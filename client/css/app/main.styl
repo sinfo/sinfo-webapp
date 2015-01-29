@@ -1,0 +1,62 @@
+// app/layout.styl
+
+@import '../_variables'
+@import '../_mixins'
+
+uniform-size(n)
+  width: n
+  height: n
+
+
+@media (min-width: 768px)
+  .navbar-default
+      min-height: 0
+      height: 52px
+
+  .navbar-right
+    margin-right: 15px;
+    li
+      cursor: pointer
+      div.dropdown
+        a
+          display: block
+          span.user-picture
+            display: inline-block
+            border-radius: 100%
+            padding: 0
+            uniform-size(40px)
+            margin-top: 4px
+            border: 1px solid #c3c3c3
+            background-position: center center
+            background-repeat: no-repeat
+            background-size: cover
+          i.fa-caret-down-a
+            padding: 18px 5px;
+            vertical-align: top;
+          i.fa-caret-down-a:after
+            content: "\f0d7"
+
+  body
+    background: white
+    font-family: 'Open Sans', sans-serif !important
+
+  i.fa
+    span
+      margin: 0 5px
+
+  div.auth
+    button
+      margin-right: 15px;
+    i
+      font-weight: bold;
+
+  .clear
+    clear: both
+
+  .no-select
+    -webkit-touch-callout: none
+    -webkit-user-select: none
+    -khtml-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none

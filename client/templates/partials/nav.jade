@@ -1,0 +1,22 @@
+div
+  ul.nav.navbar-nav
+    li
+      a(href='/')
+        i.fa.fa-home
+          span Home
+
+  ul.nav.navbar-nav.navbar-right
+    li
+      div.dropdown
+        a.dropdown-toggle.no-select(data-toggle='dropdown')
+          span.user-picture(data-hook='user-picture')
+          i.fa.fa-caret-down-a
+            span(data-hook='user-name')
+        ul.dropdown-menu(role='menu')
+          li
+            a(data-hook='logout')
+              i.fa.fa-sign-out
+                span Logout
+
+  div.clear
+
