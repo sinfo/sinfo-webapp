@@ -13,7 +13,7 @@ module.exports = PageView.extend({
     auth.init();
   },
   events: {
-    'click [data-hook=facebook-login]': 'loginWithFacebook',
+    'click [data-hook=login-facebook]': 'loginWithFacebook',
   },
   loginWithFacebook: function () {
     auth.login('facebook', this.handleLogin);

@@ -1,0 +1,109 @@
+.topbar
+  position: fixed
+  z-index: 300
+  width: 100%
+  background: #fff
+  -webkit-transform: scale3d(1, 1, 1)
+  top: 0
+  box-shadow: 0px 0px 5px #ddd
+  height: 37px
+  font-size: 14px
+
+  a
+    text-decoration: none
+    color: #555
+
+  .ink-navigation
+    >ul
+      >li
+        a
+          font-weight: normal
+        a:hover
+          background: #eee
+        >ul.submenu
+          >li
+            >a
+              color: #777
+        div.left-drawer-trigger
+          margin-top: 4px
+          margin-right: 5px
+          padding: 3px 6px
+      li.active
+        a
+          font-weight: 700
+          text-decoration: none
+      li.title
+        a
+          padding: 0px 5px
+          font-weight: bold
+          font-size: 22px
+      li.title.active
+        background: #fff
+        a
+          color: #555
+      li.event
+        padding: 5px 20px
+        input
+        select
+          padding: 2px 5px
+          border: 1px solid #eee
+          border-radius: 5px
+          font-size: 14px
+          height: 28px
+          width: 110px
+        ul.submenu
+          max-height: 400px
+          overflow: auto
+          margin-top: 5px
+          width: 340px;
+          // margin-left: 132px
+          border: 1px solid #eee
+          border-radius: 5px
+          box-shadow: 0px 0px 5px #ddd
+          img
+            width: 20px
+            height: 20px
+          span
+            margin-left: 10px
+          li.header
+            padding: 5px
+            background: #eee
+
+.ink-navigation ul.menu.horizontal > li:first-child,
+.ink-navigation ul.menu.horizontal > li:first-child a
+  border-radius: 5px
+
+.ink-navigation ul.menu.horizontal > li:last-child,
+.ink-navigation ul.menu.horizontal > li:last-child a
+  border-radius: 0
+
+
+body.ink-drawer
+  .left-drawer
+    position: fixed
+    z-index: 200
+    top: 37px
+    left: 0
+
+    .ink-navigation
+      background: white
+      border-right: 1px solid black
+      border-bottom: 1px solid black
+      border-bottom-right-radius: 3px
+
+      a
+        color: rgb(85, 85, 85)
+        text-decoration: none
+
+      ul.menu.vertical > li > a
+        border-top: 1px solid rgba(0, 0, 0, 0.15)
+        border-bottom: none
+
+      ul.menu li ul.submenu
+        display: block
+
+        li
+          padding-left: 15px
+
+      a:hover
+        background: none repeat scroll 0% 0% rgb(238, 238, 238)
