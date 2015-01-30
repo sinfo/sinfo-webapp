@@ -19,4 +19,15 @@ fenixAuth.login = function(cb) {
   });
 };
 
+fenixAuth.requestAccessToken = function(code) {
+  var codeTokens = code.split('=');
+
+  if(codeTokens && codeTokens[1]) {
+    fenix.auth.getAccessToken(codeTokens[1], function(body, response) {
+      if(response)
+        cannon.loginWithFenix(response);
+    });
+  }
+};
+
 module.exports = fenixAuth;
