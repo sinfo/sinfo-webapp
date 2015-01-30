@@ -15,6 +15,12 @@ config.facebook = {
 config.google = {
   appId: process.env.CANNON_GOOGLE_APP_ID || 'YOUR APP ID',
   apiKey: process.env.CANNON_GOOGLE_API_KEY || 'YOUR API KEY'
+} 
+
+config.fenix = {
+  appId: '570015174623243' || process.env.CANNON_FENIX_APP_ID || 'YOUR APP ID',
+  appSecretKey: 'Kq3gepWsY1jHs30bDWfmx1MjHqPh2PSrhgT4NqTXWfyDvmCxkGrfIrTytbDIP4PEkiRSkDkJsVF0CJR1djj0a0aZX3XQIomMlLYJEh7eMir9lxwNevY' || process.env.CANNON_FENIX_APP_ID || 'YOUR APP ID',
+  redirectUri: 'localhost:9000'
 }
 
 config.client = {
@@ -28,6 +34,11 @@ config.client = {
   google: {
     appId: config.google.appId,
     apiKey: config.google.apiKey
+  },
+  fenix: {
+    appId: config.fenix.appId,
+    appSecretKey: config.fenix.appSecretKey,
+    redirectUri: config.fenix.redirectUri
   }
 };
 

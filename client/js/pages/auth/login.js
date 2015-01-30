@@ -15,12 +15,16 @@ module.exports = PageView.extend({
   events: {
     'click [data-hook=facebook-login]': 'loginWithFacebook',
     'click [data-hook=google-login]': 'loginWithGoogle',
+    'click [data-hook=fenix-login]': 'loginWithFenix',
   },
   loginWithFacebook: function () {
     auth.login('facebook', this.handleLogin);
   },
   loginWithGoogle: function () {
     auth.login('google', this.handleLogin);
+  },
+  loginWithFenix: function () {
+    auth.login('fenix', this.handleLogin);
   },
   handleLogin: function(err, user) {
     log('handleLogin', arguments);

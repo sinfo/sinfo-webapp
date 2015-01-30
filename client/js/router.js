@@ -6,6 +6,7 @@ var LoginPage = require('./pages/auth/login');
 var WebAppRouter = Router.extend({
   routes: {
     '': 'home',
+    '/:query': 'fenixLogin',
     'auth/login': 'login',
     '(*path)': 'catchAll'
   },
@@ -25,7 +26,11 @@ var WebAppRouter = Router.extend({
       model: app.me
     }));
   },
-
+  
+  fenixLogin: function (query) {
+    console.log(query);
+  },
+  
   login: function () {
     if(app.me.authenticated) {
       return this.redirectTo('/');

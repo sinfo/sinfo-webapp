@@ -34,7 +34,6 @@ gAuth.checkState = function (cb) {
 };
 
 gAuth.login = function (cb) {
-  console.log(config.google.appId);
   var parameters = {
     client_id: config.google.appId,
     immediate: false,
