@@ -31,7 +31,7 @@ module.exports = {
     window.$ = window.jQuery = require('jquery');
 
     // jquery plugins
-    require('bootstrap');
+    // require('bootstrap');
   },
 
   buildModels: function() {

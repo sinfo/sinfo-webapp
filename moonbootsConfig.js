@@ -33,7 +33,8 @@ module.exports = {
     ],
     // Specify the stylesheets we want to bundle
     stylesheets: [
-      cssDir + '/app.css'
+      cssDir + '/vendor/ink.css',
+      cssDir + '/app.css',
     ],
     beforeBuildJS: function () {
       // This re-builds our template files from jade each time the app's main
