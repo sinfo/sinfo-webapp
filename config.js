@@ -18,8 +18,8 @@ config.google = {
 } 
 
 config.fenix = {
-  appId: '570015174623243' || process.env.CANNON_FENIX_APP_ID || 'YOUR APP ID',
-  appSecretKey: 'Kq3gepWsY1jHs30bDWfmx1MjHqPh2PSrhgT4NqTXWfyDvmCxkGrfIrTytbDIP4PEkiRSkDkJsVF0CJR1djj0a0aZX3XQIomMlLYJEh7eMir9lxwNevY' || process.env.CANNON_FENIX_APP_ID || 'YOUR APP ID',
+  appId: process.env.CANNON_FENIX_APP_ID || 'YOUR APP ID',
+  appSecretKey: process.env.CANNON_FENIX_APP_ID || 'YOUR APP ID',
   redirectUri: 'localhost:9000'
 }
 
