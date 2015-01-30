@@ -2,6 +2,7 @@ var log = require('bows')('login');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var auth = require('client/js/auth');
+var $ = require('jquery');
 
 
 module.exports = PageView.extend({
@@ -23,12 +24,20 @@ module.exports = PageView.extend({
     auth.login('google', this.handleLogin);
   },
   handleLogin: function(err, user) {
+    var id, token;
     log('handleLogin', arguments);
     if(err) {
       return alert(err.error);
     }
 
-    app.fetchInitialData();
-    app.navigate('/');
+    if (user.authResponse) {
+      id = user.authResponse.userID;
+      token = user.authResponse.accessToken;
+      $.get('95.85.37.125:9000/auth/facebook' + id + '/' + token, function () {
+        app.fetchInitialData();
+        app.me.authenticated = true;
+        app.navigate('/');
+      });
+    }
   }
 });
