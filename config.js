@@ -40,7 +40,7 @@ config.client = {
   },
   fenix: {
     url: config.fenix.url,
-    oauthUrl: config.fenix.oauthUrl,
+    oauthUrl: config.fenix.clientId,
     clientId: config.fenix.clientId,
     clientSecret: config.fenix.clientSecret,
     redirectUri: config.fenix.redirectUri
