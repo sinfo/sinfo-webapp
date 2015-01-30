@@ -40,5 +40,9 @@ cannon.loginWithGoogle = function(authResponse, userInfo, cb) {
   });
 };
 
+cannon.loginWithFenix = function(authResponse, cb) {
+  
+}
+
 module.exports = cannon;
 

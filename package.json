@@ -37,7 +37,8 @@
     "templatizer": "^1.0.0",
     "underscore": "^1.6.0",
     "url": "^0.10.2",
-    "xhr": "^2.0.1"
+    "xhr": "^2.0.1",
+    "fenixedu": "https://github.com/jgantunes/fenixedu/tarball/master"
   },
   "devDependencies": {
     "nodemon": "^1.2.1"
