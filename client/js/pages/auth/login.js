@@ -14,9 +14,13 @@ module.exports = PageView.extend({
   },
   events: {
     'click [data-hook=facebook-login]': 'loginWithFacebook',
+    'click [data-hook=google-login]': 'loginWithGoogle',
   },
   loginWithFacebook: function () {
     auth.login('facebook', this.handleLogin);
+  },
+  loginWithGoogle: function () {
+    auth.login('google', this.handleLogin);
   },
   handleLogin: function(err, user) {
     log('handleLogin', arguments);

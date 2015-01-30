@@ -2,11 +2,12 @@
 var config = require('clientconfig');
 var log = require('bows')('login');
 var fbAuth = require('./facebook');
-
+var gAuth = require('./google')
 var auth = {};
 
 auth.init = function() {
   fbAuth.init();
+  gAuth.init();
 };
 
 auth.login = function(type, cb) {
@@ -23,11 +24,14 @@ auth.login = function(type, cb) {
 
       fbAuth.login(cb);
     });
-  } else {
+  }
+  if (type === 'google') {
+    gAuth.login(cb);   
+  }
+  else {
     log.error('Unknown type', type);
   }
 };
-
 
 // User is not authorized, redirect
 // him/her to login page
@@ -44,8 +48,5 @@ auth.redirectToLogin = function(cb) {
 auth.logout = function() {
 
 };
-
-
-
 
 module.exports = auth;
