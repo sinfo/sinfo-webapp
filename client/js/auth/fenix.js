@@ -3,11 +3,12 @@ var log = require('bows')('fenix');
 var cannon = require('client/js/auth/cannon');
 var fenix = require('fenixedu');
 var fenixAuth = {};
-var xhr = require('xhr')
+var xhr = require('xhr');
 
+fenix = fenix(config.fenix);
 
 fenixAuth.login = function(cb) {
-  var authUrl = fenix.auth.getAuthUrl()
+  var authUrl = fenix.auth.getAuthUrl();
 
   xhr({
     uri: authUrl,
