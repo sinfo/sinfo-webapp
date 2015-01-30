@@ -35,5 +35,4 @@ fenixAuth.requestAccessToken = function(code) {
   }
 }
 
-
 module.exports = fenixAuth;

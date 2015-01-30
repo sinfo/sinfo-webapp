@@ -6,7 +6,7 @@ var config = {
 config.http = {
   listen: '0.0.0.0',
   port: process.env.WEBAPP_PORT || 9000
-}
+};
 
 config.facebook = {
   appId: process.env.CANNON_FACEBOOK_APP_ID || 'YOUR APP ID',
@@ -15,13 +15,15 @@ config.facebook = {
 config.google = {
   appId: process.env.CANNON_GOOGLE_APP_ID || 'YOUR APP ID',
   apiKey: process.env.CANNON_GOOGLE_API_KEY || 'YOUR API KEY'
-} 
+};
 
 config.fenix = {
-  appId: process.env.CANNON_FENIX_APP_ID || 'YOUR APP ID',
-  appSecretKey: process.env.CANNON_FENIX_APP_ID || 'YOUR APP ID',
-  redirectUri: 'localhost:9000'
-}
+  url: process.env.CANNON_FENIX_URL || 'https://fenix.tecnico.ulisboa.pt/api/fenix/v1/',
+  oauthUrl: process.env.CANNON_FENIX_OAUTH_URL || 'https://fenix.tecnico.ulisboa.pt/oauth/',
+  clientId: process.env.CANNON_FENIX_APP_ID || 'YOUR CLIENT_ID',
+  clientSecret: process.env.CANNON_FENIX_APP_SECRET || 'YOUR CLIENT_SECRET',
+  redirectUri: process.env.CANNON_FENIX_REDIRECT_URI || 'http://example.com/redirect'
+};
 
 config.client = {
   deckUrl: process.env.EVENTDECK_URL || 'https://deck.sinfo.org',
@@ -36,8 +38,10 @@ config.client = {
     apiKey: config.google.apiKey
   },
   fenix: {
-    appId: config.fenix.appId,
-    appSecretKey: config.fenix.appSecretKey,
+    url: config.fenix.url,
+    oauthUrl: config.fenix.oauthUrl,
+    clientId: config.fenix.clientId,
+    clientSecret: config.fenix.clientSecret,
     redirectUri: config.fenix.redirectUri
   }
 };
