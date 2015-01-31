@@ -30,12 +30,13 @@ fenixAuth.requestAccessToken = function(code) {
   if(codeTokens && codeTokens[1]) {
     fenix.auth.getAccessToken(codeTokens[1], function(body, response) {
       if(response){
-        cannon.loginWithFenix(response, this.cb);
+        log(response)
         fenix.person.getPerson(response.access_token, function(err, reply){
           if(err) {
            return this.cb(null);
           }
           if(reply && this.cb){
+            log(reply)
             cannon.loginWithFenix(response, reply, this.cb); 
           }
         });

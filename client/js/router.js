@@ -8,14 +8,14 @@ var fenixAuth = require('./auth/fenix');
 var WebAppRouter = Router.extend({
   routes: {
     '': 'home',
-    '/:query': 'fenixLogin',
+    '/auth/login/fenix?code=:query': 'fenixLogin',
     'auth/login': 'login',
     '(*path)': 'catchAll'
   },
 
   execute: function(callback, args, name) {
     if(!app.me.authenticated) {
-      this.redirectTo('auth/login');
+      this.redirectTo('auth/login/');
       return this.login();
     } else {
       return Router.prototype.execute.apply(this, [callback, args, name]);
