@@ -10,7 +10,6 @@ fenix = fenix(config.fenix);
 
 fenixAuth.login = function(cb) {
   var authUrl = fenix.auth.getAuthUrl();
-	log(authUrl);
   xhr({
     uri: authUrl,
     useXDR: true,

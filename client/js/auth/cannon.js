@@ -5,15 +5,22 @@ var log = require('bows')('cannon-auth');
 var cannon = {};
 
 cannon.loginWithFacebook = function(authResponse, cb) {
-  log(require('clientconfig'));
+  var userID = authResponse.userID;
+  var accessToken =  authResponse.accessToken;
+
   xhr({
-    uri: config.cannonUrl +'/auth/facebook/'+authResponse.userID+'/'+authResponse.accessToken,
+    uri: config.cannonUrl +'/auth/facebook',
+    json: {
+      id: authResponse.userID,
+      token: authResponse.accessToken
+    },
+    method: 'POST'
   }, function (err, resp, body) {
     if(err) {
       return cb(err);
     }
 
-    var data = JSON.parse(body);
+    var data = body;
     if(resp.statusCode >= 400) {
       return cb(data);
     }
@@ -23,17 +30,22 @@ cannon.loginWithFacebook = function(authResponse, cb) {
 };
 
 cannon.loginWithGoogle = function(authResponse, userInfo, cb) {
-  var userID = userInfo.result.id 
-  var accessToken =  authResponse.token
+  var userID = userInfo.result.id;
+  var accessToken =  authResponse.token;
   
   xhr({
-    uri: config.cannonUrl+'/auth/google/'+userID+'/'+accessToken,
+    uri: config.cannonUrl+'/auth/google',
+    json: {
+      id: userID,
+      token: accessToken
+    },
+    method: 'POST'
   }, function (err, resp, body) {
     if(err) {
       return cb(err);
     }
 
-    var data = JSON.parse(body);
+    var data = body;
     if(resp.statusCode >= 400) {
       return cb(data);
     }
@@ -44,7 +56,7 @@ cannon.loginWithGoogle = function(authResponse, userInfo, cb) {
 
 cannon.loginWithFenix = function(authResponse, cb) {
   
-}
+};
 
 module.exports = cannon;
 
