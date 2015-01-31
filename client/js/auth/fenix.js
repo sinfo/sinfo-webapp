@@ -16,7 +16,7 @@ fenixAuth.login = function(cb) {
   log(authUrl);
   log(config.fenix);
   log(config.fenix.oauthUrl+authUrl);
-  window.open(authUrl, '_blank');
+  window.location = authUrl;
   this.cb = cb;
 };
 
