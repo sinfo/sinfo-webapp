@@ -1,11 +1,13 @@
 var xhr = require('xhr');
-var cannonUrl = require('clientconfig').cannonUrl;
+var config = require('clientconfig');
+var log = require('bows')('cannon-auth');
 
 var cannon = {};
 
 cannon.loginWithFacebook = function(authResponse, cb) {
+  log(require('clientconfig'));
   xhr({
-    uri: cannonUrl+'/auth/facebook/'+authResponse.userID+'/'+authResponse.accessToken,
+    uri: config.cannonUrl +'/auth/facebook/'+authResponse.userID+'/'+authResponse.accessToken,
   }, function (err, resp, body) {
     if(err) {
       return cb(err);
@@ -25,7 +27,7 @@ cannon.loginWithGoogle = function(authResponse, userInfo, cb) {
   var accessToken =  authResponse.token
   
   xhr({
-    uri: cannonUrl+'/auth/google/'+userID+'/'+accessToken,
+    uri: config.cannonUrl+'/auth/google/'+userID+'/'+accessToken,
   }, function (err, resp, body) {
     if(err) {
       return cb(err);
