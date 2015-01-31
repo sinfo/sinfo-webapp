@@ -2,6 +2,7 @@ var log = require('bows')('login');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var auth = require('client/js/auth');
+var cookie = require('client/js/helpers/cookieParser');
 
 
 module.exports = PageView.extend({
@@ -27,11 +28,11 @@ module.exports = PageView.extend({
     auth.login('fenix', this.handleLogin);
   },
   handleLogin: function(err, user) {
-    log('handleLogin', arguments);
+    log('handleLogin', user);
     if(err) {
       return alert(err.error);
     }
-
+    cookie.setItem('token', user.token);
     app.fetchInitialData();
     app.navigate('/');
   }
