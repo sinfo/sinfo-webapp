@@ -10,21 +10,24 @@ fenix = fenix(config.fenix);
 
 fenixAuth.login = function(cb) {
   var authUrl = fenix.auth.getAuthUrl();
-  xhr({
-    uri: authUrl,
-    useXDR: true,
-  }, function (err, resp, body) {
-    log(err);
-  });
+  log(authUrl);
+  log(config.fenix);
+  log(config.fenix.oauthUrl+authUrl);
+  window.open(authUrl, '_blank');
+  this.callback = cb;
 };
 
 fenixAuth.requestAccessToken = function(code) {
   var codeTokens = code.split('=');
 
+  if(!this.cb){
+  	log('Incorrect auth flow');
+  }
+
   if(codeTokens && codeTokens[1]) {
     fenix.auth.getAccessToken(codeTokens[1], function(body, response) {
       if(response)
-        cannon.loginWithFenix(response);
+        cannon.loginWithFenix(response, this.cb);
     });
   }
 };

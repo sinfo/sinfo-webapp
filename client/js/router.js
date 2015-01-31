@@ -2,20 +2,18 @@
 var Router = require('ampersand-router');
 var HomePage = require('./pages/home');
 var LoginPage = require('./pages/auth/login');
+var log = require('bows')('router');
 var fenixAuth = require('./auth/fenix');
 
 var WebAppRouter = Router.extend({
   routes: {
     '': 'home',
-    'auth/login/fenix/:query': 'fenixLogin',
+    '/:query': 'fenixLogin',
     'auth/login': 'login',
     '(*path)': 'catchAll'
   },
 
   execute: function(callback, args, name) {
-    if(args[0] && args[0].indexOf("code") == 0) {
-      fenixAuth.requestAccessToken(args[0]);
-    }
     if(!app.me.authenticated) {
       this.redirectTo('auth/login');
       return this.login();
@@ -31,6 +29,7 @@ var WebAppRouter = Router.extend({
       model: app.me
     }));
   },
+
   login: function () {
     if(app.me.authenticated) {
       return this.redirectTo('/');
@@ -39,6 +38,13 @@ var WebAppRouter = Router.extend({
     this.trigger('page', new LoginPage({
       model: app.me
     }));
+  },
+
+  fenixLogin: function (args) {
+    log(args);
+    if(args[0] && args[0].indexOf("code") === 0) {
+      fenixAuth.requestAccessToken(args[0]);
+    }
   },
 
   catchAll: function () {
