@@ -54,8 +54,31 @@ cannon.loginWithGoogle = function(authResponse, userInfo, cb) {
   });
 };
 
-cannon.loginWithFenix = function(authResponse, cb) {
+cannon.loginWithFenix = function(authResponse, userInfo, cb) {
+  var userName = userInfo.username
+  var accessToken = authResponse.accessToken
+  var refreshToken = authResponse.refreshToken
   
+  xhr({
+    uri: config.cannonUrl+'/auth/fenix',
+    json: {
+      userName: userName,
+      accessToken: accessToken,
+      refreshToken: refreshToken
+    },
+    method: 'POST'
+  }, function (err, resp, body) {
+    if(err) {
+      return cb(err);
+    }
+
+    var data = body;
+    if(resp.statusCode >= 400) {
+      return cb(data);
+    }
+
+    cb(null, data);
+  });
 };
 
 module.exports = cannon;
