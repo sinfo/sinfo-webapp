@@ -54,17 +54,12 @@ cannon.loginWithGoogle = function(authResponse, userInfo, cb) {
   });
 };
 
-cannon.loginWithFenix = function(authResponse, userInfo, cb) {
-  var userName = userInfo.username
-  var accessToken = authResponse.accessToken
-  var refreshToken = authResponse.refreshToken
+cannon.loginWithFenix = function(code, cb) {
   
   xhr({
     uri: config.cannonUrl+'/auth/fenix',
     json: {
-      userName: userName,
-      accessToken: accessToken,
-      refreshToken: refreshToken
+      code: code
     },
     method: 'POST'
   }, function (err, resp, body) {

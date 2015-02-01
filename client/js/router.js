@@ -4,17 +4,23 @@ var HomePage = require('./pages/home');
 var LoginPage = require('./pages/auth/login');
 var log = require('bows')('router');
 var fenixAuth = require('./auth/fenix');
+var qs = require('qs');
 
 var WebAppRouter = Router.extend({
   routes: {
     '': 'home',
-    '/auth/login/fenix?code=:query': 'fenixLogin',
+    'auth/login?:query': 'fenixLogin',
     'auth/login': 'login',
     '(*path)': 'catchAll'
   },
 
   execute: function(callback, args, name) {
+    log(args);
+    log(name);
     if(!app.me.authenticated) {
+      if(name === 'fenixLogin'){
+        return callback.apply(this, args);
+      }
       this.redirectTo('auth/login/');
       return this.login();
     } else {
@@ -41,9 +47,9 @@ var WebAppRouter = Router.extend({
   },
 
   fenixLogin: function (args) {
-    log(args);
-    if(args[0] && args[0].indexOf("code") === 0) {
-      fenixAuth.requestAccessToken(args[0]);
+    args = qs.parse(args);
+    if(args && Object.keys(args)[0] === 'code'){
+      fenixAuth.requestAccessToken(args.code);
     }
   },
 
