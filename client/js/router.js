@@ -47,6 +47,7 @@ var WebAppRouter = Router.extend({
   },
 
   fenixLogin: function (args) {
+    this.redirectTo('auth/login/');
     args = qs.parse(args);
     if(args && Object.keys(args)[0] === 'code'){
       fenixAuth.requestAccessToken(args.code);

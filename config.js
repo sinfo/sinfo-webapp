@@ -21,7 +21,6 @@ config.fenix = {
   url: process.env.CANNON_FENIX_URL || 'https://fenix.tecnico.ulisboa.pt/api/fenix/v1/',
   oauthUrl: process.env.CANNON_FENIX_OAUTH_URL || 'https://fenix.tecnico.ulisboa.pt/oauth/',
   clientId: process.env.CANNON_FENIX_APP_ID || 'YOUR CLIENT_ID',
-  clientSecret: process.env.CANNON_FENIX_APP_SECRET || 'YOUR CLIENT_SECRET',
   redirectUri: process.env.CANNON_FENIX_REDIRECT_URI || 'http://example.com/redirect'
 };
 
