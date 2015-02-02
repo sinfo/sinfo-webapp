@@ -33,7 +33,7 @@ config.client = {
   cannonUrl: process.env.CANNON_URL || 'http://cannon.sinfo.org',
   debugMode: true,
   isDev: config.isDev,
-  baseURL: config.api.baseUrl,
+  baseURL: config.api.baseURL,
   facebook: {
     appId: config.facebook.appId
   },

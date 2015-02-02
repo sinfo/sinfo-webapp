@@ -4,6 +4,9 @@ var config = require('clientconfig');
 var Router = require('./router');
 var MainView = require('./views/main');
 var Me = require('./models/me');
+var Companies = require('./models/companies');
+var Sessions = require('./models/sessions');
+var Speakers = require('./models/speakers');
 var domReady = require('domready');
 
 module.exports = {
@@ -37,6 +40,10 @@ module.exports = {
   buildModels: function() {
     // create our global 'me' object and an empty collection for our channels models.
     this.me = new Me();
+    this.companies = new Companies();
+    this.sessions = new Sessions();
+    this.speakers = new Speakers();
+    this.fetchInitialData();
   },
 
   buildHTML: function() {
@@ -57,6 +64,14 @@ module.exports = {
 
       self.router.history.start({pushState: true, root: '/'});
     });
+  },
+  
+  fetchInitialData: function () {
+    var self = this;
+    
+    self.speakers.fetch()
+    self.companies.fetch()
+    self.sessions.fetch()
   },
 
   // This is how you navigate around the app.
