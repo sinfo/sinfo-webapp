@@ -102,7 +102,6 @@ module.exports = AmpModel.extend({
     },
   },
   parse: function (attrs) {
-    console.log('parsing', attrs);
     attrs.date = new Date(attrs.date);
     attrs.duration = new Date(attrs.duration);
     attrs.updated = new Date(attrs.updated);
