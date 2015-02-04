@@ -1,6 +1,6 @@
 var AmpCollection = require('ampersand-rest-collection');
 var speaker = require('./speaker');
-var config = require('clientconfig');
+var config = require('client/js/helpers/clientconfig');
 var log = require('bows')('speakers');
 
 module.exports = AmpCollection.extend({

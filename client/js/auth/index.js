@@ -1,5 +1,5 @@
 /*global app, me, $*/
-var config = require('clientconfig');
+var config = require('client/js/helpers/clientconfig');
 var log = require('bows')('login');
 var fbAuth = require('./facebook');
 var gAuth = require('./google');
@@ -27,7 +27,7 @@ auth.login = function(type, cb) {
     });
   }
   else if (type === 'google') {
-    gAuth.login(cb);   
+    gAuth.login(cb);
   }
   else if (type === 'fenix') {
     fenixAuth.login(cb);
@@ -35,7 +35,7 @@ auth.login = function(type, cb) {
   else {
     log.error('Unknown type', type);
   }
-  
+
 };
 
 // User is not authorized, redirect

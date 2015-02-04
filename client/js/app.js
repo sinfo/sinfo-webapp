@@ -1,6 +1,6 @@
 /*global app, me, $*/
 var log = require('bows')('app');
-var config = require('clientconfig');
+var config = require('client/js/helpers/clientconfig');
 var Router = require('./router');
 var MainView = require('./views/main');
 var Me = require('./models/me');
@@ -65,10 +65,10 @@ module.exports = {
       self.router.history.start({pushState: true, root: '/'});
     });
   },
-  
+
   fetchInitialData: function () {
     var self = this;
-    
+
     self.speakers.fetch()
     self.companies.fetch()
     self.sessions.fetch()

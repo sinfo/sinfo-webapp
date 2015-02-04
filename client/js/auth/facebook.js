@@ -1,4 +1,4 @@
-var config = require('clientconfig');
+var config = require('client/js/helpers/clientconfig');
 var log = require('bows')('facebook');
 var cannon = require('client/js/auth/cannon');
 

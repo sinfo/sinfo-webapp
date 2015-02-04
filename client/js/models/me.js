@@ -1,5 +1,5 @@
 var AmpersandModel = require('ampersand-model');
-var cannonUrl = require('clientconfig').cannonUrl;
+var cannonUrl = require('client/js/helpers/clientconfig').cannonUrl;
 
 module.exports = AmpersandModel.extend({
   type: 'user',
