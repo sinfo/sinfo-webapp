@@ -7,7 +7,7 @@ module.exports = View.extend({
   bindings: {
     'model.name': '[data-hook~=name]',
     'model.title': '[data-hook~=title]',
-    'model.storedImg': {
+    'model.img': {
       type: 'attribute',
       hook: 'img',
       name: 'src'

@@ -8,10 +8,6 @@ config.http = {
   port: process.env.WEBAPP_PORT || 9000
 };
 
-config.api = {
-  baseURL: 'https://deck.sinfo.org:443/api/'
-}
-
 config.facebook = {
   appId: process.env.CANNON_FACEBOOK_APP_ID || 'YOUR APP ID',
 };
@@ -33,7 +29,6 @@ config.client = {
   cannonUrl: process.env.CANNON_URL || 'http://cannon.sinfo.org',
   debugMode: true,
   isDev: config.isDev,
-  baseURL: config.api.baseURL,
   facebook: {
     appId: config.facebook.appId
   },

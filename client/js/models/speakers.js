@@ -5,5 +5,12 @@ var log = require('bows')('speakers');
 
 module.exports = AmpCollection.extend({
   model: speaker,
-  url:  config.baseURL + 'speakers'
+  url:  config.deckUrl + '/api/speakers',
+  ajaxConfig: function () {
+    return {
+      headers: {
+        'Only-Public': true
+      },
+    };
+  }
 });

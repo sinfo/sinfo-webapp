@@ -8,7 +8,7 @@ var CompanyView = View.extend({
   template: templates.cards.company,
   bindings: {
     'model.name': '[data-hook~=name]',
-    'model.storedImg': {
+    'model.img': {
       type: 'attribute',
       hook: 'img',
       name: 'src'
@@ -29,18 +29,18 @@ var CompanyView = View.extend({
 module.exports = View.extend({
   template: templates.cards.session,
   initialize: function() {
-    var self = this; 
+    var self = this;
     if(app.companies.length) {
-      return self.filterCompanies(); 
+      return self.filterCompanies();
     }
-    
+
     app.companies.fetch({ success: function() {
       self.filterCompanies();
     }});
   },
   filterCompanies: function() {
     var self = this;
-    if(!self.model.companiesDetails.length) {   
+    if(!self.model.companiesDetails.length) {
       self.model.companiesDetails = new SubCollection(app.companies, {
         filter: function (company) {
           return self.model.companies.indexOf(company.id) != -1;

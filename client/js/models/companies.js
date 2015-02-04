@@ -5,5 +5,12 @@ var log = require('bows')('companies');
 
 module.exports = AmpCollection.extend({
   model: company,
-  url: config.baseURL + 'companies'
+  url: config.deckUrl + '/api/companies',
+  ajaxConfig: function () {
+    return {
+      headers: {
+        'Only-Public': true
+      },
+    };
+  }
 });

@@ -9,7 +9,7 @@ module.exports = View.extend({
       hook: 'unread',
       type: 'toggle'
     },
-    'model.storedImg': {
+    'model.img': {
       type: 'attribute',
       hook: 'img',
       name: 'src'

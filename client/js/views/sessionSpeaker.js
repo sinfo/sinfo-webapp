@@ -8,7 +8,7 @@ var SessionView = View.extend({
   template: templates.cards.speaker,
   bindings: {
     'model.name': '[data-hook~=name]',
-    'model.storedImg': {
+    'model.img': {
       type: 'attribute',
       hook: 'img',
       name: 'src'
@@ -29,27 +29,27 @@ var SessionView = View.extend({
 module.exports = View.extend({
   template: templates.cards.session,
   initialize: function() {
-    var self = this; 
+    var self = this;
     if(app.speakers.length) {
-      return self.filterSpeakers(); 
+      return self.filterSpeakers();
     }
-    
+
     app.speakers.fetch({ success: function() {
       self.filterSpeakers();
     }});
   },
   filterSpeakers: function() {
     var self = this;
-    if(!self.model.speakersDetails.length) {      
+    if(!self.model.speakersDetails.length) {
       var sessionSpeakerIds = self.model.speakers.serialize()
         .filter(function(s) { return s.id; })
         .map(function(s) { return s.id; });
-      
+
       self.model.speakersDetails = new SubCollection(app.speakers, {
         filter: function (speaker) {
           return sessionSpeakerIds.indexOf(speaker.id) != -1;
         }
-      });      
+      });
     }
     this.render();
   },
