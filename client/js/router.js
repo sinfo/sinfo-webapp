@@ -29,6 +29,7 @@ var WebAppRouter = Router.extend({
     'sessions': 'sessions',
     'sessions/:id': 'sessionView',
     'speakers': 'speakers',
+    'me': 'me',
     'speakers/:id': 'speakerView',
     '(*path)': 'catchAll'
   },
@@ -38,7 +39,7 @@ var WebAppRouter = Router.extend({
       if(name === 'fenixLogin'){
         return callback.apply(this, args);
       }
-      this.redirectTo('auth/login/');
+      this.redirectTo('auth/login');
       return this.login();
     } else {
       return Router.prototype.execute.apply(this, [callback, args, name]);
@@ -48,6 +49,16 @@ var WebAppRouter = Router.extend({
   // ------- ROUTE HANDLERS ---------
   home: function (cenas) {
     console.log(cenas);
+    this.trigger('page', new HomePage({
+      model: app.me
+    }));
+  },
+
+  me: function () {
+    if(!app.me.authenticated) {
+      return this.redirectTo('/auth/login');
+    }
+
     this.trigger('page', new HomePage({
       model: app.me
     }));
@@ -70,7 +81,7 @@ var WebAppRouter = Router.extend({
       fenixAuth.requestAccessToken(args.code);
     }
   },
-  
+
   companies: function () {
     this.trigger('page', new Companies({
       collection: app.companies
@@ -82,31 +93,31 @@ var WebAppRouter = Router.extend({
       id: id
     }));
   },
-  
+
   sessions: function () {
    this.trigger('page', new Sessions({
      collection: app.sessions
    }));
   },
-  
+
   sessionView: function (id) {
    this.trigger('page', new SessionViewPage({
      id: id
    }));
   },
-  
+
   speakers: function () {
     this.trigger('page', new Speakers({
       collection: app.speakers
     }));
   },
-  
+
   speakerView: function (id) {
     this.trigger('page', new SpeakerViewPage({
       id: id
     }));
   },
-  
+
   catchAll: function () {
     this.redirectTo('/404');
   }

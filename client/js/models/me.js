@@ -11,6 +11,7 @@ module.exports = AmpersandModel.extend({
   },
   session: {
     authenticated: ['boolean', true, false],
+    token: ['string'],
   },
   derived: {
     background: {
@@ -19,5 +20,13 @@ module.exports = AmpersandModel.extend({
         return 'background-image:url('+this.photoUrl+');';
       }
     },
+  },
+  ajaxConfig: function () {
+    var self = this;
+    return {
+      headers: {
+        'Authorization': 'Bearer ' + self.token
+      },
+    };
   }
 });
