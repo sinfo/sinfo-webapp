@@ -46,7 +46,7 @@ module.exports = View.extend({
     });
 
     // setting a favicon for fun (note, it's dynamic)
-    setFavicon('/static/favicon.ico');
+    setFavicon('/static/logo.png');
     return this;
   },
   subviews: {

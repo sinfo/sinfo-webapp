@@ -27,13 +27,14 @@ module.exports = PageView.extend({
   loginWithFenix: function () {
     auth.login('fenix', this.handleLogin);
   },
-  handleLogin: function(err, user) {
-    log('handleLogin', user);
+  handleLogin: function(err, authDetails) {
+    log('handleLogin', authDetails);
     if(err) {
       return alert(err.error);
     }
-    cookie.setItem('token', user.token);
-    app.fetchInitialData();
-    app.navigate('/');
+    app.me.token = authDetails.token;
+    cookie.setItem('cannon-auth', authDetails.token);
+    // app.fetchInitialData();
+    // app.navigate('/');
   }
 });

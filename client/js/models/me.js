@@ -5,7 +5,7 @@ module.exports = AmpersandModel.extend({
   type: 'user',
   url: cannonUrl+'/users/me',
   props: {
-    id: ['number'],
+    id: ['string'],
     name: ['string', true, ''],
     photoUrl: ['string'],
   },

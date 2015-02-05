@@ -69,9 +69,10 @@ module.exports = {
   fetchInitialData: function () {
     var self = this;
 
-    self.speakers.fetch()
-    self.companies.fetch()
-    self.sessions.fetch()
+    self.me.fetch();
+    self.speakers.fetch();
+    self.companies.fetch();
+    self.sessions.fetch();
   },
 
   // This is how you navigate around the app.
