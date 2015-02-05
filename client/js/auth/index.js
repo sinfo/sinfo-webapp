@@ -1,6 +1,7 @@
 /*global app, me, $*/
 var config = require('client/js/helpers/clientconfig');
-var log = require('bows')('login');
+var cookie = require('client/js/helpers/cookieParser');
+var log = require('bows')('auth');
 var fbAuth = require('./facebook');
 var gAuth = require('./google');
 var fenixAuth = require('./fenix');
@@ -38,6 +39,14 @@ auth.login = function(type, cb) {
 
 };
 
+auth.logout = function() {
+  log('Logging out');
+  cookie.removeItem('cannon-auth');
+  app.me.clear();
+  app.navigate('/auth/login');
+};
+
+
 // User is not authorized, redirect
 // him/her to login page
 auth.redirectToLogin = function(cb) {
@@ -48,10 +57,6 @@ auth.redirectToLogin = function(cb) {
     log('Logging out...');
     window.location.href = 'auth/login';
   }
-};
-
-auth.logout = function() {
-
 };
 
 module.exports = auth;

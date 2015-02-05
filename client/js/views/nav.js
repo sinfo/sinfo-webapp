@@ -1,15 +1,25 @@
 var View = require('ampersand-view');
 var templates = require('client/js/templates');
+var auth = require('client/js/auth');
 
 module.exports = View.extend({
   autoRender: true,
   template: templates.partials.nav,
   bindings: {
-    'model.name': '[data-hook~=user-name]',
+    'model.name': [
+      { type: 'toggle', yes: '[data-hook~=authenticated-menu]', no: '[data-hook~=unauthenticated-menu]' },
+      { selector: '[data-hook~=user-name]' },
+    ],
     'model.background': {
       type: 'attribute',
       hook: 'user-picture',
       name: 'style'
     }
-  }
+  },
+  events: {
+    'click [data-hook=action-logout]': 'logout',
+  },
+  logout: function () {
+    auth.logout();
+  },
 });

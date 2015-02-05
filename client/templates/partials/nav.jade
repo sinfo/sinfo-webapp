@@ -1,5 +1,5 @@
 ul.menu.horizontal.push-right
-  li
+  li(data-hook='authenticated-menu')
     a(href='/me')
       span.user-picture(data-hook='user-picture')
       i.fa.fa-caret-down-a
@@ -7,6 +7,10 @@ ul.menu.horizontal.push-right
     ul.submenu
       li
         a(data-hook='action-logout') Logout
+
+  li(data-hook='unauthenticated-menu')
+    a(href='/auth/login') Login
+
 
   div.clear
 

@@ -64,9 +64,9 @@ var WebAppRouter = Router.extend({
   },
 
   login: function () {
-    if(app.me.authenticated) {
-      return this.redirectTo('/');
-    }
+    // if(app.me.authenticated) {
+    //   return this.redirectTo('/');
+    // }
 
     this.trigger('page', new LoginPage({
       model: app.me
