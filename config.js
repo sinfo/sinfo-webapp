@@ -1,6 +1,7 @@
 var config = {
   isDev: process.env.NODE_ENV != 'production',
   isSecure: false,
+  url: process.env.CANNON_WEBAPP_URL || 'http://localhost:9000'
 };
 
 config.http = {
