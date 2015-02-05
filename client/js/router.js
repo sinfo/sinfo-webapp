@@ -5,8 +5,7 @@ var HomePage = require('./pages/home');
 
 var LoginPage = require('./pages/auth/login');
 
-var Companies = require('./pages/companies/list');
-var CompanyViewPage = require('./pages/companies/view');
+var Partners = require('./pages/partners/list');
 
 var Sessions = require('./pages/sessions/list');
 var SessionViewPage = require('./pages/sessions/view');
@@ -24,8 +23,8 @@ var WebAppRouter = Router.extend({
     '': 'home',
     'auth/login?:query': 'fenixLogin',
     'auth/login': 'login',
-    'companies': 'companies',
-    'companies/:id': 'companyView',
+    'partners': 'partners',
+    'partners/:id': 'companyView',
     'sessions': 'sessions',
     'sessions/:id': 'sessionView',
     'speakers': 'speakers',
@@ -82,15 +81,9 @@ var WebAppRouter = Router.extend({
     }
   },
 
-  companies: function () {
-    this.trigger('page', new Companies({
-      collection: app.companies
-    }));
-  },
-
-  companyView: function (id) {
-    this.trigger('page', new CompanyViewPage({
-      id: id
+  partners: function () {
+    this.trigger('page', new Partners({
+      collection: app.partners
     }));
   },
 

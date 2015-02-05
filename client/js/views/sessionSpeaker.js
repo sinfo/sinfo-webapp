@@ -3,31 +3,10 @@ var log = require('bows')('session-speaker-view');
 var View = require('ampersand-view');
 var templates = require('client/js/templates');
 var SubCollection = require('ampersand-subcollection');
+var SpeakerView = require('client/js/views/speakers/view');
+var SpeakersArea = require('client/js/views/speakers/area');
 
-var SessionView = View.extend({
-  template: templates.cards.speaker,
-  bindings: {
-    'model.name': '[data-hook~=name]',
-    'model.img': {
-      type: 'attribute',
-      hook: 'img',
-      name: 'src'
-    },
-    'model.background': {
-      type: 'attribute',
-      hook: 'background',
-      name: 'style'
-    },
-    'model.viewUrl': {
-      type: 'attribute',
-      hook: 'name',
-      name: 'href'
-    }
-  }
-});
-
-module.exports = View.extend({
-  template: templates.cards.session,
+module.exports = SpeakersArea.extend({
   initialize: function() {
     var self = this;
     if(app.speakers.length) {
@@ -56,6 +35,6 @@ module.exports = View.extend({
   render: function() {
     var self = this;
     this.renderWithTemplate();
-    this.renderCollection(self.model.speakersDetails, SessionView, this.queryByHook('session-speaker-view'));
+    this.renderCollection(self.model.speakersDetails, SpeakerView, this.queryByHook('session-speaker-view'));
   }
 });

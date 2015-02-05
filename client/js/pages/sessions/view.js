@@ -3,7 +3,7 @@ var log = require('bows')('sessions');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var SpeakersView = require('client/js/views/sessionSpeaker');
-var CompaniesView = require('client/js/views/sessionCompany');
+var PartnerView = require('client/js/views/sessionPartner');
 
 
 module.exports = PageView.extend({
@@ -17,7 +17,7 @@ module.exports = PageView.extend({
       hook: 'kind'
     },
     'model.place': {
-      hook: 'place' 
+      hook: 'place'
     },
     'model.description': {
       hook: 'description'
@@ -63,13 +63,13 @@ module.exports = PageView.extend({
         });
       }
     },
-    companies: {
-      container: '[data-hook=session-companies]',
+    partners: {
+      container: '[data-hook=session-partners]',
       parent: this,
-      waitFor: 'model.companies',
+      waitFor: 'model.partners',
       prepareView: function (el) {
         var self = this;
-        return new CompaniesView({
+        return new PartnerView({
           el: el,
           model: self.model
         });

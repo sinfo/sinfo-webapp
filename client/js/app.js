@@ -4,7 +4,7 @@ var config = require('client/js/helpers/clientconfig');
 var Router = require('./router');
 var MainView = require('./views/main');
 var Me = require('./models/me');
-var Companies = require('./models/companies');
+var Partners = require('./models/partners');
 var Sessions = require('./models/sessions');
 var Speakers = require('./models/speakers');
 var domReady = require('domready');
@@ -43,7 +43,7 @@ module.exports = {
 
     // create our global 'me' object and an empty collection for our channels models.
     this.me = new Me();
-    this.companies = new Companies();
+    this.partners = new Partners();
     this.sessions = new Sessions();
     this.speakers = new Speakers();
     this.fetchInitialData();
@@ -79,7 +79,7 @@ module.exports = {
     var self = this;
 
     self.speakers.fetch();
-    self.companies.fetch();
+    self.partners.fetch();
     self.sessions.fetch();
   },
 
