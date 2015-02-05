@@ -8,6 +8,7 @@ var Companies = require('./models/companies');
 var Sessions = require('./models/sessions');
 var Speakers = require('./models/speakers');
 var domReady = require('domready');
+var cookies = require('cookie-getter');
 
 module.exports = {
   // this is the the whole app initter
@@ -38,12 +39,20 @@ module.exports = {
   },
 
   buildModels: function() {
+    var self = this;
+
     // create our global 'me' object and an empty collection for our channels models.
     this.me = new Me();
     this.companies = new Companies();
     this.sessions = new Sessions();
     this.speakers = new Speakers();
     this.fetchInitialData();
+
+    var authToken = cookies('cannon-auth');
+    if(authToken) {
+      self.me.token = authToken;
+      self.fetchUserData();
+    }
   },
 
   buildHTML: function() {
@@ -69,10 +78,15 @@ module.exports = {
   fetchInitialData: function () {
     var self = this;
 
-    self.me.fetch();
     self.speakers.fetch();
     self.companies.fetch();
     self.sessions.fetch();
+  },
+
+  fetchUserData: function () {
+    var self = this;
+
+    self.me.fetch();
   },
 
   // This is how you navigate around the app.

@@ -34,7 +34,7 @@ module.exports = PageView.extend({
     }
     app.me.token = authDetails.token;
     cookie.setItem('cannon-auth', authDetails.token);
-    // app.fetchInitialData();
-    // app.navigate('/');
+    app.fetchUserData();
+    app.navigate('/');
   }
 });

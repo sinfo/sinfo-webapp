@@ -10,7 +10,6 @@ module.exports = AmpersandModel.extend({
     photoUrl: ['string'],
   },
   session: {
-    authenticated: ['boolean', true, false],
     token: ['string'],
   },
   derived: {
@@ -18,6 +17,12 @@ module.exports = AmpersandModel.extend({
       deps: ['photoUrl'],
       fn: function () {
         return 'background-image:url('+this.photoUrl+');';
+      }
+    },
+    authenticated: {
+      deps: ['token'],
+      fn: function () {
+        return !!this.token;
       }
     },
   },
