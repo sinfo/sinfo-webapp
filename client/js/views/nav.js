@@ -14,6 +14,11 @@ module.exports = View.extend({
       type: 'attribute',
       hook: 'user-picture',
       name: 'style'
+    },
+    'model.img': {
+      type: 'attribute',
+      hook: 'user-picture',
+      name: 'src'
     }
   },
   events: {

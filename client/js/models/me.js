@@ -7,16 +7,16 @@ module.exports = AmpersandModel.extend({
   props: {
     id: ['string'],
     name: ['string', true, ''],
-    photoUrl: ['string'],
+    img: ['string'],
   },
   session: {
     token: ['string'],
   },
   derived: {
     background: {
-      deps: ['photoUrl'],
+      deps: ['img'],
       fn: function () {
-        return 'background-image:url('+this.photoUrl+');';
+        return 'background-image:url('+this.img+');';
       }
     },
     authenticated: {
