@@ -13,6 +13,8 @@ var SessionViewPage = require('./pages/sessions/view');
 var Speakers = require('./pages/speakers/list');
 var SpeakerViewPage = require('./pages/speakers/view');
 
+var UserViewPage = require('./pages/users/view');
+
 var log = require('bows')('router');
 var fenixAuth = require('./auth/fenix');
 var qs = require('qs');
@@ -58,7 +60,7 @@ var WebAppRouter = Router.extend({
       return this.redirectTo('/auth/login');
     }
 
-    this.trigger('page', new HomePage({
+    this.trigger('page', new UserViewPage({
       model: app.me
     }));
   },
