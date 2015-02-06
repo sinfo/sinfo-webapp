@@ -14,7 +14,7 @@ fenixAuth.login = function(cb) {
 
 fenixAuth.requestAccessToken = function(code) {
   if(!code){
-  	log('Incorrect auth flow');
+  	return log('Incorrect auth flow');
   }
 	cannon.loginWithFenix(code, app.currentPage.handleLogin);
 };

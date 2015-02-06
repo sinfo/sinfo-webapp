@@ -36,7 +36,7 @@ var WebAppRouter = Router.extend({
   },
 
   execute: function(callback, args, name) {
-    if(false/*!app.me.authenticated*/) {
+    if(!app.me.authenticated) {
       if(name === 'fenixLogin'){
         return callback.apply(this, args);
       }
@@ -81,7 +81,6 @@ var WebAppRouter = Router.extend({
     if(args && Object.keys(args)[0] === 'code'){
       fenixAuth.requestAccessToken(args.code);
     }
-    this.redirectTo('auth/login/');
   },
 
   partners: function () {
