@@ -1,6 +1,7 @@
 /*global app, me, $*/
-var config = require('clientconfig');
-var log = require('bows')('login');
+var config = require('client/js/helpers/clientconfig');
+var cookie = require('client/js/helpers/cookieParser');
+var log = require('bows')('auth');
 var fbAuth = require('./facebook');
 var gAuth = require('./google');
 var fenixAuth = require('./fenix');
@@ -27,7 +28,7 @@ auth.login = function(type, cb) {
     });
   }
   else if (type === 'google') {
-    gAuth.login(cb);   
+    gAuth.login(cb);
   }
   else if (type === 'fenix') {
     fenixAuth.login(cb);
@@ -35,8 +36,16 @@ auth.login = function(type, cb) {
   else {
     log.error('Unknown type', type);
   }
-  
+
 };
+
+auth.logout = function() {
+  log('Logging out');
+  cookie.removeItem('cannon-auth');
+  app.me.clear();
+  app.navigate('/auth/login');
+};
+
 
 // User is not authorized, redirect
 // him/her to login page
@@ -48,10 +57,6 @@ auth.redirectToLogin = function(cb) {
     log('Logging out...');
     window.location.href = 'auth/login';
   }
-};
-
-auth.logout = function() {
-
 };
 
 module.exports = auth;

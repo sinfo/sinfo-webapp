@@ -15,7 +15,6 @@ module.exports = AmpModel.extend({
     title: ['string'],
     description: ['string'],
     img: ['string'],
-    storedImg: ['string'],
     updated:['string']
   },
   derived: {
@@ -39,7 +38,8 @@ module.exports = AmpModel.extend({
     background: {
       deps: ['img'],
       fn: function () {
-        return 'background-image:url('+this.storedImg+');';
+        log(this.img);
+        return 'background-image:url('+this.img+');';
       }
     },
     descriptionHtml: {
@@ -54,8 +54,8 @@ module.exports = AmpModel.extend({
     _.each(this._children, function (value, key) {
         res[key] = this[key].serialize();
     }, this);
- 
-    delete res.storedImg;
+
+    delete res.img;
     return res;
   }
 });

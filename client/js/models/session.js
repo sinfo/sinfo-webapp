@@ -5,7 +5,7 @@ var AmpCollection = require('ampersand-collection');
 var options = require('options');
 var marked = require('client/js/helpers/marked');
 var SpeakerDetails = require('./speaker');
-var CompanyDetails = require('./company');
+var PartnerDetails = require('./partner');
 var Moment = require('moment');
 var log = require('bows')('session');
 
@@ -27,8 +27,8 @@ var SpeakersDetailsCollection = AmpCollection.extend({
   model: SpeakerDetails
 });
 
-var CompaniesDetailsCollection = AmpCollection.extend({
-  model: CompanyDetails
+var PartnersDetailsCollection = AmpCollection.extend({
+  model: PartnerDetails
 });
 
 module.exports = AmpModel.extend({
@@ -47,7 +47,7 @@ module.exports = AmpModel.extend({
   collections: {
     speakers: SpeakerCollection,
     speakersDetails: SpeakersDetailsCollection,
-    companiesDetails: CompaniesDetailsCollection,
+    partnersDetails: PartnersDetailsCollection,
   },
   derived: {
     thread: {
@@ -78,7 +78,7 @@ module.exports = AmpModel.extend({
       deps: ['date'],
       fn: function() {
         var date = new Date(this.date);
-        return new Moment(date).format('MMMM Do YYYY, HH:mm');  
+        return new Moment(date).format('MMMM Do YYYY, HH:mm');
       }
     },
     end: {
@@ -91,7 +91,7 @@ module.exports = AmpModel.extend({
       deps: ['end'],
       fn: function() {
         var date = new Date(this.end);
-        return new Moment(date).format('MMMM Do YYYY, HH:mm');  
+        return new Moment(date).format('MMMM Do YYYY, HH:mm');
       }
     },
     background: {
@@ -102,7 +102,6 @@ module.exports = AmpModel.extend({
     },
   },
   parse: function (attrs) {
-    console.log('parsing', attrs);
     attrs.date = new Date(attrs.date);
     attrs.duration = new Date(attrs.duration);
     attrs.updated = new Date(attrs.updated);
@@ -118,7 +117,7 @@ module.exports = AmpModel.extend({
     }, this);
 
     delete res.speakersDetails;
-    delete res.companiesDetails;
+    delete res.partnersDetails;
     delete res.unread;
 
     return res;

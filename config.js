@@ -1,16 +1,13 @@
 var config = {
   isDev: process.env.NODE_ENV != 'production',
   isSecure: false,
+  url: process.env.CANNON_WEBAPP_URL || 'http://localhost:9000'
 };
 
 config.http = {
   listen: '0.0.0.0',
   port: process.env.WEBAPP_PORT || 9000
 };
-
-config.api = {
-  baseURL: 'https://deck.sinfo.org:443/api/'
-}
 
 config.facebook = {
   appId: process.env.CANNON_FACEBOOK_APP_ID || 'YOUR APP ID',
@@ -33,7 +30,6 @@ config.client = {
   cannonUrl: process.env.CANNON_URL || 'http://cannon.sinfo.org',
   debugMode: true,
   isDev: config.isDev,
-  baseURL: config.api.baseUrl,
   facebook: {
     appId: config.facebook.appId
   },

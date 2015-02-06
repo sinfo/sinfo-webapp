@@ -4,6 +4,9 @@ var server = new Hapi.Server(config.http.listen, config.http.port);
 var moonbootsConfig = require('./moonbootsConfig');
 var internals = {};
 
+var CONFIG_COOKIE_NAME = 'cannon-config';
+
+
 // set clientconfig cookie
 internals.configStateConfig = {
   encoding: 'none',
@@ -11,7 +14,7 @@ internals.configStateConfig = {
   isSecure: config.isSecure
 };
 
-server.state('config', internals.configStateConfig);
+server.state(CONFIG_COOKIE_NAME, internals.configStateConfig);
 internals.clientConfig = JSON.stringify(config.client);
 server.ext('onPreResponse', function(request, reply) {
   if (request.state && !request.state.config) {
@@ -19,7 +22,7 @@ server.ext('onPreResponse', function(request, reply) {
     if(!response.state) {
       return reply();
     }
-    response.state('config', encodeURIComponent(internals.clientConfig));
+    response.state(CONFIG_COOKIE_NAME, encodeURIComponent(internals.clientConfig));
 
     return reply(response);
   }

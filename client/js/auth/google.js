@@ -1,4 +1,4 @@
-var config = require('clientconfig');
+var config = require('client/js/helpers/clientconfig');
 var log = require('bows')('google');
 var cannon = require('client/js/auth/cannon');
 
@@ -16,19 +16,19 @@ window.handleClientLoad = function () {
     //TODO What should this cb do?
   }), 1);
 };
-      
+
 gAuth.checkState = function (cb) {
   var sessionParams = {
     client_id: config.google.appId,
     session_state: null
   };
-  
+
   gapi.auth.checkSessionState(sessionParams, function (loginDetails) {
     log('Got google state', loginDetails);
     if (!loginDetails) {
       return cb(null);
     }
-    
+
     cannon.loginWithGoogle(cb);
   });
 };
@@ -44,7 +44,7 @@ gAuth.login = function (cb) {
     if (loginDetails && loginDetails.error) {
       return cb(new Error('couldn\'t get google auth details'));
     }
-    
+
     gapi.client.load('plus', 'v1').then(function () {
       var request = gapi.client.plus.people.get({
         'userId': 'me'
@@ -54,7 +54,7 @@ gAuth.login = function (cb) {
         if (resp && !resp.result.id) {
           return cb(new Error('couldn\'t get google user id'));
         }
-        
+
         cannon.loginWithGoogle(loginDetails, resp, cb);
       },
         function (reason) {

@@ -1,10 +1,14 @@
 /*global app, me, $*/
 var log = require('bows')('app');
-var config = require('clientconfig');
+var config = require('client/js/helpers/clientconfig');
 var Router = require('./router');
 var MainView = require('./views/main');
 var Me = require('./models/me');
+var Partners = require('./models/partners');
+var Sessions = require('./models/sessions');
+var Speakers = require('./models/speakers');
 var domReady = require('domready');
+var cookies = require('cookie-getter');
 
 module.exports = {
   // this is the the whole app initter
@@ -35,8 +39,20 @@ module.exports = {
   },
 
   buildModels: function() {
+    var self = this;
+
     // create our global 'me' object and an empty collection for our channels models.
     this.me = new Me();
+    this.partners = new Partners();
+    this.sessions = new Sessions();
+    this.speakers = new Speakers();
+    this.fetchInitialData();
+
+    var authToken = cookies('cannon-auth');
+    if(authToken) {
+      self.me.token = authToken;
+      self.fetchUserData();
+    }
   },
 
   buildHTML: function() {
@@ -57,6 +73,20 @@ module.exports = {
 
       self.router.history.start({pushState: true, root: '/'});
     });
+  },
+
+  fetchInitialData: function () {
+    var self = this;
+
+    self.speakers.fetch();
+    self.partners.fetch();
+    self.sessions.fetch();
+  },
+
+  fetchUserData: function () {
+    var self = this;
+
+    self.me.fetch();
   },
 
   // This is how you navigate around the app.

@@ -1,23 +1,53 @@
-var AmpersandModel = require('ampersand-model');
-var cannonUrl = require('clientconfig').cannonUrl;
+var AmpModel = require('ampersand-model');
+var AmpState = require('ampersand-state');
+var cannonUrl = require('client/js/helpers/clientconfig').cannonUrl;
 
-module.exports = AmpersandModel.extend({
+var Job = AmpState.extend({
+  props: {
+    startup: 'boolean',
+    internship: 'boolean',
+    start: 'date',
+  }
+});
+
+module.exports = AmpModel.extend({
   type: 'user',
   url: cannonUrl+'/users/me',
   props: {
-    id: ['number'],
-    name: ['string', true, ''],
-    photoUrl: ['string'],
+    id: 'string',
+    name: 'string',
+    img: 'string',
+    mail: 'string',
+    role: 'string',
+    area: 'string',
+    skills: 'array',
   },
   session: {
-    authenticated: ['boolean', true, false],
+    token: ['string'],
+  },
+  children: {
+    job: Job,
   },
   derived: {
     background: {
-      deps: ['photoUrl'],
+      deps: ['img'],
       fn: function () {
-        return 'background-image:url('+this.photoUrl+');';
+        return 'background-image:url('+this.img+');';
       }
     },
+    authenticated: {
+      deps: ['token'],
+      fn: function () {
+        return !!this.token;
+      }
+    },
+  },
+  ajaxConfig: function () {
+    var self = this;
+    return {
+      headers: {
+        'Authorization': 'Bearer ' + self.token
+      },
+    };
   }
 });

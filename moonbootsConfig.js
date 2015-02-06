@@ -34,6 +34,7 @@ module.exports = {
     // Specify the stylesheets we want to bundle
     stylesheets: [
       cssDir + '/vendor/ink.css',
+      cssDir + '/vendor/fullcalendar.css',
       cssDir + '/app.css',
     ],
     beforeBuildJS: function () {
