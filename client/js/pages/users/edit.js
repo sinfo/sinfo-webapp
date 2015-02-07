@@ -36,12 +36,29 @@ module.exports = PageView.extend({
           el: el,
           model: model,
           clean: function (data) {
-            data = _.compactObject(data);
+            data = {
+              id: data.id,
+              name: data.name,
+              img: data.img,
+              mail: data.mail,
+              area: data.area,
+              skills: data.skills,
+              job: {
+                startup: data['job-startup'],
+                internship: data['job-internship'],
+                start: data['job-start'],
+              }
+            }
             return data;
           },
           submitCallback: function (data) {
-            data = self.model.changedAttributes(data);
-            model.save(data, {
+            var changedAttributes = self.model.changedAttributes(data) || {};
+            changedAttributes.job = data.job;
+
+            log('data', data)
+            log('changedAttributes', changedAttributes)
+
+            model.save(changedAttributes, {
               patch: true,
               wait: false,
               success: function (model, response, options) {

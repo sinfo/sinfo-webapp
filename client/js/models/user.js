@@ -16,7 +16,6 @@ module.exports = AmpModel.extend({
     name: 'string',
     img: 'string',
     mail: 'string',
-    role: 'string',
     area: 'string',
     skills: 'array',
   },

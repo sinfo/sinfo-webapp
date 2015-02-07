@@ -1,6 +1,8 @@
 var FormView = require('ampersand-form-view');
 var InputView = require('ampersand-input-view');
 var CheckboxArray = require('ampersand-array-checkbox-view');
+var CheckboxView = require('ampersand-checkbox-view');
+var DateView = require('ampersand-pikaday-view');
 var options = require('options');
 var templates = require('client/js/templates');
 
@@ -45,14 +47,6 @@ module.exports = FormView.extend({
         parent: this
       }),
       new ExtendedInput({
-        label: 'Role',
-        name: 'role',
-        value: this.model.role || '',
-        required: false,
-        placeholder: 'Role',
-        parent: this
-      }),
-      new ExtendedInput({
         label: 'Area',
         name: 'area',
         value: this.model.area || '',
@@ -69,7 +63,26 @@ module.exports = FormView.extend({
         options: options.skills,
         minLength: 0,
         parent: this
-      })
+      }),
+      new DateView({
+        label: 'Job Start Date Avalability',
+        value: this.model && this.model.job && this.model.job.start || new Date(),
+        name: 'job-start'
+      }),
+      new CheckboxView({
+        label: 'Interested in startup jobs?',
+        name: 'job-startup',
+        template: templates.includes.formCheckbox(),
+        value: this.model && this.model.job && this.model.job.startup,
+        parent: this
+      }),
+      new CheckboxView({
+        label: 'Interested in internships?',
+        name: 'job-internship',
+        template: templates.includes.formCheckbox(),
+        value: this.model && this.model.job && this.model.job.internship,
+        parent: this
+      }),
     ];
   }
 });
