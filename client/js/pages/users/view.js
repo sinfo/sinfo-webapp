@@ -15,6 +15,14 @@ module.exports = PageView.extend({
       hook: 'img',
       name: 'style'
     },
+    'model.area': [
+      { type: 'toggle', hook: 'area' },
+      { selector: '[data-hook~=area] div' },
+    ],
+    'model.skills': [
+      { type: 'toggle', hook: 'skills' },
+      { selector: '[data-hook~=skills] div' },
+    ],
   },
   initialize: function (spec) {
     var self = this;

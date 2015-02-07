@@ -11,7 +11,6 @@ var ExtendedInput = InputView.extend({
 
 module.exports = FormView.extend({
   fields: function () {
-    console.log('me', this.model.serialize())
     return [
       new ExtendedInput({
         label: 'Id',

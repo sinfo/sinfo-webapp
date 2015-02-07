@@ -11,10 +11,6 @@ module.exports = PageView.extend({
   template: templates.pages.users.edit,
   initialize: function (spec) {
     var self = this;
-    app.me.on('sync', function() {
-      log('sync')
-      // self.renderWithTemplate();
-    })
 
     if(this.model) {
       return;
@@ -36,8 +32,6 @@ module.exports = PageView.extend({
         var self = this;
         var model = this.model;
 
-        log(this.model.serialize())
-
         return new UserForm({
           el: el,
           model: model,
@@ -58,7 +52,7 @@ module.exports = PageView.extend({
                 app.navigate('/users/'+model.id);
               },
               error: function (model, response, options) {
-                console.log('error', response.statusCode, response.response);
+                log.error(response.statusCode, response.response);
               }
             });
           }
