@@ -36,7 +36,7 @@ var WebAppRouter = Router.extend({
   },
 
   execute: function(callback, args, name) {
-    if(false/*!app.me.authenticated*/) {
+    if(!app.me.authenticated) {
       if(name === 'fenixLogin'){
         return callback.apply(this, args);
       }
