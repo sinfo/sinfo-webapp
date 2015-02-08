@@ -8,8 +8,6 @@ cannon.loginWithFacebook = function(authResponse, cb) {
   var userID = authResponse.userID;
   var accessToken =  authResponse.accessToken;
 
-  console.log(config.cannonUrl, '/auth/facebook', config.cannonUrl +'/auth/facebook')
-
   xhr({
     uri: config.cannonUrl +'/auth/facebook',
     json: {

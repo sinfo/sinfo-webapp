@@ -98,6 +98,11 @@ module.exports = {
     var url = (page.charAt(0) === '/') ? page.slice(1) : page;
 
     this.router.history.navigate(url, {trigger: true});
+  },
+
+  navigateToLogin: function() {
+    var self = this;
+    self.navigate('/auth/login?r=/'+self.router.history.fragment);
   }
 };
 

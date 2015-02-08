@@ -21,7 +21,6 @@ module.exports = View.extend({
   },
   events: {
     'click a[href]': 'handleLinkClick',
-    'click a[data-hook~=logout]': 'handleLogoutClick'
   },
   render: function () {
     // some additional stuff we want to add to the document head
@@ -83,10 +82,6 @@ module.exports = View.extend({
       e.preventDefault();
       app.navigate(aTag.pathname);
     }
-  },
-
-  handleLogoutClick: function() {
-
   },
 
   updateActiveNav: function () {

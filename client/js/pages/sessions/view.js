@@ -62,7 +62,7 @@ module.exports = PageView.extend({
   },
   handleGetTicket: function () {
     if(!app.me.authenticated) {
-      return app.navigate('/auth/login?r=/sessions/'+this.model.id);
+      return app.navigateToLogin();
     }
 
 

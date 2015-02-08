@@ -22,9 +22,13 @@ module.exports = View.extend({
     }
   },
   events: {
-    'click [data-hook=action-logout]': 'logout',
+    'click [data-hook=action-logout]': 'handleLogout',
+    'click [data-hook=action-login]': 'handleLogin',
   },
-  logout: function () {
+  handleLogout: function () {
     auth.logout();
+  },
+  handleLogin: function () {
+    app.navigateToLogin();
   },
 });
