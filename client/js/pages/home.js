@@ -9,7 +9,7 @@ module.exports = PageView.extend({
   template: templates.pages.home,
   subviews: {
     speakers: {
-      container: '[data-hook=speakers-area]',
+      container: '[data-hook=speakers-area] div',
       prepareView: function (el) {
         return new SpeakersArea({
           el: el,
@@ -18,7 +18,7 @@ module.exports = PageView.extend({
       }
     },
     partners: {
-      container: '[data-hook=partners-area]',
+      container: '[data-hook=partners-area] div',
       prepareView: function (el) {
         return new PartnersArea({
           el: el,
