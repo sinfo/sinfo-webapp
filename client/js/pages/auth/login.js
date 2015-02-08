@@ -3,6 +3,7 @@ var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var auth = require('client/js/auth');
 var cookie = require('client/js/helpers/cookieParser');
+var queryParam = require('client/js/helpers/queryParam');
 
 
 module.exports = PageView.extend({
@@ -35,6 +36,6 @@ module.exports = PageView.extend({
     app.me.token = authDetails.token;
     cookie.setItem('cannon-auth', authDetails.token);
     app.fetchUserData();
-    app.navigate('/');
+    app.navigate(queryParam('r') || '/');
   }
 });

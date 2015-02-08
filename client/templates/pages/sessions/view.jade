@@ -13,11 +13,16 @@ section.page.sessions.view
     i.fa.fa-clock-o
     span
 
-  .speakers(data-hook='session-speakers')
+  .speakers.all-100(data-hook='session-speakers')
     h2 Speakers
     div
 
-  div(data-hook='session-partners')
+  .partners.all-100(data-hook='session-partners')
     h2 Partners
     div
 
+  .tickets.all-100(data-hook='ticket')
+    h2 Tickets
+    .ink-button.blue(data-hook='action-get-ticket')
+      i.fa.fa-ticket
+        span Get a ticket!

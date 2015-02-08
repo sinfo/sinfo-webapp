@@ -43,8 +43,12 @@ module.exports = PageView.extend({
     'model.hasCompanies': [
       { type: 'toggle', hook: 'session-partners' },
     ],
+    'model.needsTicket': [
+      { type: 'toggle', hook: 'ticket' },
+    ],
   },
   events: {
+    'click [data-hook~=action-get-ticket]': 'handleGetTicket',
   },
   initialize: function (spec) {
     var self = this;
@@ -55,6 +59,13 @@ module.exports = PageView.extend({
       self.model = model;
       log('Got session', model.name);
     });
+  },
+  handleGetTicket: function () {
+    if(!app.me.authenticated) {
+      return app.navigate('/auth/login?r=/sessions/'+this.model.id);
+    }
+
+
   },
   subviews: {
     speakers: {

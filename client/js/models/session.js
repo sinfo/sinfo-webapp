@@ -117,6 +117,12 @@ module.exports = AmpModel.extend({
       fn: function () {
         return this.companies && this.companies.length > 0;
       },
+    },
+    needsTicket: {
+      deps: ['kind'],
+      fn: function () {
+        return this.kind && ['workshop'].indexOf(this.kind.toLowerCase()) != -1;
+      },
     }
   },
   parse: function (attrs) {
