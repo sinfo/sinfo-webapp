@@ -49,6 +49,12 @@ module.exports = AmpModel.extend({
     speakersDetails: SpeakersDetailsCollection,
     partnersDetails: PartnersDetailsCollection,
   },
+  session: {
+    users: 'array',
+    isRegistered: 'boolean',
+    isConfirmed: 'boolean',
+    isPresent: 'boolean',
+  },
   derived: {
     thread: {
       deps: ['id'],
@@ -122,6 +128,24 @@ module.exports = AmpModel.extend({
       deps: ['kind'],
       fn: function () {
         return this.kind && ['workshop'].indexOf(this.kind.toLowerCase()) != -1;
+      },
+    },
+    canRegist: {
+      deps: ['isRegistered'],
+      fn: function () {
+        return !this.isRegistered;
+      },
+    },
+    canConfirm: {
+      deps: ['isRegistered', 'isConfirmed'],
+      fn: function () {
+        return this.isRegistered && !this.isConfirmed && app.me.authenticated;
+      },
+    },
+    canVoid: {
+      deps: ['isRegistered'],
+      fn: function () {
+        return this.isRegistered && app.me.authenticated;
       },
     }
   },
