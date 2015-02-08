@@ -1,28 +1,23 @@
 section.page.sessions.view
-  div.ink-grid
-    div.column-group.horizontal-gutters
-      div.all-100
-        h1(data-hook='name').push-left
-        div.all-100
-      div.all-33.medium-50.small-100.tiny-100
-        img(data-hook='img', width='200',  height='200')
-        div
-          h4 Description
-          .paragraphs(data-hook="description")
-      div.all-33.medium-50.small-100.tiny-100
-        div
-          h4 Kind
-          p(data-hook="kind")
-        div
-          h4 Place
-          p(data-hook="place")
-        div
-          h4 Date
-          p(data-hook='start')
-        div
-          h4 Duration
-          p(data-hook='end')
-      div.all-33.medium-50.small-100.tiny-100
-          div(data-hook='session-speakers')
-          div(data-hook='session-companies')
+  h3(data-hook='kind')
+  h1(data-hook='name')
+
+  div(data-hook='description')
+    div
+
+  div(data-hook='place')
+    i.fa.fa-location-arrow
+    span
+
+  div(data-hook='date')
+    i.fa.fa-clock-o
+    span
+
+  .speakers(data-hook='session-speakers')
+    h2 Speakers
+    div
+
+  div(data-hook='session-partners')
+    h2 Partners
+    div
 

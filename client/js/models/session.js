@@ -100,6 +100,24 @@ module.exports = AmpModel.extend({
         return 'background-image:url(' + this.img + ');';
       }
     },
+    descriptionHtml: {
+      deps: ['description'],
+      fn: function () {
+        return this.description && marked(this.description) || '';
+      },
+    },
+    hasSpeakers: {
+      deps: ['speakers'],
+      fn: function () {
+        return this.speakers.serialize() && this.speakers.serialize().length > 0;
+      },
+    },
+    hasCompanies: {
+      deps: ['companies'],
+      fn: function () {
+        return this.companies && this.companies.length > 0;
+      },
+    }
   },
   parse: function (attrs) {
     attrs.date = new Date(attrs.date);

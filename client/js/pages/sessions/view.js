@@ -16,18 +16,18 @@ module.exports = PageView.extend({
     'model.kind': {
       hook: 'kind'
     },
-    'model.place': {
-      hook: 'place'
-    },
-    'model.description': {
-      hook: 'description'
-    },
-    'model.startParsed': {
-      hook: 'start'
-    },
-    'model.endParsed': {
-      hook: 'end'
-    },
+    'model.description': [
+      { type: 'toggle', hook: 'description' },
+      { selector: '[data-hook~=description] div' },
+    ],
+    'model.place': [
+      { type: 'toggle', hook: 'place' },
+      { selector: '[data-hook~=place] span' },
+    ],
+    'model.startParsed': [
+      { type: 'toggle', hook: 'date' },
+      { selector: '[data-hook~=date] span' },
+    ],
     'model.img': {
       type: 'attribute',
       hook: 'img',
@@ -37,6 +37,12 @@ module.exports = PageView.extend({
       type: 'innerHTML',
       hook: 'descriptionHtml'
     },
+    'model.hasSpeakers': [
+      { type: 'toggle', hook: 'session-speakers' },
+    ],
+    'model.hasCompanies': [
+      { type: 'toggle', hook: 'session-partners' },
+    ],
   },
   events: {
   },
@@ -52,7 +58,7 @@ module.exports = PageView.extend({
   },
   subviews: {
     speakers: {
-      container: '[data-hook=session-speakers]',
+      container: '[data-hook=session-speakers] div',
       parent: this,
       waitFor: 'model.speakers',
       prepareView: function (el) {
@@ -64,9 +70,9 @@ module.exports = PageView.extend({
       }
     },
     partners: {
-      container: '[data-hook=session-partners]',
+      container: '[data-hook=session-partners] div',
       parent: this,
-      waitFor: 'model.partners',
+      waitFor: 'model.companies',
       prepareView: function (el) {
         var self = this;
         return new PartnerView({
