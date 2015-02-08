@@ -38,15 +38,7 @@ var WebAppRouter = Router.extend({
   },
 
   execute: function(callback, args, name) {
-    if(!app.me.authenticated) {
-      if(name === 'fenixLogin'){
-        return callback.apply(this, args);
-      }
-      this.redirectTo('auth/login');
-      return this.login();
-    } else {
-      return Router.prototype.execute.apply(this, [callback, args, name]);
-    }
+    return Router.prototype.execute.apply(this, [callback, args, name]);
   },
 
   // ------- ROUTE HANDLERS ---------
