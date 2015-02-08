@@ -10,5 +10,12 @@ options.kinds = {
   ]
 };
 
+options.skills = [
+  'Javascript', 'CSS', 'HTML', 'Node', 'Pyhton', 'Java', 'C', 'C++', 'PHP', 'SQL', 'NoSQL',
+  '.NET', 'Android', 'iOS', 'Swift', 'Objective-C', 'SysAdmin', 'Scala', 'AngularJS', 'Backbone',
+  'Ember', 'AmpersandJS', 'Ruby', 'UX', 'Design', 'Web', 'Front-end', 'Backend', 'Full-stack',
+  'Cordova', 'Unity'
+]
+
 
 module.exports = options;

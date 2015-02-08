@@ -1,40 +1,12 @@
-var AmpModel = require('ampersand-model');
-var AmpState = require('ampersand-state');
+var User = require('./user');
 var cannonUrl = require('client/js/helpers/clientconfig').cannonUrl;
 
-var Job = AmpState.extend({
-  props: {
-    startup: 'boolean',
-    internship: 'boolean',
-    start: 'date',
-  }
-});
-
-module.exports = AmpModel.extend({
-  type: 'user',
+module.exports = User.extend({
   url: cannonUrl+'/users/me',
-  props: {
-    id: 'string',
-    name: 'string',
-    img: 'string',
-    mail: 'string',
-    role: 'string',
-    area: 'string',
-    skills: 'array',
-  },
   session: {
     token: ['string'],
   },
-  children: {
-    job: Job,
-  },
   derived: {
-    background: {
-      deps: ['img'],
-      fn: function () {
-        return 'background-image:url('+this.img+');';
-      }
-    },
     authenticated: {
       deps: ['token'],
       fn: function () {

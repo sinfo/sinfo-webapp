@@ -14,6 +14,7 @@ var Speakers = require('./pages/speakers/list');
 var SpeakerViewPage = require('./pages/speakers/view');
 
 var UserViewPage = require('./pages/users/view');
+var UserEditPage = require('./pages/users/edit');
 
 var log = require('bows')('router');
 var fenixAuth = require('./auth/fenix');
@@ -31,6 +32,7 @@ var WebAppRouter = Router.extend({
     'sessions/:id': 'sessionView',
     'speakers': 'speakers',
     'me': 'me',
+    'me/edit': 'meEdit',
     'speakers/:id': 'speakerView',
     '(*path)': 'catchAll'
   },
@@ -61,6 +63,16 @@ var WebAppRouter = Router.extend({
     }
 
     this.trigger('page', new UserViewPage({
+      model: app.me
+    }));
+  },
+
+  meEdit: function () {
+    if(!app.me.authenticated) {
+      return this.redirectTo('/auth/login');
+    }
+
+    this.trigger('page', new UserEditPage({
       model: app.me
     }));
   },

@@ -35,6 +35,7 @@ module.exports = {
     stylesheets: [
       cssDir + '/vendor/ink.css',
       cssDir + '/vendor/fullcalendar.css',
+      cssDir + '/vendor/pikaday.css',
       cssDir + '/app.css',
     ],
     beforeBuildJS: function () {
