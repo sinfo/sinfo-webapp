@@ -20,7 +20,7 @@ module.exports = AmpModel.extend({
     skills: 'array',
   },
   children: {
-    job: Job,
+    job: Job
   },
   derived: {
     background: {

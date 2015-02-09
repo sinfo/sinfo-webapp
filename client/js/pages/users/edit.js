@@ -4,6 +4,7 @@ var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var UserForm = require('client/js/forms/user');
 var _ = require('client/js/helpers/underscore');
+var fileRequests = require('client/js/helpers/fileRequests');
 
 
 module.exports = PageView.extend({
@@ -47,16 +48,30 @@ module.exports = PageView.extend({
                 startup: data['job-startup'],
                 internship: data['job-internship'],
                 start: data['job-start'],
-              }
-            }
-            return data;
+              },
+              file: data.file
+            };
+            return _.compactObject(data);
           },
           submitCallback: function (data) {
+
+            if(data.file){
+              fileRequests.upload(model.token, data.file[0], function(err, resp, body){
+                if(err){
+                  log.error(err, resp.statusCode);
+                }
+                var file = JSON.parse(body);
+                app.file.set(file);
+              });
+              delete data.file;
+            }
+
+
             var changedAttributes = self.model.changedAttributes(data) || {};
             changedAttributes.job = data.job;
 
-            log('data', data)
-            log('changedAttributes', changedAttributes)
+            log('data', data);
+            log('changedAttributes', changedAttributes);
 
             model.save(changedAttributes, {
               patch: true,
@@ -75,6 +90,6 @@ module.exports = PageView.extend({
           }
         });
       }
-    }
+    },
   }
 });

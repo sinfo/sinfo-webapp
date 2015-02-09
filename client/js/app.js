@@ -4,6 +4,7 @@ var config = require('client/js/helpers/clientconfig');
 var Router = require('./router');
 var MainView = require('./views/main');
 var Me = require('./models/me');
+var File = require('./models/file');
 var Partners = require('./models/partners');
 var Sessions = require('./models/sessions');
 var Speakers = require('./models/speakers');
@@ -43,6 +44,7 @@ module.exports = {
 
     // create our global 'me' object and an empty collection for our channels models.
     this.me = new Me();
+    this.file = new File();
     this.partners = new Partners();
     this.sessions = new Sessions();
     this.speakers = new Speakers();
@@ -86,7 +88,11 @@ module.exports = {
   fetchUserData: function () {
     var self = this;
 
-    self.me.fetch();
+    self.me.fetch({
+      success: function(model, response, options){
+        self.file.fetch();
+      }
+    });
   },
 
   // This is how you navigate around the app.
