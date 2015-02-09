@@ -10,7 +10,7 @@ module.exports = PageView.extend({
     'model.name': {
       hook: 'name'
     },
-    'model.storedImg': {
+    'model.img': {
       type: 'attribute',
       hook: 'img',
       name: 'src'
@@ -18,10 +18,10 @@ module.exports = PageView.extend({
     'model.title': {
       hook: 'title'
     },
-    'model.descriptionHtml': {
-      type: 'innerHTML',
-      hook: 'description'
-    },
+    'model.descriptionHtml': [
+      { type: 'toggle', hook: 'description' },
+      { type: 'innerHTML', selector: '[data-hook~=description] div' },
+    ],
     'model.access': {
       hook: 'access'
     },

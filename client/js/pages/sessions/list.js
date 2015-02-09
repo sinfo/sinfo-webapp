@@ -51,7 +51,14 @@ module.exports = PageView.extend({
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
           },
-          defaultDate: Moment("2015 02 23", "YYYY MM DD")
+          defaultDate: Moment('2015 02 23', 'YYYY MM DD'),
+          options: {
+            defaultView: 'agendaWeek',
+            minTime: '09:00:00',
+            maxTime: '22:00:00',
+            allDaySlot: false,
+            hiddenDays: [0]
+          }
         });
       }
     },
