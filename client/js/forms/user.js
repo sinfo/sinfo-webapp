@@ -83,6 +83,15 @@ module.exports = FormView.extend({
         value: this.model && this.model.job && this.model.job.internship,
         parent: this
       }),
+      new ExtendedInput({
+        name: 'file',
+        label: 'CV pdf file',
+        type: 'file',
+        accept: '.pdf',
+        placeholder: 'Insert new file',
+        required: true,
+        parent: this
+      })
     ];
   }
 });
