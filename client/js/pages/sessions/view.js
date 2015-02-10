@@ -2,8 +2,8 @@
 var log = require('bows')('sessions');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
-var SpeakersView = require('client/js/views/sessionSpeaker');
-var PartnerView = require('client/js/views/sessionPartner');
+var SpeakersView = require('client/js/views/sessions/sessionSpeakers');
+var PartnerView = require('client/js/views/sessions/sessionPartners');
 var tickets = require('client/js/helpers/tickets');
 
 

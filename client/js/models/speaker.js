@@ -5,7 +5,13 @@ var AmpCollection = require('ampersand-collection');
 var options = require('options');
 var marked = require('client/js/helpers/marked');
 var _ = require('client/js/helpers/underscore');
+var SessionDetails = require('./session');
 var log = require('bows')('speaker');
+
+var SessionsDetailsCollection = AmpCollection.extend({
+  model: SessionDetails
+});
+
 
 module.exports = AmpModel.extend({
 
@@ -16,6 +22,9 @@ module.exports = AmpModel.extend({
     description: ['string'],
     img: ['string'],
     updated:['string']
+  },
+  collections: {
+    sessionsDetails: SessionsDetailsCollection,
   },
   derived: {
     thread: {

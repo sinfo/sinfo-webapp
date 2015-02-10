@@ -2,6 +2,7 @@
 var log = require('bows')('speakers');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
+var SessionsView = require('client/js/views/speakers/speakerSessions');
 
 module.exports = PageView.extend({
   pageTitle: 'View speaker',
@@ -40,5 +41,19 @@ module.exports = PageView.extend({
       self.model = model;
       log('Got speaker', model.name);
     });
+  },
+  subviews: {
+    speakers: {
+      container: '[data-hook=speaker-sessions] div',
+      parent: this,
+      waitFor: 'model.id',
+      prepareView: function (el) {
+        var self = this;
+        return new SessionsView({
+          el: el,
+          model: self.model
+        });
+      }
+    },
   },
 });
