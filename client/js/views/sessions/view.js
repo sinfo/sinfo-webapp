@@ -7,11 +7,22 @@ module.exports = View.extend({
   bindings: {
     'model.name': '[data-hook~=name]',
     'model.kind': '[data-hook~=kind]',
-    'model.startParsed': '[data-hook~=date]',
     'model.viewUrl': {
       type: 'attribute',
       hook: 'action-view',
       name: 'href'
-    }
+    },
+    'model.place': [
+      { type: 'toggle', hook: 'place' },
+      { selector: '[data-hook~=place] span' },
+    ],
+    'model.startDayStr': [
+      { type: 'toggle', hook: 'date' },
+      { selector: '[data-hook~=date] span' },
+    ],
+    'model.startHoursStr': [
+      { type: 'toggle', hook: 'hours' },
+      { selector: '[data-hook~=hours] span' },
+    ],
   }
 });

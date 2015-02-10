@@ -87,6 +87,20 @@ module.exports = AmpModel.extend({
         return new Moment(date).format('MMMM Do YYYY, HH:mm');
       }
     },
+    startDayStr: {
+      deps: ['date'],
+      fn: function() {
+        var date = new Date(this.date);
+        return new Moment(date).format('dddd, MMMM Do YYYY');
+      }
+    },
+    startHoursStr: {
+      deps: ['date'],
+      fn: function() {
+        var date = new Date(this.date);
+        return new Moment(date).format('HH[h]mm');
+      }
+    },
     end: {
       deps: ['date', 'duration'],
       fn: function () {

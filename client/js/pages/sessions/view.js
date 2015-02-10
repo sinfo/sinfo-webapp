@@ -25,9 +25,13 @@ module.exports = PageView.extend({
       { type: 'toggle', hook: 'place' },
       { selector: '[data-hook~=place] span' },
     ],
-    'model.startParsed': [
+    'model.startDayStr': [
       { type: 'toggle', hook: 'date' },
       { selector: '[data-hook~=date] span' },
+    ],
+    'model.startHoursStr': [
+      { type: 'toggle', hook: 'hours' },
+      { selector: '[data-hook~=hours] span' },
     ],
     'model.img': {
       type: 'attribute',
