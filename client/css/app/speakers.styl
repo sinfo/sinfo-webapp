@@ -1,10 +1,21 @@
 .speakers.view
   text-align: center
-  img
-    border-radius: 50%
-    max-width: 300px
 
 .speakers
+  .img-container
+    max-width: 300px
+    margin-left: auto
+    margin-right: auto
+  .img
+    overflow: hidden
+    background-size: cover
+    background-position: 50%
+    background-color: #eee
+    width: 100%
+    padding-bottom: 100%
+    border-radius: 50%
+    margin: 10px
+
   .title
     color: #aaa
     font-style: italic
@@ -17,14 +28,5 @@
       a
         text-decoration: none
         text-align: center
-        .img
-          overflow: hidden
-          background-size: cover
-          background-position: 50%
-          background-color: #eee
-          width: 100%
-          padding-bottom: 100%
-          border-radius: 50%
-          margin: 10px
         .text
           height: 100px

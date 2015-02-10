@@ -15,6 +15,11 @@ module.exports = PageView.extend({
       hook: 'img',
       name: 'src'
     },
+    'model.background': {
+      type: 'attribute',
+      hook: 'img',
+      name: 'style'
+    },
     'model.title': {
       hook: 'title'
     },
