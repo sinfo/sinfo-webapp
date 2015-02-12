@@ -5,8 +5,8 @@ var config = {
 };
 
 config.http = {
-  listen: '0.0.0.0',
-  port: process.env.WEBAPP_PORT || 9000
+  listen: process.env.CANNON_WEBAPP_HOST || 'localhost',
+  port: process.env.CANNON_WEBAPP_PORT || 9000
 };
 
 config.facebook = {
