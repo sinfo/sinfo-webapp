@@ -19,6 +19,15 @@ var Speaker = AmpState.extend({
   }
 });
 
+var Tickets = AmpState.extend({
+  props: {
+    needed: ['boolean'],
+    start: ['date'],
+    end: ['date'],
+    max: ['number']
+  }
+});
+
 var SpeakerCollection = AmpCollection.extend({
   model: Speaker
 });
@@ -43,6 +52,9 @@ module.exports = AmpModel.extend({
     duration: ['date'],
     updated: ['date'],
     companies: ['array'],
+  },
+  children:{
+    tickets: Tickets
   },
   collections: {
     speakers: SpeakerCollection,
@@ -141,25 +153,25 @@ module.exports = AmpModel.extend({
     needsTicket: {
       deps: ['kind'],
       fn: function () {
-        return this.kind && ['workshop'].indexOf(this.kind.toLowerCase()) != -1;
+        return this.tickets && this.tickets.needed;
       },
     },
     canRegist: {
-      deps: ['isRegistered'],
+      deps: ['isRegistered', 'needsTicket'],
       fn: function () {
-        return !this.isRegistered;
+        return this.needsTicket && !this.isRegistered && Date.now() > this.tickets.start && Date.now() < this.tickets.end && Date.now() < this.date;
       },
     },
     canConfirm: {
       deps: ['isRegistered', 'isConfirmed'],
       fn: function () {
-        return this.isRegistered && !this.isConfirmed && app.me.authenticated;
+        return app.me.authenticated && this.isRegistered && !this.isConfirmed && Moment(this.date).isSame(Date.now(), 'day');
       },
     },
     canVoid: {
       deps: ['isRegistered'],
       fn: function () {
-        return this.isRegistered && app.me.authenticated;
+        return app.me.authenticated && this.isRegistered && Date.now() < this.date;
       },
     }
   },
@@ -167,6 +179,14 @@ module.exports = AmpModel.extend({
     attrs.date = new Date(attrs.date);
     attrs.duration = new Date(attrs.duration);
     attrs.updated = new Date(attrs.updated);
+
+    if(attrs.tickets && attrs.tickets.start){
+      attrs.tickets.start = new Date(attrs.tickets.start);
+    }
+    if(attrs.tickets && attrs.tickets.end){
+      attrs.tickets.end = new Date(attrs.tickets.end);
+    }
+
     return attrs;
   },
   serialize: function () {
