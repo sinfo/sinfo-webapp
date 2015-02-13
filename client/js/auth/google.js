@@ -37,14 +37,13 @@ gAuth.login = function (cb) {
   var parameters = {
     client_id: config.google.appId,
     immediate: false,
-    scope: ["https://www.googleapis.com/auth/plus.login", "https://www.googleapis.com/auth/userinfo.email"]
+    scope: ["https://www.googleapis.com/auth/userinfo.email"]
   };
 
   gapi.auth.authorize(parameters, function (loginDetails) {
-    if (loginDetails && loginDetails.error) {
+    if (!loginDetails && loginDetails.error) {
       return cb(new Error('couldn\'t get google auth details'));
     }
-
     gapi.client.load('plus', 'v1').then(function () {
       var request = gapi.client.plus.people.get({
         'userId': 'me'
@@ -54,7 +53,7 @@ gAuth.login = function (cb) {
         if (resp && !resp.result.id) {
           return cb(new Error('couldn\'t get google user id'));
         }
-
+        
         cannon.loginWithGoogle(loginDetails, resp, cb);
       },
         function (reason) {
