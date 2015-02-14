@@ -43,7 +43,6 @@ var WebAppRouter = Router.extend({
 
   // ------- ROUTE HANDLERS ---------
   home: function (cenas) {
-    console.log(cenas);
     this.trigger('page', new HomePage({
       model: app.me
     }));

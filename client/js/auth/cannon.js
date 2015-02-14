@@ -30,34 +30,34 @@ cannon.loginWithFacebook = function(authResponse, cb) {
 };
 
 cannon.loginWithGoogle = function(authResponse, userInfo, cb) {
-//  var userID = userInfo.result.id;
-//  var accessToken =  authResponse.token;
-//
-//  xhr({
-//    uri: config.cannonUrl+'/auth/google',
-//    json: {
-//      id: userID,
-//      token: accessToken
-//    },
-//    method: 'POST'
-//  }, function (err, resp, body) {
-//    if(err) {
-//      return cb(err);
-//    }
-//
-//    var data = body;
-//    if(resp.statusCode >= 400) {
-//      return cb(data);
-//    }
-//
-//    cb(null, data);
-//  });
+  var userID = userInfo.result.id;
+  var accessToken =  authResponse.access_token;
+  
+  xhr({
+    uri: config.cannonUrl + '/auth/google',
+    json: {
+      id: userID,
+      token: accessToken
+    },
+    method: 'POST'
+  }, function (err, resp, body) {
+    if(err) {
+      return cb(err);
+    }
+
+    var data = body;
+    if(resp.statusCode >= 400) {
+      return cb(data);
+    }
+
+    cb(null, data);
+  });
 };
 
 cannon.loginWithFenix = function(code, cb) {
 
   xhr({
-    uri: config.cannonUrl+'/auth/fenix',
+    uri: config.cannonUrl + '/auth/fenix',
     json: {
       code: code
     },
