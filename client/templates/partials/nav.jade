@@ -1,17 +1,22 @@
-ul.menu.horizontal.push-right
-  li(data-hook='authenticated-menu')
-    a(href='/me')
-      img.user-picture(data-hook='user-picture')
+li
+  a(href='/me' data-hook='authenticated-menu')
+    img.user-picture(data-hook='user-picture')
 
-      i.fa.fa-caret-down-a
-        span(data-hook='user-name')
-    ul.submenu
-      li
-        a(href='/me/edit') Edit profile
-        a(data-hook='action-logout') Logout
+    i.fa.fa-caret-down-a
+      span(data-hook='user-name')
+  ul.submenu(data-hook='authenticated-menu')
+    li
+      a(href='/me/edit')
+        i.fa.fa-edit
+          span Edit profile
+      a(data-hook='action-logout')
+        i.fa.fa-sign-out
+          span Logout
 
-  li(data-hook='unauthenticated-menu')
-    a(data-hook='action-login') Login
+  span(data-hook='unauthenticated-menu')
+    a(data-hook='action-login')
+      i.fa.fa-sign-in
+        span Login
 
 
   div.clear

@@ -7,11 +7,26 @@ body.ink-drawer
           //-   .ink-button.small.white.left-drawer-trigger
           //-     i.fa.fa-bars.fa-2x
           li.title
-            a(href='/') SINFO
+            //- a(href='//sinfo.org/22/')
+            a(href='/')
+              img(src='/static/logo.png')
+
+        ul.menu.horizontal.push-left.hide-small.hide-tiny
+          li
+            a(href='//sinfo.org/22/#speakers') Speakers
+          li
+            a(href='//sinfo.org/22/schedule.html') Schedule
+          li
+            a(href='//sinfo.org/22/StartupRush.html') Startup Rush
+          li
+            a(href='//innovation.awards.pt/' target='_blank') IA
+          li
+            a(href='//sinfo.org/22/#partners') Partners
+          li
+            a(href='//sinfo.org/22/contacts.html') Contacts
+
 
         ul.menu.horizontal.push-right
-          li
-            a(href='/sessions') Schedule
           li(data-hook='nav')
 
   main.content-drawer.ink-grid(data-hook='page-container')
