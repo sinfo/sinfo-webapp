@@ -45,6 +45,7 @@ module.exports = PageView.extend({
     'model.hasSpeakers': { type: 'toggle', hook: 'session-speakers' },
     'model.hasCompanies': { type: 'toggle', hook: 'session-partners' },
     'model.needsTicket': { type: 'toggle', hook: 'ticket' },
+    'model.ticketsMessage': { hook: 'tickets-message' },
     'model.canRegist': { type: 'toggle', hook: 'action-get-ticket' },
     'model.canConfirm': { type: 'toggle', hook: 'action-confirm-ticket' },
     'model.canVoid': { type: 'toggle', hook: 'action-void-ticket' },
