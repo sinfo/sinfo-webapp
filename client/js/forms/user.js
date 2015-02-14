@@ -89,7 +89,7 @@ module.exports = FormView.extend({
         type: 'file',
         accept: '.pdf',
         placeholder: 'Insert new file',
-        required: true,
+        required: false,
         parent: this
       })
     ];

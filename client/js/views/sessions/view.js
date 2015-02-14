@@ -24,5 +24,13 @@ module.exports = View.extend({
       { type: 'toggle', hook: 'hours' },
       { selector: '[data-hook~=hours] span' },
     ],
+    'model.description': [
+      { type: 'toggle', hook: 'description' },
+      { selector: '[data-hook~=description] div' },
+    ],
+    'model.descriptionHtml': {
+      type: 'innerHTML',
+      hook: 'descriptionHtml'
+    },
   }
 });
