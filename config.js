@@ -1,11 +1,11 @@
 var config = {
   isDev: process.env.NODE_ENV != 'production',
   isSecure: false,
-  url: process.env.CANNON_WEBAPP_URL || 'http://178.62.70.59:9000'
+  url: process.env.CANNON_WEBAPP_URL || 'http://localhost:9000'
 };
 
 config.http = {
-  listen: process.env.CANNON_WEBAPP_HOST || '178.62.70.59',
+  listen: process.env.CANNON_WEBAPP_HOST || 'localhost',
   port: process.env.CANNON_WEBAPP_PORT || 9000
 };
 
