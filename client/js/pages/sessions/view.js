@@ -17,9 +17,9 @@ module.exports = PageView.extend({
     'model.kind': {
       hook: 'kind'
     },
-    'model.description': [
+    'model.descriptionHtml': [
       { type: 'toggle', hook: 'description' },
-      { selector: '[data-hook~=description] div' },
+      { selector: '[data-hook~=description] div', type: 'innerHTML' },
     ],
     'model.place': [
       { type: 'toggle', hook: 'place' },
@@ -37,10 +37,6 @@ module.exports = PageView.extend({
       type: 'attribute',
       hook: 'img',
       name: 'src'
-    },
-    'model.descriptionHtml': {
-      type: 'innerHTML',
-      hook: 'descriptionHtml'
     },
     'model.hasSpeakers': { type: 'toggle', hook: 'session-speakers' },
     'model.hasCompanies': { type: 'toggle', hook: 'session-partners' },

@@ -17,7 +17,12 @@ module.exports = {
     var self = window.app = this;
     this.buildGlobals();
 
-    log('config', config);
+    // Welcome guest developers
+    console.log('%c Hello friend! Found a bug? ', 'background: #333; color: #00AAFF');
+    console.log('Send us a PR on GitHub (https://github.com/sinfo/cannon-webapp) or shoot us an email at devteam@sinfo.org!');
+    console.log('Thank you!');
+
+    log('Blastoff!', config);
 
     // init our URL handlers and the history tracker
     this.router = new Router();
