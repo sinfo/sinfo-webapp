@@ -6,6 +6,7 @@ var options = require('options');
 var marked = require('client/js/helpers/marked');
 var SpeakerDetails = require('./speaker');
 var PartnerDetails = require('./partner');
+var UserDetails = require('./user');
 var moment = require('moment');
 var log = require('bows')('session');
 
@@ -40,6 +41,10 @@ var PartnersDetailsCollection = AmpCollection.extend({
   model: PartnerDetails
 });
 
+var UsersDetailsCollection = AmpCollection.extend({
+  model: UserDetails
+});
+
 module.exports = AmpModel.extend({
   props: {
     id: ['string'],
@@ -60,6 +65,7 @@ module.exports = AmpModel.extend({
     speakers: SpeakerCollection,
     speakersDetails: SpeakersDetailsCollection,
     partnersDetails: PartnersDetailsCollection,
+    usersDetails: UsersDetailsCollection,
   },
   session: {
     users: 'array',
@@ -148,6 +154,12 @@ module.exports = AmpModel.extend({
       deps: ['companies'],
       fn: function () {
         return this.companies && this.companies.length > 0;
+      },
+    },
+    hasUsers: {
+      deps: ['users'],
+      fn: function () {
+        return this.users && this.users.length > 0;
       },
     },
     needsTicket: {
@@ -243,7 +255,7 @@ module.exports = AmpModel.extend({
 
     delete res.speakersDetails;
     delete res.partnersDetails;
-    delete res.unread;
+    delete res.usersDetails;
 
     return res;
   }

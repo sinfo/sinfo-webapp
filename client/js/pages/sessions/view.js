@@ -4,6 +4,7 @@ var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var SpeakersView = require('client/js/views/sessions/sessionSpeakers');
 var PartnerView = require('client/js/views/sessions/sessionPartners');
+var UserView = require('client/js/views/sessions/sessionUsers');
 var tickets = require('client/js/helpers/tickets');
 
 
@@ -40,6 +41,7 @@ module.exports = PageView.extend({
     },
     'model.hasSpeakers': { type: 'toggle', hook: 'session-speakers' },
     'model.hasCompanies': { type: 'toggle', hook: 'session-partners' },
+    'model.hasUsers': { type: 'toggle', hook: 'session-users' },
     'model.needsTicket': { type: 'toggle', hook: 'ticket' },
     'model.ticketsMessage': { hook: 'tickets-message' },
     'model.canRegist': { type: 'toggle', hook: 'action-get-ticket' },
@@ -121,6 +123,19 @@ module.exports = PageView.extend({
       prepareView: function (el) {
         var self = this;
         return new PartnerView({
+          el: el,
+          model: self.model
+        });
+      }
+    },
+    users: {
+      container: '[data-hook=session-users] div',
+      parent: this,
+      waitFor: 'model.users',
+      prepareView: function (el) {
+        var self = this;
+        console.log('bwanana')
+        return new UserView({
           el: el,
           model: self.model
         });
