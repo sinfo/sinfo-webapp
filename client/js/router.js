@@ -51,8 +51,8 @@ var WebAppRouter = Router.extend({
   },
 
   me: function () {
-    if(!app.me.authenticated) {
-      return this.redirectTo('/auth/login');
+    if(!app.me || !app.me.authenticated) {
+      return app.navigateToLogin();
     }
 
     this.trigger('page', new UserViewPage({
@@ -62,7 +62,7 @@ var WebAppRouter = Router.extend({
 
   meEdit: function () {
     if(!app.me.authenticated) {
-      return this.redirectTo('/auth/login');
+      return app.navigateToLogin();
     }
 
     this.trigger('page', new UserEditPage({
