@@ -11,6 +11,7 @@ var dom = require('ampersand-dom');
 var templates = require('../templates');
 var setFavicon = require('favicon-setter');
 var Nav = require('./nav');
+var $ = require('jquery');
 
 
 module.exports = View.extend({
@@ -21,6 +22,7 @@ module.exports = View.extend({
   },
   events: {
     'click a[href]': 'handleLinkClick',
+    'click [data-hook=menu-mobile]': 'showMenu',
   },
   render: function () {
     // some additional stuff we want to add to the document head
@@ -96,5 +98,13 @@ module.exports = View.extend({
         dom.removeClass(aTag.parentNode, 'active');
       }
     });
+  },
+
+  showMenu: function() {
+    console.log('click');
+    var el = document.getElementById('menuVertical');
+
+    el.style.display = (el.style.display != 'block' ? 'block' : 'none' );
   }
+
 });
