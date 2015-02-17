@@ -19,10 +19,8 @@ module.exports = PageView.extend({
       { type: 'toggle', hook: 'area' },
       { selector: '[data-hook~=area] div' },
     ],
-    'model.skills': [
-      { type: 'toggle', hook: 'skills' },
-      { selector: '[data-hook~=skills] div' },
-    ],
+    'model.skills': { selector: '[data-hook~=skills] div' },
+    'model.skills.length': { type: 'toggle', hook: 'skills' },
   },
   initialize: function (spec) {
     var self = this;

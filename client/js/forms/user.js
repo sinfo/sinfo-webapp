@@ -14,14 +14,14 @@ var ExtendedInput = InputView.extend({
 module.exports = FormView.extend({
   fields: function () {
     return [
-      new ExtendedInput({
-        label: 'Id',
-        name: 'id',
-        value: this.model.id || '',
-        required: false,
-        placeholder: 'Id',
-        parent: this
-      }),
+      // new ExtendedInput({
+      //   label: 'Id',
+      //   name: 'id',
+      //   value: this.model.id || '',
+      //   required: false,
+      //   placeholder: 'Id',
+      //   parent: this
+      // }),
       new ExtendedInput({
         label: 'Name',
         name: 'name',
@@ -31,7 +31,7 @@ module.exports = FormView.extend({
         parent: this
       }),
       new ExtendedInput({
-        label: 'Image Url',
+        label: 'Image URL',
         name: 'img',
         value: this.model.img || '',
         required: false,
