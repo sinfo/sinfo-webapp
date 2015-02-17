@@ -26,8 +26,26 @@ body.ink-drawer
             a(href='//sinfo.org/22/contacts.html') Contacts
 
 
-        ul.menu.horizontal.push-right
+        ul.menu.horizontal.push-right.hide-small#SessionBtn
           li(data-hook='nav')
+
+        ul.menu.horizontal.push-right.hide-all.show-small#menuMobile(data-hook='menu-mobile')
+          img(src='/static/menuSmall.png' width="28px" height="28px" style="margin-top: 10px; margin-right: 10px;")
+        
+        ul.menu.vertical.hide-all-show-small#menuVertical(data-hook='menuItems')
+          li
+            a(href='//sinfo.org/22/#speakers') Speakers
+          li
+            a(href='//sinfo.org/22/schedule.html') Schedule
+          li
+            a(href='//sinfo.org/22/StartupRush.html') Startup Rush
+          li
+            a(href='//innovation.awards.pt/' target='_blank') IA
+          li
+            a(href='//sinfo.org/22/#partners') Partners
+          li
+            a(href='//sinfo.org/22/contacts.html') Contacts
+
 
   main.content-drawer.ink-grid(data-hook='page-container')
 

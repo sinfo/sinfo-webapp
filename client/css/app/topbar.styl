@@ -56,6 +56,27 @@
           img
             vertical-align: middle
 
+  #menuMobile
+    padding-top 15px
+    cursor pointer    
+
+  #menuVertical
+    padding-top 85px
+    display none
+
+  #menuVertical li
+    width 100%
+    text-align center
+    padding-bottom 0px
+    padding-top 0px
+
+  #menuMobile:active 
+    menu()
+
+  menu()
+    #menuVertical li
+      display block
+
 .ink-navigation ul.menu.horizontal > li:first-child,
 .ink-navigation ul.menu.horizontal > li:first-child a
   border-radius: 5px
@@ -94,3 +115,8 @@ body.ink-drawer
 
       a:hover
         background: none repeat scroll 0% 0% rgb(238, 238, 238)
+
+  #SessionBtn
+    padding: 16px 26px
+    background-color: #0077AA
+    margin-top: 10px
