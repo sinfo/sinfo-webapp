@@ -17,7 +17,12 @@ module.exports = {
     var self = window.app = this;
     this.buildGlobals();
 
-    log('config', config);
+    // Welcome guest developers
+    console.log('%c Hello friend! Found a bug? ', 'background: #333; color: #00AAFF');
+    console.log('Send us a PR on GitHub (https://github.com/sinfo/cannon-webapp) or shoot us an email at devteam@sinfo.org!');
+    console.log('Thank you!');
+
+    log('Blastoff!', config);
 
     // init our URL handlers and the history tracker
     this.router = new Router();
@@ -34,6 +39,14 @@ module.exports = {
   buildGlobals: function() {
     // jquery global
     window.$ = window.jQuery = require('jquery');
+
+    // google analytics
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    window.ga('create', config.google.analytics, 'auto');
 
     // jquery plugins
     // require('bootstrap');

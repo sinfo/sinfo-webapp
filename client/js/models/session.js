@@ -6,7 +6,8 @@ var options = require('options');
 var marked = require('client/js/helpers/marked');
 var SpeakerDetails = require('./speaker');
 var PartnerDetails = require('./partner');
-var Moment = require('moment');
+var UserDetails = require('./user');
+var moment = require('moment');
 var log = require('bows')('session');
 
 var _ = require('client/js/helpers/underscore');
@@ -25,7 +26,7 @@ var Tickets = AmpState.extend({
     start: ['date'],
     end: ['date'],
     max: ['number']
-  }
+  },
 });
 
 var SpeakerCollection = AmpCollection.extend({
@@ -38,6 +39,10 @@ var SpeakersDetailsCollection = AmpCollection.extend({
 
 var PartnersDetailsCollection = AmpCollection.extend({
   model: PartnerDetails
+});
+
+var UsersDetailsCollection = AmpCollection.extend({
+  model: UserDetails
 });
 
 module.exports = AmpModel.extend({
@@ -60,6 +65,7 @@ module.exports = AmpModel.extend({
     speakers: SpeakerCollection,
     speakersDetails: SpeakersDetailsCollection,
     partnersDetails: PartnersDetailsCollection,
+    usersDetails: UsersDetailsCollection,
   },
   session: {
     users: 'array',
@@ -96,21 +102,21 @@ module.exports = AmpModel.extend({
       deps: ['date'],
       fn: function() {
         var date = new Date(this.date);
-        return new Moment(date).format('MMMM Do YYYY, HH:mm');
+        return moment(date).format('MMMM Do YYYY, HH:mm');
       }
     },
     startDayStr: {
       deps: ['date'],
       fn: function() {
         var date = new Date(this.date);
-        return new Moment(date).format('dddd, MMMM Do YYYY');
+        return moment(date).format('dddd, MMMM Do YYYY');
       }
     },
     startHoursStr: {
       deps: ['date'],
       fn: function() {
         var date = new Date(this.date);
-        return new Moment(date).format('HH[h]mm');
+        return moment(date).format('HH[h]mm');
       }
     },
     end: {
@@ -123,7 +129,7 @@ module.exports = AmpModel.extend({
       deps: ['end'],
       fn: function() {
         var date = new Date(this.end);
-        return new Moment(date).format('MMMM Do YYYY, HH:mm');
+        return moment(date).format('MMMM Do YYYY, HH:mm');
       }
     },
     background: {
@@ -150,6 +156,12 @@ module.exports = AmpModel.extend({
         return this.companies && this.companies.length > 0;
       },
     },
+    hasUsers: {
+      deps: ['users'],
+      fn: function () {
+        return this.users && this.users.length > 0;
+      },
+    },
     needsTicket: {
       deps: ['kind'],
       fn: function () {
@@ -159,21 +171,64 @@ module.exports = AmpModel.extend({
     canRegist: {
       deps: ['isRegistered', 'needsTicket'],
       fn: function () {
-        return this.needsTicket && !this.isRegistered && Date.now() > this.tickets.start && Date.now() < this.tickets.end && Date.now() < this.date;
+        var now = new Date();
+        return this.needsTicket && !this.isRegistered && now > this.tickets.start && now < this.tickets.end && now < this.date;
       },
     },
     canConfirm: {
       deps: ['isRegistered', 'isConfirmed'],
       fn: function () {
-        return app.me.authenticated && this.isRegistered && !this.isConfirmed && Moment(this.date).isSame(Date.now(), 'day');
+        var now = new Date();
+        return app.me.authenticated && this.isRegistered && !this.isConfirmed && moment(this.date).isSame(now, 'day') && now < this.date;
       },
     },
     canVoid: {
-      deps: ['isRegistered'],
+      deps: ['date', 'isRegistered'],
       fn: function () {
-        return app.me.authenticated && this.isRegistered && Date.now() < this.date;
+        var now = new Date();
+        return app.me.authenticated && this.isRegistered && now < this.date;
       },
-    }
+    },
+    ticketsMessage: {
+      deps: ['tickets', 'isConfirmed', 'isRegistered'],
+      fn: function () {
+        var now = new Date();
+
+        if(!this.tickets.needed) {
+          return 'Tickets are not needed for this session.';
+        }
+
+        if(now > new Date(this.date)) {
+          return 'Event was on ' + moment(this.date).format('MMMM Do YYYY, HH:mm') + '.';
+        }
+
+        if(this.isConfirmed) {
+          return 'You are confirmed for this session.';
+        }
+
+        if(this.isRegistered) {
+          if(!moment(this.date).isSame(now, 'day')) {
+            return 'You are registered for this session, come back on the day of the session to confirm the ticket.';
+          }
+
+          return 'You are registered for this session, please confirm the ticket bellow.';
+        }
+
+        if(now < new Date(this.tickets.start)) {
+          return 'Ticket registration starts on ' + moment(this.tickets.start).format('MMMM Do YYYY, HH:mm') + '.';
+        }
+        if(now > new Date(this.tickets.end)) {
+          return 'Ticket registration ended on ' + moment(this.tickets.end).format('MMMM Do YYYY, HH:mm') + '.';
+        }
+
+        // if(!this.users.length > this.tickets.max) {
+        //   return 'Sold out.';
+        // }
+
+        return '';
+      }
+    },
+
   },
   parse: function (attrs) {
     attrs.date = new Date(attrs.date);
@@ -200,7 +255,7 @@ module.exports = AmpModel.extend({
 
     delete res.speakersDetails;
     delete res.partnersDetails;
-    delete res.unread;
+    delete res.usersDetails;
 
     return res;
   }

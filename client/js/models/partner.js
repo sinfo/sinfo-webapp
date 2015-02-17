@@ -11,6 +11,7 @@ module.exports = AmpModel.extend({
     id: ['string'],
     name: ['string'],
     img: ['string'],
+    advertisementLvl: ['string']
   },
   derived: {
     thread: {
@@ -22,6 +23,18 @@ module.exports = AmpModel.extend({
     threadKind: {
       fn: function () {
         return 'company';
+      }
+    },
+    adv: {
+      deps: ['advertisementLvl'],
+      fn: function () {
+        if(this.model.advertisementLvl === 'max'){
+          return 'Maximum';
+        }
+        if(this.model.advertisementLvl === 'exclusive'){
+          return 'Exclusive';
+        }
+        return 'Nothing';
       }
     },
     background: {

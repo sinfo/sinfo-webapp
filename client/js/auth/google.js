@@ -11,7 +11,6 @@ gAuth.init = function () {
 };
 
 window.handleClientLoad = function () {
-  gapi.client.setApiKey(config.google.apiKey);
   window.setTimeout(gAuth.checkState(function (cb) {
     //TODO What should this cb do?
   }), 1);
