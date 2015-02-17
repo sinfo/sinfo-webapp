@@ -38,6 +38,8 @@ var WebAppRouter = Router.extend({
   },
 
   execute: function(callback, args, name) {
+    window.ga('send', 'pageview', window.location.pathname);
+
     return Router.prototype.execute.apply(this, [callback, args, name]);
   },
 
