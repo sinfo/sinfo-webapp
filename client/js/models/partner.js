@@ -6,20 +6,12 @@ var options = require('options');
 var marked = require('client/js/helpers/marked');
 var _ = require('client/js/helpers/underscore');
 
-var Participation = AmpState.extend({
-  props: {
-    advertisementLvl: 'string'
-  }
-});
-
 module.exports = AmpModel.extend({
   props: {
     id: ['string'],
     name: ['string'],
     img: ['string'],
-  },
-  children: {
-    participation: Participation,
+    advertisementLvl: ['string']
   },
   derived: {
     thread: {
@@ -34,11 +26,12 @@ module.exports = AmpModel.extend({
       }
     },
     adv: {
+      deps: ['advertisementLvl'],
       fn: function () {
-        if(participation.advertisementLvl === 'max'){
+        if(this.model.advertisementLvl === 'max'){
           return 'Maximum';
         }
-        if(participation.advertisementLvl === 'exclusive'){
+        if(this.model.advertisementLvl === 'exclusive'){
           return 'Exclusive';
         }
         return 'Nothing';
