@@ -15,7 +15,6 @@ config.facebook = {
 
 config.google = {
   appId: process.env.CANNON_GOOGLE_APP_ID || 'YOUR APP ID',
-  apiKey: process.env.CANNON_GOOGLE_API_KEY || 'YOUR API KEY',
   analytics: process.env.CANNON_GOOGLE_ANALYTICS_ID || 'YOUR GOOGLE ANALYTICS ID'
 };
 
