@@ -2,6 +2,7 @@
 var Router = require('ampersand-router');
 
 var HomePage = require('./pages/home');
+var PageNotFound = require('./pages/notFound');
 
 var LoginPage = require('./pages/auth/login');
 
@@ -119,7 +120,7 @@ var WebAppRouter = Router.extend({
   },
 
   catchAll: function () {
-    this.redirectTo('/404');
+    this.trigger('page', new PageNotFound());
   }
 });
 
