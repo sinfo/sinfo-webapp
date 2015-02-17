@@ -23,8 +23,8 @@ module.exports = PageView.extend({
       container: '[data-hook=max-partner]',
       waitFor: 'model',
       prepareView: function (el) {
-        var aux collection.filter(function(partner){
-          return partner.participation && partner.participation.advertisementLvl == 'max';
+        var aux collection.filter(function(model){
+          return model.participation && model.participation.advertisementLvl == 'max';
         }
 
         aux = new AmpersandCollection(aux, {model: Partner});
@@ -39,8 +39,8 @@ module.exports = PageView.extend({
       container: '[data-hook=exclusive-partner]',
       waitFor: 'model',
       prepareView: function (el) {
-        var aux collection.filter(function(partner){
-          return partner.participation && partner.participation.advertisementLvl == 'max';
+        var aux collection.filter(function(model){
+          return model.participation && model.participation.advertisementLvl == 'max';
         }
 
         aux = new AmpersandCollection(aux, {model: Partner});
