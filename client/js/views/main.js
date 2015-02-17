@@ -22,7 +22,8 @@ module.exports = View.extend({
   },
   events: {
     'click a[href]': 'handleLinkClick',
-    'click [data-hook=menu-mobile]': 'showMenu',
+    'click [data-hook=menu-mobile]': 'toggleMenu',
+    'click [data-hook=page-container]': 'hideMenu'
   },
   render: function () {
     // some additional stuff we want to add to the document head
@@ -100,11 +101,14 @@ module.exports = View.extend({
     });
   },
 
-  showMenu: function() {
-    console.log('click');
+  toggleMenu: function() {
     var el = document.getElementById('menuVertical');
 
     el.style.display = (el.style.display != 'block' ? 'block' : 'none' );
-  }
+  },
+
+  hideMenu: function() {
+    document.getElementById('menuVertical').style.display = 'none';
+  },
 
 });
