@@ -187,7 +187,7 @@ module.exports = AmpModel.extend({
       deps: ['date', 'isRegistered'],
       fn: function () {
         var now = new Date();
-        return app.me.authenticated && this.isRegistered && now < this.date;
+        return app.me.authenticated && this.isRegistered;
       },
     },
     ticketsMessage: {
