@@ -43,6 +43,10 @@ auth.logout = function() {
   log('Logging out');
   cookie.removeItem('cannon-auth');
   app.me.clear();
+
+  if(window.location.pathname.indexOf('/me') != -1) {
+    app.navigate('/auth/login');
+  }
   // app.navigate('/auth/login');
 };
 
