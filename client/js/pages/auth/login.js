@@ -31,7 +31,8 @@ module.exports = PageView.extend({
   handleLogin: function(err, authDetails) {
     log('handleLogin', authDetails);
     if(err) {
-      return alert(err.error);
+      log({err: err});
+      return;
     }
     app.me.token = authDetails.token;
     cookie.setItem('cannon-auth', authDetails.token);

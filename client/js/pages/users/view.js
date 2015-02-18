@@ -1,5 +1,6 @@
 /*global app, alert*/
 var log = require('bows')('users');
+var auth = require('client/js/auth');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 
@@ -21,6 +22,28 @@ module.exports = PageView.extend({
     ],
     'model.skills': { selector: '[data-hook~=skills] div' },
     'model.skills.length': { type: 'toggle', hook: 'skills' },
+  },
+  events: {
+    'click [data-hook=facebook-add]': 'addFacebook',
+    'click [data-hook=google-add]': 'addGoogle',
+    'click [data-hook=fenix-add]': 'addFenix',
+  },
+  addFacebook: function () {
+    auth.login('facebook', this.handleLogin);
+  },
+  addGoogle: function () {
+    auth.login('google', this.handleLogin);
+  },
+  addFenix: function () {
+    auth.login('fenix', this.handleLogin);
+  },
+  handleLogin: function(err, authDetails) {
+    if(err) {
+      log({err: err});
+      return;
+    }
+    app.fetchUserData();
+    app.navigate('/me');
   },
   initialize: function (spec) {
     var self = this;
