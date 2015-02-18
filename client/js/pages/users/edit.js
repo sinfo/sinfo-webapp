@@ -25,6 +25,21 @@ module.exports = PageView.extend({
     //   log('Got user', model.name);
     // });
   },
+  events: {
+    'click [data-hook=facebook-add]': 'addFacebook',
+    'click [data-hook=google-add]': 'addGoogle',
+    'click [data-hook=fenix-add]': 'addFenix',
+  },
+  addFacebook: function () {
+    auth.login('facebook', this.handleLogin);
+  },
+  addGoogle: function () {
+    auth.login('google', this.handleLogin);
+  },
+  addFenix: function () {
+    auth.login('fenix', this.handleLogin);
+  },
+
   subviews: {
     form: {
       container: 'form',
