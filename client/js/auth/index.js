@@ -12,8 +12,10 @@ auth.init = function() {
   gAuth.init();
 };
 
-auth.login = function(type, cb) {
-  log('type', type)
+auth.login = function(type, add, cb) {
+  log('type', type);
+  cb || (cb = add);
+
   if(type === 'facebook') {
     fbAuth.checkState(function (err, user) {
       if(err) {
@@ -24,11 +26,11 @@ auth.login = function(type, cb) {
         return cb(null, user);
       }
 
-      fbAuth.login(cb);
+      fbAuth.login(add, cb);
     });
   }
   else if (type === 'google') {
-    gAuth.login(cb);
+    gAuth.login(add, cb);
   }
   else if (type === 'fenix') {
     fenixAuth.login(cb);

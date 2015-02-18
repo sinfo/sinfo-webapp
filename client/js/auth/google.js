@@ -32,7 +32,9 @@ gAuth.checkState = function (cb) {
   });
 };
 
-gAuth.login = function (cb) {
+gAuth.login = function (add, cb) {
+  cb || (cb = add);
+
   var parameters = {
     client_id: config.google.appId,
     immediate: false,
@@ -52,7 +54,9 @@ gAuth.login = function (cb) {
         if (resp && !resp.result.id) {
           return cb(new Error('couldn\'t get google user id'));
         }
-        
+        if(add === true){
+          return cannon.addGoogleLogin(loginDetails, resp, cb);
+        }
         cannon.loginWithGoogle(loginDetails, resp, cb);
       },
         function (reason) {

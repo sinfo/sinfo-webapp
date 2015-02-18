@@ -32,14 +32,18 @@ fbAuth.checkState = function(cb) {
 };
 
 
-fbAuth.login = function(cb) {
+fbAuth.login = function(add, cb) {
+  cb || (cb = add);
+
   FB.login(function(loginDetails) {
     log('Got facebook login', loginDetails.authResponse);
 
     if (!loginDetails.authResponse) {
       return cb(new Error('couldn\'t get facebook auth details'))
     }
-
+    if(add === true){
+      return cannon.addFacebookLogin(loginDetails.authResponse, cb);
+    }
     cannon.loginWithFacebook(loginDetails.authResponse, cb);
   });
 };

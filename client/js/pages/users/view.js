@@ -29,10 +29,10 @@ module.exports = PageView.extend({
     'click [data-hook=fenix-add]': 'addFenix',
   },
   addFacebook: function () {
-    auth.login('facebook', this.handleLogin);
+    auth.login('facebook', true, this.handleLogin);
   },
   addGoogle: function () {
-    auth.login('google', this.handleLogin);
+    auth.login('google', true, this.handleLogin);
   },
   addFenix: function () {
     auth.login('fenix', this.handleLogin);
@@ -47,6 +47,9 @@ module.exports = PageView.extend({
   },
   initialize: function (spec) {
     var self = this;
+
+    auth.init();
+
     if(this.model) {
       return;
     }
