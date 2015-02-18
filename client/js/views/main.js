@@ -11,6 +11,7 @@ var dom = require('ampersand-dom');
 var templates = require('../templates');
 var setFavicon = require('favicon-setter');
 var Nav = require('./nav');
+var Footer = require('./footer');
 var $ = require('jquery');
 
 
@@ -60,7 +61,16 @@ module.exports = View.extend({
           el: el
         });
       }
-    }
+    },
+   /* footer: {
+      hook: 'footer',
+      prepareView: function(el) {
+        return new Footer({
+          model: this.model,
+          el: el
+        });
+      }
+    }*/
   },
 
   handleNewPage: function (view) {
