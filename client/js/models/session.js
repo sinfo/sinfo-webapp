@@ -70,6 +70,7 @@ module.exports = AmpModel.extend({
   session: {
     users: 'array',
     isRegistered: 'boolean',
+    isWaiting: 'boolean',
     isConfirmed: 'boolean',
     isPresent: 'boolean',
   },
@@ -169,10 +170,10 @@ module.exports = AmpModel.extend({
       },
     },
     canRegist: {
-      deps: ['isRegistered', 'needsTicket'],
+      deps: ['isRegistered', 'isWaiting', 'needsTicket'],
       fn: function () {
         var now = new Date();
-        return this.needsTicket && !this.isRegistered && now > this.tickets.start && now < this.tickets.end && now < this.date;
+        return this.needsTicket && !this.isRegistered && !this.isWaiting && now > this.tickets.start && now < this.tickets.end && now < this.date;
       },
     },
     canConfirm: {
@@ -190,7 +191,7 @@ module.exports = AmpModel.extend({
       },
     },
     ticketsMessage: {
-      deps: ['tickets', 'isConfirmed', 'isRegistered'],
+      deps: ['tickets', 'isWaiting', 'isConfirmed', 'isRegistered'],
       fn: function () {
         var now = new Date();
 
@@ -204,6 +205,10 @@ module.exports = AmpModel.extend({
 
         if(this.isConfirmed) {
           return 'You are confirmed for this session.';
+        }
+
+        if(this.isWaiting) {
+          return 'You are on the waiting list for this session. We\'ll contact you if we can get a new ticket for you.';
         }
 
         if(this.isRegistered) {
