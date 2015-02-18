@@ -134,7 +134,6 @@ module.exports = PageView.extend({
       waitFor: 'model.users',
       prepareView: function (el) {
         var self = this;
-        console.log('bwanana')
         return new UserView({
           el: el,
           model: self.model
