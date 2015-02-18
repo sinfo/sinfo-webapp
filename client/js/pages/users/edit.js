@@ -39,7 +39,16 @@ module.exports = PageView.extend({
   addFenix: function () {
     auth.login('fenix', this.handleLogin);
   },
-
+  handleLogin: function(err, authDetails) {
+    log('handleLogin', authDetails);
+    if(err) {
+      return alert(err.error);
+    }
+    app.me.token = authDetails.token;
+    cookie.setItem('cannon-auth', authDetails.token);
+    app.fetchUserData();
+    app.navigate(queryParam('r') || '/me');
+  },
   subviews: {
     form: {
       container: 'form',
