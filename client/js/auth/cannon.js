@@ -39,7 +39,10 @@ cannon.addFacebookLogin = function(authResponse, cb) {
       id: authResponse.userID,
       token: authResponse.accessToken
     },
-    method: 'POST'
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + app.me.token
+    }
   }, function (err, resp, body) {
     if(err) {
       return cb(err);
@@ -89,7 +92,10 @@ cannon.addGoogleLogin = function(authResponse, userInfo, cb) {
       id: userID,
       token: accessToken
     },
-    method: 'POST'
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + app.me.token
+    }
   }, function (err, resp, body) {
     if(err) {
       return cb(err);
@@ -133,7 +139,10 @@ cannon.addFenixLogin = function(code, cb) {
     json: {
       code: code
     },
-    method: 'POST'
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + app.me.token
+    }
   }, function (err, resp, body) {
     if(err) {
       return cb(err);

@@ -26,16 +26,12 @@ module.exports = PageView.extend({
   events: {
     'click [data-hook=facebook-add]': 'addFacebook',
     'click [data-hook=google-add]': 'addGoogle',
-    'click [data-hook=fenix-add]': 'addFenix',
   },
   addFacebook: function () {
     auth.login('facebook', true, this.handleLogin);
   },
   addGoogle: function () {
     auth.login('google', true, this.handleLogin);
-  },
-  addFenix: function () {
-    auth.login('fenix', this.handleLogin);
   },
   handleLogin: function(err, authDetails) {
     if(err) {
