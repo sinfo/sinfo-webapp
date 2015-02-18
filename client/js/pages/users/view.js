@@ -23,7 +23,7 @@ module.exports = PageView.extend({
     'model.skills': { selector: '[data-hook~=skills] div' },
     'model.skills.length': { type: 'toggle', hook: 'skills' },
   },
-  events: {
+  /*events: {
     'click [data-hook=facebook-add]': 'addFacebook',
     'click [data-hook=google-add]': 'addGoogle',
   },
@@ -40,11 +40,11 @@ module.exports = PageView.extend({
     }
     app.fetchUserData();
     app.navigate('/me');
-  },
+  },*/
   initialize: function (spec) {
     var self = this;
 
-    auth.init();
+    //auth.init();
 
     if(this.model) {
       return;
