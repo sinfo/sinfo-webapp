@@ -1,6 +1,6 @@
 section.page.sessions.view
-  h2(data-hook='kind')
-  h1(data-hook='name')
+  h2.kind(data-hook='kind')
+  h1.name(data-hook='name')
 
   div(data-hook='date')
     i.fa.fa-calendar
@@ -13,6 +13,9 @@ section.page.sessions.view
   div(data-hook='place')
     i.fa.fa-map-marker
       span
+
+  .description(data-hook='description')
+    div
 
   .tickets.all-100(data-hook='ticket')
     h2 Tickets
@@ -32,9 +35,6 @@ section.page.sessions.view
       i.fa.fa-check
         span Confirm ticket
 
-
-  div(data-hook='description')
-    div
 
   .details
     .speakers.all-100(data-hook='session-speakers')
