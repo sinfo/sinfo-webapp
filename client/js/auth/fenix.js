@@ -6,9 +6,6 @@ var fenixAuth = {};
 
 fenixAuth.login = function(cb) {
   var authUrl = fenix.auth.getAuthUrl();
-  log(authUrl);
-  log(config.fenix);
-  log(config.fenix.oauthUrl+authUrl);
   window.location = authUrl;
 };
 
