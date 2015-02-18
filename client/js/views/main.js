@@ -62,15 +62,15 @@ module.exports = View.extend({
         });
       }
     },
-   /* footer: {
+    footer: {
       hook: 'footer',
       prepareView: function(el) {
         return new Footer({
-          model: this.model,
+          collection: app.partners,
           el: el
         });
       }
-    }*/
+    }
   },
 
   handleNewPage: function (view) {

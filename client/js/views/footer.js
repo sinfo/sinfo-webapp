@@ -1,41 +1,50 @@
 var View = require('ampersand-view');
 var templates = require('client/js/templates');
-var AmpersandCollection = require('ampersand-collection');
-var Partner = require('client/js/models/partner');
-var PartnerView = require('./partners/view');
+var SubCollection = require('ampersand-subcollection');
+var PartnersArea = require('client/js/views/partners/area');
 
 module.exports = View.extend({
   template: templates.partials.footer,
+  initialize: function () {
+    var self = this;
+    if(!this.collection.length) {
+      return this.collection.fetch({
+        success: function () {
+          self.render();
+        }
+      });
+    }
+  },
   subviews: {
     max: {
       container: '[data-hook=max-partner]',
-      waitFor: 'model',
+      waitFor: 'collection.length',
       prepareView: function (el) {
-        var aux = collection.filter(function(model){
-          return model && model.advertisementLvl === 'max';
+        var maxPartners = new SubCollection(app.partners, {
+          filter: function (partner) {
+            return partner.advertisementLvl == 'max';
+          }
         });
 
-        var aux = new AmpersandCollection(aux, {model: Partner});
-
-        return new PartnerView({
+        return new PartnersArea({
           el: el,
-          collection: aux
+          collection: maxPartners
         });
       }
     },
     exclusive: {
       container: '[data-hook=exclusive-partner]',
-      waitFor: 'model',
+      waitFor: 'collection.length',
       prepareView: function (el) {
-        var aux = collection.filter(function(model){
-          return model && model.advertisementLvl === 'max';
+        var exclusivePartners = new SubCollection(app.partners, {
+          filter: function (partner) {
+            return partner.advertisementLvl === 'exclusive';
+          }
         });
 
-        aux = new AmpersandCollection(aux, {model: Partner});
-
-        return new PartnerView({
+        return new PartnersArea({
           el: el,
-          collection: aux
+          collection: exclusivePartners
         });
       }
     },
