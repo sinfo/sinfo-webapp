@@ -36,6 +36,6 @@ module.exports = PageView.extend({
     app.me.token = authDetails.token;
     cookie.setItem('cannon-auth', authDetails.token);
     app.fetchUserData();
-    app.navigate(queryParam('r') || '/');
+    app.navigate(queryParam('r') || '/me');
   }
 });
