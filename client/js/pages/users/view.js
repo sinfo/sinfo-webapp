@@ -50,12 +50,12 @@ module.exports = PageView.extend({
       return;
     }
 
-    // app.users.getOrFetch(spec.id, function (err, model) {
-    //   if (err) {
-    //     log.error('couldnt find a user with id: ' + spec.id);
-    //   }
-    //   self.model = model;
-    //   log('Got user', model.name);
-    // });
+    app.users.getOrFetch(spec.id,{all:true } ,function (err, model) {
+      if (err) {
+        return log.error('couldnt find a user with id: ' + spec.id);
+      }
+      self.model = model;
+      log('Got user', model.name);
+    });
   },
 });

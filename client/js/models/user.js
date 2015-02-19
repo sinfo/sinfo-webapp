@@ -29,5 +29,11 @@ module.exports = AmpModel.extend({
         return 'background-image:url('+this.img+');';
       }
     },
+    viewUrl: {
+      deps: ['id'],
+      fn: function () {
+        return '/users/'+this.id;
+      }
+    },
   },
 });

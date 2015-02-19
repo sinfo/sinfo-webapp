@@ -32,6 +32,7 @@ var WebAppRouter = Router.extend({
     'sessions': 'sessions',
     'sessions/:id': 'sessionView',
     'speakers': 'speakers',
+    'users/:id' : 'userView',
     'me': 'me',
     'me/edit': 'meEdit',
     'speakers/:id': 'speakerView',
@@ -61,6 +62,12 @@ var WebAppRouter = Router.extend({
     }));
   },
 
+  userView: function (id) {
+    this.trigger('page', new UserViewPage({
+      id: id
+    }));
+  },
+
   meEdit: function () {
     if(!app.me.authenticated) {
       return app.navigateToLogin();
@@ -83,7 +90,7 @@ var WebAppRouter = Router.extend({
 
   fenixLogin: function (args) {
     if(sessionStorage['cannon-fenix-add'] === 'true'){
-      this.me();  
+      this.me();
     }
     else{
       this.login();
