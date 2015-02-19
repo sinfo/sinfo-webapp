@@ -12,7 +12,7 @@ fenixAuth.login = function(add, cb) {
   var authUrl = fenix.auth.getAuthUrl();
 
   //fenix redirect hack
-  sessionStorage['cannon-fenix-add'] = true;
+  sessionStorage['cannon-fenix-add'] = add;
   sessionStorage['cannon-fenix-r'] = queryParam('r');
   window.location = authUrl;
 };

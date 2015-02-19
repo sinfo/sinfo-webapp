@@ -82,7 +82,12 @@ var WebAppRouter = Router.extend({
   },
 
   fenixLogin: function (args) {
-    this.login();
+    if(sessionStorage['cannon-fenix-add'] === 'true'){
+      this.me();  
+    }
+    else{
+      this.login();
+    }
     args = qs.parse(args);
     if(args && Object.keys(args)[0] === 'code'){
       fenixAuth.requestAccessToken(args.code);
