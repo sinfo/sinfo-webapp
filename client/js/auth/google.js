@@ -34,6 +34,7 @@ gAuth.checkState = function (cb) {
 
 gAuth.login = function (add, cb) {
   cb || (cb = add);
+  add = typeof add === 'function'? false : add;
 
   var parameters = {
     client_id: config.google.appId,
@@ -54,10 +55,7 @@ gAuth.login = function (add, cb) {
         if (resp && !resp.result.id) {
           return cb(new Error('couldn\'t get google user id'));
         }
-        if(add === true){
-          return cannon.addGoogleLogin(loginDetails, resp, cb);
-        }
-        cannon.loginWithGoogle(loginDetails, resp, cb);
+        cannon.loginWithGoogle(loginDetails, resp, add, cb);
       },
         function (reason) {
           return cb(new Error('couldn\'t get google user id'));

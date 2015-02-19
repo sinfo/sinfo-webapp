@@ -2,7 +2,6 @@ var log = require('bows')('login');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var auth = require('client/js/auth');
-var cookie = require('client/js/helpers/cookieParser');
 var queryParam = require('client/js/helpers/queryParam');
 
 
@@ -35,8 +34,9 @@ module.exports = PageView.extend({
       return;
     }
     app.me.token = authDetails.token;
-    cookie.setItem('cannon-auth', authDetails.token);
+    sessionStorage['cannon-auth'] = authDetails.token;
     app.fetchUserData();
-    app.navigate(queryParam('r') || '/me');
+    app.navigate(queryParam('r') || sessionStorage['cannon-fenix-r'] || '/me');
+    sessionStorage['cannon-fenix-r'] = '';
   }
 });

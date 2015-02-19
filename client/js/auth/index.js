@@ -1,6 +1,5 @@
 /*global app, me, $*/
 var config = require('client/js/helpers/clientconfig');
-var cookie = require('client/js/helpers/cookieParser');
 var log = require('bows')('auth');
 var fbAuth = require('./facebook');
 var gAuth = require('./google');
@@ -15,6 +14,7 @@ auth.init = function() {
 auth.login = function(type, add, cb) {
   log('type', type);
   cb || (cb = add);
+  add = typeof add === 'function'? false : add;
 
   if(type === 'facebook') {
     fbAuth.checkState(function (err, user) {
@@ -33,7 +33,7 @@ auth.login = function(type, add, cb) {
     gAuth.login(add, cb);
   }
   else if (type === 'fenix') {
-    fenixAuth.login(cb);
+    fenixAuth.login(add, cb);
   }
   else {
     log.error('Unknown type', type);
@@ -43,7 +43,7 @@ auth.login = function(type, add, cb) {
 
 auth.logout = function() {
   log('Logging out');
-  cookie.removeItem('cannon-auth');
+  sessionStorage.removeItem('cannon-auth');
   app.me.clear();
 
   if(window.location.pathname.indexOf('/me') != -1) {

@@ -9,12 +9,16 @@ var Partners = require('./models/partners');
 var Sessions = require('./models/sessions');
 var Speakers = require('./models/speakers');
 var domReady = require('domready');
-var cookies = require('cookie-getter');
 
 module.exports = {
   // this is the the whole app initter
   blastoff: function () {
     var self = window.app = this;
+
+    if(!Storage || !sessionStorage){
+      return alert('Sorry, but it seems your browser does not support this website. Please, update your browser version');
+    }
+
     this.buildGlobals();
 
     // Welcome guest developers
@@ -63,7 +67,7 @@ module.exports = {
     this.speakers = new Speakers();
     this.fetchInitialData();
 
-    var authToken = cookies('cannon-auth');
+    var authToken = sessionStorage['cannon-auth'];
     if(authToken) {
       self.me.token = authToken;
       self.fetchUserData();

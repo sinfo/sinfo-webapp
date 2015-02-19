@@ -4,45 +4,22 @@ var log = require('bows')('cannon-auth');
 
 var cannon = {};
 
-cannon.loginWithFacebook = function(authResponse, cb) {
+cannon.loginWithFacebook = function(authResponse, add, cb) {
+  cb || (cb = add);
   var userID = authResponse.userID;
   var accessToken =  authResponse.accessToken;
+  var uri = '/auth';
+  uri += add === true ? '/add' : '';
+  var header = app.me && app.me.token ? {Authorization: 'Bearer ' + app.me.token} : {};
 
   xhr({
-    uri: config.cannonUrl +'/auth/facebook',
-    json: {
-      id: authResponse.userID,
-      token: authResponse.accessToken
-    },
-    method: 'POST'
-  }, function (err, resp, body) {
-    if(err) {
-      return cb(err);
-    }
-
-    var data = body;
-    if(resp.statusCode >= 400) {
-      return cb(data);
-    }
-
-    cb(null, data);
-  });
-};
-
-cannon.addFacebookLogin = function(authResponse, cb) {
-  var userID = authResponse.userID;
-  var accessToken =  authResponse.accessToken;
-
-  xhr({
-    uri: config.cannonUrl +'/auth/add/facebook',
+    uri: config.cannonUrl + uri + '/facebook',
     json: {
       id: authResponse.userID,
       token: authResponse.accessToken
     },
     method: 'POST',
-    headers: {
-      Authorization: 'Bearer ' + app.me.token
-    }
+    headers: header,
   }, function (err, resp, body) {
     if(err) {
       return cb(err);
@@ -57,45 +34,22 @@ cannon.addFacebookLogin = function(authResponse, cb) {
   });
 };
 
-cannon.loginWithGoogle = function(authResponse, userInfo, cb) {
+cannon.loginWithGoogle = function(authResponse, userInfo, add, cb) {
+  cb || (cb = add);
   var userID = userInfo.result.id;
   var accessToken =  authResponse.access_token;
-  
+  var uri = '/auth';
+  uri += add === true ? '/add' : '';
+  var header = app.me && app.me.token ? {Authorization: 'Bearer ' + app.me.token} : {};
+
   xhr({
-    uri: config.cannonUrl + '/auth/google',
-    json: {
-      id: userID,
-      token: accessToken
-    },
-    method: 'POST'
-  }, function (err, resp, body) {
-    if(err) {
-      return cb(err);
-    }
-
-    var data = body;
-    if(resp.statusCode >= 400) {
-      return cb(data);
-    }
-
-    cb(null, data);
-  });
-};
-
-cannon.addGoogleLogin = function(authResponse, userInfo, cb) {
-  var userID = userInfo.result.id;
-  var accessToken =  authResponse.access_token;
-  
-  xhr({
-    uri: config.cannonUrl + '/auth/add/google',
+    uri: config.cannonUrl + uri + '/google',
     json: {
       id: userID,
       token: accessToken
     },
     method: 'POST',
-    headers: {
-      Authorization: 'Bearer ' + app.me.token
-    }
+    headers: header,
   }, function (err, resp, body) {
     if(err) {
       return cb(err);
@@ -110,39 +64,19 @@ cannon.addGoogleLogin = function(authResponse, userInfo, cb) {
   });
 };
 
-cannon.loginWithFenix = function(code, cb) {
+cannon.loginWithFenix = function(code, add, cb) {
+  cb || (cb = add);
+  var uri = '/auth';
+  uri += add === true ? '/add' : '';
+  var header = app.me && app.me.token ? {Authorization: 'Bearer ' + app.me.token} : {};
 
   xhr({
-    uri: config.cannonUrl + '/auth/fenix',
-    json: {
-      code: code
-    },
-    method: 'POST'
-  }, function (err, resp, body) {
-    if(err) {
-      return cb(err);
-    }
-
-    var data = body;
-    if(resp.statusCode >= 400) {
-      return cb(data);
-    }
-
-    cb(null, data);
-  });
-};
-
-cannon.addFenixLogin = function(code, cb) {
-
-  xhr({
-    uri: config.cannonUrl + '/auth/add/fenix',
+    uri: config.cannonUrl + uri + '/fenix',
     json: {
       code: code
     },
     method: 'POST',
-    headers: {
-      Authorization: 'Bearer ' + app.me.token
-    }
+    headers: header,
   }, function (err, resp, body) {
     if(err) {
       return cb(err);
