@@ -19,7 +19,7 @@ fbAuth.init = function() {
   });
 };
 
-fbAuth.checkState = function(cb) {
+fbAuth.checkState = function(add, cb) {
   FB.getLoginStatus(function(loginDetails) {
     log('Got facebook state', loginDetails);
 
@@ -27,7 +27,7 @@ fbAuth.checkState = function(cb) {
       return cb(null);
     }
 
-    cannon.loginWithFacebook(loginDetails.authResponse, cb);
+    cannon.loginWithFacebook(loginDetails.authResponse, add, cb);
   });
 };
 
@@ -35,6 +35,8 @@ fbAuth.checkState = function(cb) {
 fbAuth.login = function(add, cb) {
   cb || (cb = add);
   add = typeof add === 'function'? false : add;
+
+  log(add);
 
   FB.login(function(loginDetails) {
     log('Got facebook login', loginDetails.authResponse);

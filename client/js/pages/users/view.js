@@ -23,15 +23,19 @@ module.exports = PageView.extend({
     'model.skills': { selector: '[data-hook~=skills] div' },
     'model.skills.length': { type: 'toggle', hook: 'skills' },
   },
-  /*events: {
+  events: {
     'click [data-hook=facebook-add]': 'addFacebook',
     'click [data-hook=google-add]': 'addGoogle',
+    'click [data-hook=fenix-add]': 'addFenix',
   },
   addFacebook: function () {
     auth.login('facebook', true, this.handleLogin);
   },
   addGoogle: function () {
     auth.login('google', true, this.handleLogin);
+  },
+  addFenix: function () {
+    auth.login('fenix', true, this.handleLogin);
   },
   handleLogin: function(err, authDetails) {
     if(err) {
@@ -40,11 +44,11 @@ module.exports = PageView.extend({
     }
     app.fetchUserData();
     app.navigate('/me');
-  },*/
+  },
   initialize: function (spec) {
     var self = this;
 
-    //auth.init();
+    auth.init();
 
     if(this.model) {
       return;

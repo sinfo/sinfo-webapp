@@ -16,8 +16,10 @@ auth.login = function(type, add, cb) {
   cb || (cb = add);
   add = typeof add === 'function'? false : add;
 
+  log(add);
+
   if(type === 'facebook') {
-    fbAuth.checkState(function (err, user) {
+    fbAuth.checkState(add, function (err, user) {
       if(err) {
         return cb(err);
       }
@@ -25,7 +27,7 @@ auth.login = function(type, add, cb) {
       if(user) {
         return cb(null, user);
       }
-
+      log({add: add}, 'This is a ADD!');
       fbAuth.login(add, cb);
     });
   }
