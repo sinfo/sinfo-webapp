@@ -184,10 +184,10 @@ module.exports = AmpModel.extend({
       },
     },
     canVoid: {
-      deps: ['date', 'isRegistered'],
+      deps: ['date', 'isRegistered', 'isWaiting'],
       fn: function () {
         var now = new Date();
-        return app.me.authenticated && this.isRegistered;
+        return app.me.authenticated && (this.isRegistered || this.isWaiting);
       },
     },
     ticketsMessage: {
