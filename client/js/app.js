@@ -10,7 +10,6 @@ var Sessions = require('./models/sessions');
 var Speakers = require('./models/speakers');
 var Users = require('./models/users');
 var domReady = require('domready');
-
 module.exports = {
   // this is the the whole app initter
   blastoff: function () {

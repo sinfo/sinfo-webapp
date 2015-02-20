@@ -3,6 +3,8 @@ var log = require('bows')('users');
 var auth = require('client/js/auth');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
+var tickets = require('client/js/helpers/tickets');
+var SessionsView = require('client/js/views/users/userSessions')
 
 module.exports = PageView.extend({
   pageTitle: 'View user',
@@ -45,7 +47,6 @@ module.exports = PageView.extend({
     var self = this;
 
     //auth.init();
-
     if(this.model) {
       return;
     }
@@ -54,8 +55,24 @@ module.exports = PageView.extend({
       if (err) {
         return log.error('couldnt find a user with id: ' + spec.id);
       }
+
       self.model = model;
       log('Got user', model.name);
+
     });
   },
+  subviews: {
+    sessions: {
+      container: '[data-hook=user-sessions] div',
+      parent: this,
+      waitFor: 'model.sessions',
+      prepareView: function (el) {
+        var self = this;
+        return new SessionsView({
+          el: el,
+          model: self.model
+        });
+      }
+    },
+  }
 });
