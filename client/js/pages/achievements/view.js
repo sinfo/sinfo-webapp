@@ -29,11 +29,13 @@ module.exports = PageView.extend({
       
       app.sessions.getOrFetch(model.session, function(err, sessionModel) {
         if (err) {
-          return log.error('couldnt find a achievement event with id: ' + model.session);
+          return log.error('couldnt find a achievement session with id: ' + model.session);
         }
         self.model.sessionDetails.model = sessionModel;  
                                 
-        log('Got achievement event', sessionModel.name);
+        log('Got achievement session', sessionModel.name);
+        
+        self.render();
       });
     });
   },
@@ -41,10 +43,9 @@ module.exports = PageView.extend({
     session: {
       container: '[data-hook=achievement-session] div',
       parent: this,
-      waitFor: 'model.sessionDetails',
+      waitFor: 'model.sessionDetails.name',
       prepareView: function (el) {
         var self = this;
-        log("render da subview");
         return new SessionView({
           el: el,
           model: self.model.sessionDetails
