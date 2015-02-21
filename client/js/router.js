@@ -4,6 +4,9 @@ var Router = require('ampersand-router');
 var HomePage = require('./pages/home');
 var PageNotFound = require('./pages/notFound');
 
+var Achievements = require('./pages/achievements/list');
+var AchievementViewPage = require('./pages/achievements/view');
+
 var LoginPage = require('./pages/auth/login');
 
 var Partners = require('./pages/partners/list');
@@ -25,6 +28,8 @@ var qs = require('qs');
 var WebAppRouter = Router.extend({
   routes: {
     '': 'home',
+    'achievements': 'achievements',
+    'achievements/:id': 'achievementView',
     'auth/login?:query': 'fenixLogin',
     'auth/login': 'login',
     'partners': 'partners',
@@ -45,10 +50,22 @@ var WebAppRouter = Router.extend({
   },
 
   // ------- ROUTE HANDLERS ---------
-  home: function (cenas) {
+  home: function () {
     this.trigger('page', new HomePage({
       model: app.me
     }));
+  },
+  
+  achievements: function () {
+    this.trigger('page', new Achievements({
+      collection: app.achievements
+    }));
+  },
+  
+  achievementView: function (id) {
+   this.trigger('page', new AchievementViewPage({
+     id: id
+   }));
   },
 
   me: function () {

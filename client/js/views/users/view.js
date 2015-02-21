@@ -8,5 +8,5 @@ module.exports = View.extend({
     'model.name': { type: 'attribute', hook: 'action-view', name: 'title' },
     'model.img': { type: 'attribute', hook: 'img', name: 'src' },
     'model.viewUrl': { type: 'attribute', hook: 'action-view', name: 'href' }
-  }
+  },
 });

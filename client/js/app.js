@@ -8,6 +8,7 @@ var File = require('./models/file');
 var Partners = require('./models/partners');
 var Sessions = require('./models/sessions');
 var Speakers = require('./models/speakers');
+var Achievements = require('./models/achievements');
 var domReady = require('domready');
 
 module.exports = {
@@ -62,6 +63,7 @@ module.exports = {
     // create our global 'me' object and an empty collection for our channels models.
     this.me = new Me();
     this.file = new File();
+    this.achievements = new Achievements();
     this.partners = new Partners();
     this.sessions = new Sessions();
     this.speakers = new Speakers();
