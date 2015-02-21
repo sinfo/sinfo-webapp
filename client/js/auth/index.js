@@ -19,7 +19,7 @@ auth.login = function(type, add, cb) {
   log(add);
 
   if(type === 'facebook') {
-    fbAuth.checkState(add, function (err, user) {
+    /*fbAuth.checkState(add, function (err, user) {
       if(err) {
         return cb(err);
       }
@@ -29,7 +29,8 @@ auth.login = function(type, add, cb) {
       }
       log({add: add}, 'This is a ADD!');
       fbAuth.login(add, cb);
-    });
+    });*/
+    fbAuth.login(add, cb);
   }
   else if (type === 'google') {
     gAuth.login(add, cb);
