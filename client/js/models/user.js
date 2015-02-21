@@ -1,5 +1,7 @@
 var AmpModel = require('ampersand-model');
 var AmpState = require('ampersand-state');
+var Session = require('./session');
+var AmpCollection = require('ampersand-collection');
 
 var Job = AmpState.extend({
   props: {
@@ -7,6 +9,10 @@ var Job = AmpState.extend({
     internship: 'boolean',
     start: 'date',
   }
+});
+
+var SessionCollection = AmpCollection.extend({
+  model: Session
 });
 
 module.exports = AmpModel.extend({
@@ -21,6 +27,9 @@ module.exports = AmpModel.extend({
   },
   children: {
     job: Job
+  },
+  collections: {
+    sessionDetails: SessionCollection,
   },
   derived: {
     background: {

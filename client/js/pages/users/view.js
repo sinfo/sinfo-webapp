@@ -47,25 +47,23 @@ module.exports = PageView.extend({
     var self = this;
 
     //auth.init();
-    if(this.model) {
-      return;
+    if(!this.model) {
+      app.users.getOrFetch(spec.id,{all:true } ,function (err, model) {
+        if (err) {
+          return log.error('couldnt find a user with id: ' + spec.id);
+        }
+
+        self.model = model;
+        log('Got user', model.name);
+
+      });
     }
-
-    app.users.getOrFetch(spec.id,{all:true } ,function (err, model) {
-      if (err) {
-        return log.error('couldnt find a user with id: ' + spec.id);
-      }
-
-      self.model = model;
-      log('Got user', model.name);
-
-    });
   },
   subviews: {
     sessions: {
-      container: '[data-hook=user-sessions] div',
+      container: '[data-hook=user-sessions]',
       parent: this,
-      waitFor: 'model.sessions',
+      waitFor: 'model.name',
       prepareView: function (el) {
         var self = this;
         return new SessionsView({
