@@ -7,7 +7,7 @@ module.exports = AmpModel.extend({
   props: {
     id: ['string'],
     name: ['string'],
-    event: ['string'],
+    session: ['string'],
     category: ['string'],
     description: ['string'],
     instructions: ['string'],

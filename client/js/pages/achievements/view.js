@@ -5,7 +5,7 @@ var templates = require('client/js/templates');
 var SessionView = require('client/js/views/sessions/view');
 
 module.exports = PageView.extend({
-  pageTitle: 'View session',
+  pageTitle: 'View Achievement',
   template: templates.pages.achievements.view,
   bindings: {
     'model.name' : '[data-hook~=name]',
@@ -27,14 +27,14 @@ module.exports = PageView.extend({
       }
       self.model = model;
       
-      app.sessions.getOrFetch(model.event, function(err, sessionModel) {
+      app.sessions.getOrFetch(model.session, function(err, sessionModel) {
         if (err) {
-          return log.error('couldnt find a achievement event with id: ' + sessionModel.event);
+          return log.error('couldnt find a achievement event with id: ' + model.session);
         }
         self.model.sessionDetails.model = sessionModel;  
-        
+                                
         log('Got achievement event', sessionModel.name);
-        });
+      });
     });
   },
   subviews: {
@@ -44,10 +44,10 @@ module.exports = PageView.extend({
       waitFor: 'model.sessionDetails',
       prepareView: function (el) {
         var self = this;
-
+        log("render da subview");
         return new SessionView({
           el: el,
-          model: self.model
+          model: self.model.sessionDetails
         });
       }
     },
