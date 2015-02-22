@@ -5,6 +5,9 @@ var View = require('ampersand-view');
 var templates = require('client/js/templates');
 var ViewSwitcher = require('ampersand-view-switcher');
 var Achievement = require('client/js/models/achievement');
+var Session = require('client/js/models/session');
+var SurveyView = require('./survey');
+var AchievementView = require('client/js/views/achievements/view');
 var xhr = require('xhr');
 var config = require('client/js/helpers/clientconfig');
 
@@ -12,15 +15,19 @@ module.exports = PageView.extend({
   pageTitle: 'Achievement Redeem',
   template: templates.pages.redeem.view,
   props: {
+    redeemCode: 'string',
     notFound : 'boolean',
     survey: 'boolean',
     achievementObject: 'object'
   },
   children: {
-    achievement: Achievement
+    achievement: Achievement,
+    session: Session
   },
   initialize: function(spec) {
     var self = this;
+
+    self.redeemCode = spec.id;
 
     xhr({
       uri: config.cannonUrl + '/redeem/' + spec.id,
@@ -31,6 +38,8 @@ module.exports = PageView.extend({
         log(err);
       }
 
+      var data = body && JSON.parse(body);
+
       if(resp.statusCode >= 400) {
         log(resp.statusCode);
 
@@ -39,23 +48,21 @@ module.exports = PageView.extend({
         }
         else if (resp.statusCode == 412) {
           self.survey = true;
+          self.session = new Session(data.session);
         }
       }
 
-      var data = JSON.parse(body);
-
       if (data.success) {
-        self.achievementObject = data.achievement;
+        self.achievement = new Achievement(data.achievement);
       }
 
       self.render();
-
     });
   },
   render: function () {
     this.renderWithTemplate();
 
-    this.achievement.model = this.achievementObject
+    // this.achievement.model = this.achievementObject
 
     this.viewContainer = this.queryByHook('view-container');
     this.switcher = new ViewSwitcher(this.viewContainer);
@@ -76,9 +83,13 @@ module.exports = PageView.extend({
     return;
   },
   handleSurvey: function () {
+    var view = new SurveyView({ kind: this.session.kind.toLowerCase(), redeemCode: this.redeemCode, parent: this });
+    this.switcher.set(view);
     return;
   },
   handleAchievement: function () {
+    var view = new AchievementView({ model: this.achievement, parent: this });
+    this.switcher.set(view);
     return;
   }
 })

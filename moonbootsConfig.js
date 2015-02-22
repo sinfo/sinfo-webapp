@@ -4,6 +4,7 @@ var templatizer = require('templatizer');
 
 // for reuse
 var jsDir = __dirname + '/client/js';
+var libsDir = __dirname + '/client/libs';
 var cssDir = __dirname + '/client/css';
 var templatesDir = __dirname + '/client/templates'
 
@@ -30,6 +31,7 @@ module.exports = {
     // order you provide them. So for example, if you're using jQuery make sure
     // you list any plugins after jQuery itself.
     libraries: [
+      libsDir + '/jsoneditor.js',
     ],
     // Specify the stylesheets we want to bundle
     stylesheets: [
