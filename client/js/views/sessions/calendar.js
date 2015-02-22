@@ -40,6 +40,9 @@ module.exports = PageView.extend({
           }).color;
           return s;
         });
+
+        var defaultView = (window.innerWidth < 900) ? 'agendaDay' : 'agendaWeek';
+
         return new Calendar({
           el: el,
           events: events,
@@ -50,7 +53,7 @@ module.exports = PageView.extend({
           },
           defaultDate: Moment('2015 02 23', 'YYYY MM DD'),
           options: {
-            defaultView: 'agendaWeek',
+            defaultView: defaultView,
             height: 'auto',
             minTime: '09:00:00',
             maxTime: '22:00:00',
