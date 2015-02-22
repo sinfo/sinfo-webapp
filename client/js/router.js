@@ -26,8 +26,6 @@ var UserEditPage = require('./pages/users/edit');
 var log = require('bows')('router');
 var fenixAuth = require('./auth/fenix');
 var qs = require('qs');
-var xhr = require('xhr');
-var config = require('client/js/helpers/clientconfig');
 
 
 
@@ -62,13 +60,13 @@ var WebAppRouter = Router.extend({
       model: app.me
     }));
   },
-  
+
   achievements: function () {
     this.trigger('page', new Achievements({
       collection: app.achievements
     }));
   },
-  
+
   achievementView: function (id) {
    this.trigger('page', new AchievementViewPage({
      id: id
@@ -107,7 +105,7 @@ var WebAppRouter = Router.extend({
 
   fenixLogin: function (args) {
     if(sessionStorage['cannon-fenix-add'] === 'true'){
-      this.me();  
+      this.me();
     }
     else{
       this.login();
@@ -123,48 +121,13 @@ var WebAppRouter = Router.extend({
       collection: app.partners
     }));
   },
-  
+
   redeemCode: function(id) {
     if(!app.me.authenticated) {
       return app.navigateToLogin();
     }
-    
-    var header = app.me && app.me.token ? {Authorization: 'Bearer ' + app.me.token} : {};
-    var self = this;
-    xhr({
-      uri: config.cannonUrl + '/redeem/' + id,
-      method: 'GET',
-      headers: header,
-    }, function (err, resp, body) {
-      if(err) {
-        log(err);
-      }
-      
-      var redeem = {
-        notFound: false,
-        survey: false,
-        achi: null
-      }
-      
-      if(resp.statusCode >= 400) {
-        log(resp.statusCode);
-        
-        if(resp.statusCode == 404) {
-          redeem.notFound = true;
-        }
-        else if (resp.statusCode == 412) {
-          redeem.survey = true;
-        }
-      }
-      
-      var data = JSON.parse(body)
-      
 
-      if (data.success) {
-        redeem.achievementObject = data.achievement
-      }
-      self.trigger('page', new Redeem(redeem));
-    });
+    this.trigger('page', new Redeem({id: id}));
   },
 
   sessions: function () {

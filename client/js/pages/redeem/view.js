@@ -5,7 +5,8 @@ var View = require('ampersand-view');
 var templates = require('client/js/templates');
 var ViewSwitcher = require('ampersand-view-switcher');
 var Achievement = require('client/js/models/achievement');
-
+var xhr = require('xhr');
+var config = require('client/js/helpers/clientconfig');
 
 module.exports = PageView.extend({
   pageTitle: 'Achievement Redeem',
@@ -16,19 +17,49 @@ module.exports = PageView.extend({
     achievementObject: 'object'
   },
   children: {
-    achievement: Achievement 
+    achievement: Achievement
   },
-  initialize: function() {
-    this.render();
+  initialize: function(spec) {
+    var self = this;
+
+    xhr({
+      uri: config.cannonUrl + '/redeem/' + spec.id,
+      method: 'GET',
+      headers: { Authorization: 'Bearer ' + app.me.token },
+    }, function (err, resp, body) {
+      if(err) {
+        log(err);
+      }
+
+      if(resp.statusCode >= 400) {
+        log(resp.statusCode);
+
+        if(resp.statusCode == 404) {
+          self.notFound = true;
+        }
+        else if (resp.statusCode == 412) {
+          self.survey = true;
+        }
+      }
+
+      var data = JSON.parse(body);
+
+      if (data.success) {
+        self.achievementObject = data.achievement;
+      }
+
+      self.render();
+
+    });
   },
   render: function () {
     this.renderWithTemplate();
-  
+
     this.achievement.model = this.achievementObject
-    
+
     this.viewContainer = this.queryByHook('view-container');
     this.switcher = new ViewSwitcher(this.viewContainer);
-  
+
     if(this.notFound) {
       this.handleNotFound();
     }
@@ -36,7 +67,7 @@ module.exports = PageView.extend({
       this.handleSurvey();
     }
     else if(this.achievement) {
-      this.handleAchievement(); 
+      this.handleAchievement();
     }
   },
   handleNotFound: function () {
