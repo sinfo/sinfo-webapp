@@ -19,15 +19,15 @@ fbAuth.init = function() {
   });
 };
 
-fbAuth.checkState = function(cb) {
+fbAuth.checkState = function(add, cb) {
   FB.getLoginStatus(function(loginDetails) {
     log('Got facebook state', loginDetails);
 
     if(!loginDetails.authResponse) {
       return cb(null);
     }
-
-    cannon.loginWithFacebook(loginDetails.authResponse, cb);
+    cb();
+    //cannon.loginWithFacebook(loginDetails.authResponse, add, cb);
   });
 };
 
@@ -43,6 +43,9 @@ fbAuth.login = function(add, cb) {
       return cb(new Error('couldn\'t get facebook auth details'))
     }
     cannon.loginWithFacebook(loginDetails.authResponse, add, cb);
+  },{
+    scope: 'email', 
+    return_scopes: true
   });
 };
 

@@ -35,15 +35,15 @@ module.exports = FormView.extend({
         name: 'img',
         value: this.model.img || '',
         required: false,
-        placeholder: 'Img',
+        placeholder: 'A valid profile image URL',
         parent: this
       }),
       new ExtendedInput({
         label: 'Mail',
         name: 'mail',
         value: this.model.mail || '',
-        required: false,
-        placeholder: 'Mail',
+        required: true,
+        placeholder: 'Your e-mail address, this field is required for workshops',
         parent: this
       }),
       new ExtendedInput({
@@ -51,7 +51,7 @@ module.exports = FormView.extend({
         name: 'area',
         value: this.model.area || '',
         required: false,
-        placeholder: 'Area',
+        placeholder: 'Your field of work',
         parent: this
       }),
       new CheckboxArray({

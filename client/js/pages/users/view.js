@@ -23,28 +23,52 @@ module.exports = PageView.extend({
     'model.skills': { selector: '[data-hook~=skills] div' },
     'model.skills.length': { type: 'toggle', hook: 'skills' },
   },
-  /*events: {
+  events: {
     'click [data-hook=facebook-add]': 'addFacebook',
     'click [data-hook=google-add]': 'addGoogle',
+    'click [data-hook=fenix-add]': 'addFenix',
   },
   addFacebook: function () {
-    auth.login('facebook', true, this.handleLogin);
+    var self = this;
+    auth.login('facebook', true, function(){
+      self.handleLogin.apply(self, arguments);
+    });
   },
   addGoogle: function () {
-    auth.login('google', true, this.handleLogin);
+    var self = this;
+    auth.login('google', true, function(){
+      self.handleLogin.apply(self, arguments);
+    });
+  },
+  addFenix: function () {
+    var self = this;
+    auth.login('fenix', true, function(){
+      self.handleLogin.apply(self, arguments);
+    });
   },
   handleLogin: function(err, authDetails) {
+
+    var elem = this.queryByHook('message-text');
     if(err) {
+      elem.classList.add('error');
+      if(err.statusCode == 409){
+        elem.textContent = 'Account already associated to you';
+      }
+      else{
+        elem.textContent = 'Error associating account';
+      }
       log({err: err});
-      return;
+    }
+    else{
+      elem.classList.add('valid');
+      elem.textContent = 'Account sucessfully added!';
     }
     app.fetchUserData();
-    app.navigate('/me');
-  },*/
+  },
   initialize: function (spec) {
     var self = this;
 
-    //auth.init();
+    auth.init();
 
     if(this.model) {
       return;
