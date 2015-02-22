@@ -1,5 +1,6 @@
 /*global me, app*/
 var Router = require('ampersand-router');
+var ViewSwitcher = require('ampersand-view-switcher');
 
 var HomePage = require('./pages/home');
 var PageNotFound = require('./pages/notFound');
@@ -10,6 +11,8 @@ var AchievementViewPage = require('./pages/achievements/view');
 var LoginPage = require('./pages/auth/login');
 
 var Partners = require('./pages/partners/list');
+
+var Redeem = require('./pages/redeem/view');
 
 var Sessions = require('./pages/sessions/list');
 var SessionViewPage = require('./pages/sessions/view');
@@ -23,6 +26,8 @@ var UserEditPage = require('./pages/users/edit');
 var log = require('bows')('router');
 var fenixAuth = require('./auth/fenix');
 var qs = require('qs');
+var xhr = require('xhr');
+var config = require('config');
 
 
 var WebAppRouter = Router.extend({
@@ -34,6 +39,7 @@ var WebAppRouter = Router.extend({
     'auth/login': 'login',
     'partners': 'partners',
     'partners/:id': 'companyView',
+    'redeem/:id': 'redeemCode',
     'sessions': 'sessions',
     'sessions/:id': 'sessionView',
     'speakers': 'speakers',
@@ -115,6 +121,48 @@ var WebAppRouter = Router.extend({
     this.trigger('page', new Partners({
       collection: app.partners
     }));
+  },
+  
+  redeemCode: function(id) {
+    if(!app.me.authenticated) {
+      return app.navigateToLogin();
+    }
+    
+    var header = app.me && app.me.token ? {Authorization: 'Bearer ' + app.me.token} : {};
+    var self = this;
+    xhr({
+      uri: config.cannonUrl + '/redeem/' + id,
+      method: 'GET',
+      headers: header,
+    }, function (err, resp, body) {
+      if(err) {
+        log(err);
+      }
+      
+      var redeem = {
+        notFound: false,
+        survey: false,
+        achievement: null
+      }
+      
+      if(resp.statusCode >= 400) {
+        log(resp.statusCode);
+        
+        if(resp.statusCode == 404) {
+          redeem.notFound = true;
+        }
+        else if (resp.statusCode == 412) {
+          redeem.survey = true;
+        }
+      }
+      
+      data = body
+      
+      if (body.success) {
+        redeem.achievement = body.achievement
+      }
+      self.trigger('page', new Redeem(redeem));
+    });
   },
 
   sessions: function () {
