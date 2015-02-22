@@ -27,7 +27,8 @@ var log = require('bows')('router');
 var fenixAuth = require('./auth/fenix');
 var qs = require('qs');
 var xhr = require('xhr');
-var config = require('config');
+var config = require('client/js/helpers/clientconfig');
+
 
 
 var WebAppRouter = Router.extend({
@@ -142,7 +143,7 @@ var WebAppRouter = Router.extend({
       var redeem = {
         notFound: false,
         survey: false,
-        achievement: null
+        achi: null
       }
       
       if(resp.statusCode >= 400) {
@@ -156,10 +157,11 @@ var WebAppRouter = Router.extend({
         }
       }
       
-      data = body
+      var data = JSON.parse(body)
       
-      if (body.success) {
-        redeem.achievement = body.achievement
+
+      if (data.success) {
+        redeem.achievementObject = data.achievement
       }
       self.trigger('page', new Redeem(redeem));
     });

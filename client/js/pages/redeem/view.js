@@ -12,21 +12,31 @@ module.exports = PageView.extend({
   template: templates.pages.redeem.view,
   props: {
     notFound : 'boolean',
-    survey: 'boolean'
+    survey: 'boolean',
+    achievementObject: 'object'
+  },
+  children: {
+    achievement: Achievement 
   },
   initialize: function() {
     this.render();
   },
   render: function () {
     this.renderWithTemplate();
+  
+    this.achievement.model = this.achievementObject
+    
     this.viewContainer = this.queryByHook('view-container');
-    log(this.viewContainer);
     this.switcher = new ViewSwitcher(this.viewContainer);
+  
     if(this.notFound) {
       this.handleNotFound();
     }
     else if (this.survey) {
       this.handleSurvey();
+    }
+    else if(this.achievement) {
+      this.handleAchievement(); 
     }
   },
   handleNotFound: function () {
