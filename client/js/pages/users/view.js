@@ -3,10 +3,13 @@ var log = require('bows')('users');
 var auth = require('client/js/auth');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
+var tickets = require('client/js/helpers/tickets');
+var SessionsView = require('client/js/views/users/userSessions')
 
 module.exports = PageView.extend({
   pageTitle: 'View user',
   template: templates.pages.users.view,
+  waitFor:'model.name',
   bindings: {
     'model.name': {
       hook: 'name'
@@ -68,18 +71,33 @@ module.exports = PageView.extend({
   initialize: function (spec) {
     var self = this;
 
-    auth.init();
-
-    if(this.model) {
-      return;
+    if(this.model.name) {
+      return self.render();
     }
 
-    // app.users.getOrFetch(spec.id, function (err, model) {
-    //   if (err) {
-    //     log.error('couldnt find a user with id: ' + spec.id);
-    //   }
-    //   self.model = model;
-    //   log('Got user', model.name);
-    // });
+    app.users.getOrFetch(spec.id, function (err, model) {
+      if (err) {
+        return log.error('couldnt find a user with id: ' + spec.id);
+      }
+
+      self.model = model;
+      log('Got user', model.name);
+      self.render();
+
+    });
   },
+  subviews: {
+    sessions: {
+      container: '[data-hook=user-sessions]',
+      parent: this,
+      waitFor: 'model.name',
+      prepareView: function (el) {
+        var self = this;
+        return new SessionsView({
+          el: el,
+          model: self.model
+        });
+      }
+    },
+  }
 });

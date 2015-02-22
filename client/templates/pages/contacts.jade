@@ -1,0 +1,27 @@
+.page.home
+
+  section.section.header.light
+    div.container
+      h1.light Newsletter
+        span.highlight  Signup
+      div
+        p  No spam - only
+          span.highlight  latest news
+          |  workshops and activity updates
+        form.form(action="http://sinfo.us8.list-manage.com/subscribe/post?u=de57247db0922adf365af7eef&amp;id=cbc6013242",method="post")
+          div
+            input.ink-form.control.required(type="email",value="",name="EMAIL",id="NewsletterEmail",placeholder="your@email.com")
+            input.ink-button.blue(type="submit",name="subscribe",value="Subscribe")
+
+  section.dark#map
+    #map-canvas(data-hook="map-canvas")
+    div.container
+      div.row.location
+        h2 Location
+        ul(itemscope="",itemtype="http://schema.org/PostalAddress")
+          li
+            span.fa.fa-map-marker.highlight
+            span Instituto Superior Técnico, Lisbon
+          li
+            span.fa.fa-envelope.highlight
+            span geral@sinfo.org

@@ -1,6 +1,6 @@
 var PageView = require('./base');
 var templates = require('../templates');
-var SpeakersArea = require('client/js/views/speakers/area');
+var SpeakersArea = require('client/js/views/speakers/gridArea');
 var PartnersArea = require('client/js/views/partners/area');
 var SessionsCalendar = require('client/js/views/sessions/calendar');
 

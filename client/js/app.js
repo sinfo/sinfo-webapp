@@ -8,8 +8,8 @@ var File = require('./models/file');
 var Partners = require('./models/partners');
 var Sessions = require('./models/sessions');
 var Speakers = require('./models/speakers');
+var Users = require('./models/users');
 var domReady = require('domready');
-
 module.exports = {
   // this is the the whole app initter
   blastoff: function () {
@@ -65,6 +65,7 @@ module.exports = {
     this.partners = new Partners();
     this.sessions = new Sessions();
     this.speakers = new Speakers();
+    this.users = new Users();
     this.fetchInitialData();
 
     var authToken = sessionStorage['cannon-auth'];

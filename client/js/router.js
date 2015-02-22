@@ -2,6 +2,8 @@
 var Router = require('ampersand-router');
 
 var HomePage = require('./pages/home');
+var ContactPage = require('./pages/contacts');
+
 var PageNotFound = require('./pages/notFound');
 
 var LoginPage = require('./pages/auth/login');
@@ -25,6 +27,7 @@ var qs = require('qs');
 var WebAppRouter = Router.extend({
   routes: {
     '': 'home',
+    'contacts':'contacts',
     'auth/login?:query': 'fenixLogin',
     'auth/login': 'login',
     'partners': 'partners',
@@ -32,10 +35,11 @@ var WebAppRouter = Router.extend({
     'sessions': 'sessions',
     'sessions/:id': 'sessionView',
     'speakers': 'speakers',
+    'users/:id' : 'userView',
     'me': 'me',
     'me/edit': 'meEdit',
     'speakers/:id': 'speakerView',
-    '(*path)': 'catchAll'
+    '(*path)': 'catchAll',
   },
 
   execute: function(callback, args, name) {
@@ -51,6 +55,12 @@ var WebAppRouter = Router.extend({
     }));
   },
 
+  contacts: function(){
+    this.trigger('page', new ContactPage({
+      model: app.me
+    }));
+  },
+
   me: function () {
     if(!app.me || !app.me.authenticated) {
       return app.navigateToLogin();
@@ -58,6 +68,12 @@ var WebAppRouter = Router.extend({
 
     this.trigger('page', new UserViewPage({
       model: app.me
+    }));
+  },
+
+  userView: function (id) {
+    this.trigger('page', new UserViewPage({
+      id: id
     }));
   },
 
@@ -83,7 +99,7 @@ var WebAppRouter = Router.extend({
 
   fenixLogin: function (args) {
     if(sessionStorage['cannon-fenix-add'] === 'true'){
-      this.me();  
+      this.me();
     }
     else{
       this.login();
