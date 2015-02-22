@@ -47,6 +47,7 @@ module.exports = PageView.extend({
     });
   },
   handleLogin: function(err, authDetails) {
+
     var elem = this.queryByHook('message-text');
     if(err) {
       elem.classList.add('error');
@@ -63,7 +64,6 @@ module.exports = PageView.extend({
       elem.textContent = 'Account sucessfully added!';
     }
     app.fetchUserData();
-    app.navigate('/me');
   },
   initialize: function (spec) {
     var self = this;
