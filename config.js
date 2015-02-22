@@ -5,7 +5,7 @@ var config = {
 };
 
 config.http = {
-  listen: process.env.CANNON_WEBAPP_HOST || 'localhost',
+  listen: process.env.CANNON_WEBAPP_HOST || '0.0.0.0',
   port: process.env.CANNON_WEBAPP_PORT || 9000
 };
 

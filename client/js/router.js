@@ -2,6 +2,8 @@
 var Router = require('ampersand-router');
 
 var HomePage = require('./pages/home');
+var ContactPage = require('./pages/contacts');
+
 var PageNotFound = require('./pages/notFound');
 
 var LoginPage = require('./pages/auth/login');
@@ -25,6 +27,7 @@ var qs = require('qs');
 var WebAppRouter = Router.extend({
   routes: {
     '': 'home',
+    'contacts':'contacts',
     'auth/login?:query': 'fenixLogin',
     'auth/login': 'login',
     'partners': 'partners',
@@ -36,7 +39,7 @@ var WebAppRouter = Router.extend({
     'me': 'me',
     'me/edit': 'meEdit',
     'speakers/:id': 'speakerView',
-    '(*path)': 'catchAll'
+    '(*path)': 'catchAll',
   },
 
   execute: function(callback, args, name) {
@@ -48,6 +51,12 @@ var WebAppRouter = Router.extend({
   // ------- ROUTE HANDLERS ---------
   home: function (cenas) {
     this.trigger('page', new HomePage({
+      model: app.me
+    }));
+  },
+
+  contacts: function(){
+    this.trigger('page', new ContactPage({
       model: app.me
     }));
   },
