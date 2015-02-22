@@ -15,7 +15,7 @@ module.exports = PageView.extend({
     survey: 'boolean'
   },
   initialize: function() {
-    this.render() 
+    this.render();
   },
   render: function () {
     this.renderWithTemplate();
@@ -24,7 +24,7 @@ module.exports = PageView.extend({
     this.switcher = new ViewSwitcher(this.viewContainer);
     if(this.notFound) {
       this.handleNotFound();
-    } 
+    }
     else if (this.survey) {
       this.handleSurvey();
     }
@@ -35,7 +35,7 @@ module.exports = PageView.extend({
     return;
   },
   handleSurvey: function () {
-    return; 
+    return;
   },
   handleAchievement: function () {
     return;
