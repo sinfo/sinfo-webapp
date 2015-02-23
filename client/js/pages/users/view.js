@@ -74,20 +74,8 @@ module.exports = PageView.extend({
   initialize: function (spec) {
     var self = this;
 
-    if (this.model && this.model.name) {
-      return self.render();
-    }
+    return self.render();
 
-    app.users.getOrFetch(spec.id, function (err, model) {
-      if (err) {
-        return log.error('couldnt find a user with id: ' + spec.id);
-      }
-
-      self.model = model;
-      log('Got user', model.name);
-      self.render();
-
-    });
   },
   subviews: {
     sessions: {
