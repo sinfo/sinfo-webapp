@@ -5,7 +5,7 @@ var config = {
 };
 
 config.http = {
-  listen: process.env.CANNON_WEBAPP_HOST || 'localhost',
+  listen: process.env.CANNON_WEBAPP_HOST || '0.0.0.0',
   port: process.env.CANNON_WEBAPP_PORT || 9000
 };
 
@@ -27,7 +27,7 @@ config.fenix = {
 
 config.client = {
   deckUrl: process.env.EVENTDECK_URL || 'https://deck.sinfo.org',
-  cannonUrl: process.env.CANNON_URL || 'http://cannon.sinfo.org',
+  cannonUrl: process.env.CANNON_URL || 'http://localhost:8090',
   debugMode: true,
   isDev: config.isDev,
   facebook: {

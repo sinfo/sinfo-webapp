@@ -1,6 +1,7 @@
 /*global app, me, $*/
 var log = require('bows')('app');
 var config = require('client/js/helpers/clientconfig');
+var validateResponse = require('client/js/helpers/validateResponse');
 var Router = require('./router');
 var MainView = require('./views/main');
 var Me = require('./models/me');
@@ -9,8 +10,8 @@ var Partners = require('./models/partners');
 var Sessions = require('./models/sessions');
 var Speakers = require('./models/speakers');
 var Achievements = require('./models/achievements');
+var Users = require('./models/users');
 var domReady = require('domready');
-
 module.exports = {
   // this is the the whole app initter
   blastoff: function () {
@@ -67,6 +68,7 @@ module.exports = {
     this.partners = new Partners();
     this.sessions = new Sessions();
     this.speakers = new Speakers();
+    this.users = new Users();
     this.fetchInitialData();
 
     var authToken = sessionStorage['cannon-auth'];
@@ -108,6 +110,11 @@ module.exports = {
     var self = this;
 
     self.me.fetch({
+      error: function(model, response, options){
+        validateResponse(response, function(err){
+          log.error(response.statusCode, response.response);
+        });
+      },
       success: function(model, response, options){
         self.file.fetch();
       }

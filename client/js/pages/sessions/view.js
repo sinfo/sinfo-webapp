@@ -6,6 +6,7 @@ var SpeakersView = require('client/js/views/sessions/sessionSpeakers');
 var PartnerView = require('client/js/views/sessions/sessionPartners');
 var UserView = require('client/js/views/sessions/sessionUsers');
 var tickets = require('client/js/helpers/tickets');
+var validateResponse = require('client/js/helpers/validateResponse');
 
 
 module.exports = PageView.extend({
@@ -73,10 +74,11 @@ module.exports = PageView.extend({
     }
 
     tickets.registerTicket(this.model.id, function(err, ticket) {
-      if (err) {
-        return log.error('couldn\'t register ticket', err);
-      }
-      log('registered ticket', ticket);
+      validateResponse(err, 'couldn\'t register ticket', function(err){
+        if(!err){
+          log('registered ticket', ticket);
+        }
+      });
     });
   },
   handleVoidTicket: function () {
@@ -85,10 +87,11 @@ module.exports = PageView.extend({
     }
 
     tickets.voidTicket(this.model.id, function(err, ticket) {
-      if (err) {
-        return log.error('couldn\'t register ticket', err);
-      }
-      log('registered ticket', ticket);
+      validateResponse(err, 'couldn\'t register ticket', function(err){
+        if(!err){
+          log('registered ticket', ticket);
+        }
+      });
     });
   },
   handleConfirmTicket: function () {
@@ -97,10 +100,11 @@ module.exports = PageView.extend({
     }
 
     tickets.confirmTicket(this.model.id, function(err, ticket) {
-      if (err) {
-        return log.error('couldn\'t register ticket', err);
-      }
-      log('registered ticket', ticket);
+      validateResponse(err, 'couldn\'t register ticket', function(err){
+        if(!err){
+          log('registered ticket', ticket);
+        }
+      });
     });
   },
   subviews: {

@@ -8,6 +8,9 @@ function _updateSession (ticket) {
   if(!ticket) {
     return;
   }
+
+  console.log(ticket);
+
   var model = app.sessions.get(ticket.session);
   model.users = ticket.users;
 
@@ -17,7 +20,6 @@ function _updateSession (ticket) {
   model.isConfirmed = ticket.confirmed && ticket.confirmed.indexOf(userId) != -1;
   model.isPresent = ticket.present && ticket.present.indexOf(userId) != -1;
 }
-
 
 tickets.registerTicket = function(sessionId, cb) {
   var userId = app.me.id;
@@ -33,12 +35,11 @@ tickets.registerTicket = function(sessionId, cb) {
       return cb(err);
     }
 
-    var data = body;
+    var data = JSON.parse(body);
     if(resp.statusCode >= 400) {
       return cb(data);
     }
 
-    data = JSON.parse(data);
     _updateSession(data);
 
     cb(null, data);
@@ -60,12 +61,11 @@ tickets.confirmTicket = function(sessionId, cb) {
       return cb(err);
     }
 
-    var data = body;
+    var data = JSON.parse(body);
     if(resp.statusCode >= 400) {
       return cb(data);
     }
 
-    data = JSON.parse(data);
     _updateSession(data);
 
     cb(null, data);
@@ -87,12 +87,11 @@ tickets.voidTicket = function(sessionId, cb) {
       return cb(err);
     }
 
-    var data = body;
+    var data = JSON.parse(body);
     if(resp.statusCode >= 400) {
       return cb(data);
     }
 
-    data = JSON.parse(data);
     _updateSession(data);
 
     cb(null, data);
@@ -114,18 +113,36 @@ tickets.getTicket = function(sessionId, cb) {
       return cb(err);
     }
 
-    var data = body;
+    var data = JSON.parse(body);
     if(resp.statusCode >= 400) {
       return cb(data);
     }
 
-    data = JSON.parse(data);
     _updateSession(data);
 
     cb(null, data);
   });
 };
 
+tickets.getUserSessions = function(userId, cb){
+  xhr({
+    uri: config.cannonUrl +'/users/'+userId+'/sessions',
+    method: 'GET'
+  }, function (err, resp, body) {
+    if(err) {
+      return cb(err);
+    }
+
+    var data = body;
+    if(resp.statusCode >= 400) {
+      return cb(data);
+    }
+
+    data = JSON.parse(data);
+
+    cb(null, data);
+  });
+};
 
 module.exports = tickets;
 

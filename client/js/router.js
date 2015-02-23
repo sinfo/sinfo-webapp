@@ -3,6 +3,8 @@ var Router = require('ampersand-router');
 var ViewSwitcher = require('ampersand-view-switcher');
 
 var HomePage = require('./pages/home');
+var ContactPage = require('./pages/contacts');
+
 var PageNotFound = require('./pages/notFound');
 
 var Achievements = require('./pages/achievements/list');
@@ -34,6 +36,7 @@ var WebAppRouter = Router.extend({
     '': 'home',
     'achievements': 'achievements',
     'achievements/:id': 'achievementView',
+    'contacts':'contacts',
     'auth/login?:query': 'fenixLogin',
     'auth/login': 'login',
     'partners': 'partners',
@@ -42,14 +45,17 @@ var WebAppRouter = Router.extend({
     'sessions': 'sessions',
     'sessions/:id': 'sessionView',
     'speakers': 'speakers',
+    'users/:id' : 'userView',
     'me': 'me',
     'me/edit': 'meEdit',
     'speakers/:id': 'speakerView',
-    '(*path)': 'catchAll'
+    '(*path)': 'catchAll',
   },
 
   execute: function(callback, args, name) {
     window.ga('send', 'pageview', window.location.pathname);
+
+    window.scrollTo(0, 0);
 
     return Router.prototype.execute.apply(this, [callback, args, name]);
   },
@@ -73,6 +79,12 @@ var WebAppRouter = Router.extend({
    }));
   },
 
+  contacts: function(){
+    this.trigger('page', new ContactPage({
+      model: app.me
+    }));
+  },
+
   me: function () {
     if(!app.me || !app.me.authenticated) {
       return app.navigateToLogin();
@@ -80,6 +92,12 @@ var WebAppRouter = Router.extend({
 
     this.trigger('page', new UserViewPage({
       model: app.me
+    }));
+  },
+
+  userView: function (id) {
+    this.trigger('page', new UserViewPage({
+      id: id
     }));
   },
 
