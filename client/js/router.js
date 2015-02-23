@@ -45,6 +45,8 @@ var WebAppRouter = Router.extend({
   execute: function(callback, args, name) {
     window.ga('send', 'pageview', window.location.pathname);
 
+    window.scrollTo(0, 0);
+
     return Router.prototype.execute.apply(this, [callback, args, name]);
   },
 
