@@ -10,8 +10,14 @@ module.exports = PageView.extend({
   bindings: {
     'model.name' : '[data-hook~=name]',
     'model.category': '[data-hook~=category]',
-    'model.description': '[data-hook~=description]',
-    'model.instructions': '[data-hook~=instructions]',
+    'model.description': [
+      { type: 'toggle', hook: 'description' },
+      { selector: '[data-hook~=description] div' },
+    ],
+    'model.instructions': [
+      { type: 'toggle', hook: 'instructions' },
+      { selector: '[data-hook~=instructions] div' },
+    ],
     'model.value': '[data-hook~=value]',
     'model.img': {
       type: 'attribute',
@@ -26,15 +32,15 @@ module.exports = PageView.extend({
         return log.error('couldnt find a achievement with id: ' + spec.id);
       }
       self.model = model;
-      
+
       app.sessions.getOrFetch(model.session, function(err, sessionModel) {
         if (err) {
           return log.error('couldnt find a achievement session with id: ' + model.session);
         }
-        self.model.sessionDetails.model = sessionModel;  
-                                
+        self.model.sessionDetails.model = sessionModel;
+
         log('Got achievement session', sessionModel.name);
-        
+
         self.render();
       });
     });

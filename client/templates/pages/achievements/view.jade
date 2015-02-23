@@ -1,21 +1,24 @@
-section.page
+section.page.achievements.view.ink-grid
   .achievements.view
     .all-100
       div.top-space
-      h1(data-hook='name')
+      h1 Achievement
+      h3.name(data-hook='name')
     .all-100
       div.img-container.top-space
         img(data-hook='img')
     .all-100
-      div
+      div(data-hook='description')
         h3 Description
-        p(data-hook='description')
-        
+        div
+
+      div(data-hook='instructions')
         h3 Instructions
-        p(data-hook='instructions')
-        
+        div
+
+      div(data-hook='value')
         h3 Value
-        p(data-hook='value')
-    
+        div
+
     .all-100
       div(data-hook='achievement-session')
