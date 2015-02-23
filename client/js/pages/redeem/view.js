@@ -30,7 +30,7 @@ module.exports = PageView.extend({
     self.redeemCode = spec.id;
 
     xhr({
-      uri: config.cannonUrl + '/redeem/' + spec.id,
+      uri: config.cannonUrl + '/redeem/' + self.redeemCode,
       method: 'GET',
       headers: { Authorization: 'Bearer ' + app.me.token },
     }, function (err, resp, body) {

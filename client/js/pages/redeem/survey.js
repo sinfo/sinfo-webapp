@@ -5,6 +5,7 @@ var View = require('ampersand-view');
 var templates = require('client/js/templates');
 var ViewSwitcher = require('ampersand-view-switcher');
 var xhr = require('xhr');
+var Achievement = require('client/js/models/achievement');
 var config = require('client/js/helpers/clientconfig');
 
 module.exports = PageView.extend({
@@ -12,6 +13,7 @@ module.exports = PageView.extend({
   template: templates.pages.redeem.survey,
   props: {
     kind: 'string',
+    redeemCode: 'string',
     schema: 'object',
     editor: 'object'
   },
@@ -63,7 +65,35 @@ module.exports = PageView.extend({
     var self = this;
     var value = self.editor.getValue();
 
-    log('SUBMIT', value);
-    return;
+    xhr({
+      uri: config.cannonUrl + '/surveys/' + self.redeemCode,
+      method: 'POST',
+      json: value,
+      headers: { Authorization: 'Bearer ' + app.me.token },
+    }, function (err, resp, body) {
+      if(err) {
+        log(err);
+      }
+
+      if(resp.statusCode >= 400) {
+        log(resp.statusCode);
+
+        if(resp.statusCode == 404) {
+          self.parent.notFound = true;
+        }
+
+        return self.parent.render();
+      }
+
+      var data = body; // JSON.parse(body);
+
+      if (data.success) {
+        self.parent.achievement = new Achievement(data.achievement);
+      }
+
+      log('submited sury and got achievement', self.parent.achievement, data)
+
+      self.parent.render();
+    });
   },
 });
