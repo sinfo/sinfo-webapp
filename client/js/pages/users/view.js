@@ -74,7 +74,7 @@ module.exports = PageView.extend({
   initialize: function (spec) {
     var self = this;
 
-    if(this.model.name) {
+    if (this.model && this.model.name) {
       return self.render();
     }
 
