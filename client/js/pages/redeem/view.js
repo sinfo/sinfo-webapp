@@ -41,14 +41,16 @@ module.exports = PageView.extend({
       var data = body && JSON.parse(body);
 
       if(resp.statusCode >= 400) {
-        log(resp.statusCode);
-
         if(resp.statusCode == 404) {
           self.notFound = true;
+          log('redeem code not found');
         }
         else if (resp.statusCode == 412) {
           self.survey = true;
           self.session = new Session(data.session);
+          log('this achievement needs a survey');
+        } else {
+          log('unhandled error', body);
         }
       }
 

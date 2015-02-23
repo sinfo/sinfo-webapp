@@ -88,10 +88,11 @@ module.exports = PageView.extend({
       var data = body; // JSON.parse(body);
 
       if (data.success) {
+        self.parent.survey = false;
         self.parent.achievement = new Achievement(data.achievement);
       }
 
-      log('submited sury and got achievement', self.parent.achievement, data)
+      log('submited survey and got achievement');
 
       self.parent.render();
     });
