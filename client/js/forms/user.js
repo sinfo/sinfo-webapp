@@ -67,7 +67,7 @@ module.exports = FormView.extend({
       new DateView({
         label: 'Job Start Date Avalability',
         required: false,
-        value: (this.model && this.model.job&& this.model.job.start.getTime()>0 && this.model.job.start ) || '',
+        value: (this.model && this.model.job && this.model.job.start && this.model.job.start.getTime()>0 && this.model.job.start ) || '',
         name: 'job-start'
       }),
       new CheckboxView({
