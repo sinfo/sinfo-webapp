@@ -90,12 +90,30 @@ module.exports = PageView.extend({
     return;
   },
   handleAchievement: function () {
-    var view = new AchievementView({ model: this.achievement, parent: this });
+    var view = new SuccessView({ model: this.achievement, parent: this });
     this.switcher.set(view);
     return;
   }
-})
+});
 
 var NotFound = View.extend({
   template: templates.partials.redeem.notFound
+});
+
+var SuccessView = View.extend({
+  template: templates.partials.redeem.success,
+  subviews: {
+    speakers: {
+      container: '[data-hook=achievement-container]',
+      parent: this,
+      waitFor: 'model.name',
+      prepareView: function (el) {
+        var self = this;
+        return new AchievementView({
+          el: el,
+          model: self.model
+        });
+      }
+    },
+  },
 });
