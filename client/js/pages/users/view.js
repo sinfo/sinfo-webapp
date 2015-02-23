@@ -3,6 +3,7 @@ var log = require('bows')('users');
 var auth = require('client/js/auth');
 var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
+var validateResponse = require('client/js/helpers/validateResponse');
 
 module.exports = PageView.extend({
   pageTitle: 'View user',
@@ -47,23 +48,25 @@ module.exports = PageView.extend({
     });
   },
   handleLogin: function(err, authDetails) {
-
-    var elem = this.queryByHook('message-text');
-    if(err) {
-      elem.classList.add('error');
-      if(err.statusCode == 409){
-        elem.textContent = 'Account already associated to you';
+    var self = this;
+    validateResponse(err, function(err){
+      var elem = self.queryByHook('message-text');
+      if(err) {
+        elem.classList.add('error');
+        if(err.statusCode == 409){
+          elem.textContent = 'Account already associated to you';
+        }
+        else{
+          elem.textContent = 'Error associating account';
+        }
+        log({err: err});
       }
       else{
-        elem.textContent = 'Error associating account';
+        elem.classList.add('valid');
+        elem.textContent = 'Account sucessfully added!';
       }
-      log({err: err});
-    }
-    else{
-      elem.classList.add('valid');
-      elem.textContent = 'Account sucessfully added!';
-    }
-    app.fetchUserData();
+      app.fetchUserData();
+    });
   },
   initialize: function (spec) {
     var self = this;

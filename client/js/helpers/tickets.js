@@ -33,12 +33,11 @@ tickets.registerTicket = function(sessionId, cb) {
       return cb(err);
     }
 
-    var data = body;
+    var data = JSON.parse(body);
     if(resp.statusCode >= 400) {
       return cb(data);
     }
 
-    data = JSON.parse(data);
     _updateSession(data);
 
     cb(null, data);
@@ -60,12 +59,11 @@ tickets.confirmTicket = function(sessionId, cb) {
       return cb(err);
     }
 
-    var data = body;
+    var data = JSON.parse(body);
     if(resp.statusCode >= 400) {
       return cb(data);
     }
 
-    data = JSON.parse(data);
     _updateSession(data);
 
     cb(null, data);
@@ -87,12 +85,11 @@ tickets.voidTicket = function(sessionId, cb) {
       return cb(err);
     }
 
-    var data = body;
+    var data = JSON.parse(body);
     if(resp.statusCode >= 400) {
       return cb(data);
     }
 
-    data = JSON.parse(data);
     _updateSession(data);
 
     cb(null, data);
@@ -114,12 +111,11 @@ tickets.getTicket = function(sessionId, cb) {
       return cb(err);
     }
 
-    var data = body;
+    var data = JSON.parse(body);
     if(resp.statusCode >= 400) {
       return cb(data);
     }
 
-    data = JSON.parse(data);
     _updateSession(data);
 
     cb(null, data);

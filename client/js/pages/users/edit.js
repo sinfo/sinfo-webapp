@@ -5,6 +5,7 @@ var templates = require('client/js/templates');
 var UserForm = require('client/js/forms/user');
 var _ = require('client/js/helpers/underscore');
 var fileRequests = require('client/js/helpers/fileRequests');
+var validateResponse = require('client/js/helpers/validateResponse');
 
 
 module.exports = PageView.extend({
@@ -84,7 +85,9 @@ module.exports = PageView.extend({
                 app.navigate('/users/'+model.id);
               },
               error: function (model, response, options) {
-                log.error(response.statusCode, response.response);
+                validateResponse(response, function(err){
+                  log.error(response.statusCode, response.response);
+                });
               }
             });
           }

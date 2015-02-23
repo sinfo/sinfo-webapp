@@ -1,6 +1,7 @@
 /*global app, me, $*/
 var log = require('bows')('app');
 var config = require('client/js/helpers/clientconfig');
+var validateResponse = require('client/js/helpers/validateResponse');
 var Router = require('./router');
 var MainView = require('./views/main');
 var Me = require('./models/me');
@@ -106,6 +107,11 @@ module.exports = {
     var self = this;
 
     self.me.fetch({
+      error: function(model, response, options){
+        validateResponse(response, function(err){
+          log.error(response.statusCode, response.response);
+        });
+      },
       success: function(model, response, options){
         self.file.fetch();
       }
