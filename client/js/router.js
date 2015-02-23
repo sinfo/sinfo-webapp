@@ -5,6 +5,8 @@ var ViewSwitcher = require('ampersand-view-switcher');
 var HomePage = require('./pages/home');
 var ContactPage = require('./pages/contacts');
 
+var StreamPage = require('./pages/stream');
+
 var PageNotFound = require('./pages/notFound');
 
 var Achievements = require('./pages/achievements/list');
@@ -49,6 +51,7 @@ var WebAppRouter = Router.extend({
     'me': 'me',
     'me/edit': 'meEdit',
     'speakers/:id': 'speakerView',
+    'stream': 'streamView',
     '(*path)': 'catchAll',
   },
 
@@ -65,6 +68,10 @@ var WebAppRouter = Router.extend({
     this.trigger('page', new HomePage({
       model: app.me
     }));
+  },
+
+  streamView: function () {
+    this.trigger('page', new StreamPage());
   },
 
   achievements: function () {
