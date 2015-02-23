@@ -4,12 +4,16 @@ var PageView = require('client/js/pages/base');
 var templates = require('client/js/templates');
 var AchievementsView = require('client/js/views/achievements/view');
 
+var AchievementsGridView = AchievementsView.extend({
+  template: templates.partials.achievements.gridView,
+});
+
 module.exports = PageView.extend({
   pageTitle: 'Achievements',
   template: templates.partials.achievements.area,
   render: function () {
     this.renderWithTemplate();
-    this.renderCollection(this.collection, AchievementsView, this.queryByHook('achievements-list'));
+    this.renderCollection(this.collection, AchievementsGridView, this.queryByHook('achievements-list'));
     if (!this.collection.length) {
       this.fetchCollection();
     }
