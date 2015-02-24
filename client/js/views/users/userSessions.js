@@ -34,12 +34,13 @@ module.exports = View.extend({
 
     log('initialize');
 
-    if(!app.sessions.length ){
-      return app.sessions.fetch({ success: function() {
+    if(app.sessions.length ){
+      return self.filter();
+    }
+
+    app.sessions.fetch({ success: function() {
         self.filter();
       }});
-    }
-    self.filter();
   },
   sectiontitle: '',
   filter: function(){
