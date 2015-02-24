@@ -97,17 +97,10 @@ var WebAppRouter = Router.extend({
   },
 
   userView: function (id) {
-    var self = this;
-    app.users.getOrFetch(id, function (err, model) {
-      if (err) {
-        return log.error('couldnt find a user with id: ' + spec.id);
-      }
 
-      self.trigger('page', new UserViewPage({
-        model: model
-      }));
-
-    });
+    this.trigger('page', new UserViewPage({
+      id: id
+    }));
 
   },
 
