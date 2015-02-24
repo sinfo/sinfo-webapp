@@ -27,7 +27,7 @@ config.fenix = {
 
 config.client = {
   deckUrl: process.env.EVENTDECK_URL || 'https://deck.sinfo.org',
-  cannonUrl: process.env.CANNON_URL || 'http://cannon.sinfo.org',
+  cannonUrl: process.env.CANNON_URL || 'http://localhost:8090',
   debugMode: true,
   isDev: config.isDev,
   facebook: {

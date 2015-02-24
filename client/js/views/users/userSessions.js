@@ -14,6 +14,7 @@ module.exports = View.extend({
   bindings: {
     'sectiontitle':'[data-hook~=title]',
   },
+  autoRender:false,
   template:templates.partials.users.userSessions,
   render: function(){
 
@@ -45,16 +46,13 @@ module.exports = View.extend({
   sectiontitle: '',
   filter: function(){
     var self = this;
+    log('Requesting the Session ids for', self.model.id);
     tickets.getUserSessions(self.model.id, function (err, ticket) {
-      var aux = ticket.map(function(t){
-        return t.session;
-      });
-
-      log('Session Ids', aux);
+      log('Session Ids', ticket);
 
       self.model.sessionDetails = new SubCollection(app.sessions, {
         filter: function (session) {
-          return aux.indexOf(session.id) != -1;
+          return ticket.indexOf(session.id) != -1;
         }
       });
       self.render();
