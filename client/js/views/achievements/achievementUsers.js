@@ -11,6 +11,7 @@ var AchievementsGridView = AchievementsView.extend({
 });
 
 module.exports = AchievementsArea.extend({
+  template: templates.partials.achievements.userArea,
   initialize: function() {
     var self = this;
 
@@ -20,20 +21,24 @@ module.exports = AchievementsArea.extend({
 
     self.model.achievements = new AchievementUsers();
 
-    self.fetchCollection();
+    //self.fetchCollection();
   },
   render: function () {
     var self = this;
 
-    self.renderWithTemplate();
-    self.renderCollection(self.model.achievements, AchievementsGridView, self.queryByHook('achievements-list'));
     if (!self.model.achievements.length) {
       self.fetchCollection();
     }
+
+    self.renderWithTemplate();
+    self.renderCollection(self.model.achievements, AchievementsGridView, self.queryByHook('achievements-list'));
   },
   fetchCollection: function () {
+    var self = this;
     log('Fetching achievements');
-    this.model.achievements.fetch();
-    return false;
+    this.model.achievements.fetch({ success: function() {
+      log('Got users achievements', self.model.achievements.serialize());
+      self.render();
+    }});
   }
 });

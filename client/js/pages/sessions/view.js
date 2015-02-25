@@ -61,7 +61,7 @@ module.exports = PageView.extend({
         return log.error('couldnt find a session with id: ' + spec.id);
       }
       self.model = model;
-      log('Got session', model.name);
+      log('Got session', model);
 
       tickets.getTicket(spec.id, function (err, ticket) {
         log('Got ticket', ticket);
@@ -111,7 +111,7 @@ module.exports = PageView.extend({
     speakers: {
       container: '[data-hook=session-speakers] div',
       parent: this,
-      waitFor: 'model.speakers',
+      waitFor: 'model.speakers.length',
       prepareView: function (el) {
         var self = this;
         return new SpeakersView({
@@ -123,9 +123,10 @@ module.exports = PageView.extend({
     partners: {
       container: '[data-hook=session-partners] div',
       parent: this,
-      waitFor: 'model.companies',
+      waitFor: 'model.companies.length',
       prepareView: function (el) {
         var self = this;
+
         return new PartnerView({
           el: el,
           model: self.model
@@ -135,7 +136,7 @@ module.exports = PageView.extend({
     users: {
       container: '[data-hook=session-users] div',
       parent: this,
-      waitFor: 'model.users',
+      waitFor: 'model.users.length',
       prepareView: function (el) {
         var self = this;
         return new UserView({
