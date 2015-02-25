@@ -113,8 +113,7 @@ module.exports = PageView.extend({
         var self = this;
         return new AchievementsView({
           el: el,
-          model: self.model,
-          collection: self.model.achievements
+          model: self.model
         });
       }
     },

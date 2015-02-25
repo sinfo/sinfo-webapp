@@ -3,6 +3,12 @@ var log = require('bows')('achievement-users');
 var Achievements = require('client/js/models/achievements');
 var AchievementsArea = require('client/js/views/achievements/area');
 var config = require('client/js/helpers/clientconfig');
+var templates = require('client/js/templates');
+var AchievementsView = require('client/js/views/achievements/view');
+
+var AchievementsGridView = AchievementsView.extend({
+  template: templates.partials.achievements.gridView,
+});
 
 module.exports = AchievementsArea.extend({
   initialize: function() {
@@ -12,8 +18,22 @@ module.exports = AchievementsArea.extend({
       url: config.cannonUrl + '/users/'+self.model.id+'/achievements',
     });
 
-    self.collection = new AchievementUsers();
+    self.model.achievements = new AchievementUsers();
 
     self.fetchCollection();
+  },
+  render: function () {
+    var self = this;
+
+    self.renderWithTemplate();
+    self.renderCollection(self.model.achievements, AchievementsGridView, self.queryByHook('achievements-list'));
+    if (!self.model.achievements.length) {
+      self.fetchCollection();
+    }
+  },
+  fetchCollection: function () {
+    log('Fetching achievements');
+    this.model.achievements.fetch();
+    return false;
   }
 });
