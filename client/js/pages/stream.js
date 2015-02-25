@@ -26,8 +26,6 @@ module.exports = PageView.extend({
     });
 
     self.showStream = liveStreamSessions.length > 0;
-
-    console.log('liveStreamSessions', liveStreamSessions, liveStreamSessions.length, self.showStream);
   },
   props: {
     showStream: 'boolean'
