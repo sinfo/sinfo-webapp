@@ -45,7 +45,7 @@ var WebAppRouter = Router.extend({
     'sessions': 'sessions',
     'sessions/:id': 'sessionView',
     'speakers': 'speakers',
-    'users/:id' : 'userView',
+    //'users/:id' : 'userView',
     'me': 'me',
     'me/edit': 'meEdit',
     'speakers/:id': 'speakerView',

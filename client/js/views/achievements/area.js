@@ -10,11 +10,13 @@ module.exports = PageView.extend({
   render: function () {
     this.renderWithTemplate();
     this.renderCollection(this.collection, AchievementsView, this.queryByHook('achievements-list'));
+    log(this.collection);
     if (!this.collection.length) {
       this.fetchCollection();
     }
   },
   fetchCollection: function () {
+    log(this.url);
     log('Fetching achievements');
     this.collection.fetch();
     return false;

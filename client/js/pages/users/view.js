@@ -6,6 +6,8 @@ var templates = require('client/js/templates');
 var validateResponse = require('client/js/helpers/validateResponse');
 var tickets = require('client/js/helpers/tickets');
 var SessionsView = require('client/js/views/users/userSessions');
+var AchievementsView = require('client/js/views/achievements/achievementUsers');
+var config = require('client/js/helpers/clientconfig');
 
 module.exports = PageView.extend({
   pageTitle: 'View user',
@@ -74,6 +76,8 @@ module.exports = PageView.extend({
   initialize: function (spec) {
     var self = this;
 
+    log(spec);
+
     if(this.model.name) {
       return self.render();
     }
@@ -84,9 +88,8 @@ module.exports = PageView.extend({
       }
 
       self.model = model;
-      log('Got user', model.name);
-      self.render();
-
+      log('Got user', model);
+      return self.render();
     });
   },
   subviews: {
@@ -99,6 +102,19 @@ module.exports = PageView.extend({
         return new SessionsView({
           el: el,
           model: self.model
+        });
+      }
+    },
+    achievements: {
+      container: '[data-hook=user-achievements]',
+      parent: this,
+      waitFor: 'model.id',
+      prepareView: function (el) {
+        var self = this;
+        return new AchievementsView({
+          el: el,
+          model: self.model,
+          collection: self.model.achievements
         });
       }
     },
