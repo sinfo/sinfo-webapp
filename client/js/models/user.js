@@ -1,7 +1,10 @@
 var AmpModel = require('ampersand-model');
 var AmpState = require('ampersand-state');
 var Session = require('./session');
+var Achievement = require('./achievement');
 var AmpCollection = require('ampersand-collection');
+var AmpRestCollection = require('ampersand-rest-collection');
+var config = require('config');
 
 var Job = AmpState.extend({
   props: {
@@ -11,8 +14,19 @@ var Job = AmpState.extend({
   }
 });
 
+var Points = AmpState.extend({
+  props: {
+    total: 'number',
+    available: 'number'
+  }
+});
+
 var SessionCollection = AmpCollection.extend({
   model: Session
+});
+
+var AchievementCollection = AmpRestCollection.extend({
+  model: Achievement
 });
 
 module.exports = AmpModel.extend({
@@ -26,10 +40,12 @@ module.exports = AmpModel.extend({
     skills: 'array',
   },
   children: {
-    job: Job
+    job: Job,
+    points: Points
   },
   collections: {
     sessionDetails: SessionCollection,
+    achievements: AchievementCollection
   },
   derived: {
     background: {

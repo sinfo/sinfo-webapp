@@ -19,6 +19,7 @@ module.exports = PageView.extend({
     }
   },
   fetchCollection: function () {
+    log(this.url);
     log('Fetching achievements');
     this.collection.fetch();
     return false;
