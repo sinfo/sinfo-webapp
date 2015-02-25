@@ -233,7 +233,20 @@ module.exports = AmpModel.extend({
         return '';
       }
     },
-
+    hasStream: {
+      deps: ['kind'],
+      fn: function () {
+        return this.kind.toLowerCase() == 'keynote';
+      },
+    },
+    isHappening: {
+      deps: ['date', 'end'],
+      fn: function () {
+        var now = new Date();
+        return now > new Date(this.date) && now < new Date(this.end);
+      },
+      cache: false
+    },
   },
   parse: function (attrs) {
     attrs.date = new Date(attrs.date);
