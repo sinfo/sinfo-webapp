@@ -25,11 +25,16 @@ config.fenix = {
   redirectUri: process.env.CANNON_FENIX_REDIRECT_URI || 'http://example.com/redirect'
 };
 
+config.live = {
+  interval: process.env.CANNON_UPDATE_INTERVAL || 60000
+};
+
 config.client = {
   deckUrl: process.env.EVENTDECK_URL || 'https://deck.sinfo.org',
   cannonUrl: process.env.CANNON_URL || 'http://localhost:8090',
   debugMode: true,
   isDev: config.isDev,
+  live: config.live,
   facebook: {
     appId: config.facebook.appId
   },

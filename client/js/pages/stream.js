@@ -2,8 +2,7 @@ var PageView = require('./base');
 var templates = require('../templates');
 var SessionsView = require('client/js/views/live/liveSessions');
 var moment = require('moment');
-
-var UPDATE_INTERVAL = 5000;
+var config = require('client/js/helpers/clientconfig');
 
 module.exports = PageView.extend({
   pageTitle: 'Live Stream',
@@ -12,7 +11,11 @@ module.exports = PageView.extend({
     var self = this;
     self.interval = setInterval(function () {
       self.update();
-    }, UPDATE_INTERVAL);
+    }, config.live.interval);
+
+    app.sessions.once('sync', function () {
+      self.update();
+    });
 
     self.update();
   },
@@ -22,7 +25,7 @@ module.exports = PageView.extend({
 
     var liveStreamSessions = app.sessions.filter(function (session) {
       var now = new Date();
-      return moment(session.date).isSame(now, 'day') && session.isHappening && session.isHappening;
+      return moment(session.date).isSame(now, 'day') && session.isHappening && session.hasStream;
     });
 
     self.showStream = liveStreamSessions.length > 0;
