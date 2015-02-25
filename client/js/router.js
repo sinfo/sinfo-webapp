@@ -25,6 +25,7 @@ var Speakers = require('./pages/speakers/list');
 var SpeakerViewPage = require('./pages/speakers/view');
 
 var UserViewPage = require('./pages/users/view');
+var MePage = require('./pages/users/me');
 var UserEditPage = require('./pages/users/edit');
 
 var log = require('bows')('router');
@@ -97,15 +98,17 @@ var WebAppRouter = Router.extend({
       return app.navigateToLogin();
     }
 
-    this.trigger('page', new UserViewPage({
+    this.trigger('page', new MePage({
       model: app.me
     }));
   },
 
   userView: function (id) {
+
     this.trigger('page', new UserViewPage({
       id: id
     }));
+
   },
 
   meEdit: function () {

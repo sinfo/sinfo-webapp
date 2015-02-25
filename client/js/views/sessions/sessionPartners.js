@@ -19,14 +19,20 @@ module.exports = PartnersArea.extend({
   },
   filterPartners: function() {
     var self = this;
+
+    log('Companies',self.model.companies);
+    log('Partners',app.partners);
+
     if(!self.model.partnersDetails.length) {
       self.model.partnersDetails = new SubCollection(app.partners, {
         filter: function (partner) {
+          console.log(partner.id);
           return self.model.companies.indexOf(partner.id) != -1;
         }
       });
     }
-    this.render();
+    log('Partners',self.model.partnersDetails);
+    self.render();
   },
   render: function() {
     var self = this;
