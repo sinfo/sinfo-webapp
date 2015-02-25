@@ -26,12 +26,12 @@ module.exports = AchievementsArea.extend({
   render: function () {
     var self = this;
 
+    self.renderWithTemplate();
+    self.renderCollection(self.model.achievements, AchievementsGridView, self.queryByHook('achievements-list'));
+
     if (!self.model.achievements.length) {
       self.fetchCollection();
     }
-
-    self.renderWithTemplate();
-    self.renderCollection(self.model.achievements, AchievementsGridView, self.queryByHook('achievements-list'));
   },
   fetchCollection: function () {
     var self = this;
