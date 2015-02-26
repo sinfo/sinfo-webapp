@@ -1,4 +1,7 @@
 section.page.stream
   h1.title Live Stream
 
-  iframe(src="//rd3.videos.sapo.pt/playhtml?file=http://rd3.videos.sapo.pt/0FSz7BwKRPWBl42mNPLm/mov/24&relatedVideos=none", frameborder="0", scrolling="no", width="640", height="360", webkitallowfullscreen, mozallowfullscreen, allowfullscreen)
+  div(data-hook='live-stream')
+    iframe(src='//rd3.videos.sapo.pt/playhtml?file=http://rd3.videos.sapo.pt/0FSz7BwKRPWBl42mNPLm/mov/24&relatedVideos=none', frameborder='0', scrolling='no', width='640', height='360', webkitallowfullscreen, mozallowfullscreen, allowfullscreen)
+
+  .sessions(data-hook='live-sessions')
