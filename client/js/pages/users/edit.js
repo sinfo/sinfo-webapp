@@ -38,7 +38,7 @@ module.exports = PageView.extend({
           el: el,
           model: model,
           clean: function (data) {
-            data = {
+            var cleanData = {
               id: data.id,
               name: data.name,
               img: data.img,
@@ -48,11 +48,15 @@ module.exports = PageView.extend({
               job: {
                 startup: data['job-startup'],
                 internship: data['job-internship'],
-                start: data['job-start'],
               },
               file: data.file
             };
-            return _.compactObject(data);
+
+            if(data['job-start'] && data['job-start'] != '') {
+              cleanData.job.start = data['job-start'];
+            }
+
+            return _.compactObject(cleanData);
           },
           submitCallback: function (data) {
 
