@@ -6,6 +6,8 @@ var templates = require('client/js/templates');
 var validateResponse = require('client/js/helpers/validateResponse');
 var tickets = require('client/js/helpers/tickets');
 var SessionsView = require('client/js/views/users/userSessions');
+var url = require('url');
+var cannonUrl = require('client/js/helpers/clientconfig').cannonUrl;
 
 module.exports = UserView.extend({
   pageTitle: 'View me',
@@ -14,6 +16,21 @@ module.exports = UserView.extend({
     'click [data-hook=facebook-add]': 'addFacebook',
     'click [data-hook=google-add]': 'addGoogle',
     'click [data-hook=fenix-add]': 'addFenix',
+    'click [data-hook=file-download]': 'handleFileDownload',
+  },
+  props: {
+    hasResume: 'boolean',
+  },
+  bindings: {
+    'model.name': { hook: 'name' },
+    'model.background': { type: 'attribute', hook: 'img', name: 'style' },
+    'model.area': [
+      { type: 'toggle', hook: 'area' },
+      { selector: '[data-hook~=area] div' },
+    ],
+    'model.skills': { selector: '[data-hook~=skills] div' },
+    'model.skills.length': { type: 'toggle', hook: 'skills' },
+    'hasResume': { type: 'toggle', yes: '[data-hook~=file-download]', no: '[data-hook~=file-add]' },
   },
   addFacebook: function () {
     var self = this;
@@ -57,6 +74,19 @@ module.exports = UserView.extend({
   initialize: function (spec) {
     var self = this;
 
+    self.hasResume = !!app.file.created;
+    app.file.fetch();
+    app.file.on('sync', function () {
+      self.hasResume = !!app.file.created;
+    });
+
     return self.render();
+  },
+  handleFileDownload: function () {
+    var pdfUrl = url.parse(cannonUrl);
+    pdfUrl.auth = app.me.id + ':' + app.me.token;
+    pdfUrl.pathname = '/files/me/download';
+
+    window.location = url.format(pdfUrl);
   }
 });
