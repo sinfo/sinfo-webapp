@@ -3,7 +3,7 @@ var log = require('bows')('top-users');
 var Users = require('client/js/models/users');
 var PageView = require('client/js/pages/base');
 var cannonUrl = require('client/js/helpers/clientconfig').cannonUrl;
-var UserView = require('client/js/views/users/view');
+var UserView = require('client/js/views/users/topView');
 var templates = require('client/js/templates');
 var TopUsers = Users.extend({
   url: cannonUrl + '/users?sort=-points.total&limit=10'
