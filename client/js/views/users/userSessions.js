@@ -14,8 +14,8 @@ module.exports = View.extend({
   bindings: {
     'sectiontitle':'[data-hook~=title]',
   },
-  autoRender:false,
-  template:templates.partials.users.userSessions,
+  autoRender: false,
+  template: templates.partials.sessions.area,
   render: function(){
 
     log(this);
@@ -28,7 +28,7 @@ module.exports = View.extend({
     this.renderWithTemplate();
     log('rendering');
 
-    this.renderCollection(this.model.sessionDetails, SessionView, this.queryByHook('user-sessions'));
+    this.renderCollection(this.model.sessionDetails, SessionView, this.queryByHook('sessions-list'));
   },
   initialize: function() {
     var self = this;
