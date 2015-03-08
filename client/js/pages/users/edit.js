@@ -89,6 +89,8 @@ module.exports = PageView.extend({
                   return app.navigate('/me');
                 }
 
+                app.file.fetch();
+
                 app.navigate('/users/'+model.id);
               },
               error: function (model, response, options) {
