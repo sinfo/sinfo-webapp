@@ -1,18 +1,14 @@
 .session.all-100
   a(data-hook='action-view')
-    .all-40
-      h2
-        span.kind(data-hook='kind')
-        span.name(data-hook='name')
-    .all-60
-      .push-left
-        .all-20(data-hook='date')
-          i.fa.fa-calendar
-            span
-        .all-20(data-hook='hours')
-          i.fa.fa-clock-o
-            span
-        .all-20(data-hook='place')
-          i.fa.fa-map-marker
-            span
+    h2.kind(data-hook='kind')
+    h3.name(data-hook='name')
+    div(data-hook='date')
+      i.fa.fa-calendar
+        span
+    div(data-hook='hours')
+      i.fa.fa-clock-o
+        span
+    div(data-hook='place')
+      i.fa.fa-map-marker
+        span
 
