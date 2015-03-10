@@ -62,6 +62,7 @@ module.exports = FormView.extend({
         value: this.model.skills || [],
         options: options.skills,
         minLength: 0,
+        maxLength: 1000,
         parent: this
       }),
       new DateView({
