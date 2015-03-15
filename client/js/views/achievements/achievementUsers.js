@@ -38,7 +38,6 @@ module.exports = AchievementsArea.extend({
     log('Fetching achievements');
     this.model.achievements.fetch({ success: function() {
       log('Got users achievements', self.model.achievements.serialize());
-      self.render();
     }});
   }
 });
