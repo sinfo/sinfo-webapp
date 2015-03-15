@@ -67,6 +67,7 @@ module.exports = PageView.extend({
                 }
                 var file = JSON.parse(body);
                 app.file.set(file);
+                alert("CV enviado com sucesso");
               });
               delete data.file;
             }
