@@ -36,7 +36,15 @@ module.exports = FormView.extend({
         value: this.model.img || '',
         required: false,
         placeholder: 'A valid profile image URL',
-        parent: this
+        parent: this,
+        tests: [
+          function (value) {
+            var regexp = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+            if (!regexp.test(value)) {
+              return 'Must be a valid url';
+            }
+          }
+        ]
       }),
       new ExtendedInput({
         label: 'Mail',
@@ -44,7 +52,15 @@ module.exports = FormView.extend({
         value: this.model.mail || '',
         required: true,
         placeholder: 'Your e-mail address, this field is required for workshops',
-        parent: this
+        parent: this,
+        tests: [
+          function (value) {
+            var regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!regexp.test(value)) {
+              return 'Must be a valid email address';
+            }
+          }
+        ]
       }),
       new ExtendedInput({
         label: 'Area',
