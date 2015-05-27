@@ -1,4 +1,4 @@
-Cannon WebApp
+Sinfo Web App
 ===
 
 ## Enable logs
