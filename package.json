@@ -45,7 +45,7 @@
     "xhr": "^2.0.1"
   },
   "devDependencies": {
-    "nodemon": "^1.2.1"
+    "nodemon": "^1.5.0"
   },
   "jshintConfig": {
     "asi": false,
