@@ -6,7 +6,7 @@ section.page.home
         a(href="#")
           img(src='/static/logo2.png')
       br
-      h3.description 23rd edition
+      h3.description SINFO Conf 23rd edition
       .calendar
         span
           .fa.fa-calendar
@@ -56,16 +56,35 @@ section.page.home
         p.big NOTHING! We commit to make everything available for FREE! You just
           | need to show up to enjoy the event.
 
-  .light.container.section.overlay.speakers.all-100(data-hook='speakers-area')
+  .light.container.section.overlay-blue.speakers.all-100(data-hook='present-speakers-area')
     h1.light Speakers
-    h4.light One week filled with talks from the best speakers!
+    h4.light Have someone in mind?
+    .img-container#speaker-suggestion
+     .img
+    h4.light Suggest a speaker to 
+      a.mailto(href='mailto:geral@sinfo.org?subject=Speaker%20Suggestion') geral@sinfo.org
     div
 
-  .area-light.sessions.all-100(data-hook='sessions-calendar')
-    h1 Schedule
+  .light.container.section.overlay.speakers.all-100(data-hook='speakers-area')
+    h1.light Speakers from past editions
+    h4.light The best names, for the best week!
     div
 
-  .container.section.light.overlay-cv
+  .area-light.reviews.all-100(data-hook='speakers-reviews')
+    h1 What they say about us?
+    div
+      p Want to talk? We love to talk! Come join us for a cup of coffee (or beer). Drop us a line at 
+        a.mailto(href='mailto:geral@sinfo.org?subject=Meet%20Us%20Contact') geral@sinfo.org 
+    
+  .area-light.team.all-100(data-hook='sinfo-team')
+    h1 The team
+    div
+    
+  .area-light.meetus.all-100(data-hook='meet-us')
+    h1 Meet us!
+    div
+
+  .container.section.light.overlay-blue
     h1.light Upload your CV now!
     p.light Are you new to the job market? Or maybe looking for a new challenge? Well, send us your curriculum vitae and every company present at SINFO 22 will receive it!
     a.ink-button.blue(href="/me/edit" ) Upload CV
