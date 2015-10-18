@@ -1,10 +1,9 @@
-var PageView = require('./base');
+var PageView = require('client/js/pages/base');
 var templates = require('../templates');
 var $ = require('client/js/helpers/jquery');
 
 module.exports = PageView.extend({
-  pageTitle: 'Contacts',
-  template: templates.pages.contacts,
+  template: templates.partials.contacts,
   initialize: function (spec) {
     var self = this;
     $.getScript( 'https://www.google.com/jsapi' , function(){
@@ -18,9 +17,9 @@ module.exports = PageView.extend({
             mapTypeId: google.maps.MapTypeId.ROADMAP
           });
           var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(38.7373673,-9.1402185),
+            position: new google.maps.LatLng(38.7375721,-9.1376594),
             map: map,
-            title: 'SINFO 22!!!'
+            title: 'SINFO'
           });
           console.log(self.queryByHook('map-canvas'));
         }

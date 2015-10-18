@@ -32,6 +32,8 @@ module.exports = {
     // you list any plugins after jQuery itself.
     libraries: [
       libsDir + '/jsoneditor.js',
+      jsDir + '/vendor/ink-all.js',
+      jsDir + '/vendor/autoload.js'
     ],
     // Specify the stylesheets we want to bundle
     stylesheets: [

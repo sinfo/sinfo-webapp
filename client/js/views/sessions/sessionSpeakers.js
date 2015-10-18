@@ -9,11 +9,11 @@ var SpeakersArea = require('client/js/views/speakers/area');
 module.exports = SpeakersArea.extend({
   initialize: function() {
     var self = this;
-    if(app.speakers.length) {
+    if(app.speakers.current.length) {
       return self.filterSpeakers();
     }
 
-    app.speakers.fetch({ success: function() {
+    app.speakers.current.fetch({ success: function() {
       self.filterSpeakers();
     }});
   },
@@ -24,7 +24,7 @@ module.exports = SpeakersArea.extend({
         .filter(function(s) { return s.id; })
         .map(function(s) { return s.id; });
 
-      self.model.speakersDetails = new SubCollection(app.speakers, {
+      self.model.speakersDetails = new SubCollection(app.speakers.current, {
         filter: function (speaker) {
           return sessionSpeakerIds.indexOf(speaker.id) != -1;
         }

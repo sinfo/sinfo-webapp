@@ -56,35 +56,53 @@ section.page.home
         p.big NOTHING! We commit to make everything available for FREE! You just
           | need to show up to enjoy the event.
 
-  .light.container.section.overlay-blue.speakers.all-100(data-hook='present-speakers-area')
+  #speakers.area-light.container.section.overlay-blue.speakers.all-100(data-hook='speakers-area-current')
     h1.light Speakers
     h4.light Have someone in mind?
     .img-container#speaker-suggestion
      .img
     h4.light Suggest a speaker to 
       a.mailto(href='mailto:geral@sinfo.org?subject=Speaker%20Suggestion') geral@sinfo.org
-    div
+    div(data-hook='speakers-current')
 
-  .light.container.section.overlay.speakers.all-100(data-hook='speakers-area')
+  .area-light.container.section.overlay.speakers.all-100(data-hook='speakers-area-past')
     h1.light Speakers from past editions
-    h4.light The best names, for the best week!
     div
 
-  .area-light.reviews.all-100(data-hook='speakers-reviews')
-    h1 What they say about us?
-    div
-      p Want to talk? We love to talk! Come join us for a cup of coffee (or beer). Drop us a line at 
-        a.mailto(href='mailto:geral@sinfo.org?subject=Meet%20Us%20Contact') geral@sinfo.org 
+  //- .area-light.container.section.reviews.all-100(data-hook='speakers-reviews')
+  //-   h1 What they say about us?
+  //-   div
     
-  .area-light.team.all-100(data-hook='sinfo-team')
+  #team.area-light.container.members.all-100(data-hook='sinfo-team')
     h1 The team
     div
+            
+  #sponsorus.area-light.container.section.overlay.sponsorus.all-100(data-hook='sponsor-us')
+    h1 Sponsor us!
+    div
+      p Want to sponsor us? Awesome!
+      p We're still working out some details in next year's sponsor packages but you may contact us right now for more info. Drop us a line at 
+        a.mailto(href='mailto:geral@sinfo.org?subject=Meet%20Us%20Contact') geral@sinfo.org
+
+  #newsletter.area-light.container.newsletter.all-100(data-hook='newsletter')
+    h1 Newsletter
+      span.highlight  Signup
+    div
+      p  No spam - only
+        span.highlight  latest news
+        |  workshops and activity updates
+      form.form(action="http://sinfo.us8.list-manage.com/subscribe/post?u=de57247db0922adf365af7eef&amp;id=cbc6013242",method="post")
+        div
+          input.ink-form.control.required(type="email",value="",name="EMAIL",id="NewsletterEmail",placeholder="your@email.com")
+          br
+          br
+          input.ink-button.blue(type="submit",name="subscribe",value="Subscribe")
+
+  #upload.container.section.light.overlay-blue
+    h1.light Upload your CV now!
+    p.light Are you new to the job market? Or maybe looking for a new challenge? Well, send us your curriculum vitae and every company that partners with us will receive it!
+    a.ink-button.blue(href="/me/edit" ) Upload CV
     
-  .area-light.meetus.all-100(data-hook='meet-us')
+  #meetus.area-light.container.meetus.all-100(data-hook='meet-us')
     h1 Meet us!
     div
-
-  .container.section.light.overlay-blue
-    h1.light Upload your CV now!
-    p.light Are you new to the job market? Or maybe looking for a new challenge? Well, send us your curriculum vitae and every company present at SINFO 22 will receive it!
-    a.ink-button.blue(href="/me/edit" ) Upload CV

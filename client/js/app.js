@@ -8,10 +8,14 @@ var Me = require('./models/me');
 var File = require('./models/file');
 var Partners = require('./models/partners');
 var Sessions = require('./models/sessions');
-var Speakers = require('./models/speakers');
 var Achievements = require('./models/achievements');
 var Users = require('./models/users');
 var domReady = require('domready');
+
+var CURRENT_EVENT = '23-sinfo-conf'
+var Members = require('./models/members')(CURRENT_EVENT);
+var Speakers = require('./models/speakers')(CURRENT_EVENT);
+
 module.exports = {
   // this is the the whole app initter
   blastoff: function () {
@@ -63,11 +67,16 @@ module.exports = {
 
     // create our global 'me' object and an empty collection for our channels models.
     this.me = new Me();
+    this.currentEvent = CURRENT_EVENT;
     this.file = new File();
     this.achievements = new Achievements();
     this.partners = new Partners();
     this.sessions = new Sessions();
-    this.speakers = new Speakers();
+    this.speakers = {
+      past: new Speakers.past(),
+      current: new Speakers.current()
+    };
+    this.members = new Members();
     this.users = new Users();
     this.fetchInitialData();
 
@@ -101,7 +110,9 @@ module.exports = {
   fetchInitialData: function () {
     var self = this;
 
-    self.speakers.fetch();
+    self.speakers.past.fetch();
+    self.speakers.current.fetch();
+    self.members.fetch();
     self.partners.fetch();
     self.sessions.fetch();
   },
