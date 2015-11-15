@@ -38,17 +38,17 @@ var WebAppRouter = Router.extend({
     'achievements/:id': 'achievementView',
     'auth/login?:query': 'fenixLogin',
     'auth/login': 'login',
-    'partners': 'partners',
-    'partners/:id': 'companyView',
+    // 'partners': 'partners',
+    // 'partners/:id': 'companyView',
     'redeem/:id': 'redeemCode',
-    'sessions': 'sessions',
-    'sessions/:id': 'sessionView',
+    // 'sessions': 'sessions',
+    // 'sessions/:id': 'sessionView',
     'speakers': 'speakers',
     'users/:id' : 'userView',
     'me': 'me',
     'me/edit': 'meEdit',
     'speakers/:id': 'speakerView',
-    'stream': 'streamView',
+    // 'stream': 'streamView',
     '(*path)': 'catchAll',
   },
 
@@ -156,10 +156,14 @@ var WebAppRouter = Router.extend({
    }));
   },
 
+  // speakers: function () {
+  //   this.trigger('page', new Speakers({
+  //     collection: app.speakers.current
+  //   }));
+  // },
+
   speakers: function () {
-    this.trigger('page', new Speakers({
-      collection: app.speakers.current
-    }));
+    this.navigate('/\#speakers', {trigger: false})
   },
 
   speakerView: function (id) {

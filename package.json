@@ -18,7 +18,7 @@
     "ampersand-model": "^4.0.0",
     "ampersand-pikaday-view": "0.0.1",
     "ampersand-rest-collection": "^2.0.0",
-    "ampersand-router": "^1.0.1",
+    "ampersand-router": "^3.0.2",
     "ampersand-state": "^4.4.4",
     "ampersand-subcollection": "^2.0.1",
     "ampersand-view": "^7.0.1",

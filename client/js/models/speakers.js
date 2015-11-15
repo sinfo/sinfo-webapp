@@ -16,6 +16,9 @@ var Speakers = AmpCollection.extend({
 
 module.exports = function (currentEvent) {
   return {
+    default:  Speakers.extend({
+      url:  config.deckUrl + '/api/speakers'
+    }),
     current:  Speakers.extend({
       url:  config.deckUrl + '/api/speakers?event=' + currentEvent
     }),

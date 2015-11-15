@@ -37,6 +37,16 @@ module.exports = {
     // init our URL handlers and the history tracker
     this.router = new Router();
 
+    // Hack, issue with anchors
+    var oldGetFragment = this.router.history.getFragment;
+    this.router.history.getFragment = function (fragment) {
+        if(fragment) {
+            var root = this.root.slice(1);
+            if (!fragment.indexOf(root)) fragment = fragment.slice(root.length);
+        }
+        return oldGetFragment.call(this, fragment);
+    };
+
     this.buildModels();
 
     // The html must be build async
@@ -73,6 +83,7 @@ module.exports = {
     this.partners = new Partners();
     this.sessions = new Sessions();
     this.speakers = {
+      default: new Speakers.default(),
       past: new Speakers.past(),
       current: new Speakers.current()
     };
@@ -103,7 +114,7 @@ module.exports = {
 
       mainView.render();
 
-      self.router.history.start({pushState: true, root: '/'});
+      self.router.history.start({pushState: true});
     });
   },
 
