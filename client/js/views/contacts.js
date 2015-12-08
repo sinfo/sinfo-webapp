@@ -1,5 +1,5 @@
 var PageView = require('client/js/pages/base');
-var templates = require('../templates');
+var templates = require('client/js/templates');
 var $ = require('client/js/helpers/jquery');
 
 module.exports = PageView.extend({

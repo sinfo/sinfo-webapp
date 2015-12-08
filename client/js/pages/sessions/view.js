@@ -1,13 +1,12 @@
 /*global app, alert*/
-var log = require('bows')('sessions');
-var PageView = require('client/js/pages/base');
-var templates = require('client/js/templates');
-var SpeakersView = require('client/js/views/sessions/sessionSpeakers');
-var PartnerView = require('client/js/views/sessions/sessionPartners');
-var UserView = require('client/js/views/sessions/sessionUsers');
-var tickets = require('client/js/helpers/tickets');
-var validateResponse = require('client/js/helpers/validateResponse');
-
+var log = require('bows')('sessions')
+var PageView = require('client/js/pages/base')
+var templates = require('client/js/templates')
+var SpeakersView = require('client/js/views/sessions/sessionSpeakers')
+var PartnerView = require('client/js/views/sessions/sessionPartners')
+var UserView = require('client/js/views/sessions/sessionUsers')
+var tickets = require('client/js/helpers/tickets')
+var validateResponse = require('client/js/helpers/validateResponse')
 
 module.exports = PageView.extend({
   pageTitle: 'View session',
@@ -55,95 +54,95 @@ module.exports = PageView.extend({
     'click [data-hook~=action-confirm-ticket]': 'handleConfirmTicket',
   },
   initialize: function (spec) {
-    var self = this;
+    var self = this
     app.sessions.getOrFetch(spec.id, {all: true}, function (err, model) {
       if (err) {
-        return log.error('couldnt find a session with id: ' + spec.id);
+        return log.error('couldnt find a session with id: ' + spec.id)
       }
-      self.model = model;
-      log('Got session', model);
+      self.model = model
+      log('Got session', model)
 
       tickets.getTicket(spec.id, function (err, ticket) {
-        log('Got ticket', ticket);
-      });
-    });
+        log('Got ticket', ticket)
+      })
+    })
   },
   handleGetTicket: function () {
-    if(!app.me.authenticated) {
-      return app.navigateToLogin();
+    if (!app.me.authenticated) {
+      return app.navigateToLogin()
     }
 
-    tickets.registerTicket(this.model.id, function(err, ticket) {
-      validateResponse(err, 'couldn\'t register ticket', function(err){
-        if(!err){
-          log('registered ticket', ticket);
+    tickets.registerTicket(this.model.id, function (err, ticket) {
+      validateResponse(err, "couldn't register ticket", function (err) {
+        if (!err) {
+          log('registered ticket', ticket)
         }
-      });
-    });
+      })
+    })
   },
   handleVoidTicket: function () {
-    if(!app.me.authenticated) {
-      return app.navigateToLogin();
+    if (!app.me.authenticated) {
+      return app.navigateToLogin()
     }
 
-    tickets.voidTicket(this.model.id, function(err, ticket) {
-      validateResponse(err, 'couldn\'t register ticket', function(err){
-        if(!err){
-          log('registered ticket', ticket);
+    tickets.voidTicket(this.model.id, function (err, ticket) {
+      validateResponse(err, "couldn't register ticket", function (err) {
+        if (!err) {
+          log('registered ticket', ticket)
         }
-      });
-    });
+      })
+    })
   },
   handleConfirmTicket: function () {
-    if(!app.me.authenticated) {
-      return app.navigateToLogin();
+    if (!app.me.authenticated) {
+      return app.navigateToLogin()
     }
 
-    tickets.confirmTicket(this.model.id, function(err, ticket) {
-      validateResponse(err, 'couldn\'t register ticket', function(err){
-        if(!err){
-          log('registered ticket', ticket);
+    tickets.confirmTicket(this.model.id, function (err, ticket) {
+      validateResponse(err, "couldn't register ticket", function (err) {
+        if (!err) {
+          log('registered ticket', ticket)
         }
-      });
-    });
+      })
+    })
   },
   subviews: {
-    speakers: {
+    speakers: {
       container: '[data-hook=session-speakers] div',
       parent: this,
       waitFor: 'model.speakers.length',
       prepareView: function (el) {
-        var self = this;
+        var self = this
         return new SpeakersView({
           el: el,
           model: self.model
-        });
+        })
       }
     },
-    partners: {
+    partners: {
       container: '[data-hook=session-partners] div',
       parent: this,
       waitFor: 'model.companies.length',
       prepareView: function (el) {
-        var self = this;
+        var self = this
 
         return new PartnerView({
           el: el,
           model: self.model
-        });
+        })
       }
     },
-    users: {
+    users: {
       container: '[data-hook=session-users] div',
       parent: this,
       waitFor: 'model.users.length',
       prepareView: function (el) {
-        var self = this;
+        var self = this
         return new UserView({
           el: el,
           model: self.model
-        });
+        })
       }
     }
   }
-});
+})

@@ -1,8 +1,8 @@
-var PageView = require('./base');
-var templates = require('../templates');
-var SpeakersArea = require('client/js/views/speakers/gridArea');
-var MembersArea = require('client/js/views/members/gridArea');
-var Contacts = require('client/js/views/contacts');
+var PageView = require('./base')
+var templates = require('client/js/templates')
+var SpeakersArea = require('client/js/views/speakers/gridArea')
+var MembersArea = require('client/js/views/members/gridArea')
+var Contacts = require('client/js/views/contacts')
 
 module.exports = PageView.extend({
   pageTitle: 'SINFO',
@@ -14,7 +14,7 @@ module.exports = PageView.extend({
         return new SpeakersArea({
           el: el,
           collection: app.speakers.current
-        });
+        })
       }
     },
     pastSpeakers: {
@@ -23,7 +23,7 @@ module.exports = PageView.extend({
         return new SpeakersArea({
           el: el,
           collection: app.speakers.past
-        });
+        })
       }
     },
     members: {
@@ -32,7 +32,7 @@ module.exports = PageView.extend({
         return new MembersArea({
           el: el,
           collection: app.members
-        });
+        })
       }
     },
     contacts: {
@@ -40,8 +40,8 @@ module.exports = PageView.extend({
       prepareView: function (el) {
         return new Contacts({
           el: el,
-        });
+        })
       }
     }
   }
-});
+})

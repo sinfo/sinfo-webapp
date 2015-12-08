@@ -1,146 +1,146 @@
 /*global app, me, $*/
-var log = require('bows')('app');
-var config = require('client/js/helpers/clientconfig');
-var validateResponse = require('client/js/helpers/validateResponse');
-var Router = require('./router');
-var MainView = require('./views/main');
-var Me = require('./models/me');
-var File = require('./models/file');
-var Partners = require('./models/partners');
-var Sessions = require('./models/sessions');
-var Achievements = require('./models/achievements');
-var Users = require('./models/users');
-var domReady = require('domready');
+var log = require('bows')('app')
+var config = require('client/js/helpers/clientconfig')
+var validateResponse = require('client/js/helpers/validateResponse')
+var Router = require('./router')
+var MainView = require('./views/main')
+var Me = require('./models/me')
+var File = require('./models/file')
+var Partners = require('./models/partners')
+var Sessions = require('./models/sessions')
+var Achievements = require('./models/achievements')
+var Users = require('./models/users')
+var domReady = require('domready')
 
 var CURRENT_EVENT = '23-sinfo-conf'
-var Members = require('./models/members')(CURRENT_EVENT);
-var Speakers = require('./models/speakers')(CURRENT_EVENT);
+var Members = require('./models/members')(CURRENT_EVENT)
+var Speakers = require('./models/speakers')(CURRENT_EVENT)
 
 module.exports = {
   // this is the the whole app initter
   blastoff: function () {
-    var self = window.app = this;
+    var self = window.app = this
 
-    if(!Storage || !sessionStorage){
-      return alert('Sorry, but it seems your browser does not support this website. Please, update your browser version');
+    if (!Storage || !sessionStorage) {
+      return alert('Sorry, but it seems your browser does not support this website. Please, update your browser version')
     }
 
-    this.buildGlobals();
+    this.buildGlobals()
 
     // Welcome guest developers
-    console.log('%c Hello friend! Found a bug? ', 'background: #333; color: #00AAFF');
-    console.log('Send us a PR on GitHub (https://github.com/sinfo/cannon-webapp) or shoot us an email at devteam@sinfo.org!');
-    console.log('Thank you!');
+    console.log('%c Hello friend! Found a bug? ', 'background: #333; color: #00AAFF')
+    console.log('Send us a PR on GitHub (https://github.com/sinfo/cannon-webapp) or shoot us an email at devteam@sinfo.org!')
+    console.log('Thank you!')
 
-    log('Blastoff!', config);
+    log('Blastoff!', config)
 
     // init our URL handlers and the history tracker
-    this.router = new Router();
+    this.router = new Router()
 
     // Hack, issue with anchors
-    var oldGetFragment = this.router.history.getFragment;
+    var oldGetFragment = this.router.history.getFragment
     this.router.history.getFragment = function (fragment) {
-        if(fragment) {
-            var root = this.root.slice(1);
-            if (!fragment.indexOf(root)) fragment = fragment.slice(root.length);
-        }
-        return oldGetFragment.call(this, fragment);
-    };
+      if (fragment) {
+        var root = this.root.slice(1)
+        if (!fragment.indexOf(root)) fragment = fragment.slice(root.length)
+      }
+      return oldGetFragment.call(this, fragment)
+    }
 
-    this.buildModels();
+    this.buildModels()
 
     // The html must be build async
     // or else the facebook oauth
     // doesnt work
-    this.buildHTML();
+    this.buildHTML()
   },
 
   // init globals
-  buildGlobals: function() {
+  buildGlobals: function () {
     // jquery global
-    window.$ = window.jQuery = require('jquery');
+    window.$ = window.jQuery = require('jquery')
 
     // google analytics
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ;(function (i, s, o, g, r, a, m) {i['GoogleAnalyticsObject'] = r;i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)}, i[r].l = 1 * new Date();a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];a.async = 1;a.src = g;m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga')
 
-    window.ga('create', config.google.analytics, 'auto');
+    window.ga('create', config.google.analytics, 'auto')
 
-    // jquery plugins
-    // require('bootstrap');
+  // jquery plugins
+  // require('bootstrap')
   },
 
-  buildModels: function() {
-    var self = this;
+  buildModels: function () {
+    var self = this
 
     // create our global 'me' object and an empty collection for our channels models.
-    this.me = new Me();
-    this.currentEvent = CURRENT_EVENT;
-    this.file = new File();
-    this.achievements = new Achievements();
-    this.partners = new Partners();
-    this.sessions = new Sessions();
+    this.me = new Me()
+    this.currentEvent = CURRENT_EVENT
+    this.file = new File()
+    this.achievements = new Achievements()
+    this.partners = new Partners()
+    this.sessions = new Sessions()
     this.speakers = {
       default: new Speakers.default(),
       past: new Speakers.past(),
       current: new Speakers.current()
-    };
-    this.members = new Members();
-    this.users = new Users();
-    this.fetchInitialData();
+    }
+    this.members = new Members()
+    this.users = new Users()
+    this.fetchInitialData()
 
-    var authToken = sessionStorage['cannon-auth'];
-    if(authToken) {
-      self.me.token = authToken;
-      self.fetchUserData();
+    var authToken = sessionStorage['cannon-auth']
+    if (authToken) {
+      self.me.token = authToken
+      self.fetchUserData()
     }
   },
 
-  buildHTML: function() {
+  buildHTML: function () {
     // wait for document ready to render our main view,
     // this ensures the document has a body, etc.
     domReady(function () {
-      var self = app;
+      var self = app
 
-      var mainView;
+      var mainView
 
       // init our main view
       mainView = self.view = new MainView({
         model: self.me,
         el: document.body
-      });
+      })
 
-      mainView.render();
+      mainView.render()
 
-      self.router.history.start({pushState: true});
-    });
+      self.router.history.start({pushState: true})
+    })
   },
 
   fetchInitialData: function () {
-    var self = this;
+    var self = this
 
-    self.speakers.past.fetch();
-    self.speakers.current.fetch();
-    self.members.fetch();
-    self.partners.fetch();
-    self.sessions.fetch();
+    self.speakers.past.fetch()
+    self.speakers.current.fetch()
+    self.members.fetch()
+    self.partners.fetch()
+    self.sessions.fetch()
   },
 
   fetchUserData: function () {
-    var self = this;
+    var self = this
 
     self.me.fetch({
-      error: function(model, response, options){
-        validateResponse(response, function(err){
-          log.error(response.statusCode, response.response);
-        });
+      error: function (model, response, options) {
+        validateResponse(response, function (err) {
+          log.error(response.statusCode, response.response)
+        })
       },
-      success: function(model, response, options){
-        self.file.fetch();
+      success: function (model, response, options) {
+        self.file.fetch()
       }
-    });
+    })
   },
 
   // This is how you navigate around the app.
@@ -149,16 +149,16 @@ module.exports = {
   // it expects a url without a leading slash.
   // for example: "costello/settings".
   navigate: function (page) {
-    var url = (page.charAt(0) === '/') ? page.slice(1) : page;
+    var url = (page.charAt(0) === '/') ? page.slice(1) : page
 
-    this.router.history.navigate(url, {trigger: true});
+    this.router.history.navigate(url, {trigger: true})
   },
 
-  navigateToLogin: function() {
-    var self = this;
-    self.navigate('/auth/login?r=/'+self.router.history.fragment);
+  navigateToLogin: function () {
+    var self = this
+    self.navigate('/auth/login?r=/' + self.router.history.fragment)
   }
-};
+}
 
 // run it
-module.exports.blastoff();
+module.exports.blastoff()
