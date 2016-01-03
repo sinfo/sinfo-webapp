@@ -1,5 +1,5 @@
 var PageView = require('./base');
-var templates = require('../templates');
+var templates = require('client/js/templates');
 var SessionsView = require('client/js/views/live/liveSessions');
 var moment = require('moment');
 var config = require('client/js/helpers/clientconfig');

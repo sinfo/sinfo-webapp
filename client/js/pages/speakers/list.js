@@ -13,7 +13,7 @@ module.exports = PageView.extend({
       prepareView: function (el) {
         return new SpeakersArea({
           el: el,
-          collection: app.speakers
+          collection: app.speakers.current
         });
       }
     },

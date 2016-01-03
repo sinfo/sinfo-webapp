@@ -1,40 +1,47 @@
-var PageView = require('./base');
-var templates = require('../templates');
-var SpeakersArea = require('client/js/views/speakers/gridArea');
-var PartnersArea = require('client/js/views/partners/area');
-var SessionsCalendar = require('client/js/views/sessions/calendar');
-
+var PageView = require('./base')
+var templates = require('client/js/templates')
+var SpeakersArea = require('client/js/views/speakers/gridArea')
+var MembersArea = require('client/js/views/members/gridArea')
+var Contacts = require('client/js/views/contacts')
 
 module.exports = PageView.extend({
-  pageTitle: 'SINFO Webapp',
+  pageTitle: 'SINFO',
   template: templates.pages.home,
   subviews: {
-    speakers: {
-      container: '[data-hook=speakers-area] div',
+    currentSpeakers: {
+      container: '[data-hook=speakers-current]',
       prepareView: function (el) {
         return new SpeakersArea({
           el: el,
-          collection: app.speakers
-        });
+          collection: app.speakers.current
+        })
       }
     },
-    partners: {
-      container: '[data-hook=partners-area] div',
+    pastSpeakers: {
+      container: '[data-hook=speakers-area-past] div',
       prepareView: function (el) {
-        return new PartnersArea({
+        return new SpeakersArea({
           el: el,
-          collection: app.partners
-        });
+          collection: app.speakers.past
+        })
       }
     },
-    sessions: {
-      container: '[data-hook=sessions-calendar] div',
+    members: {
+      container: '[data-hook=sinfo-team] div',
       prepareView: function (el) {
-        return new SessionsCalendar({
+        return new MembersArea({
           el: el,
-          collection: app.sessions
-        });
+          collection: app.members
+        })
       }
     },
+    contacts: {
+      container: '[data-hook=meet-us] div',
+      prepareView: function (el) {
+        return new Contacts({
+          el: el,
+        })
+      }
+    }
   }
-});
+})

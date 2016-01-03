@@ -1,3 +1,8 @@
+ul
+  li.acticve
+    a
+      color: inherit
+
 .page.home
   .highlight
     color: #0077AA
@@ -33,7 +38,7 @@
     bottom: 0
     right: 0
 
-  .overlay-cv
+  .overlay-blue
     background: #1E90FF
     opacity: .8
     position: absolute
@@ -47,6 +52,12 @@
       margin: 30px
     .ink-button
       font-size: 24px
+    .mailto:link
+      text-decoration: none
+      color: #504C4B
+    .mailto:hover
+      text-decoration: none
+
 
 
   .overlay.color
@@ -79,7 +90,9 @@
   .speakers
     h1
       margin: 30px
-
+    #speaker-suggestion
+      .img
+        background: url('/static/unknown.png') center no-repeat;
     .speaker
       .name
         color: #fff
@@ -139,9 +152,8 @@
     text-align: center;
 
   .opacidade
-    background: url(/static/opacity.png) repeat;
-    padding:1em 0
-    height: 500px
+    padding: 5em 0
+    height: 600px
 
   .calendar
     span

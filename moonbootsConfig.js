@@ -1,13 +1,12 @@
-var config = require('config');
-var stylizer = require('stylizer');
-var templatizer = require('templatizer');
+var config = require('config')
+var stylizer = require('stylizer')
+var templatizer = require('templatizer')
 
 // for reuse
-var jsDir = __dirname + '/client/js';
-var libsDir = __dirname + '/client/libs';
-var cssDir = __dirname + '/client/css';
-var templatesDir = __dirname + '/client/templates'
-
+var jsDir = __dirname + '/client/js'
+var libsDir = __dirname + '/client/libs'
+var cssDir = __dirname + '/client/css'
+var templatesDir = __dirname + '/views'
 
 module.exports = {
   // Tell the Hapi server what URLs the application should be served from.
@@ -16,7 +15,8 @@ module.exports = {
   // examples:
   //     '/{p*}' - match everything that isn't matched by something more specific
   //     '/dashboard/{p*}' - serve the app at all routes starting with '/dashboard'
-  appPath: '/{p*}',
+  appPath: '/',
+  appTemplate: 'home',
   // The moonboots config
   moonboots: {
     // The base name of the javascript file served in the <script src="the_name.*.js">
@@ -32,28 +32,30 @@ module.exports = {
     // you list any plugins after jQuery itself.
     libraries: [
       libsDir + '/jsoneditor.js',
+      jsDir + '/vendor/ink-all.js',
+      jsDir + '/vendor/autoload.js'
     ],
     // Specify the stylesheets we want to bundle
     stylesheets: [
       cssDir + '/vendor/ink.css',
       cssDir + '/vendor/fullcalendar.css',
       cssDir + '/vendor/pikaday.css',
-      cssDir + '/app.css',
+      cssDir + '/app.css'
     ],
     beforeBuildJS: function () {
       // This re-builds our template files from jade each time the app's main
       // js file is requested. Which means you can seamlessly change jade and
       // refresh in your browser to get new templates.
       if (config.isDev) {
-        templatizer(templatesDir, jsDir + '/templates.js');
+        templatizer(templatesDir, jsDir + '/templates.js')
       }
     },
     beforeBuildCSS: function (done) {
       // We only want to do this in dev mode. If it's not in dev mode, this
       // function will only be run once.
       if (!config.isDev) {
-        done();
-        return;
+        done()
+        return
       }
       // Re-compile stylus to css each time the app's main css file is requested.
       // In addition there's a "watch" option that will make stylizer also be able
@@ -67,7 +69,7 @@ module.exports = {
         // Beware there's an issue with watch on OSX that causes issues with
         // watch if you're not running node 0.10.25 or later.
         watch: cssDir + '/**/*.styl'
-      }, done);
+      }, done)
     }
   }
-};
+}
