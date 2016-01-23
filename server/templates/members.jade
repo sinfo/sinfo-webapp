@@ -1,0 +1,10 @@
+.list.members(data-hook='members-list')
+  each member in members
+    div.member.all-20.medium-25.small-50.tiny-100
+      h5.name.push-center= member.name
+      .img-container.push-center
+        .img(style='background-image:url(' + member.img + ');')
+      .details.push-center
+        a.social-icon.fa.fa-envelope-o(target='_blank' href='mailto:'+ member.mail)
+        a.social-icon.fa.fa-twitter(target='_blank' href=member.twitter)
+        a.social-icon.fa.fa-github(target='_blank' href=member.github)

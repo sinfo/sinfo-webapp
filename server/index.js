@@ -51,8 +51,8 @@ var publicAssets = {
 }
 
 server.route(publicAssets)
-
-// require('./routes')
+require('./methods')
+require('./routes')
 
 // require moonboots_hapi plugin
 server.pack.register(

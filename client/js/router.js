@@ -32,8 +32,9 @@ var qs = require('qs')
 var WebAppRouter = Router.extend({
   routes: {
     '': 'home',
-    'achievements': 'achievements',
-    'achievements/:id': 'achievementView',
+    ':event': 'event',
+    ':event/achievements': 'achievements',
+    ':event/achievements/:id': 'achievementView',
     'auth/login?:query': 'fenixLogin',
     'auth/login': 'login',
     // 'partners': 'partners',
@@ -41,7 +42,7 @@ var WebAppRouter = Router.extend({
     'redeem/:id': 'redeemCode',
     // 'sessions': 'sessions',
     // 'sessions/:id': 'sessionView',
-    'speakers': 'speakers',
+    ':event/speakers': 'speakers',
     'users/:id': 'userView',
     'me': 'me',
     'me/edit': 'meEdit',
@@ -61,6 +62,13 @@ var WebAppRouter = Router.extend({
 
   // ------- ROUTE HANDLERS ---------
   home: function () {
+    // this.trigger('page', new HomePage({
+    //   model: app.me
+    // }))
+    window.location = '/'
+  },
+
+  event: function () {
     this.trigger('page', new HomePage({
       model: app.me
     }))

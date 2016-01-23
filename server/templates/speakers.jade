@@ -1,0 +1,23 @@
+.list.speakers(data-hook='speakers-list')
+  .ink-carousel(data-pagination='#carousel-pagination' data-auto-advance='7000')
+    ul.stage.column-group.half-gutters
+      each speaker in speakers
+        li.all-100.slide.push-center.speaker
+          .column-group
+            .all-70.push-center
+              .all-50.push-right
+                .img-container.push-center
+                  .img(style='background-image:url(' + speaker.img + ');')
+              .all-50.align-left
+                i
+                  b.large
+                    i.fa.fa-quote-right.half-right-space
+                    span= speaker.feedback
+                    i.fa.fa-quote-right.half-left-space
+                  br
+                  br
+                  h4= speaker.name
+                  h5= speaker.title
+            
+    nav#carousel-pagination.ink-navigation
+      ul.pagination.chevron

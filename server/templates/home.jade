@@ -1,5 +1,7 @@
 html
   include ../../views/head
+  script(type='text/javascript' src='http://fastly.ink.sapo.pt/3.1.10/js/ink-all.js')
+  script(type='text/javascript' src='http://fastly.ink.sapo.pt/3.1.10/js/autoload.js')
   
   body.ink-drawer
     .topbar
@@ -44,5 +46,98 @@ html
               a.ink-smooth-scroll(href='/code') Code of Conduct
 
   main(data-hook='page-container')
-    include ../../views/pages/home
+  section.page.home
+
+    .header#header
+      .opacidade
+        h1
+          a(href="/")
+            img(src='/static/logo2.png')
+        br
+        h3.description SINFO 23
+        .calendar
+          span
+            .fa.fa-calendar
+              span 22 - 26 February, 2016
+            .sep
+            .fa.fa-map-marker
+              span IST - Alameda, Lx
+
+        a.social-icon(target="_blank" href="http://fb.com/sinfoist")
+          i.social-icon.fa.fa-facebook
+        a.social-icon(target="_blank" href="http://twitter.com/sinfo_ist")
+          i.social-icon.fa.fa-twitter
+        a.social-icon(target="_blank" href="http://youtube.com/sinfoist")
+          i.social-icon.fa.fa-youtube
+        a.social-icon(target="_blank" href="http://instagram.com/sinfo_ist")
+          i.social-icon.fa.fa-instagram
+        a.social-icon(target="_blank" href="http://github.com/sinfo")
+          i.social-icon.fa.fa-github
+
+    .area-light
+      h1.highlight SINFO Conf
+      
+      .column-group.gutters
+        .all-100
+          p.big SINFO Conf is one of the biggest Tech conferences in Portugal. It's 
+            | an annual, non-profit event organised exclusively by college students who
+            | strive for a more interesting and ground-breaking event each edition.
+
+      .column-group.gutters
+        .all-50.small-100.tiny-100.justify-text
+          h3 When?
+          p.big The 23rd annual edition will take place from 22 to 26 February 2016.
+            
+        .all-50.small-100.tiny-100.justify-text
+          h3 Where?
+          p.big SINFO takes place at the Alameda Campus of Instituto Superior Técnico,
+            | in the beautiful city of Lisbon, Portugal.
+      .column-group.gutters
+        .all-50.small-100.tiny-100.justify-text
+          h3 Why?
+          p.big Our main goal is to allow students and general attendance to interact
+            | and be closer with influential, important and interesting people or
+            | companies in the fields of Information Technology and Computer Science.
+            
+        .all-50.small-100.tiny-100.justify-text
+          h3 For how much?
+          p.big NOTHING! We commit to make everything available for FREE! You just
+            | need to show up to enjoy the event.
+
+    #speakers.light.overlay-blue.container.section.reviews.all-100(data-hook='speakers-reviews')
+      h1 What they say about us?
+      include ./speakers
+      
+    #team.area-light.container.members.all-100(data-hook='sinfo-team' data-spy='true' data-target='#main-menu')
+      h1 The team
+      include ./members
+              
+    #sponsorus.area-light.container.section.overlay.sponsorus.all-100(data-hook='sponsor-us' data-spy='true' data-target='#main-menu')
+      h1 Sponsor us!
+      div
+        p Want to sponsor us? 
+          a.highlight(href='/sponsor') Check our sponsor page for more info.
+
+    #newsletter.area-light.container.newsletter.all-100(data-hook='newsletter' data-spy='true' data-target='#main-menu')
+      h1 Newsletter
+        span.highlight  Signup
+      div
+        p  No spam - only
+          span.highlight  latest news
+          |  workshops and activity updates
+        form.form(action="http://sinfo.us8.list-manage.com/subscribe/post?u=de57247db0922adf365af7eef&amp;id=cbc6013242",method="post")
+          div
+            input.ink-form.control.required(type="email",value="",name="EMAIL",id="NewsletterEmail",placeholder="your@email.com")
+            br
+            br
+            input.ink-button.blue(type="submit",name="subscribe",value="Subscribe")
+
+    #upload.container.section.light.overlay-blue
+      h1.light Upload your CV now!
+      p.light Are you new to the job market? Or maybe looking for a new challenge? Well, send us your curriculum vitae and every company that partners with us will receive it!
+      a.ink-button.blue(href="/me/edit" ) Upload CV
+      
+    #meetus.area-light.container.meetus.all-100(data-hook='meet-us' data-spy='true' data-target='#main-menu')
+      h1 Meet us!
+      div
   footer(data-hook='footer')
