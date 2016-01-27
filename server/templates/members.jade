@@ -5,6 +5,9 @@
       .img-container.push-center
         .img(style='background-image:url(' + member.img + ');')
       .details.push-center
-        a.social-icon.fa.fa-envelope-o(target='_blank' href='mailto:'+ member.mail)
-        a.social-icon.fa.fa-twitter(target='_blank' href=member.twitter)
-        a.social-icon.fa.fa-github(target='_blank' href=member.github)
+        if member.mail
+          a.social-icon.fa.fa-envelope-o(target='_blank' href='mailto:'+ member.mail)
+        if member.twitter
+          a.social-icon.fa.fa-twitter(target='_blank' href=member.twitter)
+        if member.github
+          a.social-icon.fa.fa-github(target='_blank' href=member.github)

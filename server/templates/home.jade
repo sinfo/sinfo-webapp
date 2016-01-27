@@ -8,11 +8,7 @@ html
       .ink-grid
         nav.ink-navigation#main-menu
           ul.menu.horizontal.push-left
-            //- li.hide-all.show-medium.show-small.show-tiny
-            //-   .ink-button.small.white.left-drawer-trigger
-            //-     i.fa.fa-bars.fa-2x
             li.title
-              //- a(href='//sinfo.org/22/')
               a(href='/')
                 img(src='/static/logo.png')
 
@@ -49,30 +45,39 @@ html
   section.page.home
 
     .header#header
-      .opacidade
-        h1
-          a(href="/")
-            img(src='/static/logo2.png')
-        br
-        h3.description SINFO 23
-        .calendar
-          span
-            .fa.fa-calendar
-              span 22 - 26 February, 2016
-            .sep
-            .fa.fa-map-marker
-              span IST - Alameda, Lx
+      .opacidade.column-group.gutters
+        .all-100
+          h1
+            a(href="/")
+              img(src='/static/logo2.png')
+          br
 
-        a.social-icon(target="_blank" href="http://fb.com/sinfoist")
-          i.social-icon.fa.fa-facebook
-        a.social-icon(target="_blank" href="http://twitter.com/sinfoist")
-          i.social-icon.fa.fa-twitter
-        a.social-icon(target="_blank" href="http://youtube.com/sinfoist")
-          i.social-icon.fa.fa-youtube
-        a.social-icon(target="_blank" href="http://instagram.com/sinfoist")
-          i.social-icon.fa.fa-instagram
-        a.social-icon(target="_blank" href="http://github.com/sinfo")
-          i.social-icon.fa.fa-github
+          a.social-icon(target="_blank" href="http://fb.com/sinfoist")
+            i.social-icon.fa.fa-facebook
+          a.social-icon(target="_blank" href="http://twitter.com/sinfoist")
+            i.social-icon.fa.fa-twitter
+          a.social-icon(target="_blank" href="http://youtube.com/sinfoist")
+            i.social-icon.fa.fa-youtube
+          a.social-icon(target="_blank" href="http://instagram.com/sinfoist")
+            i.social-icon.fa.fa-instagram
+          a.social-icon(target="_blank" href="http://github.com/sinfo")
+            i.social-icon.fa.fa-github
+    
+        .all-50.push-center.events  
+          .ink-carousel(data-pagination='#carousel-pagination-event')
+            ul.stage.half-gutters
+              each event in events
+                li.slide.event
+                  a(href='/' + event.id)
+                    h3.description.align-center= event.name
+                    .calendar
+                      i.fa.fa-calendar
+                      span= event.begin.day + ' - ' + event.end.day + ' ' + event.begin.month
+                      br
+                      span= event.begin.year
+                    
+            nav#carousel-pagination-event.ink-navigation
+              ul.pagination.chevron
 
     .area-light
       h1.highlight Who are we
@@ -119,6 +124,10 @@ html
     #team.area-light.container.members.all-100(data-hook='sinfo-team' data-spy='true' data-target='#main-menu')
       h1 The team
       include ./members
+      
+    #meetus.area-light.container.meetus.all-100(data-hook='meet-us' data-spy='true' data-target='#main-menu')
+      h1 Meet us!
+      include ../../views/partials/contacts
               
     #sponsorus.area-light.container.section.overlay.sponsorus.all-100(data-hook='sponsor-us' data-spy='true' data-target='#main-menu')
       h1 Sponsor us!
@@ -133,14 +142,10 @@ html
         p  No spam - only
           span.highlight  latest news
           |  workshops and activity updates
-        form.form(action="http://sinfo.us8.list-manage.com/subscribe/post?u=de57247db0922adf365af7eef&amp;id=cbc6013242",method="post")
+        form.form(action="https://sinfo.us8.list-manage.com/subscribe?u=de57247db0922adf365af7eef&id=107b5bbe53",method="post")
           div
             input.ink-form.control.required(type="email",value="",name="EMAIL",id="NewsletterEmail",placeholder="your@email.com")
             br
             br
             input.ink-button.blue(type="submit",name="subscribe",value="Subscribe")
-      
-    #meetus.area-light.container.meetus.all-100(data-hook='meet-us' data-spy='true' data-target='#main-menu')
-      h1 Meet us!
-      div
-  footer(data-hook='footer')
+  include ../../views/partials/footer

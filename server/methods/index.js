@@ -13,6 +13,7 @@ server.method('deck.speakers.get', getSpeakers, {})
 server.method('deck.speakers.getFeedback', getSpeakersFeedback, {})
 server.method('deck.companies.get', getCompanies, {})
 server.method('deck.members.get', getMembers, {})
+server.method('deck.events.get', getEvents, {})
 
 function getSpeakersFeedback (options, cb) {
   cb = cb || options
@@ -76,5 +77,15 @@ function getMembers (options, cb) {
     qs: {
       event: options.event
     }
+  }, function (err, res, body) { httpHandler(err, res, body, cb) })
+}
+
+function getEvents (options, cb) {
+  cb = cb || options
+  if (typeof options === 'function') options = {}
+
+  deckRequest({
+    method: 'GET',
+    uri: '/events'
   }, function (err, res, body) { httpHandler(err, res, body, cb) })
 }
