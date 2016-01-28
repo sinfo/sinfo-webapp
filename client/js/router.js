@@ -1,6 +1,5 @@
 /*global app*/
 var Router = require('ampersand-router')
-var ViewSwitcher = require('ampersand-view-switcher')
 
 var HomePage = require('./pages/home')
 
@@ -37,11 +36,11 @@ var WebAppRouter = Router.extend({
     ':event/achievements/:id': 'achievementView',
     'auth/login?:query': 'fenixLogin',
     'auth/login': 'login',
-    // 'partners': 'partners',
-    // 'partners/:id': 'companyView',
+    ':event/partners': 'partners',
+    'partners/:id': 'companyView',
     'redeem/:id': 'redeemCode',
-    // 'sessions': 'sessions',
-    // 'sessions/:id': 'sessionView',
+    ':event/sessions': 'sessions',
+    ':event/sessions/:id': 'sessionView',
     ':event/speakers': 'speakers',
     'users/:id': 'userView',
     'me': 'me',
@@ -68,20 +67,23 @@ var WebAppRouter = Router.extend({
     window.location = '/'
   },
 
-  event: function () {
+  event: function (event) {
     this.trigger('page', new HomePage({
+      event: event,
       model: app.me
     }))
   },
 
-  achievements: function () {
+  achievements: function (event) {
     this.trigger('page', new Achievements({
+      event: event,
       collection: app.achievements
     }))
   },
 
-  achievementView: function (id) {
+  achievementView: function (event, id) {
     this.trigger('page', new AchievementViewPage({
+      event: event,
       id: id
     }))
   },
@@ -100,7 +102,6 @@ var WebAppRouter = Router.extend({
     this.trigger('page', new UserViewPage({
       id: id
     }))
-
   },
 
   meEdit: function () {
@@ -124,7 +125,7 @@ var WebAppRouter = Router.extend({
   },
 
   fenixLogin: function (args) {
-    if (sessionStorage['cannon-fenix-add'] === 'true') {
+    if (window.sessionStorage['cannon-fenix-add'] === 'true') {
       this.me()
     } else {
       this.login()
@@ -135,44 +136,47 @@ var WebAppRouter = Router.extend({
     }
   },
 
-  partners: function () {
+  partners: function (event) {
     this.trigger('page', new Partners({
+      event: event,
       collection: app.partners
     }))
   },
 
-  redeemCode: function (id) {
+  redeemCode: function (event, id) {
     if (!app.me.authenticated) {
       return app.navigateToLogin()
     }
 
-    this.trigger('page', new Redeem({id: id}))
+    this.trigger('page', new Redeem({
+      event: event,
+      id: id
+    }))
   },
 
-  sessions: function () {
+  sessions: function (event) {
     this.trigger('page', new Sessions({
+      event: event,
       collection: app.sessions
     }))
   },
 
-  sessionView: function (id) {
+  sessionView: function (event, id) {
     this.trigger('page', new SessionViewPage({
+      event: event,
       id: id
     }))
   },
 
   sponsor: function () {
-    window.open('/sponsor.html')
+    window.location = '/sponsor'
   },
 
-  // speakers: function () {
-  //   this.trigger('page', new Speakers({
-  //     collection: app.speakers.current
-  //   }))
-  // },
-
-  speakers: function () {
-    this.navigate('/\#speakers', {trigger: false})
+  speakers: function (event) {
+    this.trigger('page', new Speakers({
+      event: event,
+      collection: app.speakers.current
+    }))
   },
 
   speakerView: function (id) {
