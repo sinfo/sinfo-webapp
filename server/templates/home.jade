@@ -1,48 +1,152 @@
 html
   include ../../views/head
+  script(type='text/javascript' src='http://fastly.ink.sapo.pt/3.1.10/js/ink-all.js')
+  script(type='text/javascript' src='http://fastly.ink.sapo.pt/3.1.10/js/autoload.js')
+  script.
+    function getScript(source, callback) {
+      var script = document.createElement('script');
+      var prior = document.getElementsByTagName('script')[0];
+      script.async = 1;
+      prior.parentNode.insertBefore(script, prior);
+
+      script.onload = script.onreadystatechange = function( _, isAbort ) {
+          if(isAbort || !script.readyState || /loaded|complete/.test(script.readyState) ) {
+              script.onload = script.onreadystatechange = null;
+              script = undefined;
+
+              if(!isAbort) { if(callback) callback(); }
+          }
+      };
+
+      script.src = source;
+    }
+
+    getScript( 'https://www.google.com/jsapi' , function(){
+      google.load("maps", "3",{
+        callback: function (){
+          console.log('HERE LOADED GOOGLE');
+          var map = new google.maps.Map(document.querySelector('[data-hook=map-canvas]'),{
+            scrollwheel: false,
+            center: new google.maps.LatLng(38.7375721,-9.1376594),
+            zoom: 17,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          });
+          var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(38.7375721,-9.1376594),
+            map: map,
+            title: 'SINFO'
+          });
+        }
+      });
+    });
   
   body.ink-drawer
-    .topbar
-      .ink-grid
-        nav.ink-navigation#main-menu
-          ul.menu.horizontal.push-left
-            //- li.hide-all.show-medium.show-small.show-tiny
-            //-   .ink-button.small.white.left-drawer-trigger
-            //-     i.fa.fa-bars.fa-2x
-            li.title
-              //- a(href='//sinfo.org/22/')
-              a(href='/')
-                img(src='/static/logo.png')
+    include ./nav.jade
 
-          ul.menu.horizontal.push-left.hide-small.hide-tiny
-            li
-              a.ink-smooth-scroll(href='/#speakers') Speakers
-            li
-              a.ink-smooth-scroll(href='/#sponsorus') Sponsor us!
-            li
-              a.ink-smooth-scroll(href='/#sponsorus') Newsletter
-            li
-              a.ink-smooth-scroll(href='/#meetus') Meet us!
-            li
-              a(href='/code') Code of Conduct
+    section.page.home
+
+      .header#header
+        .opacidade.column-group.gutters
+          .all-100
+            h1
+              a(href="/")
+                img(src='/static/logo2.png')
+            br
+
+            a.social-icon(target="_blank" href="http://fb.com/sinfoist")
+              i.social-icon.fa.fa-facebook
+            a.social-icon(target="_blank" href="http://twitter.com/sinfoist")
+              i.social-icon.fa.fa-twitter
+            a.social-icon(target="_blank" href="http://youtube.com/sinfoist")
+              i.social-icon.fa.fa-youtube
+            a.social-icon(target="_blank" href="http://instagram.com/sinfoist")
+              i.social-icon.fa.fa-instagram
+            a.social-icon(target="_blank" href="http://github.com/sinfo")
+              i.social-icon.fa.fa-github
+
+          .all-50.medium-100.small-100.tiny-100.push-center.events  
+            .ink-carousel(data-pagination='#carousel-pagination-event')
+              ul.stage.half-gutters
+                each event in events
+                  li.slide.event
+                    a(href='/' + event.id)
+                      h3.description.align-center= event.name
+                      .calendar
+                        i.fa.fa-calendar
+                        span= event.begin.day + ' - ' + event.end.day + ' ' + event.begin.month
+                        br
+                        span= event.begin.year
+                      
+              nav#carousel-pagination-event.ink-navigation
+                ul.pagination.chevron
+
+      .area-light
+        h1.highlight Who are we
+        
+        .column-group.gutters
+          .all-100
+            p.big SINFO is a non-profit, college student, organization responsible for organizing
+              | one of the biggest Tech conferences in Portugal. It's an annual, non-profit
+              | event whose goal is to create a suitable, tech friendly environment to learn, share and
+              | explore through keynotes, workshops, presentations and much, much more! 
+
+        .column-group.gutters
+          .all-50.small-100.tiny-100.justify-text
+            h3 When?
+            p.big The main event takes place every year during one week.
               
+          .all-50.small-100.tiny-100.justify-text
+            h3 Where?
+            p.big SINFO takes place at the Alameda Campus of Instituto Superior Técnico,
+              | in the beautiful city of Lisbon, Portugal.
 
+        .column-group.gutters
+          .all-50.small-100.tiny-100.justify-text
+            h3 Why?
+            p.big Our main goal is to allow students and general attendance to interact
+              | and be closer with influential, important and interesting people or
+              | companies in the fields of Information Technology and Computer Science.
+              
+          .all-50.small-100.tiny-100.justify-text
+            h3 For how much?
+            p.big NOTHING! We commit to make everything available for FREE! You just
+              | need to show up to enjoy the event.
+          
+        .column-group.gutters
+          .all-50.small-100.tiny-100.justify-text
+            h3 Is that it?
+            p.big Absolutely not! Despite the annual SINFO conference being our main event, we organize
+              | much more things and cooperate with a lot more communities and companies during the year.
 
-          ul.menu.horizontal.push-right
-            li(data-hook='nav')
-            li.hide-all.show-small.show-tiny#menuMobile(data-hook='menu-mobile')
-              i.fa.fa-bars
+      #speakers.light.overlay-blue.container.section.reviews.all-100(data-hook='speakers-reviews')
+        h1 What they say about us?
+        include ./speakers
+        
+      #team.area-light.container.members.all-100(data-hook='sinfo-team' data-spy='true' data-target='#main-menu')
+        h1 The team
+        include ./members
+        
+      #meetus.area-light.container.meetus.all-100(data-hook='meet-us' data-spy='true' data-target='#main-menu')
+        h1 Meet us!
+        include ../../views/partials/contacts
+                
+      #sponsorus.area-light.container.section.overlay.sponsorus.all-100(data-hook='sponsor-us' data-spy='true' data-target='#main-menu')
+        h1 Sponsor us!
+        div
+          p Want to sponsor us? 
+            a.highlight(href='/sponsor') Check our sponsor page for more info.
 
-          ul.menu.vertical#menuVertical
-            li
-              a.ink-smooth-scroll(href='/#speakers') Speakers
-            li
-              a.ink-smooth-scroll(href='/#sponsors') Sponsor us!
-            li
-              a.ink-smooth-scroll(href='/#meetus') Meet us!
-            li
-              a.ink-smooth-scroll(href='/code') Code of Conduct
-
-  main(data-hook='page-container')
-    include ../../views/pages/home
-  footer(data-hook='footer')
+      #newsletter.area-light.container.newsletter.all-100(data-hook='newsletter' data-spy='true' data-target='#main-menu')
+        h1 Newsletter
+          span.highlight  Signup
+        div
+          p  No spam - only
+            span.highlight  latest news
+            |  workshops and activity updates
+          form.form(action="https://sinfo.us8.list-manage.com/subscribe?u=de57247db0922adf365af7eef&id=107b5bbe53",method="post")
+            div
+              input.ink-form.control.required(type="email",value="",name="EMAIL",id="NewsletterEmail",placeholder="your@email.com")
+              br
+              br
+              input.ink-button.blue(type="submit",name="subscribe",value="Subscribe")
+    include ../../views/partials/footer

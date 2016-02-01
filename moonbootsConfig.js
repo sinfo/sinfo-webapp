@@ -15,8 +15,8 @@ module.exports = {
   // examples:
   //     '/{p*}' - match everything that isn't matched by something more specific
   //     '/dashboard/{p*}' - serve the app at all routes starting with '/dashboard'
-  appPath: '/',
-  appTemplate: 'home',
+  appPath: '/{p*}',
+  // appTemplate: 'home',
   // The moonboots config
   moonboots: {
     // The base name of the javascript file served in the <script src="the_name.*.js">

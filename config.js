@@ -29,6 +29,10 @@ config.live = {
   interval: process.env.CANNON_UPDATE_INTERVAL || 60000
 }
 
+config.event = {
+  current: process.env.CANNON_EVENT_CURRENT || '23-sinfo-conf'
+}
+
 config.client = {
   deckUrl: process.env.EVENTDECK_URL || 'https://deck.sinfo.org',
   cannonUrl: process.env.CANNON_URL || 'https://cannon.sinfo.org',
