@@ -153,17 +153,24 @@ ul
 
   .opacidade
     padding: 5em 0
-    height: 600px
 
   .calendar
-    span
-      font-size: 20pt
+    font-size: 20pt
       font-weight: 400
       color: white
-      display: inline-block
-      margin: 0 20px 15px
-      position: relative
-      top: -12px
+
+      div
+        margin-bottom: 20px
+
+        br
+          display: none
+          @media screen and (max-width: 480px)
+            display: block;
+        span
+          display: inline-block
+          line-height: 40pt
+          vertical-align: top
+          margin-left: 20px
 
   .form
     .ink-button

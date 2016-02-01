@@ -37,7 +37,7 @@ module.exports = View.extend({
     this.pageSwitcher = new ViewSwitcher(this.queryByHook('page-container'), {
       show: function (newView, oldView) {
         // it's inserted and rendered for me
-        document.title = _.result(newView, 'pageTitle') || 'Muzzley Web App';
+        document.title = _.result(newView, 'pageTitle') || 'SINFO Web App';
         document.scrollTop = 0;
 
         // add a class specifying it's active
