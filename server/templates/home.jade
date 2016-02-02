@@ -43,7 +43,7 @@ html
   body.ink-drawer
     include ./nav.jade
 
-    section.page.home
+    section.page.home.content-drawer
 
       .header#header
         .opacidade.column-group.gutters
@@ -73,6 +73,7 @@ html
                       h3.description.align-center= event.name
                       .calendar
                         i.fa.fa-calendar
+                        br.other
                         span= event.begin.day + ' - ' + event.end.day + ' ' + event.begin.month
                         br
                         span= event.begin.year
