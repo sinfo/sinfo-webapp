@@ -160,14 +160,23 @@ ul
     height: 600px
 
   .calendar
-    span
-      font-size: 20pt
-      font-weight: 400
-      color: white
-      display: inline-block
-      margin: 0 20px 0px
-      position: relative
-      top: -12px
+    font-size: 20pt
+    font-weight: 400
+    color: white
+
+    div
+      margin-bottom: 20px
+
+      br
+        display: none
+        @media screen and (max-width: 480px)
+          display: block;
+      span
+        display: inline-block
+        line-height: 40pt
+        vertical-align: top
+        margin-left: 20px
+>>>>>>> Stashed changes
   .event
     a
       color: white

@@ -8,8 +8,8 @@ module.exports = SpeakerArea.extend({
   render: function () {
     this.renderWithTemplate();
     this.renderCollection(this.collection, SpeakerView, this.queryByHook('speakers-list'));
-    if (!this.collection.length) {
-      this.fetchCollection();
-    }
+    // if (!this.collection.length) {
+    //   this.fetchCollection();
+    // }
   },
 });

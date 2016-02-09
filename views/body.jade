@@ -1,7 +1,7 @@
 body.ink-drawer
   .topbar
     .ink-grid
-      nav.ink-navigation#main-menu
+      nav.ink-navigation
         ul.menu.horizontal.push-left
           //- li.hide-all.show-medium.show-small.show-tiny
           //-   .ink-button.small.white.left-drawer-trigger
@@ -13,16 +13,17 @@ body.ink-drawer
 
         ul.menu.horizontal.push-left.hide-small.hide-tiny
           li
-            a.ink-smooth-scroll(href='/#speakers') Speakers
+            a(href='./speakers') Speakers
           li
-            a.ink-smooth-scroll(href='/#sponsorus') Sponsor us!
+            a(href='./sessions') Schedule
           li
-            a.ink-smooth-scroll(href='/#sponsorus') Newsletter
+            a(href='./partners') Partners
           li
-            a.ink-smooth-scroll(href='/#meetus') Meet us!
+            a(href='./achievements') Achievements
           li
-            a(href='/code') Code of Conduct
-            
+            a(href='/stream') Live Stream
+          li
+            a(href='/contacts') Contacts
 
 
         ul.menu.horizontal.push-right
@@ -32,13 +33,18 @@ body.ink-drawer
 
         ul.menu.vertical#menuVertical
           li
-            a.ink-smooth-scroll(href='/#speakers') Speakers
+            a(href='./speakers') Speakers
           li
-            a.ink-smooth-scroll(href='/#sponsors') Sponsor us!
+            a(href='./sessions') Schedule
           li
-            a.ink-smooth-scroll(href='/#meetus') Meet us!
+            a(href='./partners') Partners
           li
-            a.ink-smooth-scroll(href='/code') Code of Conduct
+            a(href='./achievements') Achievements
+          li
+            a(href='/stream') Live Stream
+          li
+            a(href='/contacts') Contacts
+
 
   main(data-hook='page-container')
 

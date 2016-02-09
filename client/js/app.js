@@ -1,4 +1,3 @@
-/*global app, me, $*/
 var log = require('bows')('app')
 var config = require('client/js/helpers/clientconfig')
 var validateResponse = require('client/js/helpers/validateResponse')
@@ -12,17 +11,15 @@ var Achievements = require('./models/achievements')
 var Users = require('./models/users')
 var domReady = require('domready')
 
-var CURRENT_EVENT = '23-sinfo-conf'
-var Members = require('./models/members')(CURRENT_EVENT)
-var Speakers = require('./models/speakers')(CURRENT_EVENT)
+var Speakers = require('./models/speakers')
 
 module.exports = {
   // this is the the whole app initter
   blastoff: function () {
     var self = window.app = this
 
-    if (!Storage || !sessionStorage) {
-      return alert('Sorry, but it seems your browser does not support this website. Please, update your browser version')
+    if (!window.Storage || !window.sessionStorage) {
+      return window.alert('Sorry, but it seems your browser does not support this website. Please, update your browser version')
     }
 
     this.buildGlobals()
@@ -61,8 +58,8 @@ module.exports = {
     window.$ = window.jQuery = require('jquery')
 
     // google analytics
-    ;(function (i, s, o, g, r, a, m) {i['GoogleAnalyticsObject'] = r;i[r] = i[r] || function () {
-          (i[r].q = i[r].q || []).push(arguments)}, i[r].l = 1 * new Date();a = s.createElement(o),
+    ;(function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r;i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date();a = s.createElement(o),
       m = s.getElementsByTagName(o)[0];a.async = 1;a.src = g;m.parentNode.insertBefore(a, m)
     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga')
 
@@ -77,21 +74,16 @@ module.exports = {
 
     // create our global 'me' object and an empty collection for our channels models.
     this.me = new Me()
-    this.currentEvent = CURRENT_EVENT
+
     this.file = new File()
     this.achievements = new Achievements()
     this.partners = new Partners()
     this.sessions = new Sessions()
-    this.speakers = {
-      default: new Speakers.default(),
-      past: new Speakers.past(),
-      current: new Speakers.current()
-    }
-    this.members = new Members()
+    this.speakers = new Speakers()
     this.users = new Users()
-    this.fetchInitialData()
+    // this.fetchInitialData()
 
-    var authToken = sessionStorage['cannon-auth']
+    var authToken = window.sessionStorage['cannon-auth']
     if (authToken) {
       self.me.token = authToken
       self.fetchUserData()
@@ -118,15 +110,13 @@ module.exports = {
     })
   },
 
-  fetchInitialData: function () {
-    var self = this
-
-    self.speakers.past.fetch()
-    self.speakers.current.fetch()
-    self.members.fetch()
-    self.partners.fetch()
-    self.sessions.fetch()
-  },
+  // fetchInitialData: function () {
+  //   var self = this
+  //
+  //   self.speakers.fetch()
+  //   self.partners.fetch()
+  //   self.sessions.fetch()
+  // },
 
   fetchUserData: function () {
     var self = this

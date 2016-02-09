@@ -1,6 +1,6 @@
-var AmpCollection = require('ampersand-rest-collection');
-var partner = require('./partner');
-var config = require('client/js/helpers/clientconfig');
+var AmpCollection = require('ampersand-rest-collection')
+var partner = require('./partner')
+var config = require('client/js/helpers/clientconfig')
 
 module.exports = AmpCollection.extend({
   model: partner,
@@ -10,6 +10,6 @@ module.exports = AmpCollection.extend({
       headers: {
         'Only-Public': true
       },
-    };
+    }
   }
-});
+})

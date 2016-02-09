@@ -24,6 +24,8 @@ var UserViewPage = require('./pages/users/view')
 var MePage = require('./pages/users/me')
 var UserEditPage = require('./pages/users/edit')
 
+var EventModel = require('./models/event')
+
 var log = require('bows')('router')
 var fenixAuth = require('./auth/fenix')
 var qs = require('qs')
@@ -31,6 +33,7 @@ var qs = require('qs')
 var WebAppRouter = Router.extend({
   routes: {
     '': 'home',
+    '404': 'catchAll',
     ':event': 'event',
     ':event/achievements': 'achievements',
     ':event/achievements/:id': 'achievementView',
@@ -70,7 +73,7 @@ var WebAppRouter = Router.extend({
   event: function (event) {
     this.trigger('page', new HomePage({
       event: event,
-      model: app.me
+      model: new EventModel({id: event})
     }))
   },
 
@@ -84,7 +87,8 @@ var WebAppRouter = Router.extend({
   achievementView: function (event, id) {
     this.trigger('page', new AchievementViewPage({
       event: event,
-      id: id
+      id: id,
+      collection: app.achievements
     }))
   },
 
@@ -100,7 +104,8 @@ var WebAppRouter = Router.extend({
 
   userView: function (id) {
     this.trigger('page', new UserViewPage({
-      id: id
+      id: id,
+      collection: app.users
     }))
   },
 
@@ -164,7 +169,8 @@ var WebAppRouter = Router.extend({
   sessionView: function (event, id) {
     this.trigger('page', new SessionViewPage({
       event: event,
-      id: id
+      id: id,
+      collection: app.sessions
     }))
   },
 
@@ -175,13 +181,14 @@ var WebAppRouter = Router.extend({
   speakers: function (event) {
     this.trigger('page', new Speakers({
       event: event,
-      collection: app.speakers.current
+      collection: app.speakers
     }))
   },
 
   speakerView: function (id) {
     this.trigger('page', new SpeakerViewPage({
-      id: id
+      id: id,
+      collection: app.speakers
     }))
   },
 

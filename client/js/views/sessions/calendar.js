@@ -1,47 +1,51 @@
 /*global app, alert*/
-var log = require('bows')('sessions');
-var PageView = require('client/js/pages/base');
-var templates = require('client/js/templates');
-var Calendar = require('ampersand-fullcalendar-view');
-var Moment = require('moment');
-var _ = require('underscore');
-var options = require('options');
+var log = require('bows')('sessions')
+var PageView = require('client/js/pages/base')
+var templates = require('client/js/templates')
+var Calendar = require('ampersand-fullcalendar-view')
+var _ = require('underscore')
+var options = require('options')
 
 module.exports = PageView.extend({
   template: templates.pages.sessions.list,
-  initialize: function () {
-    var self = this;
+  initialize: function (data) {
+    this.selectedEvent = this.model.id
     if (!this.collection.length) {
-      return this.fetchCollection();
+      return this.fetchCollection()
     }
   },
   fetchCollection: function () {
-    var self = this;
-    log('Fetching sessions');
-    this.collection.fetch({success: function () {
-      self.render();
-    }});
+    var self = this
+    log('Fetching sessions')
+    var options = {
+      success: function () {
+        self.render()
+      }
+    }
+    if (self.selectedEvent) options.data = {event: self.selectedEvent}
+    this.collection.fetch(options)
 
-    return false;
+    return false
   },
   subviews: {
     calendar: {
       container: '[data-hook=sessions-list]',
       waitFor: 'collection.length',
       prepareView: function (el) {
-        var events = this.collection.serialize().map(function(s) {
-          s.title = s.name;
-          s.start = new Date(s.date);
-          s.duration = new Date(s.duration);
-          s.end = new Date(s.start.getTime() + s.duration.getTime());
-          s.url = '/sessions/' + s.id;
-          s.color = _.find(options.kinds.sessions, function(o) {
-            return s.kind === o.name;
-          }).color;
-          return s;
-        });
+        var self = this
+        var events = this.collection.serialize().map(function (s) {
+          s.title = s.name
+          s.start = new Date(s.date)
+          s.duration = new Date(s.duration)
+          s.end = new Date(s.start.getTime() + s.duration.getTime())
+          s.url = '/sessions/' + s.id
+          s.color = _.find(options.kinds.sessions, function (o) {
+            return s.kind === o.name
+          }).color
+          return s
+        })
 
-        var defaultView = (window.innerWidth < 900) ? 'agendaDay' : 'agendaWeek';
+        var defaultView = (window.innerWidth < 900) ? 'agendaDay' : 'agendaWeek'
 
         return new Calendar({
           el: el,
@@ -51,7 +55,7 @@ module.exports = PageView.extend({
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
           },
-          defaultDate: Moment('2015 02 23', 'YYYY MM DD'),
+          defaultDate: self.model.date,
           options: {
             defaultView: defaultView,
             height: 'auto',
@@ -60,8 +64,8 @@ module.exports = PageView.extend({
             allDaySlot: false,
             hiddenDays: [0]
           }
-        });
+        })
       }
-    },
+    }
   }
-});
+})

@@ -1,4 +1,3 @@
-/*global app, alert*/
 var log = require('bows')('sessions')
 var PageView = require('client/js/pages/base')
 var templates = require('client/js/templates')
@@ -20,19 +19,19 @@ module.exports = PageView.extend({
     },
     'model.descriptionHtml': [
       { type: 'toggle', hook: 'description' },
-      { selector: '[data-hook~=description] div', type: 'innerHTML' },
+      { selector: '[data-hook~=description] div', type: 'innerHTML' }
     ],
     'model.place': [
       { type: 'toggle', hook: 'place' },
-      { selector: '[data-hook~=place] span' },
+      { selector: '[data-hook~=place] span' }
     ],
     'model.startDayStr': [
       { type: 'toggle', hook: 'date' },
-      { selector: '[data-hook~=date] span' },
+      { selector: '[data-hook~=date] span' }
     ],
     'model.startHoursStr': [
       { type: 'toggle', hook: 'hours' },
-      { selector: '[data-hook~=hours] span' },
+      { selector: '[data-hook~=hours] span' }
     ],
     'model.img': {
       type: 'attribute',
@@ -46,16 +45,16 @@ module.exports = PageView.extend({
     'model.ticketsMessage': { hook: 'tickets-message' },
     'model.canRegist': { type: 'toggle', hook: 'action-get-ticket' },
     'model.canConfirm': { type: 'toggle', hook: 'action-confirm-ticket' },
-    'model.canVoid': { type: 'toggle', hook: 'action-void-ticket' },
+    'model.canVoid': { type: 'toggle', hook: 'action-void-ticket' }
   },
   events: {
     'click [data-hook~=action-get-ticket]': 'handleGetTicket',
     'click [data-hook~=action-void-ticket]': 'handleVoidTicket',
-    'click [data-hook~=action-confirm-ticket]': 'handleConfirmTicket',
+    'click [data-hook~=action-confirm-ticket]': 'handleConfirmTicket'
   },
   initialize: function (spec) {
     var self = this
-    app.sessions.getOrFetch(spec.id, {all: true}, function (err, model) {
+    self.collection.getOrFetch(spec.id, {all: true}, function (err, model) {
       if (err) {
         return log.error('couldnt find a session with id: ' + spec.id)
       }

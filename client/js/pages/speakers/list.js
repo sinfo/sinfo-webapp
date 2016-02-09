@@ -11,9 +11,11 @@ module.exports = PageView.extend({
     speakers: {
       container: '[data-hook=speakers-area] div',
       prepareView: function (el) {
+        var self = this
+        self.collection.fetch()
         return new SpeakersArea({
           el: el,
-          collection: app.speakers.current
+          collection: self.collection
         });
       }
     },

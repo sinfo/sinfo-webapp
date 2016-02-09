@@ -38,7 +38,7 @@ module.exports = PageView.extend({
   },
   initialize: function (spec) {
     var self = this;
-    app.speakers.default.getOrFetch(spec.id, function (err, model) {
+    self.collection.getOrFetch(spec.id, function (err, model) {
       if (err) {
         log.error('couldnt find a speaker with id: ' + spec.id);
       }
