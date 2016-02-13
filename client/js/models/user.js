@@ -60,5 +60,11 @@ module.exports = AmpModel.extend({
         return '/users/'+this.id;
       }
     },
+    skillsString: {
+       deps: ['skills'],
+       fn: function () {        
+        return this.skills.join(", ")
+       } 
+    },
   },
 });
