@@ -5,6 +5,7 @@ var log = require('bows')('speakers');
 
 var Speakers = AmpCollection.extend({
   model: speaker,
+  comparator: 'name',
   ajaxConfig: function () {
     return {
       headers: {

@@ -7,6 +7,7 @@ module.exports = function (currentEvent) {
   return AmpCollection.extend({
     model: member,
     url:  config.deckUrl + '/api/members?event=' + currentEvent,
+    comparator: 'name',
     ajaxConfig: function () {
       return {
         headers: {
