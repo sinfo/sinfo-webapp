@@ -91,32 +91,36 @@
   border-radius: 0
 
 
+button.ink-button.right-drawer-trigger
+  background: transparent
+  color: white
+
+  span.fa.fa-times
+    display: none
+
+
 body.ink-drawer
-  .left-drawer
-    position: fixed
-    z-index: 200
-    top: 37px
-    left: 0
-
-    .ink-navigation
-      background: white
-      border-right: 1px solid black
-      border-bottom: 1px solid black
-      border-bottom-right-radius: 3px
-
-      a
-        color: rgb(85, 85, 85)
-        text-decoration: none
-
-      ul.menu.vertical > li > a
-        border-top: 1px solid rgba(0, 0, 0, 0.15)
-        border-bottom: none
-
-      ul.menu li ul.submenu
+  &.push.right
+    button.ink-button.right-drawer-trigger
+      span.fa.fa-bars
+        display: none
+      span.fa.fa-times
         display: block
+  .right-drawer
+    background-color: #0077AA
 
-        li
-          padding-left: 15px
-
-      a:hover
-        background: none repeat scroll 0% 0% rgb(238, 238, 238)
+    ul
+      padding-left: 0
+      li
+        list-style: none
+        border-bottom: solid #006194 1px
+        vertical-align: top
+        margin: 0
+        padding: 1em 0 1em 1.45em
+        &:first-child
+          color: white
+          font-size: 1.40em
+          text-align: center
+          padding: 1.45em 0
+        a
+          color: white

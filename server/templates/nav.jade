@@ -1,4 +1,4 @@
-.topbar
+.topbar.content-drawer
   .ink-grid
     nav.ink-navigation#main-menu
       ul.menu.horizontal.push-left
@@ -23,20 +23,25 @@
 
 
       ul.menu.horizontal.push-right
-        li(data-hook='nav')
-        li.hide-all.show-medium.show-small.show-tiny#menuMobile(data-hook='menu-mobile')
-          i.fa.fa-bars
+        //- li(data-hook='nav')
+        //- li.hide-all.show-medium.show-small.show-tiny#menuMobile(data-hook='menu-mobile')
+        li.hide-all.show-medium.show-small.show-tiny
+          button.ink-button.right-drawer-trigger
+            span.fa.fa-bars
+            span.fa.fa-times
 
-      ul.menu.vertical#menuVertical
-        li
-          a.ink-smooth-scroll(href='/#speakers') Speakers
-        li
-          a.ink-smooth-scroll(href='/#team') The team
-        li
-          a.ink-smooth-scroll(href='/#meetus') Meet us!
-        li
-          a.ink-smooth-scroll(href='/#sponsorus') Sponsor us!
-        li
-          a.ink-smooth-scroll(href='/#newsletter') Newsletter
-        li
-          a(href='/coc') Code of Conduct
+div.right-drawer
+  ul
+    li Menu
+    li
+      a.ink-smooth-scroll(href='/#speakers') Speakers
+    li
+      a.ink-smooth-scroll(href='/#team') The team
+    li
+      a.ink-smooth-scroll(href='/#meetus') Meet us!
+    li
+      a.ink-smooth-scroll(href='/#sponsorus') Sponsor us!
+    li
+      a.ink-smooth-scroll(href='/#newsletter') Newsletter
+    li
+      a(href='/coc') Code of Conduct

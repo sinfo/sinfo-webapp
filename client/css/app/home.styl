@@ -115,8 +115,31 @@ ul
   background-position-y: 50%;
   background-repeat: no-repeat;
 
+  .ink-navigation
+    ul.pagination.chevron
+      li.previous
+        a:after
+          content: "\f053"
+      li.next
+        a:after
+          content: "\f054"
+      li.previous,li.next
+        a
+          top: 50%
+          font-size: 2em;
+          @media screen and (min-width: 600px)
+            top: 45%
+            font-size: 4em;
+
+
+  br.other
+    @media screen and (min-width: 600px)
+      display: none
   .fa
-    font-size: 50px;
+    font-size: 50px
+    margin: 0 0 25px 0
+    @media screen and (min-width: 600px)
+      margin: 0 25px 0 0
 
   .social-icon
     font-size: 50px;
@@ -157,7 +180,6 @@ ul
 
   .opacidade
     padding: 5em 0
-    height: 600px
 
   .calendar
     font-size: 20pt
@@ -176,7 +198,7 @@ ul
         line-height: 40pt
         vertical-align: top
         margin-left: 20px
->>>>>>> Stashed changes
+
   .event
     a
       color: white
