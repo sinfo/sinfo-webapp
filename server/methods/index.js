@@ -77,7 +77,17 @@ function getMembers (options, cb) {
     qs: {
       event: options.event
     }
-  }, function (err, res, body) { httpHandler(err, res, body, cb) })
+  }, function (err, res, body) { httpHandler(err, res, body, function sortMembers (err, members) {
+      if (err) return cb(err);
+
+      Async.sortBy(members, function(x, callback){
+          callback(null, x.name);
+      }, function(err,result) {
+        if (err) return cb(Boom.badImplementation());
+        cb(null, result);
+      });
+    }) 
+  })
 }
 
 function getEvents (options, cb) {
