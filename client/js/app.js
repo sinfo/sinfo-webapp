@@ -72,6 +72,8 @@ module.exports = {
   buildModels: function () {
     var self = this
 
+    this.selectedEvent = {}
+
     // create our global 'me' object and an empty collection for our channels models.
     this.me = new Me()
 

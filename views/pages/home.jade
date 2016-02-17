@@ -1,38 +1,40 @@
 section.page.home
+
   .header.event#header
-    .calendar
-      h1(data-hook='event-name')
-      span
-        i.fa.fa-calendar
-        br.other
-        span(data-hook='date-range')
-        br
-        span(data-hook='date-year')
-        .sep
-        .fa.fa-map-marker
-          span IST - Alameda, Lx
+    .opacidade.event
+      .calendar
+        h1#event-name(data-hook='event-name')
+        span
+          i.fa.fa-calendar
+          br.other
+          span(data-hook='date-range')
+          br
+          span(data-hook='date-year')
+          .sep
+          .fa.fa-map-marker
+            span IST - Alameda, Lx
 
   .area-light
     h1.highlight What is it?
 
     p.big 
       a(href='http://sinfo.org') SINFO
-      |  conference is one of the biggest Tech events in Portugal, and is heading to its 23nd Edition.
+      |  conference is one of the biggest Tech events in Portugal.
 
     p.big.align-left During a whole week, thousands of participants gather to see some of the brightest minds and greatest speakers in the world talk about some of the trendiest topics of today. Everyone will be able to try the newest gadgets and technologies in the market while being presented with an overview of the IT landscape by the country’s best companies. To top it all off, every day several workshops on the most requested topics will allow every participant to improve their technical and non-technical skills. Save the date, this is one of the biggest events of the year which you will not want to miss.
 
     a.ink-button.blue(href="http://sinfo.org" ) Learn More
 
-  .light.container.section.overlay.speakers.all-100(data-hook='speakers-area')
+  #speakers.light.container.section.overlay.speakers.all-100(data-hook='speakers-area')
     h1.light Speakers
     h4.light One week filled with talks from the best speakers!
     div
 
-  .area-light.sessions.all-100(data-hook='sessions-calendar')
+  #sessions.area-light.sessions.all-100(data-hook='sessions-calendar')
     h1 Schedule
     div
 
-  .container.section.light.overlay
+  #partners.container.section.light.overlay
     h1.light Upload your CV now!
     p.light Are you new to the job market? Or maybe looking for a new challenge? Well, send us your curriculum vitae and every company present at SINFO 22 will receive it!
     a.ink-button.blue(href="/me/edit" ) Upload CV

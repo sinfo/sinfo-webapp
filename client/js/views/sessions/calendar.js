@@ -10,9 +10,25 @@ module.exports = PageView.extend({
   template: templates.pages.sessions.list,
   initialize: function (data) {
     this.selectedEvent = this.model.id
-    if (!this.collection.length) {
-      return this.fetchCollection()
+    if (!this.collection.length || !this.model.date) {
+      return this.fetchEvent()
     }
+  },
+  render: function () {
+    this._initializeSubviews()
+    return PageView.prototype.render.apply(this, arguments)
+  },
+  fetchEvent: function () {
+    var self = this
+    log('Fetching event')
+    var options = {
+      success: function () {
+        return self.fetchCollection()
+      }
+    }
+    this.model.fetch(options)
+
+    return false
   },
   fetchCollection: function () {
     var self = this
@@ -22,7 +38,6 @@ module.exports = PageView.extend({
         self.render()
       }
     }
-    if (self.selectedEvent) options.data = {event: self.selectedEvent}
     this.collection.fetch(options)
 
     return false
@@ -38,7 +53,7 @@ module.exports = PageView.extend({
           s.start = new Date(s.date)
           s.duration = new Date(s.duration)
           s.end = new Date(s.start.getTime() + s.duration.getTime())
-          s.url = '/sessions/' + s.id
+          s.url = self.selectedEvent + '/sessions/' + s.id
           s.color = _.find(options.kinds.sessions, function (o) {
             return s.kind === o.name
           }).color

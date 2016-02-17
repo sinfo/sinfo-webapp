@@ -34,23 +34,24 @@ var WebAppRouter = Router.extend({
   routes: {
     '': 'home',
     '404': 'catchAll',
-    ':event': 'event',
-    ':event/achievements': 'achievements',
-    ':event/achievements/:id': 'achievementView',
     'auth/login?:query': 'fenixLogin',
     'auth/login': 'login',
-    ':event/partners': 'partners',
     'partners/:id': 'companyView',
     'redeem/:id': 'redeemCode',
-    ':event/sessions': 'sessions',
-    ':event/sessions/:id': 'sessionView',
-    ':event/speakers': 'speakers',
     'users/:id': 'userView',
     'me': 'me',
     'me/edit': 'meEdit',
     'speakers/:id': 'speakerView',
     // 'stream': 'streamView',
     'sponsor': 'sponsor',
+    'coc': 'coc',
+    'events/:event': 'event',
+    'events/:event/achievements': 'achievements',
+    'events/:event/achievements/:id': 'achievementView',
+    'events/:event/partners': 'partners',
+    // '/events/:event/sessions': 'sessions',
+    'events/:event/sessions/:id': 'sessionView',
+    // '/events/:event/speakers': 'speakers',
     '(*path)': 'catchAll'
   },
 
@@ -68,6 +69,14 @@ var WebAppRouter = Router.extend({
     //   model: app.me
     // }))
     window.location = '/'
+  },
+
+  sponsor: function () {
+    window.location = '/sponsor'
+  },
+
+  coc: function () {
+    window.location = '/coc'
   },
 
   event: function (event) {
@@ -172,10 +181,6 @@ var WebAppRouter = Router.extend({
       id: id,
       collection: app.sessions
     }))
-  },
-
-  sponsor: function () {
-    window.location = '/sponsor'
   },
 
   speakers: function (event) {

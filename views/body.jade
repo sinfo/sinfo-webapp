@@ -1,50 +1,52 @@
 body.ink-drawer
-  .topbar
+
+  .topbar.content-drawer
     .ink-grid
-      nav.ink-navigation
+      nav.ink-navigation#main-menu
         ul.menu.horizontal.push-left
-          //- li.hide-all.show-medium.show-small.show-tiny
-          //-   .ink-button.small.white.left-drawer-trigger
-          //-     i.fa.fa-bars.fa-2x
           li.title
-            //- a(href='//sinfo.org/22/')
             a(href='/')
               img(src='/static/logo.png')
 
-        ul.menu.horizontal.push-left.hide-small.hide-tiny
+        ul.menu.horizontal.push-left.hide-medium.hide-small.hide-tiny
           li
-            a(href='./speakers') Speakers
+            a.ink-smooth-scroll(href='#speakers') Speakers
           li
-            a(href='./sessions') Schedule
+            a.ink-smooth-scroll(href='#sessions') Schedule
           li
-            a(href='./partners') Partners
+            a.ink-smooth-scroll(href='#partners') Partners
+          //- li
+          //-   a(href='#achievements') Achievements
+          //- li
+          //-   a(href='/stream') Live Stream
           li
-            a(href='./achievements') Achievements
-          li
-            a(href='/stream') Live Stream
-          li
-            a(href='/contacts') Contacts
+            a(href='/coc') Code of Conduct
+            
 
 
         ul.menu.horizontal.push-right
-          li(data-hook='nav')
-          li.hide-all.show-small.show-tiny#menuMobile(data-hook='menu-mobile')
-            i.fa.fa-bars
+          //- li(data-hook='nav')
+          //- li.hide-all.show-medium.show-small.show-tiny#menuMobile(data-hook='menu-mobile')
+          li.hide-all.show-medium.show-small.show-tiny
+            button.ink-button.right-drawer-trigger
+              span.fa.fa-bars
+              span.fa.fa-times
 
-        ul.menu.vertical#menuVertical
-          li
-            a(href='./speakers') Speakers
-          li
-            a(href='./sessions') Schedule
-          li
-            a(href='./partners') Partners
-          li
-            a(href='./achievements') Achievements
-          li
-            a(href='/stream') Live Stream
-          li
-            a(href='/contacts') Contacts
-
+  div.right-drawer
+    ul
+      li Menu
+      li
+        a.ink-smooth-scroll(href='#speakers') Speakers
+      li
+        a.ink-smooth-scroll(href='#sessions') Schedule
+      li
+        a.ink-smooth-scroll(href='#partners') Partners
+      //- li
+      //-   a(href='#achievements') Achievements
+      //- li
+      //-   a(href='/stream') Live Stream
+      li
+        a(href='/coc') Code of Conduct
 
   main(data-hook='page-container')
 

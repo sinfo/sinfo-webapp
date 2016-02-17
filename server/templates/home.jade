@@ -69,7 +69,7 @@ html
               ul.stage.half-gutters
                 each event in events
                   li.slide.event
-                    a(href='/' + event.id)
+                    a(href='/events/' + event.id)
                       h3.description.align-center= event.name
                       .calendar
                         i.fa.fa-calendar
@@ -150,4 +150,4 @@ html
               br
               br
               input.ink-button.blue(type="submit",name="subscribe",value="Subscribe")
-    include ../../views/partials/footer
+    include ./footer
