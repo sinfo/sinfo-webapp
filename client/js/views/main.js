@@ -14,10 +14,15 @@ var Nav = require('./nav');
 var Footer = require('./footer');
 var $ = require('jquery');
 
+// HACK
+var DEFAULT_EVENT = '23-sinfo-conf'
+
 
 module.exports = View.extend({
   template: templates.body,
   initialize: function () {
+    var route =  window.location.pathname.split('/')
+    if (route[1] === 'events' && route[2]) this.selectedEvent || DEFAULT_EVENT
     // this marks the correct nav item selected
     this.listenTo(app.router, 'page', this.handleNewPage);
   },
@@ -57,6 +62,7 @@ module.exports = View.extend({
       hook: 'nav',
       prepareView: function(el) {
         return new Nav({
+          selectedEvent: this.selectedEvent,
           model: this.model,
           el: el
         });
@@ -65,6 +71,7 @@ module.exports = View.extend({
     footer: {
       hook: 'footer',
       prepareView: function(el) {
+        app.partners.fetch({data: {event: this.selectedEvent}})
         return new Footer({
           collection: app.partners,
           el: el

@@ -9,24 +9,6 @@ module.exports = PageView.extend({
   pageTitle: 'SINFO',
   template: templates.pages.home,
   bindings: {
-    'model.id': [
-      {
-        type: function (el, value) { el.setAttribute('href', value + '/speakers') },
-        hook: 'speakers-url'
-      },
-      {
-        type: function (el, value) { el.setAttribute('href', value + '/sessions') },
-        hook: 'sessions-url'
-      },
-      {
-        type: function (el, value) { el.setAttribute('href', value + '/partners') },
-        hook: 'partners-url'
-      },
-      {
-        type: function (el, value) { el.setAttribute('href', value + '/achievements') },
-        hook: 'achievements-url'
-      }
-    ],
     'model.name': { hook: 'event-name' },
     'model.dateStrings.range': { hook: 'date-range' },
     'model.dateStrings.year': { hook: 'date-year' }
@@ -52,17 +34,17 @@ module.exports = PageView.extend({
         })
       }
     },
-    partners: {
-      container: '[data-hook=partners-area] div',
-      prepareView: function (el) {
-        app.partners.fetch({data: {event: this.selectedEvent}})
-        return new PartnersArea({
-          el: el,
-          collection: app.partners,
-          event: this.selectedEvent
-        })
-      }
-    },
+    // partners: {
+    //   container: '[data-hook=partners-area] div',
+    //   prepareView: function (el) {
+    //     app.partners.fetch({data: {event: this.selectedEvent}})
+    //     return new PartnersArea({
+    //       el: el,
+    //       collection: app.partners,
+    //       event: this.selectedEvent
+    //     })
+    //   }
+    // },
     sessions: {
       container: '[data-hook=sessions-calendar] div',
       prepareView: function (el) {
