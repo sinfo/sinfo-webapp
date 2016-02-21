@@ -12,9 +12,10 @@ module.exports = View.extend({
     var self = this;
 
     self.seeMore = '/events/' + object.selectedEvent + '/partners';
-    
+
     if(!this.collection.length) {
       return this.collection.fetch({
+        data: {event: object.selectedEvent},
         success: function () {
           self.render();
         }
@@ -29,7 +30,7 @@ module.exports = View.extend({
       container: '[data-hook=max-partner]',
       waitFor: 'collection.length',
       prepareView: function (el) {
-        var maxPartners = new SubCollection(app.partners, {
+        var maxPartners = new SubCollection(this.collection, {
           filter: function (partner) {
             return partner.advertisementLvl == 'max';
           }
@@ -45,7 +46,7 @@ module.exports = View.extend({
       container: '[data-hook=exclusive-partner]',
       waitFor: 'collection.length',
       prepareView: function (el) {
-        var exclusivePartners = new SubCollection(app.partners, {
+        var exclusivePartners = new SubCollection(this.collection, {
           filter: function (partner) {
             return partner.advertisementLvl === 'exclusive';
           }
