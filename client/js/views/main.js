@@ -74,7 +74,8 @@ module.exports = View.extend({
         app.partners.fetch({data: {event: this.selectedEvent}})
         return new Footer({
           collection: app.partners,
-          el: el
+          el: el,
+          selectedEvent: this.selectedEvent
         });
       }
     }

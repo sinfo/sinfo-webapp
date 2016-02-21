@@ -5,8 +5,14 @@ var PartnersArea = require('client/js/views/partners/area');
 
 module.exports = View.extend({
   template: templates.partials.footer,
-  initialize: function () {
+  props: {
+    seeMore: 'string'
+  },
+  initialize: function (object) {
     var self = this;
+
+    self.seeMore = '/events/' + object.selectedEvent + '/partners';
+    
     if(!this.collection.length) {
       return this.collection.fetch({
         success: function () {
@@ -14,6 +20,9 @@ module.exports = View.extend({
         }
       });
     }
+  },
+  bindings: {
+    'seeMore': { type: 'attribute', hook: 'partners-see-more', name: 'href' }
   },
   subviews: {
     max: {
