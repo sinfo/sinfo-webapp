@@ -8,10 +8,11 @@ var SubCollection = require('ampersand-subcollection');
 module.exports = PageView.extend({
   pageTitle: 'Partners',
   template: templates.pages.partners.list,
-  initialize: function () {
+  initialize: function (options) {
     var self = this;
     if(!this.collection.length) {
       return this.collection.fetch({
+        data: {event: options.event},
         success: function () {
           self.render();
         }
@@ -23,7 +24,7 @@ module.exports = PageView.extend({
       container: '[data-hook=min-partner]',
       waitFor: 'collection.length',
       prepareView: function (el) {
-        var minPartners = new SubCollection(app.partners, {
+        var minPartners = new SubCollection(this.collection, {
           filter: function (partner) {
             return partner.advertisementLvl == 'min';
           }
@@ -39,7 +40,7 @@ module.exports = PageView.extend({
       container: '[data-hook=med-partner]',
       waitFor: 'collection.length',
       prepareView: function (el) {
-        var medPartners = new SubCollection(app.partners, {
+        var medPartners = new SubCollection(this.collection, {
           filter: function (partner) {
             return partner.advertisementLvl == 'med';
           }
@@ -55,7 +56,7 @@ module.exports = PageView.extend({
       container: '[data-hook=max-partner]',
       waitFor: 'collection.length',
       prepareView: function (el) {
-        var maxPartners = new SubCollection(app.partners, {
+        var maxPartners = new SubCollection(this.collection, {
           filter: function (partner) {
             return partner.advertisementLvl == 'max';
           }
@@ -71,7 +72,7 @@ module.exports = PageView.extend({
       container: '[data-hook=exclusive-partner]',
       waitFor: 'collection.length',
       prepareView: function (el) {
-        var exclusivePartners = new SubCollection(app.partners, {
+        var exclusivePartners = new SubCollection(this.collection, {
           filter: function (partner) {
             return partner.advertisementLvl === 'exclusive';
           }

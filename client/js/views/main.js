@@ -22,7 +22,7 @@ module.exports = View.extend({
   template: templates.body,
   initialize: function () {
     var route =  window.location.pathname.split('/')
-    if (route[1] === 'events' && route[2]) this.selectedEvent || DEFAULT_EVENT
+    if (route[1] === 'events' && route[2]) this.selectedEvent = route[2] || DEFAULT_EVENT
     // this marks the correct nav item selected
     this.listenTo(app.router, 'page', this.handleNewPage);
   },
@@ -125,7 +125,10 @@ module.exports = View.extend({
   },
 
   hideMenu: function() {
-    document.getElementById('menuVertical').style.display = 'none';
+    var el = document.getElementById('menuVertical');
+    if (el) {
+      el.style.display = 'none';
+    }
   },
 
 });
