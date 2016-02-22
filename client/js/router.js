@@ -157,13 +157,12 @@ var WebAppRouter = Router.extend({
     }))
   },
 
-  redeemCode: function (event, id) {
+  redeemCode: function (id) {
     if (!app.me.authenticated) {
       return app.navigateToLogin()
     }
 
     this.trigger('page', new Redeem({
-      event: event,
       id: id
     }))
   },
