@@ -1,7 +1,11 @@
 var Hapi = require('hapi')
 var config = require('config')
 var path = require('path')
-var server = module.exports.hapi = new Hapi.Server(config.http.listen, config.http.port)
+var server = module.exports.hapi = new Hapi.Server(config.http.listen, config.http.port, {
+  debug: {
+    request: ['error']
+  }
+})
 var moonbootsConfig = require('moonbootsConfig')
 var internals = {}
 
