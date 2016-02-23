@@ -101,6 +101,22 @@ ul
       .name
         color: #fff
 
+    .ink-navigation
+      ul.pagination.chevron
+        li.previous
+          a:after
+            content: "\f053"
+        li.next
+          a:after
+            content: "\f054"
+        li.previous,li.next
+          a
+            top: 10%
+            font-size: 2em
+            @media screen and (min-width: 600px)
+              top: 15%
+              font-size: 3em;
+
 .header
   overflow:hidden;
   background: url('/static/header-home.jpg') center no-repeat;
