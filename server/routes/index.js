@@ -69,3 +69,20 @@ server.route({
     }
   }
 })
+
+server.route({
+  method: 'GET',
+  path: '/privacy-policy',
+  config: {
+    pre: [
+      { method: function getMoonbootsApp (request, reply) {
+        request.server.plugins.moonboots_hapi.clientApp(reply)
+      }, assign: 'moonboots' }
+    ],
+    handler: function (request, reply) {
+      var moonboots = request.pre.moonboots
+
+      reply.view('privacy-policy', { cssFileName: '/' + moonboots.result.css.fileName })
+    }
+  }
+})
