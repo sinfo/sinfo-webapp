@@ -24,7 +24,6 @@ html
     getScript( 'https://www.google.com/jsapi' , function(){
       google.load("maps", "3",{
         callback: function (){
-          console.log('HERE LOADED GOOGLE');
           var map = new google.maps.Map(document.querySelector('[data-hook=map-canvas]'),{
             scrollwheel: false,
             center: new google.maps.LatLng(38.7375721,-9.1376594),
@@ -64,22 +63,22 @@ html
             a.social-icon(target="_blank" href="http://github.com/sinfo")
               i.social-icon.fa.fa-github
 
-          .all-50.medium-100.small-100.tiny-100.push-center.events  
-            .ink-carousel(data-pagination='#carousel-pagination-event')
-              ul.stage.half-gutters
-                each event in events
-                  li.slide.event
-                    a(href='/events/' + event.id)
-                      h3.description.align-center= event.name
-                      .calendar
-                        i.fa.fa-calendar
-                        br.other
-                        span= event.begin.day + ' - ' + event.end.day + ' ' + event.begin.month
-                        br
-                        span= event.begin.year
-                      
-              nav#carousel-pagination-event.ink-navigation
-                ul.pagination.chevron
+          //- .all-50.medium-100.small-100.tiny-100.push-center.events  
+          //-   .ink-carousel(data-pagination='#carousel-pagination-event')
+          //-     ul.stage.half-gutters
+          //-       each event in events
+          //-         li.slide.event
+          //-           a(href='/events/' + event.id)
+          //-             h3.description.align-center= event.name
+          //-             .calendar
+          //-               i.fa.fa-calendar
+          //-               br.other
+          //-               span= event.begin.day + ' - ' + event.end.day + ' ' + event.begin.month
+          //-               br
+          //-               span= event.begin.year
+          //-             
+          //-     nav#carousel-pagination-event.ink-navigation
+          //-       ul.pagination.chevron
 
       .area-light
         h1.highlight Who are we
