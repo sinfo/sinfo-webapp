@@ -65,6 +65,10 @@
     "lint": "standard | snazzy",
     "test": "jest --env=jsdom"
   },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sinfo/sinfo-webapp/issues"
