@@ -1,5 +1,5 @@
-var path = require('path');
-var findCacheDir = require('find-cache-dir');
+var path = require('path')
+var findCacheDir = require('find-cache-dir')
 
 module.exports = {
   // Don't try to find .babelrc because we want to force this configuration.
@@ -37,4 +37,4 @@ module.exports = {
       moduleName: path.dirname(require.resolve('babel-runtime/package'))
     }]
   ]
-};
+}

@@ -10,7 +10,6 @@
   "devDependencies": {
     "autoprefixer": "6.4.1",
     "babel-core": "6.14.0",
-    "babel-eslint": "6.1.2",
     "babel-jest": "15.0.0",
     "babel-loader": "6.2.5",
     "babel-plugin-transform-class-properties": "6.11.5",
@@ -27,12 +26,6 @@
     "cross-spawn": "4.0.0",
     "css-loader": "0.24.0",
     "detect-port": "1.0.0",
-    "eslint": "3.5.0",
-    "eslint-loader": "1.5.0",
-    "eslint-plugin-flowtype": "2.18.1",
-    "eslint-plugin-import": "1.12.0",
-    "eslint-plugin-jsx-a11y": "2.2.2",
-    "eslint-plugin-react": "5.2.2",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.9.0",
     "filesize": "3.3.0",
@@ -51,6 +44,9 @@
     "promise": "7.1.1",
     "recursive-readdir": "2.0.0",
     "rimraf": "2.5.4",
+    "snazzy": "^5.0.0",
+    "standard": "^8.1.0",
+    "standard-loader": "^5.0.0",
     "strip-ansi": "3.0.1",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
@@ -66,7 +62,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "jest --watch --env=jsdom"
+    "lint": "standard | snazzy",
+    "test": "jest --env=jsdom"
   },
   "license": "MIT",
   "bugs": {
@@ -92,8 +89,5 @@
     ],
     "testEnvironment": "node",
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js|jsx)$"
-  },
-  "eslintConfig": {
-    "extends": "./config/eslint.js"
   }
 }

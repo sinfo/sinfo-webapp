@@ -1,4 +1,4 @@
-var path = require('path');
+var path = require('path')
 
 module.exports = {
   // Don't try to find .babelrc because we want to force this configuration.
@@ -27,7 +27,7 @@ module.exports = {
       // Resolve the Babel runtime relative to the config.
       // You can safely remove this after ejecting:
       moduleName: path.dirname(require.resolve('babel-runtime/package'))
-    }],
+    }]
     // Optimization: hoist JSX that never changes out of render()
     // Disabled because of issues:
     // * https://github.com/facebookincubator/create-react-app/issues/525
@@ -35,4 +35,4 @@ module.exports = {
     // TODO: Enable again when these issues are resolved.
     // require.resolve('babel-plugin-transform-react-constant-elements')
   ]
-};
+}

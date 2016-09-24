@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 class Footer extends Component {
-  render() {
+  render () {
     return (
       <h1> Ola </h1>
-    );
+    )
   }
 }
 
-export default Footer;
+export default Footer
