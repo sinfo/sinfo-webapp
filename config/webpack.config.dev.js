@@ -11,6 +11,7 @@ var env = require('./env')
 // It is focused on developer experience and fast rebuilds.
 // The production configuration is different and lives in a separate file.
 module.exports = {
+  isDev: true,
   // This makes the bundle appear split into separate modules in the devtools.
   // We don't use source maps here because they can be confusing:
   // https://github.com/facebookincubator/create-react-app/issues/343#issuecomment-237241875
@@ -18,31 +19,29 @@ module.exports = {
   devtool: 'eval',
   // These are the "entry points" to our application.
   // This means they will be the "root" imports that are included in JS bundle.
-  // The first two entry points enable "hot" CSS and auto-refreshes for JS.
   entry: [
-    // Include WebpackDevServer client. It connects to WebpackDevServer via
-    // sockets and waits for recompile notifications. When WebpackDevServer
-    // recompiles, it sends a message to the client by socket. If only CSS
-    // was changed, the app reload just the CSS. Otherwise, it will refresh.
-    // The "?/" bit at the end tells the client to look for the socket at
-    // the root path, i.e. /sockjs-node/. Otherwise visiting a client-side
-    // route like /todos/42 would make it wrongly request /todos/42/sockjs-node.
-    // The socket server is a part of WebpackDevServer which we are using.
-    // The /sockjs-node/ path I'm referring to is hardcoded in WebpackDevServer.
-    require.resolve('webpack-dev-server/client') + '?/',
-    // Include Webpack hot module replacement runtime. Webpack is pretty
-    // low-level so we need to put all the pieces together. The runtime listens
-    // to the events received by the client above, and applies updates (such as
-    // new CSS) to the running application.
-    require.resolve('webpack/hot/dev-server'),
+    // Setup webpack hot middleware client
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     // We ship a few polyfills by default.
     require.resolve('./polyfills'),
-    // Finally, this is your app's code:
+    // App code:
     paths.appIndexJs
     // We include the app code last so that if there is a runtime error during
     // initialization, it doesn't blow up the WebpackDevServer client, and
     // changing JS code would still trigger a refresh.
   ],
+  hotServer: {
+    path: '/__webpack_hmr',
+    heartbeat: 10 * 1000
+  },
+  devServer: {
+    publicPath: '/',
+    lazy: false,
+    quiet: false,
+    noInfo: true,
+    stats: { colors: true },
+    host: 'localhost'
+  },
   output: {
     // Next line is not used in dev but WebpackDevServer crashes without it:
     path: paths.appBuild,
@@ -57,28 +56,14 @@ module.exports = {
   },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
-    // We read `NODE_PATH` environment variable in `paths.js` and pass paths here.
-    // We use `fallback` instead of `root` because we want `node_modules` to "win"
-    // if there any conflicts. This matches Node resolution mechanism.
-    // https://github.com/facebookincubator/create-react-app/issues/253
     fallback: paths.nodePaths,
     // These are the reasonable defaults supported by the Node ecosystem.
-    // We also include JSX as a common component filename extension to support
-    // some tools, although we do not recommend using it, see:
-    // https://github.com/facebookincubator/create-react-app/issues/290
     extensions: ['.js', '.json', '.jsx', ''],
     alias: {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web'
     }
-  },
-  // Resolve loaders (webpack plugins for CSS, images, transpilation) from the
-  // directory of `react-scripts` itself rather than the project directory.
-  // You can remove this after ejecting.
-  resolveLoader: {
-    root: paths.ownNodeModules,
-    moduleTemplates: ['*-loader']
   },
   module: {
     // First, run the linter.

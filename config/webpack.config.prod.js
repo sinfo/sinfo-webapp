@@ -80,8 +80,8 @@ module.exports = {
     // It's important to do this before Babel processes the JS.
     preLoaders: [
       {
-        test: /\.(js|jsx)$/,
-        loader: 'eslint',
+        test: /\.jsx?$/,
+        loader: 'standard',
         include: paths.appSrc
       }
     ],

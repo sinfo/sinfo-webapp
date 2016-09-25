@@ -28,6 +28,4 @@ build/Release
 node_modules
 
 .DS_Store
-client/js/templates.js
-client/css/app.css
-sftp-config.json
+build
