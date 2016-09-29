@@ -1,11 +1,11 @@
-var path = require('path')
-var autoprefixer = require('autoprefixer')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var url = require('url')
-var paths = require('./paths')
-var env = require('./env')
+const path = require('path')
+const autoprefixer = require('autoprefixer')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const url = require('url')
+const paths = require('./paths')
+const env = require('./env')
 
 // Assert this just to be safe.
 // Development builds of React are slow and not intended for production.
@@ -18,8 +18,8 @@ if (env['process.env.NODE_ENV'] !== '"production"') {
 // single-page apps that may serve index.html for nested URLs like /todos/42.
 // We can't use a relative path in HTML because we don't want to load something
 // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
-var homepagePath = require(paths.appPackageJson).homepage
-var publicPath = homepagePath ? url.parse(homepagePath).pathname : '/'
+const homepagePath = require(paths.appPackageJson).homepage
+let publicPath = homepagePath ? url.parse(homepagePath).pathname : '/'
 if (!publicPath.endsWith('/')) {
   // If we don't do this, file assets will get incorrect paths.
   publicPath += '/'
@@ -91,7 +91,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
         loader: 'babel',
-        query: require('./babel.prod')
+        query: require('./babel.config')
       },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.

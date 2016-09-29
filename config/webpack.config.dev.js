@@ -1,11 +1,19 @@
+'use strict'
 
-var autoprefixer = require('autoprefixer')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
-var WatchMissingNodeModulesPlugin = require('../scripts/utils/WatchMissingNodeModulesPlugin')
-var paths = require('./paths')
-var env = require('./env')
+const autoprefixer = require('autoprefixer')
+const webpack = require('webpack')
+const findCacheDir = require('find-cache-dir')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const WatchMissingNodeModulesPlugin = require('../scripts/utils/WatchMissingNodeModulesPlugin')
+const paths = require('./paths')
+const env = require('./env')
+const babelConfig = require('./babel.config')
+
+// Enable caching results in ./node_modules/.cache/react-scripts/ directory for
+// faster rebuilds.
+babelConfig.cacheDirectory = findCacheDir({
+  name: 'react-scripts'
+})
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -81,7 +89,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
         loader: 'babel',
-        query: require('./babel.dev')
+        query: babelConfig
       },
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -90,7 +98,7 @@ module.exports = {
       // in development "style" loader enables hot editing of CSS.
       {
         test: /\.css$/,
-        loader: 'style!css!postcss'
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader', 'postcss-loader')
       },
       // JSON is not enabled by default in Webpack but both Node and Browserify
       // allow it implicitly so we also enable it.
@@ -127,15 +135,6 @@ module.exports = {
           limit: 10000,
           name: 'static/media/[name].[hash:8].[ext]'
         }
-      },
-      // "html" loader is used to process template page (index.html) to resolve
-      // resources linked with <link href="./relative/path"> HTML tags.
-      {
-        test: /\.html$/,
-        loader: 'html',
-        query: {
-          attrs: ['link:href']
-        }
       }
     ]
   },
@@ -153,20 +152,12 @@ module.exports = {
     ]
   },
   plugins: [
-    // Generates an `index.html` file with the <script> injected.
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: paths.appHtml
-    }),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'development') { ... }. See `env.js`.
     new webpack.DefinePlugin(env),
-    // This is necessary to emit hot updates (currently CSS only):
+    // This is necessary to emit hot updates:
     new webpack.HotModuleReplacementPlugin(),
-    // Watcher doesn't work well if you mistype casing in a path so we use
-    // a plugin that prints an error when you attempt to do this.
-    // See https://github.com/facebookincubator/create-react-app/issues/240
-    new CaseSensitivePathsPlugin(),
+    new ExtractTextPlugin('style.css', {allChunks: true}),
     // If you require a missing module and then `npm install` it, you still have
     // to restart the development server for Webpack to discover it. This plugin
     // makes the discovery automatic so you don't have to restart.

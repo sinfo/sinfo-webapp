@@ -1,0 +1,10 @@
+doctype html
+html()
+  head
+    != head.meta
+    != cssTags
+    != head.link
+    != head.title
+  body
+    div(id="root") !{reactPage}
+    != scriptTags

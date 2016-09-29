@@ -1,20 +1,47 @@
 'use strict'
 
-const Hapi = require('hapi')
+// Install require hook
+require('babel-register')(require('../../config/babel.config'))
 const webpackConfig = require('../../config/webpack.config.dev')
 
-const server = new Hapi.Server()
+const Hapi = require('hapi')
+
+const server = new Hapi.Server({
+  // Get error logs from the pug compiler
+  debug: {
+    request: ['error']
+  }
+})
+
 server.connection({ port: 3000 })
 
 server.register([
-  { register: require('inert') },
+  {register: require('vision')},
+  {register: require('inert')},
   {
     register: require('huyang'),
     options: webpackConfig
+  },
+  {
+    register: require('./plugins/react-render'),
+    options: {
+      routes: require('../app/routes')
+    }
   }
 ], (err) => {
   if (err) throw err
 
+  // Setup the pug view template engine
+  server.views({
+    engines: { pug: require('pug') },
+    encoding: 'utf8',
+    isCached: true,
+    compileOptions: {
+      pretty: true
+    }
+  })
+
+  // Start the server
   server.start((err) => {
     if (err) throw err
     console.log(`Server running at: ${server.info.uri}`)
