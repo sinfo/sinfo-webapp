@@ -1,7 +1,6 @@
 const autoprefixer = require('autoprefixer')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const url = require('url')
 const config = require('./app.config').app
 const env = require('./helpers/env')
 
@@ -9,18 +8,6 @@ const env = require('./helpers/env')
 // Development builds of React are slow and not intended for production.
 if (env['process.env.NODE_ENV'] !== '"production"') {
   throw new Error('Production builds must have NODE_ENV=production.')
-}
-
-// We use "homepage" field to infer "public path" at which the app is served.
-// Webpack needs to know it to put the right <script> hrefs into HTML even in
-// single-page apps that may serve index.html for nested URLs like /todos/42.
-// We can't use a relative path in HTML because we don't want to load something
-// like /todos/42/static/js/bundle.7289d.js. We have to know the root.
-const homepagePath = require(config.paths.appPackageJson).homepage
-let publicPath = homepagePath ? url.parse(homepagePath).pathname : '/'
-if (!publicPath.endsWith('/')) {
-  // If we don't do this, file assets will get incorrect paths.
-  publicPath += '/'
 }
 
 // This is the production configuration.
@@ -46,7 +33,7 @@ module.exports = {
     filename: 'static/js/[name].[chunkhash:8].js',
     chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     // We inferred the "public path" (such as / or /my-project) from homepage.
-    publicPath: publicPath
+    publicPath: '/'
   },
   resolve: {
     // These are the reasonable defaults supported by the Node ecosystem.
