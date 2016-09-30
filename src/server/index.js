@@ -1,10 +1,14 @@
 'use strict'
-
-// Install require hook
+// Set babel require hook
 require('babel-register')(require('../../config/babel.config'))
-const webpackConfig = require('../../config/webpack.config.dev')
 
 const Hapi = require('hapi')
+const config = require('../../config/app.config')
+
+// Require the correct webpack config
+const webpackConfig = config.isDev
+  ? require('../../config/webpack.dev')
+  : require('../../config/webpack.prod')
 
 const server = new Hapi.Server({
   // Get error logs from the pug compiler
@@ -13,7 +17,10 @@ const server = new Hapi.Server({
   }
 })
 
-server.connection({ port: 3000 })
+server.connection({
+  host: config.server.host,
+  port: config.server.port
+})
 
 server.register([
   {register: require('vision')},

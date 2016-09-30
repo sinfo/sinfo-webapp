@@ -1,11 +1,9 @@
-const path = require('path')
 const autoprefixer = require('autoprefixer')
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const url = require('url')
-const paths = require('./paths')
-const env = require('./env')
+const config = require('./app.config').app
+const env = require('./helpers/env')
 
 // Assert this just to be safe.
 // Development builds of React are slow and not intended for production.
@@ -18,7 +16,7 @@ if (env['process.env.NODE_ENV'] !== '"production"') {
 // single-page apps that may serve index.html for nested URLs like /todos/42.
 // We can't use a relative path in HTML because we don't want to load something
 // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
-const homepagePath = require(paths.appPackageJson).homepage
+const homepagePath = require(config.paths.appPackageJson).homepage
 let publicPath = homepagePath ? url.parse(homepagePath).pathname : '/'
 if (!publicPath.endsWith('/')) {
   // If we don't do this, file assets will get incorrect paths.
@@ -37,11 +35,11 @@ module.exports = {
   // In production, we only want to load the polyfills and the app code.
   entry: [
     require.resolve('./polyfills'),
-    paths.appIndexJs
+    config.paths.appIndexJs
   ],
   output: {
     // The build folder.
-    path: paths.appBuild,
+    path: config.paths.appBuild,
     // Generated JS file names (with nested folders).
     // There will be one main bundle, and one file per asynchronous chunk.
     // We don't currently advertise code splitting but Webpack supports it.
@@ -51,29 +49,13 @@ module.exports = {
     publicPath: publicPath
   },
   resolve: {
-    // This allows you to set a fallback for where Webpack should look for modules.
-    // We read `NODE_PATH` environment variable in `paths.js` and pass paths here.
-    // We use `fallback` instead of `root` because we want `node_modules` to "win"
-    // if there any conflicts. This matches Node resolution mechanism.
-    // https://github.com/facebookincubator/create-react-app/issues/253
-    fallback: paths.nodePaths,
     // These are the reasonable defaults supported by the Node ecosystem.
-    // We also include JSX as a common component filename extension to support
-    // some tools, although we do not recommend using it, see:
-    // https://github.com/facebookincubator/create-react-app/issues/290
     extensions: ['.js', '.json', '.jsx', ''],
     alias: {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web'
     }
-  },
-  // Resolve loaders (webpack plugins for CSS, images, transpilation) from the
-  // directory of `react-scripts` itself rather than the project directory.
-  // You can remove this after ejecting.
-  resolveLoader: {
-    root: paths.ownNodeModules,
-    moduleTemplates: ['*-loader']
   },
   module: {
     // First, run the linter.
@@ -82,14 +64,14 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'standard',
-        include: paths.appSrc
+        include: config.paths.appSrc
       }
     ],
     loaders: [
       // Process JS with Babel.
       {
         test: /\.(js|jsx)$/,
-        include: paths.appSrc,
+        include: config.paths.appSrc,
         loader: 'babel',
         query: require('./babel.config')
       },
@@ -100,11 +82,7 @@ module.exports = {
       // but unlike in development configuration, we do something different.
       // `ExtractTextPlugin` first applies the "postcss" and "css" loaders
       // (second argument), then grabs the result CSS and puts it into a
-      // separate file in our build process. This way we actually ship
-      // a single CSS file in production instead of JS code injecting <style>
-      // tags. If you use code splitting, however, any async bundles will still
-      // use the "style" loader inside the async code so CSS from them won't be
-      // in the main CSS file.
+      // separate file in our build process.
       {
         test: /\.css$/,
         // "?-autoprefixer" disables autoprefixer in css-loader itself:
@@ -137,7 +115,7 @@ module.exports = {
       // A special case for favicon.ico to place it into build root directory.
       {
         test: /\/favicon.ico$/,
-        include: [paths.appSrc],
+        include: [config.paths.appSrc],
         loader: 'file',
         query: {
           name: 'favicon.ico?[hash:8]'
@@ -152,24 +130,8 @@ module.exports = {
           limit: 10000,
           name: 'static/media/[name].[hash:8].[ext]'
         }
-      },
-      // "html" loader is used to process template page (index.html) to resolve
-      // resources linked with <link href="./relative/path"> HTML tags.
-      {
-        test: /\.html$/,
-        loader: 'html',
-        query: {
-          attrs: ['link:href']
-        }
       }
     ]
-  },
-  // Point ESLint to our predefined config.
-  eslint: {
-    // TODO: consider separate config for production,
-    // e.g. to enable no-console and no-debugger only in production.
-    configFile: path.join(__dirname, 'eslint.js'),
-    useEslintrc: false
   },
   // We use PostCSS for autoprefixing only.
   postcss: function () {
@@ -185,27 +147,7 @@ module.exports = {
     ]
   },
   plugins: [
-    // Generates an `index.html` file with the <script> injected.
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: paths.appHtml,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        minifyJS: true,
-        minifyCSS: true,
-        minifyURLs: true
-      }
-    }),
-    // Makes some environment variables available to the JS code, for example:
-    // if (process.env.NODE_ENV === 'production') { ... }. See `env.js`.
-    // It is absolutely essential that NODE_ENV was set to production here.
-    // Otherwise React will be compiled in the very slow development mode.
+    // Makes some environment variables available to the JS code
     new webpack.DefinePlugin(env),
     // This helps ensure the builds are consistent if source hasn't changed:
     new webpack.optimize.OccurrenceOrderPlugin(),

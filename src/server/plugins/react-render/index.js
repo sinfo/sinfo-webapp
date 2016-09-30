@@ -10,8 +10,8 @@ const forEach = require('lodash.foreach')
 function register (server, options = {}, next) {
   const routes = options.routes
   const assets = server.plugins.huyang.stats.assets
-  console.log(assets)
-  // Extract scripts to pass to served html
+
+  // Extract scripts to pass to the template
   const bundles = filter(assets, (asset) => asset.chunkNames.indexOf('main') !== -1)
   let scriptTags = ''
   let cssTags = ''
@@ -23,31 +23,30 @@ function register (server, options = {}, next) {
   server.route({
     method: 'GET',
     path: '/{p*}',
-    handler: function (request, reply) {
-      ReactRouter.match({ routes, location: request.path }, (error, redirectLocation, renderProps) => {
-        if (error) return reply(Boom.badImplementation(error.message))
-        if (redirectLocation) return reply.redirect(302, redirectLocation.pathname + redirectLocation.search)
-        if (renderProps) {
-          // You can also check renderProps.components or renderProps.routes for
-          // your "not found" component or route respectively, and send a 404 as
-          // below, if you're using a catch-all route.
-          const reactPage = ReactDOM.renderToString(
-            React.createElement(
-              ReactRouter.RouterContext,
-              Object.assign({}, renderProps)
-            )
-          )
-          const headElems = Helmet.rewind()
-          const head = {}
-          forEach(headElems, (value, prop) => {
-            head[prop] = value.toString()
-          })
-          return reply.view('./template.pug', {reactPage, scriptTags, cssTags, head}, {path: __dirname})
-        }
-        reply(Boom.notFound())
-      })
-    }
+    handler: appRouter
   })
+
+  function appRouter (request, reply) {
+    ReactRouter.match({ routes, location: request.path }, (error, redirectLocation, renderProps) => {
+      if (error) return reply(Boom.badImplementation(error.message))
+      if (redirectLocation) return reply.redirect(302, redirectLocation.pathname + redirectLocation.search)
+      // No component to render
+      if (!renderProps) return reply(Boom.notFound())
+      const reactPage = ReactDOM.renderToString(
+        React.createElement(
+          ReactRouter.RouterContext,
+          Object.assign({}, renderProps)
+        )
+      )
+      const headElems = Helmet.rewind()
+      const head = {}
+      forEach(headElems, (value, prop) => {
+        head[prop] = value.toString()
+      })
+      return reply.view('./template.pug', {reactPage, scriptTags, cssTags, head}, {path: __dirname})
+    })
+  }
+
   next()
 }
 
