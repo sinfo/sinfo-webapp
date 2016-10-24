@@ -8,7 +8,7 @@ class Header extends Component {
 
   render () {
     return (
-      <Navbar inverse>
+      <Navbar inverse className='header'>
         <Navbar.Header>
           <Navbar.Brand>
             <a href='#'>SINFO</a>
