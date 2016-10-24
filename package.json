@@ -53,6 +53,7 @@
     "lodash.foreach": "^4.5.0",
     "pug": "^2.0.0-beta6",
     "react": "^15.3.2",
+    "react-boostrap-carousel": "^2.0.2",
     "react-bootstrap": "^0.30.3",
     "react-dom": "^15.3.2",
     "react-helmet": "^3.1.0",
@@ -61,7 +62,7 @@
   },
   "scripts": {
     "start": "node src/server",
-    "dev": "nodemon -e js,json,pug --watch src/server --watch config src/server",
+    "dev": "nodemon -e css,js,json,pug --watch src --watch config src/server",
     "clean": "rm -rf build",
     "build": "npm run clean && NODE_ENV=production webpack --colors --display-error-details --config config/webpack.config.prod.js",
     "lint": "standard | snazzy",
