@@ -11,7 +11,7 @@ class Header extends Component {
       <Navbar inverse className='header'>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href='#'>SINFO</a>
+            <a href='#'><img src='https://static.wixstatic.com/media/e91543_2a60c36724e24e05a748a43d34a0e4f1~mv2.png/v1/fill/w_42,h_42,al_c,usm_0.66_1.00_0.01/e91543_2a60c36724e24e05a748a43d34a0e4f1~mv2.png' /></a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
