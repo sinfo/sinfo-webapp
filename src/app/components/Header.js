@@ -23,6 +23,9 @@ class Header extends Component {
             <NavItem eventKey={3} href='#home'>Sponsor Us</NavItem>
             <NavItem eventKey={4} href='#home'>COC</NavItem>
           </Nav>
+          <Nav pullRight>
+            <NavItem eventKey={5} href='#home'>Login</NavItem>
+          </Nav>
         </Navbar.Collapse>
       </Navbar>
     )
