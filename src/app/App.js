@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import Head from './components/Head'
 import Carousel from './components/Carousel'
 import Events from './components/Events'
+import Speakers from './components/speakers/Speakers'
 
 class App extends Component {
   componentDidMount () {
@@ -22,7 +23,8 @@ class App extends Component {
         <Header />
         <Carousel />
         <Events />
-        <Link to='/test'> BATATA POWER</Link>
+        <Speakers />
+        <Link to='/test' />
         <Footer />
       </div>
     )
