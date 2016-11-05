@@ -4,7 +4,8 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Head from './components/Head'
 import Carousel from './components/Carousel'
-// import Events from './components/Events'
+import Events from './components/Events'
+import Speakers from './components/speakers/Speakers'
 
 class App extends Component {
   componentDidMount () {
@@ -21,13 +22,9 @@ class App extends Component {
         <Head />
         <Header />
         <Carousel />
-        <div className='App-header'>
-          <h2>Welcome to React</h2>
-        </div>
-        <p className='App-intro'>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Link to='/test'> Test link</Link>
+        <Events />
+        <Speakers />
+        <Link to='/test' />
         <Footer />
       </div>
     )

@@ -27,3 +27,54 @@
   width: 24px;
   height: auto;
 }
+
+.carousel {
+  height: 630px;
+}
+.carousel div{
+  height: 100%;
+  width: 100%;
+}
+.carousel-indicators li {
+  background-color: rgba(0,0,0,0) !important;
+  border: 1px solid white !important;
+}
+.carousel-indicators li.active {
+  background-color: white !important;
+}
+.carousel .title {
+  top: 100px;
+  position: relative;
+  font-size: 100px;
+  color: white;
+  text-shadow: rgba(0, 0, 0, 0.4) 0px 4px 5px;
+}
+.carousel .sub-title {
+  top: 150px;
+  position: relative;
+  font-size: 70px;
+  color: white;
+  text-shadow: rgba(0, 0, 0, 0.4) 0px 4px 5px;
+}
+.speakers {
+  background-color: rgba(48, 120, 190, 1);
+}
+.speakers .title {
+  color: white;
+  font-size: 78px;
+  margin-top: 40px;
+}
+.speaker .img {
+  border-radius: 50%;
+  height: 160px;
+  width: 160px;
+  background-position: center;
+  background-size: cover;
+  margin: auto;
+}
+.speaker span {
+  position: relative;
+  color: white;
+  font-weight: 400;
+  top: 40px;
+}
