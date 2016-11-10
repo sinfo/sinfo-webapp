@@ -78,3 +78,25 @@
   font-weight: 400;
   top: 40px;
 }
+.team {
+  background-color: white;
+}
+.team .title {
+  color: black;
+  font-size: 78px;
+  margin-top: 40px;
+}
+.member .img {
+  border-radius: 50%;
+  height: 160px;
+  width: 160px;
+  background-position: center;
+  background-size: cover;
+  margin: auto;
+}
+.member span {
+  position: relative;
+  color: white;
+  font-weight: 400;
+  top: 40px;
+}
