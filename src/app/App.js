@@ -6,6 +6,7 @@ import Head from './components/Head'
 import Carousel from './components/Carousel'
 import Events from './components/Events'
 import Speakers from './components/speakers/Speakers'
+import Team from './components/team/Team'
 
 class App extends Component {
   componentDidMount () {
@@ -24,6 +25,7 @@ class App extends Component {
         <Carousel />
         <Events />
         <Speakers />
+        <Team />
         <Link to='/test' />
         <Footer />
       </div>
