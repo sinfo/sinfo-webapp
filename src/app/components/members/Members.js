@@ -4,32 +4,29 @@ import { Grid, Row } from 'react-bootstrap'
 
 import Member from './Member'
 
-export default class Team extends Component {
+export default class Members extends Component {
   constructor (props) {
     super(props)
-    this.state = { team: [] }
+    this.state = { members: [] }
   }
 
   componentDidMount () {
     const self = this
     axios.get('https://deck.sinfo.org:443/api/members?event=24-sinfo&&participations=true')
     .then(res => {
-      self.setState({ team: res.data })
+      self.setState({ members: res.data })
     })
   }
 
   render () {
     return (
-      <Grid fluid className='team'>
+      <Grid fluid className='members'>
         <Grid>
-          <h1 className='title'>Team</h1>
+          <h1 className='title'>The team</h1>
           <Row>
             {
-              this.state.team.map((member, index) => {
-                if (member.participations.event === '24-sinfo') {
-                  return (<Member key={index} name={member.name} img={member.img} />)
-                }
-                return
+              this.state.members.map((member, index) => {
+                return (<Member key={index} name={member.name} img={member.img} />)
               })
             }
           </Row>
