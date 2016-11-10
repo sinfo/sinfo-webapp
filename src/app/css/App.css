@@ -78,10 +78,10 @@
   font-weight: 400;
   top: 40px;
 }
-.team {
+.members {
   background-color: white;
 }
-.team .title {
+.members .title {
   color: black;
   font-size: 78px;
   margin-top: 40px;
@@ -93,10 +93,13 @@
   background-position: center;
   background-size: cover;
   margin: auto;
+  padding: 10px;
 }
-.member span {
-  position: relative;
-  color: white;
-  font-weight: 400;
-  top: 40px;
+.member .name {
+    margin: 5px;
+    text-align: center;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
