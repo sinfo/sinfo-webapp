@@ -26,7 +26,7 @@ export default class Members extends Component {
           <Row>
             {
               this.state.members.map((member, index) => {
-                return (<Member key={index} name={member.name} img={member.img} />)
+                return (<Member key={index} name={member.name} img={member.img} twitter={member.twitter} github={member.github} mail={member.mail} />)
               })
             }
           </Row>
