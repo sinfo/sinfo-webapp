@@ -56,6 +56,9 @@
   color: white;
   text-shadow: rgba(0, 0, 0, 0.4) 0px 4px 5px;
 }
+/*
+* SINFO Speakers
+*/
 .speakers {
   background-color: rgba(48, 120, 190, 1);
 }
@@ -78,8 +81,12 @@
   font-weight: 400;
   top: 40px;
 }
+/*
+* SINFO Members
+*/
 .members {
   background-color: white;
+  text-align: center;
 }
 .members .title {
   color: black;
@@ -96,10 +103,26 @@
   padding: 10px;
 }
 .member .name {
-    margin: 5px;
-    text-align: center;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  font-size: 16px;
+  color: #404040;
+  font-weight: 700;
+  line-height: 1.16;
+  margin: 5px;
+  text-align: center;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.member .social-icon {
+  text-decoration: none;
+  margin: 0.1em;
+  opacity: 0.9;
+  color: #202020;
+  font-size: 1.5em;
+  padding: 8px
+}
+.member .social-icon:hover {
+  opacity: 1;
+  color: #202020;
 }

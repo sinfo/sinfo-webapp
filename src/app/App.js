@@ -15,6 +15,7 @@ class App extends Component {
     require('./css/App.css')
     require('./css/Header.css')
     require('./css/react-boostrap-carousel.css')
+    require('./css/font-awesome.min.css')
     // logo = require('./images/logo.svg')
   }
   render () {
