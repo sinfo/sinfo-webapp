@@ -1,10 +1,11 @@
 doctype html
 html()
-  head
-    != head.meta
-    != cssTags
-    != head.link
-    != head.title
+  if head
+    head
+      != head.meta
+      != css
+      != head.link
+      != head.title
   body
     div(id="root") !{reactPage}
-    != scriptTags
+    != js

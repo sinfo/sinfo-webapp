@@ -9,16 +9,9 @@ const forEach = require('lodash.foreach')
 
 function register (server, options = {}, next) {
   const routes = options.routes
-  const assets = server.plugins.huyang.stats.assets
 
-  // Extract scripts to pass to the template
-  const bundles = filter(assets, (asset) => asset.chunkNames.indexOf('main') !== -1)
-  let scriptTags = ''
-  let cssTags = ''
-  bundles.forEach((bundle) => {
-    if (bundle.name.match(/\w\.js$/)) scriptTags += `<script async src=${bundle.name}></script>`
-    if (bundle.name.match(/\w\.css$/)) cssTags += `<link rel="stylesheet" href=${bundle.name}>`
-  })
+  // Only generate the bundle tags once
+  const bundles = getBundles()
 
   server.route({
     method: 'GET',
@@ -26,7 +19,25 @@ function register (server, options = {}, next) {
     handler: appRouter
   })
 
+  // Extract resources to embed in the template
+  function getBundles () {
+    let tags = {js: '', css: ''}
+    const assets = server.plugins.huyang.stats.assets
+
+    // Extract scripts to pass to the template
+    const bundles = filter(assets, (asset) => asset.chunkNames.indexOf('main') !== -1)
+    bundles.forEach((bundle) => {
+      if (bundle.name.match(/\w\.js$/)) tags.js += `<script async src=${bundle.name}></script>`
+      if (bundle.name.match(/\w\.css$/)) tags.css += `<link rel="stylesheet" href=${bundle.name}>`
+    })
+    return tags
+  }
+
+  // The logic for the webapp router
   function appRouter (request, reply) {
+    // Don't do server rendering in dev
+    if (options.isDev) return reply.view('./template.pug', bundles, {path: __dirname})
+    // Let the react router handle the rest
     ReactRouter.match({ routes, location: request.path }, (error, redirectLocation, renderProps) => {
       if (error) return reply(Boom.badImplementation(error.message))
       if (redirectLocation) return reply.redirect(302, redirectLocation.pathname + redirectLocation.search)
@@ -43,7 +54,12 @@ function register (server, options = {}, next) {
       forEach(headElems, (value, prop) => {
         head[prop] = value.toString()
       })
-      return reply.view('./template.pug', {reactPage, scriptTags, cssTags, head}, {path: __dirname})
+      return reply.view('./template.pug', {
+        js: bundles.js,
+        css: bundles.css,
+        reactPage,
+        head
+      }, {path: __dirname})
     })
   }
 

@@ -47,8 +47,7 @@ module.exports = {
     lazy: false,
     quiet: false,
     noInfo: true,
-    stats: { colors: true },
-    host: 'localhost'
+    stats: { colors: true }
   },
   output: {
     // Next line is not used in dev but WebpackDevServer crashes without it:
@@ -96,7 +95,7 @@ module.exports = {
       // in development "style" loader enables hot editing of CSS.
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader', 'postcss-loader')
+        loader: 'style!css!postcss'
       },
       // JSON is not enabled by default in Webpack but both Node and Browserify
       // allow it implicitly so we also enable it.

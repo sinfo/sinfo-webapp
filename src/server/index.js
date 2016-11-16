@@ -32,6 +32,7 @@ server.register([
   {
     register: require('./plugins/react-render'),
     options: {
+      isDev: config.isDev,
       routes: require('../app/routes')
     }
   }
