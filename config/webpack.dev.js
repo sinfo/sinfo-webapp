@@ -1,11 +1,19 @@
+'use strict'
 
-var autoprefixer = require('autoprefixer')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
-var WatchMissingNodeModulesPlugin = require('../scripts/utils/WatchMissingNodeModulesPlugin')
-var paths = require('./paths')
-var env = require('./env')
+const autoprefixer = require('autoprefixer')
+const webpack = require('webpack')
+const findCacheDir = require('find-cache-dir')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const WatchMissingNodeModulesPlugin = require('./helpers/WatchMissingNodeModulesPlugin')
+const env = require('./helpers/env')
+const babelConfig = require('./babel.config')
+const config = require('./app.config').app
+
+// Enable caching results in ./node_modules/.cache/react-scripts/ directory for
+// faster rebuilds.
+babelConfig.cacheDirectory = findCacheDir({
+  name: 'react-scripts'
+})
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -25,7 +33,7 @@ module.exports = {
     // We ship a few polyfills by default.
     require.resolve('./polyfills'),
     // App code:
-    paths.appIndexJs
+    config.paths.appIndexJs
     // We include the app code last so that if there is a runtime error during
     // initialization, it doesn't blow up the WebpackDevServer client, and
     // changing JS code would still trigger a refresh.
@@ -39,12 +47,11 @@ module.exports = {
     lazy: false,
     quiet: false,
     noInfo: true,
-    stats: { colors: true },
-    host: 'localhost'
+    stats: { colors: true }
   },
   output: {
     // Next line is not used in dev but WebpackDevServer crashes without it:
-    path: paths.appBuild,
+    path: config.paths.appBuild,
     // Add /* filename */ comments to generated require()s in the output.
     pathinfo: true,
     // This does not produce a real file. It's just the virtual path that is
@@ -55,8 +62,6 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    // This allows you to set a fallback for where Webpack should look for modules.
-    fallback: paths.nodePaths,
     // These are the reasonable defaults supported by the Node ecosystem.
     extensions: ['.js', '.json', '.jsx', ''],
     alias: {
@@ -72,16 +77,16 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'standard',
-        include: paths.appSrc
+        include: config.paths.appSrc
       }
     ],
     loaders: [
       // Process JS with Babel.
       {
         test: /\.(js|jsx)$/,
-        include: paths.appSrc,
+        include: config.paths.appSrc,
         loader: 'babel',
-        query: require('./babel.dev')
+        query: babelConfig
       },
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -112,7 +117,7 @@ module.exports = {
       // A special case for favicon.ico to place it into build root directory.
       {
         test: /\/favicon.ico$/,
-        include: [paths.appSrc],
+        include: [config.paths.appSrc],
         loader: 'file',
         query: {
           name: 'favicon.ico?[hash:8]'
@@ -126,15 +131,6 @@ module.exports = {
         query: {
           limit: 10000,
           name: 'static/media/[name].[hash:8].[ext]'
-        }
-      },
-      // "html" loader is used to process template page (index.html) to resolve
-      // resources linked with <link href="./relative/path"> HTML tags.
-      {
-        test: /\.html$/,
-        loader: 'html',
-        query: {
-          attrs: ['link:href']
         }
       }
     ]
@@ -153,25 +149,17 @@ module.exports = {
     ]
   },
   plugins: [
-    // Generates an `index.html` file with the <script> injected.
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: paths.appHtml
-    }),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'development') { ... }. See `env.js`.
     new webpack.DefinePlugin(env),
-    // This is necessary to emit hot updates (currently CSS only):
+    // This is necessary to emit hot updates:
     new webpack.HotModuleReplacementPlugin(),
-    // Watcher doesn't work well if you mistype casing in a path so we use
-    // a plugin that prints an error when you attempt to do this.
-    // See https://github.com/facebookincubator/create-react-app/issues/240
-    new CaseSensitivePathsPlugin(),
+    new ExtractTextPlugin('static/css/[name].[contenthash:8].css'),
     // If you require a missing module and then `npm install` it, you still have
     // to restart the development server for Webpack to discover it. This plugin
     // makes the discovery automatic so you don't have to restart.
     // See https://github.com/facebookincubator/create-react-app/issues/186
-    new WatchMissingNodeModulesPlugin(paths.appNodeModules)
+    new WatchMissingNodeModulesPlugin(config.paths.appNodeModules)
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

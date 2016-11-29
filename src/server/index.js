@@ -1,20 +1,55 @@
 'use strict'
+// Set babel require hook
+require('babel-register')(require('../../config/babel.config'))
 
 const Hapi = require('hapi')
-const webpackConfig = require('../../config/webpack.config.dev')
+const config = require('../../config/app.config')
 
-const server = new Hapi.Server()
-server.connection({ port: 3000 })
+// Require the correct webpack config
+const webpackConfig = config.isDev
+  ? require('../../config/webpack.dev')
+  : require('../../config/webpack.prod')
+
+const server = new Hapi.Server({
+  // Get error logs from the pug compiler
+  debug: {
+    request: ['error']
+  }
+})
+
+server.connection({
+  host: config.server.host,
+  port: config.server.port
+})
 
 server.register([
-  { register: require('inert') },
+  {register: require('vision')},
+  {register: require('inert')},
   {
     register: require('huyang'),
     options: webpackConfig
+  },
+  {
+    register: require('./plugins/react-render'),
+    options: {
+      isDev: config.isDev,
+      routes: require('../app/routes')
+    }
   }
 ], (err) => {
   if (err) throw err
 
+  // Setup the pug view template engine
+  server.views({
+    engines: { pug: require('pug') },
+    encoding: 'utf8',
+    isCached: true,
+    compileOptions: {
+      pretty: true
+    }
+  })
+
+  // Start the server
   server.start((err) => {
     if (err) throw err
     console.log(`Server running at: ${server.info.uri}`)
