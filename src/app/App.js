@@ -5,8 +5,7 @@ import Footer from './components/Footer'
 import Head from './components/Head'
 import Carousel from './components/Carousel'
 import Events from './components/Events'
-import Speakers from './components/speakers/Speakers'
-import Members from './components/members/Members'
+import EditionPicker from './components/EditionPicker'
 
 class App extends Component {
   componentDidMount () {
@@ -25,9 +24,8 @@ class App extends Component {
         <Header />
         <Carousel />
         <Events />
-        <Speakers />
-        <Members />
         <Link to='/test' />
+        <EditionPicker />
         <Footer />
       </div>
     )
