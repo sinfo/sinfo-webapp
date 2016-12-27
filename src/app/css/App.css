@@ -1,0 +1,128 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.social-icon {
+  width: 24px;
+  height: auto;
+}
+
+.carousel {
+  height: 630px;
+}
+.carousel div{
+  height: 100%;
+  width: 100%;
+}
+.carousel-indicators li {
+  background-color: rgba(0,0,0,0) !important;
+  border: 1px solid white !important;
+}
+.carousel-indicators li.active {
+  background-color: white !important;
+}
+.carousel .title {
+  top: 100px;
+  position: relative;
+  font-size: 100px;
+  color: white;
+  text-shadow: rgba(0, 0, 0, 0.4) 0px 4px 5px;
+}
+.carousel .sub-title {
+  top: 150px;
+  position: relative;
+  font-size: 70px;
+  color: white;
+  text-shadow: rgba(0, 0, 0, 0.4) 0px 4px 5px;
+}
+/*
+* SINFO Speakers
+*/
+.speakers {
+  background-color: rgba(48, 120, 190, 1);
+}
+.speakers .title {
+  color: white;
+  font-size: 78px;
+  margin-top: 40px;
+}
+.speaker .img {
+  border-radius: 50%;
+  height: 160px;
+  width: 160px;
+  background-position: center;
+  background-size: cover;
+  margin: auto;
+}
+.speaker span {
+  position: relative;
+  color: white;
+  font-weight: 400;
+  top: 40px;
+}
+/*
+* SINFO Members
+*/
+.members {
+  background-color: white;
+  text-align: center;
+}
+.members .title {
+  color: black;
+  font-size: 78px;
+  margin-top: 40px;
+}
+.member .img {
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  background-position: center;
+  background-size: cover;
+  margin: auto;
+  padding: 10px;
+}
+.member .name {
+  font-size: 16px;
+  color: #404040;
+  font-weight: 700;
+  line-height: 1.16;
+  margin: 5px;
+  text-align: center;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.member .social-icon {
+  text-decoration: none;
+  margin: 0.1em;
+  opacity: 0.9;
+  color: #202020;
+  font-size: 1.5em;
+  padding: 8px
+}
+.member .social-icon:hover {
+  opacity: 1;
+  color: #202020;
+}

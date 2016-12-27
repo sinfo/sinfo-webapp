@@ -8,10 +8,10 @@ class Header extends Component {
 
   render () {
     return (
-      <Navbar inverse>
+      <Navbar inverse className='header'>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href='#'>SINFO</a>
+            <a href='#'><img src='https://static.wixstatic.com/media/e91543_2a60c36724e24e05a748a43d34a0e4f1~mv2.png/v1/fill/w_42,h_42,al_c,usm_0.66_1.00_0.01/e91543_2a60c36724e24e05a748a43d34a0e4f1~mv2.png' /></a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -22,6 +22,9 @@ class Header extends Component {
             <NavItem eventKey={3} href='#home'>Speakers</NavItem>
             <NavItem eventKey={3} href='#home'>Sponsor Us</NavItem>
             <NavItem eventKey={4} href='#home'>COC</NavItem>
+          </Nav>
+          <Nav pullRight>
+            <NavItem eventKey={5} href='#home'>Login</NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
