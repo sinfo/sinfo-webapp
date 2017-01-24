@@ -1,29 +1,9 @@
 .list.speakers(data-hook='speakers-list')
-  .ink-carousel(data-pagination='#carousel-pagination' data-auto-advance='7000')
-    ul.stage.column-group.half-gutters
-      each speaker in speakers
-        li.all-100.slide.push-center.speaker
-          a(href='/speakers/' + speaker.id)
-            .column-group
-              .all-70.push-center
-                .column-group.gutters
-                  .all-50.tiny-100.small-100
-                    .img-container.half-left-space
-                      .img(style='background-image:url(' + speaker.img + ');')
-                      .hide-all.show-tiny.show-small
-                        h4= speaker.name
-                        h5= speaker.title
-                  .all-50.tiny-100.small-100.align-left
-                    i
-                      b.large
-                        i.fa.fa-quote-right.half-right-space
-                        span= speaker.feedback
-                        i.fa.fa-quote-right.half-left-space
-                      .hide-tiny.hide-small
-                        br
-                        br
-                        h4= speaker.name
-                        h5= speaker.title
-            
-    nav#carousel-pagination.ink-navigation
-      ul.pagination.chevron
+  each speaker in speakers
+    .speaker.all-25.medium-30.small-100.tiny-100
+      .push-center
+        // a.push-center(href='/speakers/' + speaker.id)
+        h5.push-center.name= speaker.name
+        .img-container.push-center
+          .img(style='background-image:url(' + speaker.img + ');')
+        .title.push-center= speaker.title

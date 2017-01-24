@@ -15,14 +15,15 @@ var Footer = require('./footer');
 var $ = require('jquery');
 
 // HACK
-var DEFAULT_EVENT = '23-sinfo-conf'
+var DEFAULT_EVENT = '24-sinfo'
 
 
 module.exports = View.extend({
   template: templates.body,
   initialize: function () {
     var route =  window.location.pathname.split('/')
-    if (route[1] === 'events' && route[2]) this.selectedEvent = route[2] || DEFAULT_EVENT
+    this.selectedEvent = (route[1] === 'events' && route[2]) ? route[2] : DEFAULT_EVENT
+    console.log(this.selectedEvent)
     // this marks the correct nav item selected
     this.listenTo(app.router, 'page', this.handleNewPage);
   },

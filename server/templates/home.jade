@@ -63,22 +63,14 @@ html
             a.social-icon(target="_blank" href="http://github.com/sinfo")
               i.social-icon.fa.fa-github
 
-          //- .all-50.medium-100.small-100.tiny-100.push-center.events  
-          //-   .ink-carousel(data-pagination='#carousel-pagination-event')
-          //-     ul.stage.half-gutters
-          //-       each event in events
-          //-         li.slide.event
-          //-           a(href='/events/' + event.id)
-          //-             h3.description.align-center= event.name
-          //-             .calendar
-          //-               i.fa.fa-calendar
-          //-               br.other
-          //-               span= event.begin.day + ' - ' + event.end.day + ' ' + event.begin.month
-          //-               br
-          //-               span= event.begin.year
-          //-             
-          //-     nav#carousel-pagination-event.ink-navigation
-          //-       ul.pagination.chevron
+          .all-50.medium-100.small-100.tiny-100.push-center.events
+              .half-gutters.event
+                h3.description.align-center Join us in our next edition!
+                h2.description.align-center= events[1].name
+                .calendar
+                  i.fa.fa-calendar
+                  br.other
+                  span= events[1].begin.day + ' - ' + events[1].end.day + ' ' + events[1].begin.month
 
       .area-light
         h1.highlight Who are we
@@ -119,7 +111,7 @@ html
               | much more things and cooperate with a lot more communities and companies during the year.
 
       #speakers.light.overlay-blue.container.section.reviews.all-100(data-hook='speakers-reviews')
-        h1 What they say about us?
+        h1 Speakers
         include ./speakers
         
       #team.area-light.container.members.all-100(data-hook='sinfo-team' data-spy='true' data-target='#main-menu')

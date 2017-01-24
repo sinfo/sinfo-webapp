@@ -3,6 +3,9 @@ var templates = require('client/js/templates');
 var SubCollection = require('ampersand-subcollection');
 var PartnersArea = require('client/js/views/partners/area');
 
+// HACK
+var DEFAULT_EVENT = '24-sinfo'
+
 module.exports = View.extend({
   template: templates.partials.footer,
   props: {
@@ -11,11 +14,11 @@ module.exports = View.extend({
   initialize: function (object) {
     var self = this;
 
-    self.seeMore = '/events/' + object.selectedEvent + '/partners';
+    self.seeMore = '/events/' + DEFAULT_EVENT + '/partners';
 
     if(!this.collection.length) {
       return this.collection.fetch({
-        data: {event: object.selectedEvent},
+        data: {event: DEFAULT_EVENT},
         success: function () {
           self.render();
         }

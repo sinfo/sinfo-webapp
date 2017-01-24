@@ -30,7 +30,7 @@ config.live = {
 }
 
 config.event = {
-  current: process.env.CANNON_EVENT_CURRENT || '23-sinfo-conf'
+  current: process.env.CANNON_EVENT_CURRENT || '24-sinfo'
 }
 
 config.client = {

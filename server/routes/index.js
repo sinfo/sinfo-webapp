@@ -20,6 +20,10 @@ server.route({
           var Deck = request.server.methods.deck
           Deck.companies.get({event: config.event.current}, reply)
         }, assign: 'companies' },
+        { method: function getSpeakers (request, reply) {
+          var Deck = request.server.methods.deck
+          Deck.speakers.get({event: config.event.current}, reply)
+        }, assign: 'speakers' },
         { method: function getEvents (request, reply) {
           var Deck = request.server.methods.deck
           Deck.events.get(function (err, events) {
@@ -31,8 +35,7 @@ server.route({
             })
             reply(null, events)
           })
-        }, assign: 'events' },
-        { method: 'deck.speakers.getFeedback()', assign: 'speakers' }
+        }, assign: 'events' }
       ]
     ],
     handler: function (request, reply) {

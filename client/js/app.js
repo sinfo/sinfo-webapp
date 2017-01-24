@@ -13,6 +13,9 @@ var domReady = require('domready')
 
 var Speakers = require('./models/speakers')
 
+// HACK
+var DEFAULT_EVENT = '24-sinfo'
+
 module.exports = {
   // this is the the whole app initter
   blastoff: function () {
@@ -72,7 +75,7 @@ module.exports = {
   buildModels: function () {
     var self = this
 
-    this.selectedEvent = {}
+    this.selectedEvent = DEFAULT_EVENT
 
     // create our global 'me' object and an empty collection for our channels models.
     this.me = new Me()
