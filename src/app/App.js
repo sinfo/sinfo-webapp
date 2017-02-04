@@ -11,10 +11,10 @@ class App extends Component {
   componentDidMount () {
     // We need to require css here in order for it to be isomorphic
     require('bootstrap/dist/css/bootstrap.css')
-    require('./css/App.css')
-    require('./css/Header.css')
     require('./css/react-boostrap-carousel.css')
     require('./css/font-awesome.min.css')
+    require('./css/App.css')
+    require('./css/Header.css')
     // logo = require('./images/logo.svg')
   }
   render () {

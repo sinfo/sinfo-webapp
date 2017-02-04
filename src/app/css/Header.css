@@ -1,44 +1,16 @@
-.header, .header .container {
+.header {
+  font-size: 16px;
+  top: 0;
+  color: #FFF;
+  position: fixed;
   margin-bottom: 0;
   border-radius: 0;
+  border-color: #000;
   width: 100%;
-  height: 100px;
-  background-color: rgba(22, 22, 22, 0.85);
+  z-index: 300;
+  background: rgba(0, 0, 0, 0.6);
 }
 
-.navbar-header, .navbar-collapse,
-.navbar-collapse ul, .navbar-collapse ul li,
-.navbar-collapse ul li a, .navbar-inverse .navbar-nav > li > a {
-  height: 100px;
-  color: #FFFFFF;
-  background-color: rgba(22, 22, 22, 0.85);
-  font: normal normal normal 18px/1.4em proxima-n-w01-reg,sans-serif;
-  line-height: 70px;
-}
-
-.navbar-header a {
-  padding-top: 30px;
-}
-
-.navbar-inverse .navbar-nav > .active > a,
-.navbar-inverse .navbar-nav > .active > a:hover,
-.navbar-inverse .navbar-nav > .active > a:focus {
-  color: #FFFFFF;
-  padding-top: 11px;
-  background-color: rgba(22, 22, 22, 0.85);
-  border-top: 4px solid;
-  border-top-color: #00689F;
-}
-
-.navbar-inverse .navbar-nav > li > a:hover {
-  border-top: 4px solid;
-  padding-top: 11px;
-  border-top-color: #FFFFFF;
-  color: #00689F;
-}
-
-.navbar-inverse .navbar-right > li > a,
-.navbar-inverse .navbar-right > li > a:hover {
-  color: #FFFFFF;
-  background-color: #00689F;
+.navbar-default .navbar-nav > li > a {
+  color: #FFF;
 }
