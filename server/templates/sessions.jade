@@ -1,0 +1,38 @@
+.sessions
+  #calendar
+    script.
+      var sessions = !{JSON.stringify(sessions)}
+      var options = !{JSON.stringify(options.kinds.sessions)}
+      var event = !{JSON.stringify(events[1])}
+      var defaultView = (window.innerWidth < 900) ? 'agendaDay' : 'agendaWeek'
+      
+      $().ready(function(){
+        $('#calendar').fullCalendar({
+          events: sessions.map(function (s) {
+            var color = '';
+            options.forEach(function (o) {
+              if (s.kind === o.name) color = o.color
+            })
+            return {
+              title: s.name,
+              start: new Date(s.date),
+              duration: new Date(s.duration),
+              end: new Date((new Date(s.date)).getTime() + (new Date(s.duration)).getTime()),
+              url: event.id + '/sessions/' + s.id,
+              color:  color
+            }
+          }),
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+          },
+          defaultDate: event.date,
+          defaultView: defaultView,
+          height: 'auto',
+          minTime: '09:00:00',
+          maxTime: '22:00:00',
+          allDaySlot: false,
+          hiddenDays: [0]
+        });
+      })
