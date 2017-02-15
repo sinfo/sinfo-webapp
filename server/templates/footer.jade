@@ -1,7 +1,28 @@
-.all-100.double-top-space.footer.partners
+#partners.all-100.double-top-space.footer.partners
   h3 Partners
-  a#digital-ocean(href='https://www.digitalocean.com/' target="_blank")
-    img(src="/static/digital_ocean_grey.png")
-  .all-100
-    p.note Made with &#9829; at SINFO - code available 
-      |<a href='https://github.com/sinfo/sinfo-webapp'> here</a>
+  .sub-title Diamond
+  .partners.exclusive
+    .list
+      each company in companies.exclusive
+        span.partner
+          a(title=company.name)
+            img(src=company.img)
+  .sub-title Platinum
+  .partners.maximum
+    .list
+      each company in companies.max
+        span.partner
+          a(title=company.name)
+            img(src=company.img)
+        
+  .all-100.push-center
+    a#see-more.ink-button.blue(href='/events/' + events[1].id + '/partners') See More
+
+  .all-100.top-space.note
+    .all-25.small-100
+      a(href='/contacts') Contacts
+    .all-50.small-100
+      p Made with &#9829; at SINFO - code available 
+        |<a href='https://github.com/sinfo/sinfo-webapp'> here</a>
+    .all-25.small-100
+      a(href='/privacy-policy') Privacy policy

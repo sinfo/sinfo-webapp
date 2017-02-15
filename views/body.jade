@@ -6,27 +6,31 @@ body.ink-drawer
         ul.menu.horizontal.push-left
           li.title
             a(href='/')
-              img(src='/static/logo.png')
+              img#home-icon(src='/static/poweron.png')
 
         ul.menu.horizontal.push-left.hide-medium.hide-small.hide-tiny
           li
-            a.ink-smooth-scroll(href='#speakers') Speakers
+            a.ink-smooth-scroll(href='/speakers') Speakers
           li
-            a.ink-smooth-scroll(href='#sessions') Schedule
+            a.ink-smooth-scroll(href='/sessions') Schedule
           li
-            a.ink-smooth-scroll(href='#partners') Partners
+            a.ink-smooth-scroll(href='/venue') Venue
+          li
+            a.ink-smooth-scroll(href='/contacts') Contacts
+          li
+            a.ink-smooth-scroll(href='/partners') Partners
           //- li
           //-   a(href='#achievements') Achievements
-          li
-            a(href='https://www.youtube.com/user/sinfoist') Live Stream!
+          //- li
+          //-   a(href='https://www.youtube.com/user/sinfoist') Live Stream!
           li
             a(href='/coc') Code of Conduct
             
 
 
         ul.menu.horizontal.push-right
-          li(data-hook='nav')
-          li.hide-all.show-medium.show-small.show-tiny#menuMobile(data-hook='menu-mobile')
+          //- li(data-hook='nav')
+          //- li.hide-all.show-medium.show-small.show-tiny#menuMobile(data-hook='menu-mobile')
           li.hide-all.show-medium.show-small.show-tiny
             button.ink-button.right-drawer-trigger
               span.fa.fa-bars
@@ -36,18 +40,23 @@ body.ink-drawer
     ul
       li Menu
       li
-        a.ink-smooth-scroll(href='#speakers') Speakers
+        a.ink-smooth-scroll(href='/speakers') Speakers
       li
-        a.ink-smooth-scroll(href='#sessions') Schedule
+        a.ink-smooth-scroll(href='/sessions') Schedule
       li
-        a.ink-smooth-scroll(href='#partners') Partners
+        a.ink-smooth-scroll(href='/venue') Venue
+      li
+        a.ink-smooth-scroll(href='/contacts') Contacts
+      li
+        a.ink-smooth-scroll(href='/partners') Partners
       //- li
       //-   a(href='#achievements') Achievements
       //- li
       //-   a(href='https://www.youtube.com/user/sinfoist') Live Stream!
       li
         a(href='/coc') Code of Conduct
+  
+  section.page.content-drawer
+    main(data-hook='page-container')
 
-  main(data-hook='page-container')
-
-  footer(data-hook='footer')
+    footer(data-hook='footer')

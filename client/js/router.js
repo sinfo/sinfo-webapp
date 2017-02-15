@@ -32,26 +32,32 @@ var qs = require('qs')
 
 var WebAppRouter = Router.extend({
   routes: {
-    '': 'home',
     '404': 'catchAll',
-    'auth/login?:query': 'fenixLogin',
-    'auth/login': 'login',
-    'partners/:id': 'companyView',
-    'redeem/:id': 'redeemCode',
-    'users/:id': 'userView',
-    'me': 'me',
-    'me/edit': 'meEdit',
+    // 'auth/login?:query': 'fenixLogin',
+    // 'auth/login': 'login',
+    // 'partners/:id': 'companyView',
+    // 'redeem/:id': 'redeemCode',
+    // 'users/:id': 'userView',
+    // 'me': 'me',
+    // 'me/edit': 'meEdit',
+    'speakers': 'speakers',
+    'sessions': 'generalSessions',
     'speakers/:id': 'speakerView',
     // 'stream': 'streamView',
-    'sponsor': 'sponsor',
+    // 'sponsor': 'sponsor',
+    'privacy-policy': 'privacyPolicy',
     'coc': 'coc',
-    'events/:event': 'event',
-    'events/:event/achievements': 'achievements',
-    'events/:event/achievements/:id': 'achievementView',
+    'venue': 'venue',
+    'contacts': 'contacts',
+    // 'events/:event/achievements': 'achievements',
+    // 'events/:event/achievements/:id': 'achievementView',
+    'partners': 'generalPartners',
     'events/:event/partners': 'partners',
-    // '/events/:event/sessions': 'sessions',
+    'sessions': 'generalSessions',
+    // 'events/:event/sessions': 'sessions',
     'events/:event/sessions/:id': 'sessionView',
     // '/events/:event/speakers': 'speakers',
+    '': 'home',
     '(*path)': 'catchAll'
   },
 
@@ -77,6 +83,18 @@ var WebAppRouter = Router.extend({
 
   coc: function () {
     window.location = '/coc'
+  },
+
+  privacyPolicy: function () {
+    window.location = '/privacy-policy'
+  },
+
+  venue: function () {
+    window.location = '/#venue'
+  },
+
+  contacts: function () {
+    window.location = '/#contacts'
   },
 
   event: function (event) {
@@ -157,6 +175,11 @@ var WebAppRouter = Router.extend({
     }))
   },
 
+  generalPartners: function () {
+    window.location = '/#partners'
+  },
+
+
   redeemCode: function (id) {
     if (!app.me.authenticated) {
       return app.navigateToLogin()
@@ -165,6 +188,10 @@ var WebAppRouter = Router.extend({
     this.trigger('page', new Redeem({
       id: id
     }))
+  },
+
+  generalSessions: function () {
+    window.location = '/#sessions'
   },
 
   sessions: function (event) {
@@ -183,10 +210,11 @@ var WebAppRouter = Router.extend({
   },
 
   speakers: function (event) {
-    this.trigger('page', new Speakers({
-      event: event,
-      collection: app.speakers
-    }))
+    // this.trigger('page', new Speakers({
+    //   event: event,
+    //   collection: app.speakers
+    // }))
+    window.location = '/#speakers'
   },
 
   speakerView: function (id) {

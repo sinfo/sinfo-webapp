@@ -16,7 +16,8 @@ module.exports = {
   //     '/{p*}' - match everything that isn't matched by something more specific
   //     '/dashboard/{p*}' - serve the app at all routes starting with '/dashboard'
   appPath: '/{p*}',
-  // appTemplate: 'home',
+  appTemplate: 'base',
+  developmentMode: config.isDev,
   // The moonboots config
   moonboots: {
     // The base name of the javascript file served in the <script src="the_name.*.js">
@@ -24,7 +25,6 @@ module.exports = {
     // The base name of the css file served in the <link rel="stylesheet" src="the_name.*.css">
     cssFileName: 'cannon-webapp',
     main: jsDir + '/app.js',
-    developmentMode: config.isDev,
     // Specify any non-commonjs libraries we wish to include.
     // You can think of this as your list of <script> tags in your HTML.
     // These will simply be included before any of your application code in the
@@ -32,8 +32,8 @@ module.exports = {
     // you list any plugins after jQuery itself.
     libraries: [
       libsDir + '/jsoneditor.js',
-      jsDir + '/vendor/ink-all.js',
-      jsDir + '/vendor/autoload.js'
+      jsDir + '/vendor/ink-all.js'
+      // jsDir + '/vendor/autoload.js'
     ],
     // Specify the stylesheets we want to bundle
     stylesheets: [

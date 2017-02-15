@@ -1,9 +1,7 @@
 html
   include ../../views/head
   title SINFO
-  script(type='text/javascript' src='https://ink.global.ssl.fastly.net/3.1.10/js/ink-all.js')
-  script(type='text/javascript' src='https://ink.global.ssl.fastly.net/3.1.10/js/autoload.js')
-  script.
+  script(async).
     function getScript(source, callback) {
       var script = document.createElement('script');
       var prior = document.getElementsByTagName('script')[0];
@@ -32,7 +30,7 @@ html
             mapTypeId: google.maps.MapTypeId.ROADMAP
           });
           var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(38.7375721,-9.1376594),
+            position: new google.maps.LatLng(38.736814, -9.138123),
             map: map,
             title: 'SINFO'
           });
@@ -50,7 +48,7 @@ html
           .all-100
             h1
               a(href="/")
-                img(src='/static/logo2.png')
+                img(src='/static/logo.png')
             br
 
             a.social-icon(target="_blank" href="http://fb.com/sinfoist")
@@ -67,7 +65,7 @@ html
           .all-50.medium-100.small-100.tiny-100.push-center.events
               .half-gutters.event
                 h3.description.align-center Join us in our next edition!
-                h2.description.align-center= events[1].name
+                h2#event-title.description.align-center= events[1].name
                 .calendar
                   i.fa.fa-calendar
                   br.other
@@ -111,26 +109,31 @@ html
             p.big Absolutely not! Despite the annual SINFO conference being our main event, we organize
               | much more things and cooperate with a lot more communities and companies during the year.
 
-      #speakers.light.overlay-blue.container.section.reviews.all-100(data-hook='speakers-reviews')
-        h1 Speakers
+      #speakers.light.overlay-blue.container.section.reviews.all-100
+        h1.light Speakers
         include ./speakers
+      
+      #sessions.area-light.sessions.all-100
+        h1 Schedule
+        include ./sessions
+
+      #venue.overlay-blue.container.section.meetus.all-100
+        h1.light Venue
+        include ../../views/partials/venue
+      #contacts.overlay-blue.container.section.meetus.all-100
+        h1.light Contacts
+        include ../../views/partials/contacts
+
+      //- #cv.container.section.light.overlay
+      //-   h1.light Upload your CV now!
+      //-   p.light Are you new to the job market? Or maybe looking for a new challenge? Well, send us your curriculum vitae and every company present at SINFO will receive it!
+      //-   a.ink-button.blue(href="/me/edit" ) Upload CV
         
-      #team.area-light.container.members.all-100(data-hook='sinfo-team' data-spy='true' data-target='#main-menu')
+      #team.area-light.container.members.all-100
         h1 The team
         include ./members
-        
-      #meetus.area-light.container.meetus.all-100(data-hook='meet-us' data-spy='true' data-target='#main-menu')
-        h1 Meet us!
-        include ../../views/partials/contacts
-                
-      #sponsorus.area-light.container.section.overlay.sponsorus.all-100(data-hook='sponsor-us' data-spy='true' data-target='#main-menu')
-        h1 Sponsor us!
-        div
-          p Want to sponsor us? Awesome!
-          p We're still prepping for another awesome SINFO edition, so our sponsor info isn't finished yet. 
-          p But feel free to reach us at #[a.highlight(href='mailto:geral@sinfo.org') geral@sinfo.org]
 
-      #newsletter.area-light.container.newsletter.all-100(data-hook='newsletter' data-spy='true' data-target='#main-menu')
+      #newsletter.area-light.container.newsletter.all-100
         h1 Newsletter
           span.highlight  Signup
         div
@@ -143,4 +146,4 @@ html
               br
               br
               input.ink-button.blue(type="submit",name="subscribe",value="Subscribe")
-    include ./footer
+      include ./footer

@@ -1,5 +1,6 @@
 var server = require('server').hapi
 var config = require('config')
+var options = require('options')
 var dateParser = require('server/helpers/dateParser')
 var _ = require('underscore')
 
@@ -24,6 +25,10 @@ server.route({
           var Deck = request.server.methods.deck
           Deck.speakers.get({event: config.event.current}, reply)
         }, assign: 'speakers' },
+        { method: function getSessions (request, reply) {
+          var Deck = request.server.methods.deck
+          Deck.sessions.get({event: config.event.current}, reply)
+        }, assign: 'sessions' },
         { method: function getEvents (request, reply) {
           var Deck = request.server.methods.deck
           Deck.events.get(function (err, events) {
@@ -43,14 +48,19 @@ server.route({
       var speakers = request.pre.speakers
       var companies = request.pre.companies
       var members = request.pre.members
+      var sessions = request.pre.sessions
       var events = request.pre.events
 
       reply.view('home', {
+        options: options,
         speakers: speakers,
         companies: companies,
         members: members,
+        sessions: sessions,
         events: events,
-        cssFileName: '/' + moonboots.result.css.fileName
+        cssFileName: '/' + moonboots.result.css.fileName,
+        // WARNING don't load the script on the homepage, it will duplicate everything
+        jsFileName: '/' + moonboots.result.js.fileName
       })
     }
   }

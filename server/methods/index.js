@@ -14,6 +14,7 @@ server.method('deck.speakers.getFeedback', getSpeakersFeedback, {})
 server.method('deck.companies.get', getCompanies, {})
 server.method('deck.members.get', getMembers, {})
 server.method('deck.events.get', getEvents, {})
+server.method('deck.sessions.get', getSessions, {})
 
 function getSpeakersFeedback (options, cb) {
   cb = cb || options
@@ -64,7 +65,24 @@ function getCompanies (options, cb) {
     qs: {
       event: options.event
     }
-  }, function (err, res, body) { httpHandler(err, res, body, cb) })
+  }, function (err, res, body) {
+    httpHandler(err, res, body, function filterComapnies (err, companies) {
+      if (err) return cb(err)
+      var resultCompanies = {
+        max: [],
+        exclusive: []
+      }
+
+      Async.each(companies, function iterator (company, cbIt) {
+        if (company.advertisementLvl === 'exclusive') resultCompanies.exclusive.push(company)
+        if (company.advertisementLvl === 'max') resultCompanies.max.push(company)
+        cbIt()
+      }, function done (err) {
+        if (err) return cb(Boom.badImplementation())
+        cb(null, resultCompanies)
+      })
+    })
+  })
 }
 
 function getMembers (options, cb) {
@@ -74,6 +92,19 @@ function getMembers (options, cb) {
   deckRequest({
     method: 'GET',
     uri: '/members',
+    qs: {
+      event: options.event
+    }
+  }, function (err, res, body) { httpHandler(err, res, body, cb) })
+}
+
+function getSessions (options, cb) {
+  cb = cb || options
+  if (typeof options === 'function') options = {}
+
+  deckRequest({
+    method: 'GET',
+    uri: '/sessions',
     qs: {
       event: options.event
     }

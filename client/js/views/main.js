@@ -24,8 +24,16 @@ module.exports = View.extend({
     var route =  window.location.pathname.split('/')
     this.selectedEvent = (route[1] === 'events' && route[2]) ? route[2] : DEFAULT_EVENT
     console.log(this.selectedEvent)
+
     // this marks the correct nav item selected
     this.listenTo(app.router, 'page', this.handleNewPage);
+
+    // Load mobile drawer menu
+    window.addEventListener('load', function() {
+      Ink.requireModules(['Ink.UI.Drawer_1'], function (Drawer) {
+        new Drawer()
+      })
+    })
   },
   events: {
     'click a[href]': 'handleLinkClick',
@@ -43,7 +51,7 @@ module.exports = View.extend({
     this.pageSwitcher = new ViewSwitcher(this.queryByHook('page-container'), {
       show: function (newView, oldView) {
         // it's inserted and rendered for me
-        document.title = _.result(newView, 'pageTitle') || 'SINFO Web App';
+        document.title = _.result(newView, 'pageTitle') || 'SINFO';
         document.scrollTop = 0;
 
         // add a class specifying it's active

@@ -1,8 +1,8 @@
-.list.speakers(data-hook='speakers-list')
+.list.speakers
   each speaker in speakers
     .speaker.all-25.medium-30.small-100.tiny-100
-      .push-center
-        // a.push-center(href='/speakers/' + speaker.id)
+      //- .push-center
+      a.push-center(href='/speakers/' + speaker.id)
         h5.push-center.name= speaker.name
         .img-container.push-center
           .img(style='background-image:url(' + speaker.img + ');')
