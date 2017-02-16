@@ -18,7 +18,7 @@
               start: new Date(s.date),
               duration: new Date(s.duration),
               end: new Date((new Date(s.date)).getTime() + (new Date(s.duration)).getTime()),
-              url: event.id + '/sessions/' + s.id,
+              url: '/events/' + event.id + '/sessions/' + s.id,
               color:  color
             }
           }),
