@@ -30,10 +30,20 @@ ul
     padding-top: 25px
     overflow: hidden
     position: relative
-    text-align: center;
+    text-align: center
 
   .overlay
     background: #25201f
+    opacity: .8
+    position: absolute
+    z-index: 0
+    top:0
+    left: 0
+    bottom: 0
+    right: 0
+
+  .overlay-gray
+    background: #373E4C
     opacity: .8
     position: absolute
     z-index: 0
@@ -116,6 +126,9 @@ ul
             @media screen and (min-width: 600px)
               top: 15%
               font-size: 3em;
+
+#venue
+  padding-bottom: 0
 
 .header
   min-height: 100%;
