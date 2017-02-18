@@ -4,8 +4,33 @@
       var sessions = !{JSON.stringify(sessions)}
       var options = !{JSON.stringify(options.kinds.sessions)}
       var event = !{JSON.stringify(events[1])}
-      var defaultView = (window.innerWidth < 900) ? 'agendaDay' : 'agendaWeek'
-      
+      var defaultView = 'agendaWeek'
+      var header =
+      {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      }
+
+      var footer = false
+
+      if(window.innerWidth < 900) {
+        defaultView = 'agendaDay'
+        header =
+        {
+          left: '',
+          center: 'title',
+          right: ''
+        }
+
+        footer =
+        {
+          left: '',
+          center: 'prev,next today',
+          right: ''
+        }
+      }
+
       $().ready(function(){
         $('#calendar').fullCalendar({
           events: sessions.map(function (s) {
@@ -22,11 +47,8 @@
               color:  color
             }
           }),
-          header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-          },
+          header: header,
+          footer: footer,
           defaultDate: event.date,
           defaultView: defaultView,
           height: 'auto',
@@ -35,6 +57,9 @@
           allDaySlot: false,
           hiddenDays: [0]
         });
+
+        if (window.innerWidth < 900)
+          $('.fc-icon').addClass('responsive-fc-icon')
       })
   .push-center.all-100
     a.download-button.ink-button.blue(href='//deck.sinfo.org/calendar.ics')
