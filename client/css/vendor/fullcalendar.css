@@ -975,10 +975,3 @@ be a descendant of the grid when it is being dragged.
 .fc-time-grid-event .fc-resizer:after {
 	content: "=";
 }
-
-/* fc-icon resize */
-.responsive-fc-icon {
-	overflow: visible;
-	top: 0;
-	font-size: 1.5em;
-}
