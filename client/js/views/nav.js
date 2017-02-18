@@ -1,10 +1,10 @@
-var View = require('ampersand-view');
-var templates = require('client/js/templates');
-var auth = require('client/js/auth');
+var View = require('ampersand-view')
+var templates = require('client/js/templates')
+var auth = require('client/js/auth')
 
 module.exports = View.extend({
-  autoRender: true,
-  template: templates.partials.nav,
+  // autoRender: true,
+  // template: templates.partials.nav,
   // bindings: {
   //   'model.name': [
   //     { type: 'toggle', yes: '[data-hook~=authenticated-menu]', no: '[data-hook~=unauthenticated-menu]' },
@@ -31,4 +31,4 @@ module.exports = View.extend({
   // handleLogin: function () {
   //   app.navigateToLogin();
   // },
-});
+})

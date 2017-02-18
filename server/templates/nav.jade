@@ -23,8 +23,10 @@
 
 
       ul.menu.horizontal.push-right
-        //- li(data-hook='nav')
-        //- li.hide-all.show-medium.show-small.show-tiny#menuMobile(data-hook='menu-mobile')
+        li.hide-medium.hide-small.hide-tiny
+          a(href='/me')
+            i.fa.fa-user-circle-o.fa-2(aria-hidden='true')
+            span My profile
         li.hide-all.show-medium.show-small.show-tiny
           button.ink-button.right-drawer-trigger
             span.fa.fa-bars
@@ -33,6 +35,8 @@
 div.right-drawer
   ul
     li Menu
+    li
+      a(href='/me') My profile
     li
       a.ink-smooth-scroll(href='/#speakers') Speakers
     li

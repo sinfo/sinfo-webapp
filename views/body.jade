@@ -29,6 +29,10 @@ body.ink-drawer
 
 
         ul.menu.horizontal.push-right
+          li.hide-medium.hide-small.hide-tiny
+            a(href='/me')
+              i.fa.fa-user-circle-o.fa-2(aria-hidden='true')
+              span My profile
           //- li(data-hook='nav')
           //- li.hide-all.show-medium.show-small.show-tiny#menuMobile(data-hook='menu-mobile')
           li.hide-all.show-medium.show-small.show-tiny
@@ -39,6 +43,8 @@ body.ink-drawer
   div.right-drawer
     ul
       li Menu
+      li
+        a(href='/me') My profile
       li
         a.ink-smooth-scroll(href='/speakers') Speakers
       li
