@@ -58,14 +58,14 @@ module.exports = PageView.extend({
       prepareView: function (el) {
         var maxPartners = new SubCollection(this.collection, {
           filter: function (partner) {
-            return partner.advertisementLvl == 'max';
+            return partner.advertisementLvl == 'max'
           }
-        });
+        })
 
         return new PartnersArea({
           el: el,
           collection: maxPartners
-        });
+        })
       }
     },
     exclusive: {
@@ -74,15 +74,32 @@ module.exports = PageView.extend({
       prepareView: function (el) {
         var exclusivePartners = new SubCollection(this.collection, {
           filter: function (partner) {
-            return partner.advertisementLvl === 'exclusive';
+            return partner.advertisementLvl === 'exclusive'
           }
-        });
+        })
 
         return new PartnersArea({
           el: el,
           collection: exclusivePartners
-        });
+        })
       }
     },
-  },
+    other: {
+      container: '[data-hook=other-partner]',
+      waitFor: 'collection.length',
+      prepareView: function (el) {
+        var otherPartners = new SubCollection(this.collection, {
+          filter: function (partner) {
+            return partner.advertisementLvl === 'media' ||
+              partner.advertisementLvl === 'other'
+          }
+        })
+
+        return new PartnersArea({
+          el: el,
+          collection: otherPartners
+        })
+      }
+    }
+  }
 });
