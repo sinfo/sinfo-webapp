@@ -117,7 +117,7 @@ html
         h1 Schedule
         include ./sessions
 
-      #venue.overlay-blue.container.section.meetus.all-100
+      #venue.overlay-gray.container.section.meetus.all-100
         h1.light Venue
         include ../../views/partials/venue
       #contacts.overlay-blue.container.section.meetus.all-100
@@ -133,17 +133,14 @@ html
         h1 The team
         include ./members
 
-      #newsletter.area-light.container.newsletter.all-100
-        h1 Newsletter
-          span.highlight  Signup
+      #newsletter.overlay-blue.container.section.newsletter.all-100
+        h1.light Newsletter Signup
         div
-          p  No spam - only
-            span.highlight  latest news
-            |  workshops and activity updates
+          p.light  No spam - only latest news workshops and activity updates
           form.form(action="https://sinfo.us8.list-manage.com/subscribe?u=de57247db0922adf365af7eef&id=107b5bbe53",method="post")
             div
               input.ink-form.control.required(type="email",value="",name="EMAIL",id="NewsletterEmail",placeholder="your@email.com")
               br
               br
-              input.ink-button.blue(type="submit",name="subscribe",value="Subscribe")
+              input.ink-button.gray(type="submit",name="subscribe",value="Subscribe")
       include ./footer
