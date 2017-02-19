@@ -9,7 +9,6 @@ var _ = require('underscore');
 var domify = require('domify');
 var dom = require('ampersand-dom');
 var templates = require('client/js/templates');
-var setFavicon = require('favicon-setter');
 var Nav = require('./nav');
 var Footer = require('./footer');
 var $ = require('jquery');
@@ -61,10 +60,6 @@ module.exports = View.extend({
         app.currentPage = newView;
       }
     });
-
-    // setting a favicon for fun (note, it's dynamic)
-    setFavicon('/static/favicon.ico');
-    return this;
   },
   subviews: {
     nav: {
