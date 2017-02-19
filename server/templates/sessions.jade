@@ -4,9 +4,11 @@
       var sessions = !{JSON.stringify(sessions)}
       var options = !{JSON.stringify(options.kinds.sessions)}
       var event = !{JSON.stringify(events[1])}
+      event.date = new Date(event.date)
       var defaultView = 'agendaWeek'
-      var header =
-      {
+      var now = new Date()
+      var defaultDate = now.getTime() > event.date.getTime() ? now : event.date
+      var header = {
         left: 'prev,next today',
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
@@ -16,15 +18,13 @@
 
       if(window.innerWidth < 900) {
         defaultView = 'agendaDay'
-        header =
-        {
+        header = {
           left: '',
           center: 'title',
           right: ''
         }
 
-        footer =
-        {
+        footer = {
           left: '',
           center: 'prev,next today',
           right: ''
@@ -49,16 +49,18 @@
           }),
           header: header,
           footer: footer,
-          defaultDate: event.date,
+          defaultDate: defaultDate,
           defaultView: defaultView,
           height: 'auto',
           minTime: '09:00:00',
           maxTime: '22:00:00',
+          weekends: false,
           allDaySlot: false,
           hiddenDays: [0]
         });
       })
-  .push-center.all-100
+  .push-center.all-100.download-calendar
     a.download-button.ink-button.blue(href='//deck.sinfo.org/calendar.ics')
       i.fa.fa-download
-      | Download Schedule
+      span.hide-tiny.hide-small Download 
+      span Schedule
