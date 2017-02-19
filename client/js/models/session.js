@@ -57,6 +57,7 @@ module.exports = AmpModel.extend({
     duration: ['date'],
     updated: ['date'],
     companies: ['array'],
+    event: ['string']
   },
   children:{
     tickets: Tickets
@@ -84,7 +85,7 @@ module.exports = AmpModel.extend({
     viewUrl: {
       deps: ['id'],
       fn: function () {
-        return '/sessions/' + this.id;
+        return '/events/' + this.event + '/sessions/' + this.id
       }
     },
     title: {
