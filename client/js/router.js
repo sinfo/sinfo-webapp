@@ -37,7 +37,7 @@ var WebAppRouter = Router.extend({
     'auth/login': 'login',
     'login': 'login',
     // 'partners/:id': 'companyView',
-    // 'redeem/:id': 'redeemCode',
+    'redeem/:id': 'redeemCode',
     'users/:id': 'userView',
     'me': 'me',
     'me/edit': 'meEdit',
