@@ -28,7 +28,14 @@ module.exports = UserView.extend({
       { type: 'toggle', hook: 'area' },
       { selector: '[data-hook~=area] div' },
     ],
-    'model.skills': { selector: '[data-hook~=skills] div' },
+    'model.skills': {
+      selector: '[data-hook~=skills] div',
+      type: function (el, value) {
+        console.log('VALUE', value)
+        el.textContent = value ? value.join(', ') : ' '
+        console.log(el)
+      }
+    },
     'model.skills.length': { type: 'toggle', hook: 'skills' },
     'hasResume': { type: 'toggle', yes: '[data-hook~=file-download]', no: '[data-hook~=file-add]' },
   },
