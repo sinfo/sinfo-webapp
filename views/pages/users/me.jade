@@ -1,9 +1,34 @@
 section.page.users.view.ink-grid.power-on-background
-  h1.name(data-hook='name')
+  h1.name.align-center(data-hook='name')
   .img-container
     .img(data-hook='img')
+    
+  .buttons.align-center.resume
+    a.ink-button(data-hook='file-add' href='/me/edit')
+      span
+        i.fa.fa-cloud-upload
+      span Upload your resume
+    .ink-button(data-hook='file-download' style='background: #AA0')
+      span
+        i.fa.fa-cloud-download
+      span Download resume
+  
+  .information-area
 
-  .buttons
+    h4.heading.align-center.extralarge Your Profile
+    div(data-hook='area')
+      h5.sub-heading.large Area
+      div
+
+    div(data-hook='skills')
+      h5.sub-heading.large Skills
+      div
+
+    div(data-hook='user-achievements')
+
+    div(data-hook='user-sessions')
+  h4.heading.align-center Connect more accounts
+  .buttons.align-center
     .ink-button(data-hook='facebook-add' style='background: #48649F')
       span
         i.fa.fa-facebook
@@ -17,28 +42,5 @@ section.page.users.view.ink-grid.power-on-background
         i.fa.fa-graduation-cap
       span Add fenixedu account
 
-    br
-
-    a.ink-button(data-hook='file-add' style='background: #AA0' href='/me/edit')
-      span
-        i.fa.fa-cloud-upload
-      span Upload your resume
-    .ink-button(data-hook='file-download' style='background: #AA0')
-      span
-        i.fa.fa-cloud-download
-      span Download resume
-
   div.message(data-hook='message-container')
     h6(data-hook='message-text')
-
-  div(data-hook='area')
-    h6 Area
-    div
-
-  div(data-hook='skills')
-    h6 Skills
-    div
-
-  div(data-hook='user-achievements')
-
-  div(data-hook='user-sessions')
