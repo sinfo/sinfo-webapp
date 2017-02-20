@@ -1,9 +1,9 @@
-section.page.users.view.ink-grid
+section.users.view.ink-grid
   h1.name.align-center(data-hook='name')
   .img-container
     .img(data-hook='img')
     
-  .buttons.align-center
+  .buttons.align-center.resume
     a.ink-button(data-hook='file-add' style='background: #AA0' href='/me/edit')
       span
         i.fa.fa-cloud-upload
@@ -15,20 +15,19 @@ section.page.users.view.ink-grid
   
   .information-area
 
-    h4.align-center Your Profile
+    h4.heading.align-center.extralarge Your Profile
     div(data-hook='area')
-      h6 Area
+      h5.sub-heading.large Area
       div
 
     div(data-hook='skills')
-      h6 Skills
+      h5.sub-heading.large Skills
       div
 
     div(data-hook='user-achievements')
 
     div(data-hook='user-sessions')
-  
-  h4.align-center Connect more accounts
+  h4.heading.align-center Connect more accounts
   .buttons.align-center
     .ink-button(data-hook='facebook-add' style='background: #48649F')
       span
