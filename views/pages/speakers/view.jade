@@ -1,14 +1,14 @@
 section.page.speakers.view.ink-grid
-  h1.name(data-hook='name')
-  //- img(data-hook='img')
   .img-container
    .img(data-hook='img')
-  h3.title(data-hook='title')
+  h1.name(data-hook='name')
+  span.title(data-hook='title')
 
-  h6 Biography
   .description(data-hook='description')
+    h3 Biography
+    br
     div
 
-  //- .details
-  //-   .sessions.all-100(data-hook='speaker-sessions')
-  //-     div
+  .overlay-blue.container.section
+    .sessions.all-100(data-hook='speaker-sessions')
+      div.light

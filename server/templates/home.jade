@@ -37,13 +37,46 @@ html
         }
       });
     });
-  
+
+  script.
+    (function($) {
+      $.fn.parallax = function(options) {
+        var windowHeight = $(window).height();
+          // Establish default settings
+          var settings = $.extend({
+            speed        : 0.15
+          }, options);
+          // Iterate over each object in collection
+          return this.each( function() {
+            // Save a reference to the element
+            var $this = $(this);
+            // Set up Scroll Handler
+            $(document).scroll(function(){
+              var scrollTop = $(window).scrollTop();
+              var offset = $this.offset().top;
+              var height = $this.outerHeight();
+              // Check if above or below viewport
+              if (offset + height <= scrollTop || offset >= scrollTop + windowHeight) {
+                return;
+              }
+              var yBgPosition = Math.round((offset - scrollTop) * settings.speed);
+              yBgPosition = yBgPosition < 0 ? yBgPosition : 0 ;
+              // Apply the Y Background Position to Set the Parallax Effect
+              $this.css('background-position', 'center ' + yBgPosition + 'px');
+            });
+          });
+        }
+      }(jQuery));
+    $().ready(function(){
+      $('.parallax').parallax({ speed :0.20 });
+    })
+
   body.ink-drawer
     include ./nav.jade
 
     section.page.home.content-drawer
 
-      .header#header
+      .header#header.parallax
         .opacidade.column-group.gutters
           .all-100
             h1
@@ -82,29 +115,29 @@ html
               | explore through keynotes, workshops, presentations and much, much more! 
 
         .column-group.gutters
-          .all-50.small-100.tiny-100.justify-text
+          .all-50.small-100.tiny-100.justify-text.when
             h3 When?
             p.big The main event takes place every year during one week.
               
-          .all-50.small-100.tiny-100.justify-text
+          .all-50.small-100.tiny-100.justify-text.where
             h3 Where?
             p.big SINFO takes place at the Alameda Campus of Instituto Superior Técnico,
               | in the beautiful city of Lisbon, Portugal.
 
         .column-group.gutters
-          .all-50.small-100.tiny-100.justify-text
+          .all-50.small-100.tiny-100.justify-text.why
             h3 Why?
             p.big Our main goal is to allow students and general attendance to interact
               | and be closer with influential, important and interesting people or
               | companies in the fields of Information Technology and Computer Science.
               
-          .all-50.small-100.tiny-100.justify-text
+          .all-50.small-100.tiny-100.justify-text.forHowMuch
             h3 For how much?
             p.big NOTHING! We commit to make everything available for FREE! You just
               | need to show up to enjoy the event.
           
         .column-group.gutters
-          .all-50.small-100.tiny-100.justify-text
+          .all-50.small-100.tiny-100.justify-text.isItThat
             h3 Is that it?
             p.big Absolutely not! Despite the annual SINFO conference being our main event, we organize
               | much more things and cooperate with a lot more communities and companies during the year.
