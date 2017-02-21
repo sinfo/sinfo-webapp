@@ -73,8 +73,9 @@ html
   script.
     $().ready(function(){
       var nav_hours = new Date().getHours();
-      if (nav_hours >= 14 && nav_hours <= 20)
-        $('.live').css("visibility", "visible")
+      if (nav_hours >= 14 && nav_hours <= 20){
+        $('.live').attr('style', 'display: block !important');
+      }
     })
 
   body.ink-drawer
