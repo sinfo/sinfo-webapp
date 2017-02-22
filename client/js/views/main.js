@@ -27,8 +27,14 @@ module.exports = View.extend({
     // this marks the correct nav item selected
     this.listenTo(app.router, 'page', this.handleNewPage);
 
-    // Load mobile drawer menu
     window.addEventListener('load', function() {
+      // Horrible hack
+      var nav_hours = new Date().getHours();
+      if (nav_hours >= 13 && nav_hours <= 19){
+        $('.live').attr('style', 'display: block !important');
+      }
+
+      // Load mobile drawer menu
       Ink.requireModules(['Ink.UI.Drawer_1'], function (Drawer) {
         new Drawer()
       })
