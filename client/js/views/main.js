@@ -29,10 +29,10 @@ module.exports = View.extend({
 
     window.addEventListener('load', function() {
       // Horrible hack
-      var nav_hours = new Date().getHours();
-      if (nav_hours >= 13 && nav_hours <= 19){
-        $('.live').attr('style', 'display: block !important');
-      }
+      //var nav_hours = new Date().getHours();
+      //if (nav_hours >= 13 && nav_hours <= 19){
+        //$('.live').attr('style', 'display: block !important');
+      //}
 
       // Load mobile drawer menu
       Ink.requireModules(['Ink.UI.Drawer_1'], function (Drawer) {
