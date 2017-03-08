@@ -149,18 +149,44 @@ html
             p.big Absolutely not! Despite the annual SINFO conference being our main event, we organize
               | much more things and cooperate with a lot more communities and companies during the year.
 
+      #achievements.overlay-gray.container.section.all-100.light.top5
+        h1.light Top 5 most active users
+        p These were the users that accomulated the most points from redeeming QR codes during SINFO24
+        ul
+          li.st
+            span.number 1.
+            | Manuel Alves
+            p.points 590 points
+          li
+            span.number 2.
+            | Tito Santiago
+            p.points 550 points
+          li
+            span.number 3.
+            | Artur Fonseca
+            p.points 250 points
+          li
+            span.number 4.
+            | Sérgio Tavares
+            p.points 230 points
+          li
+            span.number 5.
+            | Tiago Simões
+            p.points 170 points
+
+      #cv.area-light
+        h1 Upload your CV now!
+        p Are you new to the job market? Or maybe looking for a new challenge? Well, send us your curriculum vitae and every company present at SINFO will receive it!
+        a.ink-button.gray(href="/me/edit" ) Upload CV
+
       #speakers.light.overlay-blue.container.section.reviews.all-100
         h1.light Speakers
         include ./speakers
       
-      #sessions.area-light.sessions.all-100
-        h1 Schedule
-        include ./sessions
+      //#sessions.area-light.sessions.all-100
+        //h1 Schedule
+        //include ./sessions
         
-      #cv.overlay-blue.container.section
-        h1.light Upload your CV now!
-        p.light Are you new to the job market? Or maybe looking for a new challenge? Well, send us your curriculum vitae and every company present at SINFO will receive it!
-        a.ink-button.gray(href="/me/edit" ) Upload CV
       #venue.overlay-gray.container.section.meetus.all-100
         h1.light Venue
         include ../../views/partials/venue
