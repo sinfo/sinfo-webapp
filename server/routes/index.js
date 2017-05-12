@@ -15,7 +15,7 @@ server.route({
         }, assign: 'moonboots' },
         { method: function getMembers (request, reply) {
           var Deck = request.server.methods.deck
-          Deck.members.get({event: config.event.current}, reply)
+          Deck.members.get({event: config.event.members}, reply)
         }, assign: 'members' },
         { method: function getCompanies (request, reply) {
           var Deck = request.server.methods.deck
