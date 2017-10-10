@@ -2570,6 +2570,10 @@ li {
 .heading-block {
   padding: 150px 0;
 }
+.logo-hero {
+  width: 65%;
+  margin: 15px auto;
+}
 .hero-heading-top,
 .hero-heading-bottom {
   position: absolute;
@@ -5229,6 +5233,7 @@ button[type="submit"] .loading {
   left: 0;
   right: 0;
   text-align: center;
+  z-index: 2 !important;
 }
 .socials-nav-item {
   margin: 0 12px;
