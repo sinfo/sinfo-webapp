@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-auth',
@@ -7,13 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthComponent implements OnInit {
 
-  constructor() { }
+  constructor () { }
 
-  ngOnInit() {
+  ngOnInit () {
   }
 
-  onFenixLogin() {
-    console.log('test');
+  onFenixLogin () {
+    sessionStorage.setItem('user', '')
+    console.log('Login with Fenix performed')
   }
 
 }
