@@ -31,3 +31,10 @@ node_modules
 client/js/templates.js
 client/css/app.css
 sftp-config.json
+
+# Angular
+/dist
+/tmp
+/out-tsc
+/e2e/*.js
+/e2e/*.map
