@@ -6939,11 +6939,11 @@ button[type="submit"] .loading {
 .bg3 {
   background-image: url("../img/backgrounds/bg3.jpg");
 }
-.bg4 {
-  background-image: url("../img/backgrounds/bg4.jpg");
+.newsletterbg {
+  background-image: url("../img/backgrounds/newsletter.jpg");
 }
-.bg5 {
-  background-image: url("../img/backgrounds/bg5.jpg");
+.counterbg {
+  background-image: url("../img/backgrounds/counterbg.jpg");
 }
 .gradient-overlay:before {
   background: #9001a5;
@@ -6959,13 +6959,13 @@ button[type="submit"] .loading {
 .bg1.overlay:before {
 	opacity: 0.9;
 }
-.bg4.overlay:before {
+.newsletterbg.overlay:before {
     background-color: #282f43;
-	opacity: 0.85;
+	opacity: 0;
 }
-.bg5.overlay:before {
+.counterbg.overlay:before {
   background-color: #262627;
-  opacity: 0.7;
+  opacity: 0.1;
 }
 .hero-section {
   z-index: 1;

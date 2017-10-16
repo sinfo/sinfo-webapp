@@ -762,9 +762,9 @@ Ventcamp = {
                 $countdown = $('.countdown');
 
                 // count down 10 days from today
-                futureDate.setDate( futureDate.getDate() + 10 );
+                //futureDate.setDate( futureDate.getDate() + 222 );
                 // or set specific date in the future
-                // futureDate = new Date(2014, 7, 26);
+                futureDate = new Date(2018, 02, 26);
 
                 $countdown.countdown({
                     until: futureDate,
@@ -773,7 +773,7 @@ Ventcamp = {
                     layout: $('.countdown').html()
                 });
             }else {
-                this.log( 'Can\'t find jQuery.coundown function' );
+                this.log( 'Can\'t find jQuery.countdown function' );
             }
         }
     },

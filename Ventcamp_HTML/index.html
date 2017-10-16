@@ -177,60 +177,57 @@
       </div>
     </section>
 
-    <section id="counters" class="section align-center overlay bg-cover bg5 light-text">
-      <div class="container">
+    <section id="countdown" class="section align-center overlay bg-cover counterbg light-text">
+			<!-- Countdown start -->
+			<div class="row counters-wrapper countdown">
+				<div class="col-sm-3">
+					<div class="counter-block counter-block-no-border has-separator">
+						<div class="counter-box">
+							<div class="counter-content">
+								<span class="count">{dnn}</span>
 
-        <div class="row counters-wrapper">
-          <div class="col-sm-3">
-            <div class="counter-block counter-block-no-border">
-              <div class="counter-box">
-                <div class="counter-content">
-                  <span class="count" data-from="0" data-to="136">0</span>
+								<p class="title">days</p>
+							</div>
+						</div>
+					</div>
+				</div>
 
-                  <p class="title">speakers</p>
-                </div>
-              </div>
-            </div>
-          </div>
+				<div class="col-sm-3">
+					<div class="counter-block counter-block-no-border has-separator">
+						<div class="counter-box">
+							<div class="counter-content">
+								<span class="count">{hnn}</span>
 
-          <div class="col-sm-3">
-            <div class="counter-block counter-block-no-border">
-              <div class="counter-box">
-                <div class="counter-content">
-                  <span class="count" data-from="0" data-to="5">0</span>
+								<p class="title">hours</p>
+							</div>
+						</div>
+					</div>
+				</div>
 
-                  <p class="title">days</p>
-                </div>
-              </div>
-            </div>
-          </div>
+				<div class="col-sm-3">
+					<div class="counter-block counter-block-no-border has-separator">
+						<div class="counter-box">
+							<div class="counter-content">
+								<span class="count">{mnn}</span>
 
-          <div class="col-sm-3">
-            <div class="counter-block counter-block-no-border">
-              <div class="counter-box">
-                <div class="counter-content">
-                  <span class="count" data-from="0" data-to="25">0</span>
+								<p class="title">minutes</p>
+							</div>
+						</div>
+					</div>
+				</div>
 
-                  <p class="title">workshops</p>
-                </div>
-              </div>
-            </div>
-          </div>
+				<div class="col-sm-3">
+					<div class="counter-block counter-block-no-border">
+						<div class="counter-box">
+							<div class="counter-content">
+								<span class="count">{snn}</span>
 
-          <div class="col-sm-3">
-            <div class="counter-block counter-block-no-border">
-              <div class="counter-box">
-                <div class="counter-content">
-                  <span class="count" data-from="0" data-to="200">0</span>
-
-                  <p class="title">speeches</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
+								<p class="title">seconds</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>        
     </section>
 
     <section id="speakers" class="section align-center">
@@ -1200,10 +1197,11 @@
 
     </section>
 
-    <section id="sign_up" class="section bg-cover overlay bg4 light-text align-center">
+    <section id="sign_up" class="section bg-cover overlay newsletterbg light-text align-center">
       <div class="container">
+        <!-- don't know if I'm feeling the colors with the image too much -->
         <h2><span class="highlight">Newsletter</span> Sign Up</h2>
-        <small>No Spam - Only latest news, price and activity updates</small>
+        <small>Be the first to recieve the latest updates from SINFO!</small>
         <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
           <form id="subscribe_main" action="" method="post" enctype="multipart/form-data" class="form row newsletter-form mailchimp-form">
             <fieldset class="col-sm-8">
@@ -1784,6 +1782,7 @@
     <script type="text/javascript" src="assets/js/jquery.appear.js"></script>
     <script type="text/javascript" src="assets/js/jquery.plugin.js"></script>
     <script type="text/javascript" src="assets/js/jquery.countTo.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.countdown.js"></script>
     <script type="text/javascript" src="assets/js/jquery.mb.YTPlayer.min.js"></script>
     <script type="text/javascript" src="assets/js/masonry.pkgd.min.js"></script>
     <script type="text/javascript" src="assets/js/modal-box.js"></script>
