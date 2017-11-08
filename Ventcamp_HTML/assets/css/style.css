@@ -3509,6 +3509,11 @@ button.btn.btn-block {
   content: "";
   border-right: 1px solid #eff1f5;
 }
+.schedule .presentations:before {
+  left: 117px;
+  width: 882px;
+  border-left: 1px solid #eff1f5;
+}
 .schedule .tab-content-schedule .panel-group {
   margin-bottom: 0;
 }
@@ -3518,6 +3523,11 @@ button.btn.btn-block {
   min-height: 65px;
   padding: 0 0 0 104px;
   background-color: transparent;
+}
+.schedule .tab-content-schedule .presentations-item {
+  padding-left: 0px;
+  padding-right: 104px;
+
 }
 .schedule .tab-content-schedule .schedule-item:last-child {
   margin-bottom: 0;
@@ -3530,6 +3540,22 @@ button.btn.btn-block {
   vertical-align: middle;
   top: 25px;
   left: 4px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 36px;
+  background-color: #ffffff;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.schedule .presentations-item .lecture-icon-wrapper {
+  position: absolute;
+  vertical-align: middle;
+  top: 25px;
+  left: 405px;
   width: 40px;
   height: 40px;
   text-align: center;
