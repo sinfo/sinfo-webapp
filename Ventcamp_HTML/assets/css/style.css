@@ -5692,7 +5692,8 @@ button[type="submit"] .loading {
 }
 .speaker .photo-wrapper img {
   display: block;
-  max-width: 100%;
+  max-width: 70%;
+  margin: 0 auto;
 }
 .speaker .name {
   font-size: 13px;
@@ -5706,6 +5707,9 @@ button[type="submit"] .loading {
 }
 .speaker .about {
   padding: 0 15px;
+}
+.speaker .text-alt {
+  min-height: 87px;
 }
 .speaker .speaker-socials > li {
   padding: 0 10px;
