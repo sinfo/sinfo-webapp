@@ -247,7 +247,7 @@
 						</div>
 					</div>
 				</div>
-			</div>        
+			</div>
     </section>
 
     <section id="speakers" class="section align-center">
@@ -257,78 +257,33 @@
         <br />
         <br />
 
-        <div class="col-sm-3">
-          <div class="speaker">
-            <div class="photo-wrapper square">
-              <div class="view view-first">
-                  <img src="./assets/img/speakers/speaker1.jpg" alt="John Doe" class="img-responsive">
+  			<!--GET-->
+  			<script>
+          var requestURL = 'https://deck.sinfo.org:443/api/speakers?event=24-sinfo&&participations=true';
+    			var request = new XMLHttpRequest();
+    			request.open('GET', requestURL);
+    			request.responseType = 'json';
+    			request.send();
+    			request.onload = function() {
+            request.response.forEach(function(speaker){
+              $("#speakers > div").append(`<div class="col-sm-3">
+                <div class="speaker">
+                  <div class="photo-wrapper square">
+                    <div class="view view-first">
+                        <img src=${speaker.img} alt="${speaker.name}" class="img-responsive">
+                    </div>
+                  </div>
+                  <h3 class="name">${speaker.name}</h3>
+                  <p class="text-alt"><small>${speaker.title}</small></p>
+                </div>
               </div>
-            </div>
-            <h3 class="name">ERIC BOLDY</h3>
-            <p class="text-alt"><small>Project Manager</small></p>
- 
-          </div>
-        </div>
-  
-        <div class="col-sm-3">
-          <div class="speaker">
-            <div class="photo-wrapper square"><img src="./assets/img/speakers/speaker2.jpg" alt="John Doe" class="img-responsive"></div>
-            <h3 class="name">JAMES ROCK</h3>
-            <p class="text-alt"><small>VP Product @ Flopbox</small></p>
-          </div>
-        </div>
-  
-        <div class="col-sm-3">
-          <div class="speaker">
-            <div class="photo-wrapper square"><img src="./assets/img/speakers/speaker3.jpg" alt="John Doe" class="img-responsive"></div>
-            <h3 class="name">ANDREA WARRAETY</h3>
-            <p class="text-alt"><small>Designer @ Winstagrap</small></p>
-          </div>
-        </div>
-  
-        <div class="col-sm-3">
-          <div class="speaker">
-            <div class="photo-wrapper square"><img src="./assets/img/speakers/speaker4.jpg" alt="John Doe" class="img-responsive"></div>
-            <h3 class="name">MARTIN BRANSON</h3>
-            <p class="text-alt"><small>Evangelist @ Doogle</small></p>
-          </div>
-        </div>
-  
-        <div class="col-sm-3">
-          <div class="speaker">
-            <div class="photo-wrapper square"><img src="./assets/img/speakers/speaker5.jpg" alt="John Doe" class="img-responsive"></div>
-            <h3 class="name">AMY WARNER</h3>
-            <p class="text-alt"><small>Graphic Designer</small></p>
-          </div>
-        </div>
-  
-        <div class="col-sm-3">
-          <div class="speaker">
-            <div class="photo-wrapper square"><img src="./assets/img/speakers/speaker2.jpg" alt="John Doe" class="img-responsive"></div>
-            <h3 class="name">ALEC KROSOVIC</h3>
-            <p class="text-alt"><small>Project Manager</small></p>
-          </div>
-        </div>
-  
-        <div class="col-sm-3">
-          <div class="speaker">
-            <div class="photo-wrapper square"><img src="./assets/img/speakers/speaker2.jpg" alt="John Doe" class="img-responsive"></div>
-            <h3 class="name">JAMES ROCK</h3>
-            <p class="text-alt"><small>VP Product @ Flopbox</small></p>
-          </div>
-        </div>
-  
-        <div class="col-sm-3">
-          <div class="speaker">
-            <div class="photo-wrapper square"><img src="./assets/img/speakers/speaker1.jpg" alt="John Doe" class="img-responsive"></div>
-            <h3 class="name">ERIC BOLDY</h3>
-            <p class="text-alt"><small>Project Manager</small></p>
-          </div>
-        </div>
-
+              `)
+            })
+    			}
+  			</script>
       </div>
     </section>
-    
+
     <section id="schedule" class="section schedule-section align-center">
       <div class="container">
         <span class="icon section-icon icon-office-21"></span>
