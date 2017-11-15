@@ -5700,12 +5700,16 @@ button[type="submit"] .loading {
   text-transform: uppercase;
   line-height: 14px;
   letter-spacing: 0.3em;
+  height: 28px;
 }
 .speaker .name + p small {
   font-size: 14px;
 }
 .speaker .about {
   padding: 0 15px;
+}
+.speaker .speaker-socials {
+  height: 37px;
 }
 .speaker .speaker-socials > li {
   padding: 0 10px;
