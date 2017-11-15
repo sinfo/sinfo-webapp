@@ -2570,6 +2570,10 @@ li {
 .heading-block {
   padding: 150px 0;
 }
+.heading-block .fa {
+  color: #039cff;
+  margin-right: 10px;
+}
 .logo-hero {
   width: 50%;
   margin: 15px auto;
@@ -6944,10 +6948,10 @@ button[type="submit"] .loading {
   background-image: url("../img/backgrounds/bg3.jpg");
 }
 .newsletterbg {
-  background-image: url("../img/backgrounds/newsletter.jpg");
+  background-image: url("../img/countdown.jpg");
 }
 .counterbg {
-  background-image: url("../img/backgrounds/counterbg.jpg");
+  background-image: url("../img/countdown.jpg");
 }
 .gradient-overlay:before {
   background: #9001a5;
