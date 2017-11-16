@@ -1546,39 +1546,7 @@
         <br/>
         <br/>
 
-        <div class="sponsors">
-          <div class="sponsor big"><img src="assets/img/sponsors/sponsor-big-1.png" alt=""></div>
-          <div class="sponsor big"><img src="assets/img/sponsors/sponsor-big-2.png" alt=""></div>
-          <div class="sponsor big"><img src="assets/img/sponsors/sponsor-big-3.png" alt=""></div>
-          <div class="sponsor big"><img src="assets/img/sponsors/sponsor-big-4.png" alt=""></div>
-        </div>
-
-        <div class="sponsors">
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor1.png" alt=""></div>
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor2.png" alt=""></div>
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor3.png" alt=""></div>
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor4.png" alt=""></div>
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor5.png" alt=""></div>
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor6.png" alt=""></div>
-        </div>
-        <div class="sponsors">
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor9.png" alt=""></div>
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor10.png" alt=""></div>
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor1.png" alt=""></div>
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor2.png" alt=""></div>
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor3.png" alt=""></div>
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor4.png" alt=""></div>
-        </div>
-        <div class="sponsors">
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor5.png" alt=""></div>
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor6.png" alt=""></div>
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor7.png" alt=""></div>
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor3.png" alt=""></div>
-        </div>
-
-        <div class="sponsors">
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor2.png" alt=""></div>
-          <div class="sponsor inline"><img src="assets/img/sponsors/sponsor1.png" alt=""></div>
+        <div id="sponsors-diamond" class="sponsors">
         </div>
 
       </div>
@@ -1787,8 +1755,6 @@
         request.send();
         request.onload = function() {
 
-          console.log(request.response);
-          
           request.response.forEach(function(el){
             processDataFromDeck(el);
           });
@@ -1818,9 +1784,45 @@
 
         $("#team > div").append(html);
       }
+
+      function processSponsors(sponsor) {
+
+        var platinumPerLine = 4;
+
+        /* diamond */
+        if (sponsor.advertisementLvl == 'exclusive') {
+          $("#sponsors-diamond").append(
+            `<div class="sponsor big"><img src=${sponsor.img} alt=""></div>`
+          );
+        }
+        
+        /* platinum */
+        else if (sponsor.advertisementLvl == 'max') {
+          var loadedPlatinum = $(".platinum");
+          var lastPlatinum = loadedPlatinum[loadedPlatinum.length - 1];
+
+          /* if this div has fewer than 6 sponsors */
+          if (lastPlatinum && $(lastPlatinum).children().length < platinumPerLine) {
+            
+            $(lastPlatinum).append(
+              `<div class="sponsor"><img src=${sponsor.img} alt=""></div>`
+            );
+          }
+
+          /* else, create new div */
+          else {
+            $('#sponsors > div').append(
+              `<div class="sponsors platinum">
+                <div class="sponsor"><img src=${sponsor.img} alt=""></div>
+              </div>`
+            );
+          }
+        }
+      }
       
       (function() {
-        var members = getDataFromDeck('members','event=25-sinfo&&participations=true', processMember);
+        getDataFromDeck('members','event=25-sinfo&&participations=true', processMember);
+        getDataFromDeck('companies','event=24-sinfo&&participations=true', processSponsors);
       })();
 
       
