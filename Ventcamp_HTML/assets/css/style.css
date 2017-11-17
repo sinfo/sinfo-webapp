@@ -2135,6 +2135,9 @@ span {
 .align-center {
   text-align: center;
 }
+.justify {
+  text-align: justify;
+}
 .light-text,
 .footer {
   color: #ffffff;
@@ -2228,6 +2231,11 @@ span {
   }
   .sub-title,
   .sub-title.big {
+    font-size: 15px;
+  }
+}
+@media (max-width: 320px) {
+  h5.heading-alt {
     font-size: 15px;
   }
 }
@@ -2690,6 +2698,9 @@ li {
   }
 }
 @media (max-width: 480px) {
+  .logo-hero {
+    width: 75%;
+  }
   blockquote {
     padding: 0 35px;
     font-size: 13px;
