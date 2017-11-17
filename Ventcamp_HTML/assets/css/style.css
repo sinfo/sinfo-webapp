@@ -2570,6 +2570,10 @@ li {
 .heading-block {
   padding: 150px 0;
 }
+.heading-block .fa {
+  color: #039cff;
+  margin-right: 10px;
+}
 .logo-hero {
   width: 50%;
   margin: 15px auto;
@@ -5692,7 +5696,8 @@ button[type="submit"] .loading {
 }
 .speaker .photo-wrapper img {
   display: block;
-  max-width: 100%;
+  max-width: 70%;
+  margin: 0 auto;
 }
 .speaker .name {
   font-size: 13px;
@@ -5710,6 +5715,9 @@ button[type="submit"] .loading {
 }
 .speaker .speaker-socials {
   height: 37px;
+}
+.speaker .text-alt {
+  min-height: 87px;
 }
 .speaker .speaker-socials > li {
   padding: 0 10px;
@@ -5805,6 +5813,12 @@ button[type="submit"] .loading {
     width: 50px;
     height: 50px;
   }
+}
+/* ----------------------------------------------------------------------------
+    Members
+---------------------------------------------------------------------------- */
+.member .photo-wrapper img {
+  max-width: 100%;
 }
 /* ----------------------------------------------------------------------------
     Sponsors
@@ -6944,10 +6958,10 @@ button[type="submit"] .loading {
   background-image: url("../img/backgrounds/bg3.jpg");
 }
 .newsletterbg {
-  background-image: url("../img/backgrounds/newsletter.jpg");
+  background-image: url("../img/countdown.jpg");
 }
 .counterbg {
-  background-image: url("../img/backgrounds/counterbg.jpg");
+  background-image: url("../img/countdown.jpg");
 }
 .gradient-overlay:before {
   background: #9001a5;
