@@ -1777,54 +1777,6 @@
     <script type="text/javascript" src="assets/js/masonry.pkgd.min.js"></script>
     <script type="text/javascript" src="assets/js/modal-box.js"></script>
     <script type="text/javascript" src="assets/js/ventcamp.js"></script>
-    <script>
-      var  deck = 'https://deck.sinfo.org:443/api/';
-
-      function getDataFromDeck(field, params, processDataFromDeck) {
-        var request = new XMLHttpRequest();
-        request.open('GET', deck + field + '?' + params);
-        request.responseType = 'json';
-        request.send();
-        request.onload = function() {
-
-          console.log(request.response);
-          
-          request.response.forEach(function(el){
-            processDataFromDeck(el);
-          });
-        }
-      }
-
-      function processMember(member) {
-
-        var html = `<div class="col-sm-2">
-            <div class="speaker">
-              <div class="photo-wrapper rounded"><img src=${member.img} alt=${member.name} class="img-responsive"></div>
-              <h3 class="name">${member.name}</h3>
-              <ul class="speaker-socials">`;
-        
-        ['twitter', 'facebook', 'github'].forEach( function(el) {
-          if (member[el]) {
-            html += `
-            <li><a href="#"><span class="fa fa-${el}"></span></a></li>`;
-          }
-        });
-
-        html += `
-              </ul>
-            </div>
-          </div>
-        `;
-
-        $("#team > div").append(html);
-      }
-      
-      (function() {
-        var members = getDataFromDeck('members','event=25-sinfo&&participations=true', processMember);
-      })();
-
-      
-    </script>
-    
+    <script type="text/javascript" src="assets/js/fetch.js"></script>
   </body>
 </html>
