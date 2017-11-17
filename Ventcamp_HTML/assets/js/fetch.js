@@ -1,0 +1,53 @@
+var  deck = 'https://deck.sinfo.org:443/api/';
+
+$(document).on('ready', function () {
+  fetchFromDeck('members','event=25-sinfo&&participations=true', processMember);
+});
+
+function fetchFromDeck(field, params, processDataFromDeck) {
+  var request = new XMLHttpRequest();
+  request.open('GET', deck + field + '?' + params);
+  request.responseType = 'json';
+  request.send();
+  request.onload = function() {
+    console.log(request.response)
+    request.response.forEach(function(el){
+      processDataFromDeck(el);
+    });
+  }
+}
+
+function processMember(member) {
+  // Dom Load hack
+  setTimeout(function() {
+    $("#team > div").append(html)
+  }, 1);
+
+  var html = `
+  <div class="col-sm-2">
+    <div class="speaker">
+      <div class="photo-wrapper rounded">
+        <img src=${member.img} alt=${member.name} class="img-responsive">
+      </div>
+      <h3 class="name">${member.name}</h3>
+      <ul class="speaker-socials">
+        ${getSocial()}
+      </ul>
+    </div>
+  </div>
+  `;
+
+  function getSocial(){
+    var socialNav = "";
+    if (member["twitter"])
+      socialNav += `<li><a href='https://twitter.com/${member["twitter"]}'><span class="fa fa-twitter"></span></a></li>`;
+
+    if (member["facebook"])
+      socialNav += `<li><a href='https://facebook.com/${member["facebook"]}'><span class="fa fa-facebook"></span></a></li>`;
+
+    if (member["github"])
+      socialNav += `<li><a href='https://github.com/${member["github"]}'><span class="fa fa-github"></span></a></li>`;
+
+    return socialNav;
+  }
+}
