@@ -5174,6 +5174,9 @@ button[type="submit"] .loading {
     margin-bottom: 14px;
     font-size: 50px;
   }
+  .speaker .text-alt {
+    min-height: 130px;
+  }
 }
 @media (max-width: 767px) {
   .package-column,
@@ -5802,6 +5805,24 @@ button[type="submit"] .loading {
 .speakers.masonry .about {
   margin: 0;
   padding: 0;
+}
+@media (max-width: 991px) and (min-width: 768px) {
+  .speaker .text-alt {
+    min-height: 131px;
+  }
+  section#speakers {
+    padding-bottom: 0;
+    margin-bottom: -20px;
+  }
+}
+@media (max-width: 480px) {
+  .speaker .text-alt {
+    min-height: initial;
+  }
+  section#speakers {
+    padding-bottom: 0;
+    margin-bottom: -20px;
+  }
 }
 @media (max-width: 480px) {
   .speakers.masonry .speaker-top {

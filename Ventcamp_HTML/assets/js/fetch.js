@@ -1,11 +1,11 @@
-var  deck = 'https://deck.sinfo.org:443/api/';
-
 $(document).on('ready', function () {
+  fetchFromDeck('speakers','event=24-sinfo&&participations=true', processSpeaker);
   fetchFromDeck('members','event=25-sinfo&&participations=true', processMember);
   fetchFromDeck('companies','event=24-sinfo&&participations=true', processSponsors);
 });
 
 function fetchFromDeck(field, params, processDataFromDeck) {
+  var  deck = 'https://deck.sinfo.org:443/api/';
   var request = new XMLHttpRequest();
   request.open('GET', deck + field + '?' + params);
   request.responseType = 'json';
@@ -50,6 +50,22 @@ function processMember(member) {
 
     return socialNav;
   }
+}
+
+function processSpeaker (speaker) {
+  $("#speakers > div").append(`
+    <div class="col-sm-3">
+      <div class="speaker">
+        <div class="photo-wrapper square">
+          <div class="view view-first">
+            <img src=${speaker.img} alt="${speaker.name}" class="img-responsive">
+          </div>
+        </div>
+        <h3 class="name">${speaker.name}</h3>
+        <p class="text-alt"><small>${speaker.title}</small></p>
+      </div>
+    </div>
+  `)
 }
 
 function processSponsors(sponsor) {

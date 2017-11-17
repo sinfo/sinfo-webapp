@@ -246,31 +246,6 @@
         <h3>Speakers</h3>
         <br />
         <br />
-
-  			<!--GET-->
-  			<script>
-          var requestURL = 'https://deck.sinfo.org:443/api/speakers?event=24-sinfo&&participations=true';
-    			var request = new XMLHttpRequest();
-    			request.open('GET', requestURL);
-    			request.responseType = 'json';
-    			request.send();
-    			request.onload = function() {
-            request.response.forEach(function(speaker){
-              $("#speakers > div").append(`<div class="col-sm-3">
-                <div class="speaker">
-                  <div class="photo-wrapper square">
-                    <div class="view view-first">
-                        <img src=${speaker.img} alt="${speaker.name}" class="img-responsive">
-                    </div>
-                  </div>
-                  <h3 class="name">${speaker.name}</h3>
-                  <p class="text-alt"><small>${speaker.title}</small></p>
-                </div>
-              </div>
-              `)
-            })
-    			}
-  			</script>
       </div>
     </section>
 
