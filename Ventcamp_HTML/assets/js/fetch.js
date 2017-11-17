@@ -25,7 +25,7 @@ function processMember(member) {
 
   var html = `
   <div class="col-sm-2">
-    <div class="speaker">
+    <div class="speaker member">
       <div class="photo-wrapper rounded">
         <img src=${member.img} alt=${member.name} class="img-responsive">
       </div>
