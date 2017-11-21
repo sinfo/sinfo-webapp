@@ -5721,7 +5721,7 @@ section#feedback {
   font-weight: 700;
   text-transform: uppercase;
   line-height: 14px;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.1em;
   height: 28px;
 }
 .speaker .name + p small {
