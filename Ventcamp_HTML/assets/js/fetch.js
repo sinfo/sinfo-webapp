@@ -39,6 +39,10 @@ function processMember(member) {
 
   function getSocial(){
     var socialNav = "";
+    
+    if (member["mail"])
+    socialNav += `<li><a href='mailto:${member["mail"]}'><span class="fa fa-envelope"></span></a></li>`;
+    
     if (member["twitter"])
       socialNav += `<li><a href='https://twitter.com/${member["twitter"]}'><span class="fa fa-twitter"></span></a></li>`;
 
