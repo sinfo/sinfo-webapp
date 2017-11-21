@@ -4888,6 +4888,9 @@ button[type="submit"] .loading {
 /* ----------------------------------------------------------------------------
     Testimonials
 ---------------------------------------------------------------------------- */
+section#feedback {
+  padding-bottom: 30px;
+}
 .testimonial {
   margin-bottom: 15px;
 }
@@ -5851,6 +5854,12 @@ button[type="submit"] .loading {
 ---------------------------------------------------------------------------- */
 .member .photo-wrapper img {
   max-width: 100%;
+}
+@media (max-width: 480px) {
+  .member .photo-wrapper img {
+    max-width: 80%;
+    border-radius: 50%;
+  }
 }
 /* ----------------------------------------------------------------------------
     Sponsors
