@@ -5822,7 +5822,7 @@ section#feedback {
 }
 @media (max-width: 991px) and (min-width: 768px) {
   .speaker .text-alt {
-    min-height: 131px;
+    min-height: 145px;
   }
   section#speakers {
     padding-bottom: 0;
