@@ -1,10 +1,3 @@
-/*
-*
-* Custom js snippets for Ventcamp v2.0
-* by Vivaco
-*
-*/
-
 var Ventcamp;
 
 ;(function($){
@@ -38,12 +31,6 @@ Ventcamp = {
 
     log: function (msg) {
         if ( this.options.log ) console.log('%cStartupLy Log: ' + msg, 'color: #1ac6ff');
-    },
-
-    buildStyleSwitcher: function () {
-        var template = '<div class="style-switcher"><a href="#" class="style-toggle"><i class="fa fa-cog"></i></a><h6>Color palette</h6><ul class="template-set-color"><li><a data-color="Blue" class="color blue" href="#" title="style"></a></li><li><a data-color="Pink" class="color pink" href="#" title="main-pink"></a></li><li><a data-color="Green" class="color green" href="#" title="main-green"></a></li><li><a data-color="Berry" class="color berry" href="#" title="main-berry"></a></li><li><a data-color="Orange" class="color orange" href="#" title="main-orange"></a></li></ul><div class="template-animations-switch"><h6>Animations</h6><input id="animations_switch" type="checkbox" checked="checked" /><label for="animations_switch"><i></i></label></div></div>'
-
-        $('body').append(template);
     },
 
     // check if site is laoded from mobile device
