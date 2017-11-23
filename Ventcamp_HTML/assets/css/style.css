@@ -2454,7 +2454,7 @@ li {
 }
 .section {
   position: relative;
-  padding: 50px 0;
+  padding: 30px 0;
 }
 .fullwidth-section {
   zoom: 1;
@@ -2580,10 +2580,28 @@ li {
 }
 .heading-block .heading-alt {
   letter-spacing: 2px;
+  margin-bottom: 8px;
 }
 .heading-block .fa {
   color: #008ae6;
   margin: auto 5px;
+}
+div.intro {
+  position: absolute;
+  bottom: 4vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+div.intro a{
+  width: fit-content;
+}
+div.intro i.fa-chevron-down {
+  font-size: 2.5em;
+}
+div.intro i.fa-chevron-down:hover {
+  color: #1aa3ff;
 }
 .logo-hero {
   width: 50%;
@@ -2602,7 +2620,6 @@ li {
   bottom: 40px;
 }
 .img-column {
-  padding-top: 20px;
   padding-bottom: 20px;
 }
 .list {
@@ -2650,7 +2667,7 @@ li {
 }
 @media (min-width: 1080px) {
   .video-bg video {
-    width: 100%;
+    width: 102%;
   }
 }
 @media (max-width: 991px) {
@@ -2662,6 +2679,9 @@ li {
   }
   .heading-block {
     padding: 80px 0;
+  }
+  .heading-block .heading-alt {
+   font-size: 17px;
   }
   .hero-heading-top {
     top: 30px;
@@ -2693,6 +2713,10 @@ li {
   }
   .heading-block {
     padding: 40px 0;
+  }
+  .heading-block .heading-alt {
+    margin-top: 10%;
+    font-size: 15px;
   }
   .hero-heading-top {
     position: relative;
@@ -5713,7 +5737,7 @@ section#feedback {
     Speakers
 ---------------------------------------------------------------------------- */
 .speaker {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   text-align: center;
 }
 .speaker .photo-wrapper {
