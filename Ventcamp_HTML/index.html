@@ -57,7 +57,12 @@
       <div class="preloader"></div>
     </div>
 
-    <section id="hero" class="hero-section ytp-player-background bg-cover window-height light-text" data-video="DutZn9wl6Bk" data-property="{videoURL: 'https://www.youtube.com/watch?v=DutZn9wl6Bk', containment: '#hero', autoPlay: true, realfullscreen: true, stopMovieOnBlur: false, addRaster: false, showControls: false, mute:true, startAt:0, opacity:1, gaTrack: false}">
+    <section id="hero" class="hero-section window-height light-text">
+      <div class="video-bg">
+        <video autoplay loop muted>
+          <source src="assets/video/big.mp4" type="video/mp4"/>
+        </video>
+      </div>
       <ul class="socials-nav">
         <li class="socials-nav-item">
           <a href="https://twitter.com/sinfoist" target="_blank"><span class="fa fa-twitter"></span></a>
@@ -91,8 +96,7 @@
           <div class="col-sm-2 col-xs-12 navigation-header">
             <a href="#" class="logo">
               <img src="assets/img/logos/logo_small_white.png" alt="Sinfo" width="119" height="17" class="retina-hide">
-              <img src="assets/img/logos/logo_big_white.png" alt="Sinfo" width="119" height="17" class="retina-show">
-            </a>
+              <img src="assets/img/logos/logo_big_white.png" alt="Sinfo" width="119" height="17" class="retina-show"> </a>
             <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-controls="navigation">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -104,10 +108,9 @@
             <div id="navigation" class="navbar-collapse collapse">
               <ul class="navigation-list pull-left light-text">
                 <li class="navigation-item"><a href="#about" class="navigation-link">About</a></li>
+                <li class="navigation-item"><a href="#feedback" class="navigation-link">Testimonials</a></li>
                 <li class="navigation-item"><a href="#speakers" class="navigation-link">Speakers</a></li>
                 <li class="navigation-item"><a href="#team" class="navigation-link">Team</a></li>
-                <li class="navigation-item"><a href="#feedback" class="navigation-link">Testimonials</a></li>
-                <li class="navigation-item"><a href="#sponsors" class="navigation-link">Sponsors</a></li>
                 <li class="navigation-item"><a href="#contacts" class="navigation-link">Contacts</a></li>
               </ul>
             </div>
@@ -190,101 +193,8 @@
             </div>
           </div>
         </div>
-      </div> </section>
-
-    <section id="countdown" class="section align-center overlay bg-cover counterbg light-text">
-			<!-- Countdown start -->
-			<div class="row counters-wrapper countdown">
-				<div class="col-sm-3">
-					<div class="counter-block counter-block-no-border has-separator">
-						<div class="counter-box">
-							<div class="counter-content">
-								<span class="count">{dnn}</span>
-
-								<p class="title">days</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-3">
-					<div class="counter-block counter-block-no-border has-separator">
-						<div class="counter-box">
-							<div class="counter-content">
-								<span class="count">{hnn}</span>
-
-								<p class="title">hours</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-3">
-					<div class="counter-block counter-block-no-border has-separator">
-						<div class="counter-box">
-							<div class="counter-content">
-								<span class="count">{mnn}</span>
-
-								<p class="title">minutes</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-3">
-					<div class="counter-block counter-block-no-border">
-						<div class="counter-box">
-							<div class="counter-content">
-								<span class="count">{snn}</span>
-
-								<p class="title">seconds</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+      </div> 
     </section>
-
-    <section id="speakers" class="section align-center">
-      <div class="container">
-        <span class="icon section-icon icon-faces-users-03"></span>
-        <h3>Speakers</h3>
-        <br />
-        <br />
-      </div>
-    </section>
-
-    <section id="sign_up" class="section bg-cover overlay newsletterbg light-text align-center">
-      <div class="container">
-        <!-- don't know if I'm feeling the colors with the image too much -->
-        <h2><span class="highlight">Newsletter</span> Sign Up</h2>
-        <small>Be the first to recieve the latest updates from SINFO!</small>
-        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-          <form id="subscribe_main" action="" method="post" enctype="multipart/form-data" class="form row newsletter-form mailchimp-form">
-            <fieldset class="col-sm-8">
-              <input id="NewsletterEmail" name="NewsletterEmail" type="email" placeholder="email@email.com">
-            </fieldset>
-            <fieldset class="col-sm-4">
-              <input type="submit" value="submit" class="btn btn-sm btn-outline-clr">
-            </fieldset>
-            <div class="response"></div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <section id="team" class="section align-center">
-      <div class="container">
-        <span class="icon section-icon icon-faces-users-04"></span>
-        <h3>The team</h5>
-        <!-- <p class="text-alt">Meet our <span class="highlight">professonals</span></p> -->
-        <br />
-        <br />
-  
-      </div>
-    </section>
-    
-
 
     <section id="feedback" class="section align-center" style="padding-top: 25px;">
       <div class="container">
@@ -331,6 +241,101 @@
       </div>
     </section>
 
+
+    <section id="countdown" class="section align-center overlay bg-cover counterbg light-text">
+      <!-- Countdown start -->
+      <div class="row counters-wrapper countdown">
+        <div class="col-sm-3">
+          <div class="counter-block counter-block-no-border has-separator">
+            <div class="counter-box">
+              <div class="counter-content">
+                <span class="count">{dnn}</span>
+
+                <p class="title">days</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="counter-block counter-block-no-border has-separator">
+            <div class="counter-box">
+              <div class="counter-content">
+                <span class="count">{hnn}</span>
+
+                <p class="title">hours</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="counter-block counter-block-no-border has-separator">
+            <div class="counter-box">
+              <div class="counter-content">
+                <span class="count">{mnn}</span>
+
+                <p class="title">minutes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="counter-block counter-block-no-border">
+            <div class="counter-box">
+              <div class="counter-content">
+                <span class="count">{snn}</span>
+
+                <p class="title">seconds</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="speakers" class="section align-center">
+      <div class="container">
+        <span class="icon section-icon icon-faces-users-03"></span>
+        <h3>Speakers</h3>
+        <br />
+        <br />
+      </div>
+    </section>
+
+    <section id="sign_up" class="section bg-cover overlay newsletterbg light-text align-center">
+      <div class="container">
+        <!-- don't know if I'm feeling the colors with the image too much -->
+        <h2><span class="highlight">Newsletter</span> Sign Up</h2>
+        <small>Be the first to recieve the latest updates from SINFO!</small>
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+          <form id="subscribe_main" action="" method="post" enctype="multipart/form-data" class="form row newsletter-form mailchimp-form">
+            <fieldset class="col-sm-8">
+              <input id="NewsletterEmail" name="NewsletterEmail" type="email" placeholder="email@email.com">
+            </fieldset>
+            <fieldset class="col-sm-4">
+              <input type="submit" value="submit" class="btn btn-sm btn-outline-clr">
+            </fieldset>
+            <div class="response"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" class="section align-center">
+      <div class="container">
+        <span class="icon section-icon icon-faces-users-04"></span>
+        <h3>The team</h5>
+        <!-- <p class="text-alt">Meet our <span class="highlight">professonals</span></p> -->
+        <br />
+        <br />
+
+      </div>
+    </section>
+
+
+
     <!--<section id="register" class="section overlay overlay-clr bg-cover bg4 light-text align-center">-->
       <!--<div class="container">-->
         <!--<h2>Register to Ventcamp now!</h2>-->
@@ -339,8 +344,8 @@
         <!--<br />-->
 
         <!--<a href="#" class="btn btn-lg btn-outline">Register</a>-->
-      <!--</div>-->
-    <!--</section>-->
+        <!--</div>-->
+      <!--</section>-->
 
     <section id="sponsors" class="section align-center">
       <div class="container">
@@ -448,7 +453,7 @@
             </ul>
 
             <p class="text-alt"><small>Made with ♥ at SINFO - code available 
-              <a href="https://github.com/sinfo/sinfo-webapp" target="_blank">here</a></small>
+                <a href="https://github.com/sinfo/sinfo-webapp" target="_blank">here</a></small>
             </p>
           </div>
 

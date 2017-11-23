@@ -2454,7 +2454,7 @@ li {
 }
 .section {
   position: relative;
-  padding: 90px 0;
+  padding: 50px 0;
 }
 .fullwidth-section {
   zoom: 1;
@@ -2578,9 +2578,12 @@ li {
 .heading-block {
   padding: 150px 0;
 }
+.heading-block .heading-alt {
+  letter-spacing: 2px;
+}
 .heading-block .fa {
   color: #008ae6;
-  margin-right: 10px;
+  margin: auto 5px;
 }
 .logo-hero {
   width: 50%;
@@ -2644,6 +2647,11 @@ li {
   padding: 15px;
   font-size: 15px;
   line-height: 1.5625;
+}
+@media (min-width: 1080px) {
+  .video-bg video {
+    width: 100%;
+  }
 }
 @media (max-width: 991px) {
   .wrapper {
@@ -4886,10 +4894,16 @@ button[type="submit"] .loading {
   top: 0;
 }
 /* ----------------------------------------------------------------------------
+    About
+---------------------------------------------------------------------------- */
+section#about {
+  padding-bottom: 20px;
+}
+/* ----------------------------------------------------------------------------
     Testimonials
 ---------------------------------------------------------------------------- */
 section#feedback {
-  padding-bottom: 30px;
+  /*padding-bottom: 30px;*/
 }
 .testimonial {
   margin-bottom: 15px;
@@ -5852,8 +5866,15 @@ section#feedback {
 /* ----------------------------------------------------------------------------
     Members
 ---------------------------------------------------------------------------- */
+.member .name {
+  height: auto;
+  color: #007acc;
+}
 .member .photo-wrapper img {
   max-width: 100%;
+}
+.speaker .speaker-socials > li {
+  padding: 0 5px;
 }
 @media (max-width: 480px) {
   .member .photo-wrapper img {
@@ -6674,7 +6695,6 @@ section#feedback {
 }
 .footer-base {
   padding: 40px 0 30px;
-  background-color: #1f2125;
   text-align: left;
 }
 .footer-nav > li {
