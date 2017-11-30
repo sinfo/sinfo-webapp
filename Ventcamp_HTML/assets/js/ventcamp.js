@@ -1242,9 +1242,9 @@ $('.navigation-item').on( 'click', function (event) {
 });
 
 $('.logo img').hover(function (event) {
-    $('#logo_white').addClass('retina-show').removeClass('retina-hide');
-    $('#logo_blue').addClass('retina-hide').removeClass('retina-show');
+    $('#logo_white').hide();
+    $('#logo_blue').show();
 }, function (event) {
-    $('#logo_blue').addClass('retina-show').removeClass('retina-hide');
-    $('#logo_white').addClass('retina-hide').removeClass('retina-show');
+    $('#logo_blue').hide();
+    $('#logo_white').show();
 });
