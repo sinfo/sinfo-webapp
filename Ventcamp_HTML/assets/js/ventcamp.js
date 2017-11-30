@@ -4,6 +4,9 @@ var Ventcamp;
 
     $(document).on('ready', function () {
         Ventcamp.init();
+
+        $('#logo_white').show();
+        $('#logo_blue').hide();
     });
 
 })( jQuery );
