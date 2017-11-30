@@ -20,7 +20,8 @@ function fetchFromDeck(field, params, processDataFromDeck) {
 function processMember(member) {
   // Dom Load hack
   setTimeout(function() {
-    $("#team > div").append(html)
+    if( member.name != "ToolBot!" )
+      $("#team > div").append(html);
   }, 1);
 
   var html = `
