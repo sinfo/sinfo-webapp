@@ -2344,7 +2344,7 @@ input[type=password].error,
 .call-to-action-section > .overlay:before,
 .thumb-wrapper .overlay:before,
 .header .buy-btn {
-  background-color: #008ae6;
+  background-color: white;
 }
 .base-clr-txt,
 .highlight,
@@ -2416,6 +2416,9 @@ input[type="submit"] + .loading,
 input.header.header-color .navigation-header .buy-btn,
 .header .buy-btn {
   color: #008ae6;
+}
+.fa-chevron-down {
+  color: white
 }
 ::selection {
   color: #ffffff;
@@ -6588,7 +6591,7 @@ section#feedback {
     right: 0;
     left: 0;
     z-index: 1000;
-    height: 91px;
+    height: 71px;
   }
   .header .fade-in-on-stick {
     display: inline-block;
@@ -6638,13 +6641,13 @@ section#feedback {
   }
   .header-wrapper {
     height: auto;
-    min-height: 90px;
+    min-height: 70px;
   }
   .header-wrapper > .container {
     padding: 0;
   }
   .navigation-header {
-    padding: 18px 15px 13px 35px;
+    padding: 6px 15px 6px 35px;
   }
   .navigation-header .logo {
     padding: 12px 0;
@@ -6713,12 +6716,12 @@ section#feedback {
     Footer
 ---------------------------------------------------------------------------- */
 .footer {
-  padding: 50px 0 0;
+  padding: 0 0 0;
   color: #ffffff;
   background-color: #262627;
 }
 .footer-base {
-  padding: 40px 0 30px;
+  padding: 30px 0 30px;
   text-align: left;
 }
 .footer-nav > li {

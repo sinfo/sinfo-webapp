@@ -1,6 +1,6 @@
 $(document).on('ready', function () {
   fetchFromDeck('speakers','event=24-sinfo&&participations=true', processSpeaker);
-  fetchFromDeck('members','event=25-sinfo&&participations=true', processMember);
+  fetchFromDeck('members','sort=name&event=25-sinfo&&participations=true', processMember);
   fetchFromDeck('companies','event=24-sinfo&&participations=true', processSponsors);
 });
 
@@ -20,7 +20,8 @@ function fetchFromDeck(field, params, processDataFromDeck) {
 function processMember(member) {
   // Dom Load hack
   setTimeout(function() {
-    $("#team > div").append(html)
+    if( member.name !== "ToolBot!" )
+      $("#team > div").append(html);
   }, 1);
 
   var html = `
