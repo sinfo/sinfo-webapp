@@ -1173,17 +1173,13 @@ Ventcamp = {
         var original_video_h = 1080;
         var original_video_r = original_video_w/original_video_h;
 
-        var $video = $('.video-bg video');
-        var $video_wrapper = $('.video-bg');
-
-        var video_wrapper_w = $video_wrapper.width();
-        var video_wrapper_h = $video_wrapper.height();
+        var video_wrapper_w = $('.video-bg').width();
+        var video_wrapper_h = $('.video-bg').height();
         var video_wrapper_r = video_wrapper_w/video_wrapper_h;
 
-        if( video_wrapper_r >= original_video_r )
+        if( (video_wrapper_r + 0.25)  >= original_video_r )
             return;
 
-        var w_translation = v_translation = 0;
         var css = {
             'position': 'absolute'
         };
@@ -1198,7 +1194,7 @@ Ventcamp = {
             css['top'] = -h_translation;
         }
 
-        $video.css(css);
+        $('.video-bg video').css(css);
     },
 
     init: function (options) {
