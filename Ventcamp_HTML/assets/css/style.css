@@ -5754,7 +5754,7 @@ section#feedback {
 }
 .speaker .photo-wrapper img {
   display: block;
-  max-width: 70%;
+  /*max-width: 70%;*/
   margin: 0 auto;
 }
 .speaker .name {
