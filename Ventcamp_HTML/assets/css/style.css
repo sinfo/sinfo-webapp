@@ -5864,6 +5864,9 @@ section#feedback {
 div#mc_embed_signup {
   margin-top: 20px;
 }
+div.clear input.btn:hover {
+  color: #008ae6;
+}
 @media (max-width: 991px) and (min-width: 768px) {
   .speaker .text-alt {
     min-height: 145px;
