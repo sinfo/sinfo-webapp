@@ -1042,7 +1042,7 @@ Ventcamp = {
 
         this.checkHeaderStatus();
 
-        this.masonryInit();
+        //this.masonryInit();
 
         this.hidePreloader();
     },
