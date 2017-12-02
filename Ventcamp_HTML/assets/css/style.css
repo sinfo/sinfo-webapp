@@ -5861,6 +5861,9 @@ section#feedback {
   margin: 0;
   padding: 0;
 }
+div#mc_embed_signup {
+  margin-top: 20px;
+}
 @media (max-width: 991px) and (min-width: 768px) {
   .speaker .text-alt {
     min-height: 145px;
