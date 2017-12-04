@@ -2098,7 +2098,7 @@ small {
 }
 .text-alt,
 .counter-box .counter-content .title {
-  color: #B8BCC3;
+  color: #9B9B9B;
 }
 a {
   -webkit-transition: color 0.2s ease;
@@ -7052,7 +7052,7 @@ div.clear input.btn:hover {
   background-image: url("../img/backgrounds/bg3.jpg");
 }
 .newsletterbg {
-  background-image: url("../img/countdown.jpg");
+  background-image: url("../img/Newsletter.jpg");
 }
 .counterbg {
   background-image: url("../img/countdown.jpg");
