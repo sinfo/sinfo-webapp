@@ -2023,8 +2023,8 @@ h4,
 h5,
 h6,
 .h7 {
-  font-family: "PT Sans Caption", Arial, "Helvetica Neue", Helvetica, sans-serif;
-  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  font-weight: 450;
 }
 h1,
 h2,
@@ -2052,7 +2052,7 @@ h6,
   color: #8d93a0;
 }
 h5.heading-alt {
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-size: 19px;
   line-height: 1.7;
   letter-spacing: 0.5em;
@@ -2750,6 +2750,9 @@ div.intro i.fa-chevron-down:hover {
     display: block;
     display: initial;
   }
+}
+.heading-alt .fa {
+  color: white;
 }
 /* ----------------------------------------------------------------------------
     Style switcher
