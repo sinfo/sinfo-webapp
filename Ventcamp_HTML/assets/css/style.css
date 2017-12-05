@@ -5767,6 +5767,7 @@ section#feedback {
   line-height: 14px;
   letter-spacing: 0.1em;
   height: 28px;
+  margin-bottom: 0;
 }
 .speaker .name + p small {
   font-size: 14px;
