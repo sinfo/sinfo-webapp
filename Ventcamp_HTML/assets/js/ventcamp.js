@@ -7,6 +7,16 @@ var Ventcamp;
 
         $('#logo_white').show();
         $('#logo_blue').hide();
+
+        if( !Ventcamp.mobileDevice ) {
+            $('.logo img').hover(function (event) {
+                $('#logo_white').hide();
+                $('#logo_blue').show();
+            }, function (event) {
+                $('#logo_blue').hide();
+                $('#logo_white').show();
+            });
+        }
     });
 
 })( jQuery );
