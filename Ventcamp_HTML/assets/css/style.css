@@ -2670,7 +2670,7 @@ div.intro i.fa-chevron-down:hover {
 }
 @media (min-width: 1080px) {
   .video-bg video {
-    width: 102%;
+    /* width: 102%; */
   }
 }
 @media (max-width: 991px) {
