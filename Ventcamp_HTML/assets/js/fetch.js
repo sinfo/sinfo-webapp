@@ -29,11 +29,11 @@ function processMember(member) {
     <div class="speaker member">
       <div class="photo-wrapper rounded">
         <img src=${member.img} alt=${member.name} class="img-responsive">
+          <ul class="speaker-socials">
+            ${getSocial()}
+          </ul>
       </div>
       <h3 class="name">${member.name}</h3>
-      <ul class="speaker-socials">
-        ${getSocial()}
-      </ul>
     </div>
   </div>
   `;
