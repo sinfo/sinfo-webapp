@@ -1187,9 +1187,6 @@ Ventcamp = {
         var video_wrapper_h = $('.video-bg').height();
         var video_wrapper_r = video_wrapper_w/video_wrapper_h;
 
-        if( (video_wrapper_r + 0.25)  >= original_video_r )
-            return;
-
         var css = {
             'position': 'absolute'
         };
@@ -1200,7 +1197,7 @@ Ventcamp = {
         }
 
         if( original_video_h > video_wrapper_h ) {
-            var h_translation = (original_video_h - video_wrapper_h) /2;
+            var h_translation = (original_video_h - video_wrapper_h) * 0.6;
             css['top'] = -h_translation;
         }
 
