@@ -5958,9 +5958,8 @@ div.clear input.btn:hover {
   opacity: 0.2;
 }
 @media (max-width: 480px) {
-  .member .photo-wrapper img {
-    max-width: 80%;
-    border-radius: 50%;
+  .member .photo-wrapper {
+    max-width: 70%;
   }
 }
 /* ----------------------------------------------------------------------------
