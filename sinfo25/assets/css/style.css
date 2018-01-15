@@ -5903,6 +5903,7 @@ div.clear input.btn:hover {
   height: auto;
   color: #007acc;
 }
+.hacky .photo-wrapper,
 .member .photo-wrapper {
   -webkit-transition: all 0.2s ease; /* Safari and Chrome */
   -moz-transition: all 0.2s ease; /* Firefox */
@@ -5910,7 +5911,12 @@ div.clear input.btn:hover {
   -o-transition: all 0.2s ease; /* Opera */
   transition: all 0.2s ease;
   margin-bottom: 10px;
+  overflow: hidden;
 }
+.hacky .photo-wrapper {
+  margin-bottom: 20px;
+}
+.hacky .photo-wrapper img,
 .member .photo-wrapper img {
   max-width: 100%;
   -webkit-transition: all 0.2s ease; /* Safari and Chrome */
@@ -5919,6 +5925,7 @@ div.clear input.btn:hover {
   -o-transition: all 0.2s ease; /* Opera */
   transition: all 0.2s ease;
 }
+.hacky .photo-wrapper .speaker-socials,
 .member .photo-wrapper .speaker-socials {
   position: absolute;
   z-index: 100;
@@ -5928,6 +5935,7 @@ div.clear input.btn:hover {
   left: 8%;
   width: 85%;
 }
+.hacky .speaker-socials li,
 .member .speaker-socials li {
   vertical-align: top;
   display: inline-block;
@@ -5941,12 +5949,17 @@ div.clear input.btn:hover {
 .speaker .speaker-socials > li a:active .fa {
   color: #008ae6;
 }
+.hacky .photo-wrapper:hover {
+  background-color: rgba(0, 122, 204, 0.64);
+}
 .member .photo-wrapper:hover{
   background-color: rgba(0, 122, 204, 0.2);
 }
+.hacky .photo-wrapper:hover .speaker-socials,
 .member .photo-wrapper:hover .speaker-socials{
   display: inline-block;
 }
+.hacky .photo-wrapper:hover img,
 .member .photo-wrapper:hover img {
   -webkit-transform:scale(1.1); /* Safari and Chrome */
   -moz-transform:scale(1.1); /* Firefox */

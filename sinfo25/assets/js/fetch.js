@@ -1,5 +1,5 @@
 $(document).on('ready', function () {
-  fetchFromDeck('speakers','event=24-sinfo&&participations=true', processSpeaker);
+  fetchFromDeck('speakers','sort=name&event=25-sinfo&&participations=true', processSpeaker);
   fetchFromDeck('members','sort=name&event=25-sinfo&&participations=true', processMember);
   //fetchFromDeck('companies','event=24-sinfo&&participations=true', processSponsors);
 });
