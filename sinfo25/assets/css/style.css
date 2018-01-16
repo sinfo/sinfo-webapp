@@ -2591,8 +2591,8 @@ div.intro {
   align-items: center;
 
   -moz-animation: bounce 1.5s infinite;
-	-webkit-animation: bounce 4s infinite;
-	animation: bounce 4s infinite;
+  -webkit-animation: bounce 4s infinite;
+  animation: bounce 4s infinite;
 }
 div.intro a{
   width: fit-content;
