@@ -2589,6 +2589,10 @@ div.intro {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  -moz-animation: bounce 1.5s infinite;
+	-webkit-animation: bounce 4s infinite;
+	animation: bounce 4s infinite;
 }
 div.intro a{
   width: fit-content;
@@ -2599,6 +2603,62 @@ div.intro i.fa-chevron-down {
 div.intro i.fa-chevron-down:hover {
   color: #1aa3ff;
 }
+@-moz-keyframes intro {
+  0%, 100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  75% {
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+  }
+  80%, 90% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
+  }
+  85%, 95%{
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+}
+@-webkit-keyframes bounce {
+  0%, 100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  75% {
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+  }
+  80%, 90% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
+  }
+  85%, 95%{
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  75% {
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+  }
+  80%, 90% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
+  }
+  85%, 95%{
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+}
+
 .logo-hero {
   width: 50%;
   margin: 15px auto;
