@@ -62,7 +62,7 @@ function processSpeaker (speaker) {
     <div class="col-sm-3">
       <div class="speaker">
         <div class="photo-wrapper square">
-          <div class="view view-first">
+          <div class="view view-first" style="background: transparent url('assets/img/logos/speakers/${speaker.id}.png') no-repeat;">
             <img src=${speaker.img} alt="${speaker.name}" class="img-responsive">
           </div>
         </div>
