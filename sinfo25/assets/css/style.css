@@ -2590,9 +2590,11 @@ div.intro {
   flex-direction: column;
   align-items: center;
 
-  -moz-animation: bounce 4s infinite;
-  -webkit-animation: bounce 4s infinite;
-  animation: bounce 4s infinite;
+  /* hack: cant use the infinite without causing problems */
+  -o-animation: bounce 4s 400;
+  -moz-animation: bounce 4s 400;
+  -webkit-animation: bounce 4s 400;
+  animation: bounce 4s 40;
 }
 div.intro a{
   width: fit-content;
@@ -2603,21 +2605,39 @@ div.intro i.fa-chevron-down {
 div.intro i.fa-chevron-down:hover {
   color: #1aa3ff;
 }
-@-moz-keyframes intro {
+@-o-keyframes bounce {
   0%, 100% {
-    -webkit-transform: translateY(0);
+    -o-transform: translateY(0);
     transform: translateY(0);
   }
   75% {
-    -webkit-transform: translateY(2px);
+    -o-transform: translateY(2px);
     transform: translateY(2px);
   }
   80%, 90% {
-    -webkit-transform: translateY(-4px);
+    -o-transform: translateY(-4px);
     transform: translateY(-4px);
   }
   85%, 95%{
-    -webkit-transform: translateY(4px);
+    -o-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+}
+@-moz-keyframes bounce {
+  0%, 100% {
+    -moz-transform: translateY(0);
+    transform: translateY(0);
+  }
+  75% {
+    -moz-transform: translateY(2px);
+    transform: translateY(2px);
+  }
+  80%, 90% {
+    -moz-transform: translateY(-4px);
+    transform: translateY(-4px);
+  }
+  85%, 95%{
+    -moz-transform: translateY(4px);
     transform: translateY(4px);
   }
 }
@@ -2639,26 +2659,36 @@ div.intro i.fa-chevron-down:hover {
     transform: translateY(4px);
   }
 }
-
 @keyframes bounce {
   0%, 100% {
+    -o-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
     -webkit-transform: translateY(0);
     transform: translateY(0);
   }
   75% {
+    -o-transform: translateY(2px);
+    -moz-transform: translateY(2px);
+    -ms-transform: translateY(2px);
     -webkit-transform: translateY(2px);
     transform: translateY(2px);
   }
   80%, 90% {
+    -o-transform: translateY(-4px);
+    -moz-transform: translateY(-4px);
+    -ms-transform: translateY(-4px);
     -webkit-transform: translateY(-4px);
     transform: translateY(-4px);
   }
   85%, 95%{
+    -o-transform: translateY(4px);
+    -moz-transform: translateY(4px);
+    -ms-transform: translateY(4px);
     -webkit-transform: translateY(4px);
     transform: translateY(4px);
   }
 }
-
 .logo-hero {
   width: 50%;
   margin: 15px auto;
