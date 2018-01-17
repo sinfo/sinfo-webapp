@@ -2590,6 +2590,7 @@ div.intro {
   flex-direction: column;
   align-items: center;
 
+
   /* hack: cant use the infinite without causing problems */
   -o-animation: bounce 4s 400;
   -moz-animation: bounce 4s 400;
@@ -2675,6 +2676,7 @@ div.intro i.fa-chevron-down:hover {
     transform: translateY(2px);
   }
   80%, 90% {
+
     -o-transform: translateY(-4px);
     -moz-transform: translateY(-4px);
     -ms-transform: translateY(-4px);
