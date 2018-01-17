@@ -2591,6 +2591,7 @@ div.intro {
   align-items: center;
 
   -moz-animation: bounce 4s infinite;
+  -ms-animation: bounce 4s infinite;
   -webkit-animation: bounce 4s infinite;
   animation: bounce 4s infinite;
 }
@@ -2603,62 +2604,6 @@ div.intro i.fa-chevron-down {
 div.intro i.fa-chevron-down:hover {
   color: #1aa3ff;
 }
-@-moz-keyframes intro {
-  0%, 100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
-  75% {
-    -webkit-transform: translateY(2px);
-    transform: translateY(2px);
-  }
-  80%, 90% {
-    -webkit-transform: translateY(-4px);
-    transform: translateY(-4px);
-  }
-  85%, 95%{
-    -webkit-transform: translateY(4px);
-    transform: translateY(4px);
-  }
-}
-@-webkit-keyframes bounce {
-  0%, 100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
-  75% {
-    -webkit-transform: translateY(2px);
-    transform: translateY(2px);
-  }
-  80%, 90% {
-    -webkit-transform: translateY(-4px);
-    transform: translateY(-4px);
-  }
-  85%, 95%{
-    -webkit-transform: translateY(4px);
-    transform: translateY(4px);
-  }
-}
-
-@keyframes bounce {
-  0%, 100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
-  75% {
-    -webkit-transform: translateY(2px);
-    transform: translateY(2px);
-  }
-  80%, 90% {
-    -webkit-transform: translateY(-4px);
-    transform: translateY(-4px);
-  }
-  85%, 95%{
-    -webkit-transform: translateY(4px);
-    transform: translateY(4px);
-  }
-}
-
 .logo-hero {
   width: 50%;
   margin: 15px auto;
@@ -5984,6 +5929,7 @@ div.clear input.btn:hover {
   -ms-transition: all 0.2s ease; /* IE 9 */
   -o-transition: all 0.2s ease; /* Opera */
   transition: all 0.2s ease;
+  border-radius: inherit;
 }
 .hacky .photo-wrapper .speaker-socials,
 .member .photo-wrapper .speaker-socials {
@@ -6021,13 +5967,15 @@ div.clear input.btn:hover {
 }
 .hacky .photo-wrapper:hover img,
 .member .photo-wrapper:hover img {
-  -webkit-transform:scale(1.1); /* Safari and Chrome */
-  -moz-transform:scale(1.1); /* Firefox */
-  -ms-transform:scale(1.1); /* IE 9 */
-  -o-transform:scale(1.1); /* Opera */
-  transform:scale(1.1);
+  /*-webkit-transform:scale(1.1); /* Safari and Chrome */
+  /*-moz-transform:scale(1.1); /* Firefox */
+  /*-ms-transform:scale(1.1); /* IE 9 */
+  /*-o-transform:scale(1.1); /* Opera */
+  /*transform:scale(1.1);*/
 
   filter: alpha(opacity=20);
+  -webkit-transform: opacity(1.1); /* Safari and Chrome */
+  transform: opacity(1.1);
   opacity: 0.2;
 }
 @media (max-width: 480px) {

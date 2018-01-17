@@ -314,3 +314,66 @@ lesshat-selector {
 @-o-keyframes flip3dVertical{ 0% { opacity: 0; -o-transform: perspective(1300px) rotateX(-90deg); } 50% { opacity: 1; -o-transform: perspective(1300px) rotateX(20deg); } 85%{ -o-transform: perspective(1300px) rotateX(-10deg); } 100% { opacity: 1; -o-transform: perspective(1300px) rotateX(0); }}
 @keyframes flip3dVertical{ 0% { opacity: 0;-webkit-transform: perspective(1300px) rotateX(-90deg);-moz-transform: perspective(1300px) rotateX(-90deg);-ms-transform: perspective(1300px) rotateX(-90deg);transform: perspective(1300px) rotateX(-90deg); } 50% { opacity: 1;-webkit-transform: perspective(1300px) rotateX(20deg);-moz-transform: perspective(1300px) rotateX(20deg);-ms-transform: perspective(1300px) rotateX(20deg);transform: perspective(1300px) rotateX(20deg); } 85%{-webkit-transform: perspective(1300px) rotateX(-10deg);-moz-transform: perspective(1300px) rotateX(-10deg);-ms-transform: perspective(1300px) rotateX(-10deg);transform: perspective(1300px) rotateX(-10deg); } 100% { opacity: 1;-webkit-transform: perspective(1300px) rotateX(0);-moz-transform: perspective(1300px) rotateX(0);-ms-transform: perspective(1300px) rotateX(0);transform: perspective(1300px) rotateX(0); };
 }
+@-moz-keyframes bounce {
+  0%, 100% {
+    -moz-transform: translateY(0);
+    transform: translateY(0);
+  }
+  75% {
+    -moz-transform: translateY(2px);
+    transform: translateY(2px);
+  }
+  80%, 90% {
+    -moz-transform: translateY(-4px);
+    transform: translateY(-4px);
+  }
+  85%, 95%{
+    -moz-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+}
+@-webkit-keyframes bounce {
+  0%, 100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  75% {
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+  }
+  80%, 90% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
+  }
+  85%, 95%{
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  75% {
+    -moz-transform: translateY(2px);
+    -ms-transform: translateY(2px);
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+  }
+  80%, 90% {
+    -moz-transform: translateY(-4px);
+    -ms-transform: translateY(-4px);
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
+  }
+  85%, 95%{
+    -moz-transform: translateY(4px);
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+}
