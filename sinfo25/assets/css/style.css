@@ -5967,12 +5967,6 @@ div.clear input.btn:hover {
 }
 .hacky .photo-wrapper:hover img,
 .member .photo-wrapper:hover img {
-  /*-webkit-transform:scale(1.1); /* Safari and Chrome */
-  /*-moz-transform:scale(1.1); /* Firefox */
-  /*-ms-transform:scale(1.1); /* IE 9 */
-  /*-o-transform:scale(1.1); /* Opera */
-  /*transform:scale(1.1);*/
-
   filter: alpha(opacity=20);
   -webkit-transform: opacity(1.1); /* Safari and Chrome */
   transform: opacity(1.1);
