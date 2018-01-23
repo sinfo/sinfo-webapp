@@ -5935,9 +5935,6 @@ div.clear input.btn:hover {
   margin-bottom: 10px;
   overflow: hidden;
 }
-.hacky .photo-wrapper {
-  margin-bottom: 20px;
-}
 .hacky .photo-wrapper img,
 .member .photo-wrapper img {
   max-width: 100%;
