@@ -5779,8 +5779,10 @@ section#feedback {
   transform: scale(1.2);
 }
 .speaker .photo-wrapper div {
-  background-size: contain !important;
+  background-size: 90% !important;
   background-position: center !important;
+  background-color: white;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
 .speaker .speaker-socials {

@@ -62,7 +62,8 @@ function processSpeaker (speaker) {
     <div class="col-sm-3">
       <div class="speaker">
         <div class="photo-wrapper square">
-          <div class="view view-first" style="background: transparent url('assets/img/logos/speakers/${speaker.id}.png') no-repeat;">
+          <div class="view view-first"
+            style="background-image:url('https://static.sinfo.org/SINFO_25/speakersCompanies/${speaker.name.replace(/\s/g, '')}.png');">
             <img src=${speaker.img} alt="${speaker.name}" class="img-responsive">
           </div>
         </div>
