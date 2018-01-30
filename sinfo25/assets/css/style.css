@@ -2337,7 +2337,8 @@ input[type=password].error,
 .call-to-action-section > .overlay:before,
 .thumb-wrapper .overlay:before,
 .header .buy-btn {
-  background-color: white;
+  /*background-color: white;*/
+  background-color: #018ae6;
 }
 .base-clr-txt,
 .highlight,
@@ -3507,6 +3508,7 @@ button.btn.btn-block {
 .nav.nav-schedule > li.active a:hover *,
 .nav.nav-schedule > li.active a:focus * {
   color: #ffffff;
+  background-color: ;
 }
 .schedule .tab-content {
   padding: 0;
