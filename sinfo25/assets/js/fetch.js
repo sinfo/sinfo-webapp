@@ -1,6 +1,7 @@
 $(document).on('ready', function () {
   fetchFromDeck('speakers','sort=name&event=25-sinfo&&participations=true', processSpeaker);
   fetchFromDeck('members','sort=name&event=25-sinfo&&participations=true', processMember);
+  fetchFromDeck('sessions', 'sort=date&event=24-sinfo', processSessions)
   //fetchFromDeck('companies','event=24-sinfo&&participations=true', processSponsors);
 });
 
@@ -14,6 +15,59 @@ function fetchFromDeck(field, params, processDataFromDeck) {
     request.response.forEach(function(el){
       processDataFromDeck(el);
     });
+  }
+}
+
+var keynotesCounter = 0;
+var workshopsCounter = 0;
+var presentationsCounter = 0;
+
+function processSessions(session) {
+  dates = {
+    '20': 'day1',
+    '21': 'day2',
+    '22': 'day3',
+    '23': 'day4',
+    '24': 'day5'
+  };
+
+  date = new Date(Date.parse(session.date));
+  duration = new Date(Date.parse(session.duration));
+  day = dates[date.getDate()];
+  hour = date.getHours()
+  minute = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes()
+  speakers = ''
+
+  session.speakers.forEach( function (speaker) {
+    name = speaker.id.replace(/-/g, ' ');
+
+    if (speakers.length !== 0) {
+      speakers += ', ';
+    }
+    speakers += name;
+  });
+
+  if (session.kind === 'Keynote') {
+    keynotesCounter += 1;
+    html = `
+      <div class="panel schedule-item">
+        <div class="lecture-icon-wrapper">
+          <span class="fa fa-cutlery"></span>
+        </div>
+        <a data-toggle="collapse" data-parent="#${day}_keynotes_timeline" href="#${day}_keynotes_time${keynotesCounter}" class="schedule-item-toggle">
+          <strong class="time highlight"><span class="icon icon-office-24"></span>${hour}:${minute}</strong>
+          <h6 class="title">${session.name}<i class="icon icon-arrows-06"></i></h6>
+        </a>
+        <div id="${day}_keynotes_time${keynotesCounter}" class="panel-collapse collapse in schedule-item-body">
+          <article>
+            <p class="description">${session.description}</p>
+            <strong class="highlight speaker-name">${speakers}</strong>
+          </article>
+        </div>
+      </div>
+    `;
+
+    $(`#${day}_keynotes > div`).append(html);
   }
 }
 
