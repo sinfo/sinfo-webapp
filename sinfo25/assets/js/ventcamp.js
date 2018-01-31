@@ -389,7 +389,7 @@ Ventcamp = {
                 var $schedule = $('.tab-content-schedule');
                 var presentations = false;
 
-                if (id.indexOf('presentations') !== -1) {
+                if (id.indexOf('presentations') !== -1 || id.indexOf('workshops') !== -1) {
                     presentations = true;
                 }
 

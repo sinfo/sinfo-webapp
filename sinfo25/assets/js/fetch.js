@@ -23,7 +23,27 @@ var workshopsCounter = 0;
 var presentationsCounter = 0;
 
 function processSessions(session) {
-  dates = {
+
+  function twoDigitMinues(minutes) {
+    return (minutes < 10 ? '0' : '') + minutes
+  }
+
+  function parseSpeakers(speakers) {
+    parsed = '';
+
+    speakers.forEach( function (speaker) {
+      var name = speaker.id.replace(/-/g, ' ');
+  
+      if (!speakers.length) {
+        parsed += ', ';
+      }
+      parsed += name;
+    });
+
+    return parsed;
+  }
+
+  var dates = {
     '20': 'day1',
     '21': 'day2',
     '22': 'day3',
@@ -31,44 +51,70 @@ function processSessions(session) {
     '24': 'day5'
   };
 
-  date = new Date(Date.parse(session.date));
-  duration = new Date(Date.parse(session.duration));
-  day = dates[date.getDate()];
-  hour = date.getHours()
-  minute = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes()
-  speakers = ''
-
-  session.speakers.forEach( function (speaker) {
-    name = speaker.id.replace(/-/g, ' ');
-
-    if (speakers.length !== 0) {
-      speakers += ', ';
-    }
-    speakers += name;
-  });
+  var htmlParent = '';
+  var date = new Date(Date.parse(session.date));
+  var duration = new Date(Date.parse(session.duration));
+  var day = dates[date.getDate()];
+  var time = `${date.getHours()}:${twoDigitMinues(date.getMinutes())}`;
 
   if (session.kind === 'Keynote') {
     keynotesCounter += 1;
-    html = `
+    var html = `
       <div class="panel schedule-item">
         <div class="lecture-icon-wrapper">
           <span class="fa fa-cutlery"></span>
         </div>
         <a data-toggle="collapse" data-parent="#${day}_keynotes_timeline" href="#${day}_keynotes_time${keynotesCounter}" class="schedule-item-toggle">
-          <strong class="time highlight"><span class="icon icon-office-24"></span>${hour}:${minute}</strong>
+          <strong class="time highlight"><span class="icon icon-office-24"></span>${time}</strong>
           <h6 class="title">${session.name}<i class="icon icon-arrows-06"></i></h6>
         </a>
         <div id="${day}_keynotes_time${keynotesCounter}" class="panel-collapse collapse in schedule-item-body">
           <article>
             <p class="description">${session.description}</p>
-            <strong class="highlight speaker-name">${speakers}</strong>
+            <strong class="highlight speaker-name">${parseSpeakers(session.speakers)}</strong>
           </article>
         </div>
       </div>
     `;
 
-    $(`#${day}_keynotes > div`).append(html);
+    htmlParent = `#${day}_keynotes > div`;
+
+  } else if (session.kind === 'Presentation' || session.kind === 'Workshop') {
+    if (!session.place) return;
+    var counter;
+    
+    if (session.kind === 'Presentation') {
+      presentationsCounter += 1;
+      counter = presentationsCounter;
+    } else {
+      workshopsCounter += 1;
+      counter = workshopsCounter;
+    }
+
+    var place = 'room' + session.place.split(' ')[1];
+
+    var html = `
+      <div class="panel schedule-item ${place === 'room2' ? 'presentations-item' : ''}">
+        <div class="lecture-icon-wrapper">
+          <img src="${session.img}" alt="" class="img-responsive">
+        </div>
+        <a data-toggle="collapse" data-parent="#${day}_presentations_${counter}_timeline" href="#${day}_presentations_time${counter}" class="schedule-item-toggle">
+          <strong class="time highlight"><span class="icon icon-office-24"></span>${time} PM</strong>
+          <h6 class="title">${session.name}<i class="icon icon-arrows-06"></i></h6>
+        </a>
+        <div id="${day}_presentations_time${counter}" class="panel-collapse collapse in schedule-item-body">
+          <article>
+            <p class="description">${session.description}</p>
+            <strong class="highlight speaker-name">${parseSpeakers(session.speakers)}</strong>
+          </article>
+        </div>
+      </div>
+    `
+
+    htmlParent = `#${day}_${session.kind.toLowerCase()}s .${place}`;
   }
+
+  $(htmlParent).append(html);
 }
 
 function processMember(member) {
