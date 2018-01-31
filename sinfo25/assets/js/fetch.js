@@ -1,40 +1,64 @@
 $(document).on('ready', function () {
-  fetchFromDeck('speakers','sort=name&event=25-sinfo&&participations=true', processSpeaker);
-  fetchFromDeck('members','sort=name&event=25-sinfo&&participations=true', processMember);
-  fetchFromDeck('sessions', 'sort=date&event=24-sinfo', processSessions)
+  var event = '25-sinfo';
+  var sessionCounter = 0;
+  var speakers = {};
+
+  fetchFromDeck('speakers',`sort=name&event=${event}&&participations=true`, processSpeaker, speakers);
+  fetchFromDeck('members',`sort=name&event=${event}&&participations=true`, processMember);
+  fetchFromDeck('events', '', getDatesAndSessions, {event: event, counter: sessionCounter, speakers: speakers});
   //fetchFromDeck('companies','event=24-sinfo&&participations=true', processSponsors);
 });
 
-function fetchFromDeck(field, params, processDataFromDeck) {
-  var  deck = 'https://deck.sinfo.org:443/api/';
+function fetchFromDeck(field, params, processDataFromDeck, extraData) {
+  var deck = 'https://deck.sinfo.org:443/api/';
   var request = new XMLHttpRequest();
   request.open('GET', deck + field + '?' + params);
   request.responseType = 'json';
   request.send();
   request.onload = function() {
     request.response.forEach(function(el){
-      processDataFromDeck(el);
+      if (extraData) {
+        processDataFromDeck(el, extraData);
+      } else {
+        processDataFromDeck(el);
+      }
     });
   }
 }
 
-var keynotesCounter = 0;
-var workshopsCounter = 0;
-var presentationsCounter = 0;
+function getDatesAndSessions(event, data) {
+  if (event.id !== data.event) return;
+  
+  data.dates = {};
+  var date = new Date(Date.parse(event.date));
+  var duration = (new Date(Date.parse(event.duration))).getDate();
+  
+  for (let i = 1; i <= duration; i++) {
+    date.setDate(date.getDate() + 1)
+    data.dates[date.getDate()] = 'day' + i;
+  }
+  
+  fetchFromDeck('sessions', `sort=date&event=${data.event}`, processSessions, data)
+}
 
-function processSessions(session) {
-
+function processSessions(session, data) {
   function twoDigitMinues(minutes) {
     return (minutes < 10 ? '0' : '') + minutes
   }
 
-  function parseSpeakers(speakers) {
+  function parseSpeakers(speakersList) {
     parsed = '';
 
-    speakers.forEach( function (speaker) {
-      var name = speaker.id.replace(/-/g, ' ');
+    speakersList.forEach( function (speaker) {
+      var name = '';
+
+      if (data.speakers[speaker.id]) {
+        name = data.speakers[speaker.id].name;
+      } else {
+        name = speaker.id.replace(/-/g, ' ')
+      }
   
-      if (!speakers.length) {
+      if (!speakersList.length) {
         parsed += ', ';
       }
       parsed += name;
@@ -43,32 +67,26 @@ function processSessions(session) {
     return parsed;
   }
 
-  var dates = {
-    '20': 'day1',
-    '21': 'day2',
-    '22': 'day3',
-    '23': 'day4',
-    '24': 'day5'
-  };
-
   var htmlParent = '';
+  var html = '';
   var date = new Date(Date.parse(session.date));
   var duration = new Date(Date.parse(session.duration));
-  var day = dates[date.getDate()];
+  var day = data.dates[date.getDate()];
   var time = `${date.getHours()}:${twoDigitMinues(date.getMinutes())}`;
 
   if (session.kind === 'Keynote') {
-    keynotesCounter += 1;
-    var html = `
+    html = `
       <div class="panel schedule-item">
         <div class="lecture-icon-wrapper">
-          <span class="fa fa-cutlery"></span>
+          <img src="${session.img}" alt="" class="img-responsive">
         </div>
-        <a data-toggle="collapse" data-parent="#${day}_keynotes_timeline" href="#${day}_keynotes_time${keynotesCounter}" class="schedule-item-toggle">
-          <strong class="time highlight"><span class="icon icon-office-24"></span>${time}</strong>
+        <a data-toggle="collapse" data-parent="#${day}_keynotes_timeline" href="#${day}_keynotes_time${data.counter}" class="schedule-item-toggle">
+          <strong class="time highlight"><span class="icon icon-office-24"></span>${time}
+          <span class="icon icon-office-47 place"></span>${session.place}
+          </strong>
           <h6 class="title">${session.name}<i class="icon icon-arrows-06"></i></h6>
         </a>
-        <div id="${day}_keynotes_time${keynotesCounter}" class="panel-collapse collapse in schedule-item-body">
+        <div id="${day}_keynotes_time${data.counter}" class="panel-collapse collapse in schedule-item-body">
           <article>
             <p class="description">${session.description}</p>
             <strong class="highlight speaker-name">${parseSpeakers(session.speakers)}</strong>
@@ -81,28 +99,20 @@ function processSessions(session) {
 
   } else if (session.kind === 'Presentation' || session.kind === 'Workshop') {
     if (!session.place) return;
-    var counter;
-    
-    if (session.kind === 'Presentation') {
-      presentationsCounter += 1;
-      counter = presentationsCounter;
-    } else {
-      workshopsCounter += 1;
-      counter = workshopsCounter;
-    }
-
     var place = 'room' + session.place.split(' ')[1];
 
-    var html = `
+    html = `
       <div class="panel schedule-item ${place === 'room2' ? 'presentations-item' : ''}">
         <div class="lecture-icon-wrapper">
           <img src="${session.img}" alt="" class="img-responsive">
         </div>
-        <a data-toggle="collapse" data-parent="#${day}_presentations_${counter}_timeline" href="#${day}_presentations_time${counter}" class="schedule-item-toggle">
-          <strong class="time highlight"><span class="icon icon-office-24"></span>${time} PM</strong>
+        <a data-toggle="collapse" data-parent="#${day}_presentations_${data.counter}_timeline" href="#${day}_presentations_time${data.counter}" class="schedule-item-toggle">
+          <strong class="time highlight"><span class="icon icon-office-24"></span>${time} PM
+          <span class="icon icon-office-47 place"></span>${session.place}
+          </strong>
           <h6 class="title">${session.name}<i class="icon icon-arrows-06"></i></h6>
         </a>
-        <div id="${day}_presentations_time${counter}" class="panel-collapse collapse in schedule-item-body">
+        <div id="${day}_presentations_time${data.counter}" class="panel-collapse collapse in schedule-item-body">
           <article>
             <p class="description">${session.description}</p>
             <strong class="highlight speaker-name">${parseSpeakers(session.speakers)}</strong>
@@ -114,6 +124,7 @@ function processSessions(session) {
     htmlParent = `#${day}_${session.kind.toLowerCase()}s .${place}`;
   }
 
+  data.counter += 1;
   $(htmlParent).append(html);
 }
 
@@ -157,13 +168,22 @@ function processMember(member) {
   }
 }
 
-function processSpeaker (speaker) {
+function processSpeaker (speaker, speakers) {
+  var companyLogo = `https://static.sinfo.org/SINFO_25/speakersCompanies/${speaker.name.replace(/\s/g, '')}.png`
+
+  speakers[speaker.id] = {
+    companyLogo: companyLogo,
+    img: speaker.img,
+    name: speaker.name,
+    title: speaker.title
+  };
+
   $("#speakers > div").append(`
     <div class="col-sm-3">
       <div class="speaker">
         <div class="photo-wrapper square">
           <div class="view view-first"
-            style="background-image:url('https://static.sinfo.org/SINFO_25/speakersCompanies/${speaker.name.replace(/\s/g, '')}.png');">
+            style="background-image:url('${companyLogo}');">
             <img src=${speaker.img} alt="${speaker.name}" class="img-responsive">
           </div>
         </div>

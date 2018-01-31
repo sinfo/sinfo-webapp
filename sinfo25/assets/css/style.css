@@ -3670,6 +3670,9 @@ button.btn.btn-block {
   text-transform: uppercase;
   letter-spacing: 0.5em;
 }
+.place {
+  margin-left: 15px;
+}
 .download-schedule-btn {
   -webkit-transition: color 0.2s ease, background 0.2s ease, border 0.2s ease;
   -moz-transition: color 0.2s ease, background 0.2s ease, border 0.2s ease;
