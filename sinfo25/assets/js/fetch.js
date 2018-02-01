@@ -17,11 +17,9 @@ function fetchFromDeck(field, params, processDataFromDeck, extraData) {
   request.send();
   request.onload = function() {
     request.response.forEach(function(el){
-      if (extraData) {
-        processDataFromDeck(el, extraData);
-      } else {
-        processDataFromDeck(el);
-      }
+      if (extraData)
+        return processDataFromDeck(el, extraData);
+      return processDataFromDeck(el);
     });
   }
 }
