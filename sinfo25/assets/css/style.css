@@ -3563,9 +3563,12 @@ button.btn.btn-block {
   border-right: 1px solid #eff1f5;
 }
 .schedule .presentations:before {
-  left: 117px;
-  width: 882px;
+  left: 104px;
+  width: 895px;
   border-left: 1px solid #eff1f5;
+}
+.room1 {
+  padding-left: 0px;
 }
 .schedule .tab-content-schedule .panel-group {
   margin-bottom: 0;
