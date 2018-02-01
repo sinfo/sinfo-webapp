@@ -3556,15 +3556,15 @@ button.btn.btn-block {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 104px;
+  left: 110px;
   width: 0;
   display: block;
   content: "";
   border-right: 1px solid #eff1f5;
 }
 .schedule .presentations:before {
-  left: 104px;
-  width: 895px;
+  left: 110px;
+  width: 879px;
   border-left: 1px solid #eff1f5;
 }
 .room1 {
@@ -3595,10 +3595,10 @@ button.btn.btn-block {
 .schedule .schedule-item .lecture-icon-wrapper {
   position: absolute;
   vertical-align: middle;
-  top: 25px;
+  top: 15px;
   left: 4px;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   text-align: center;
   font-size: 20px;
   line-height: 36px;
@@ -3608,21 +3608,9 @@ button.btn.btn-block {
   border-radius: 50%;
   overflow: hidden;
 }
+
 .schedule .presentations-item .lecture-icon-wrapper {
-  position: absolute;
-  vertical-align: middle;
-  top: 25px;
-  left: 405px;
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  font-size: 20px;
-  line-height: 36px;
-  background-color: #ffffff;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 50%;
-  overflow: hidden;
+  left: 385px;
 }
 .schedule .schedule-item .schedule-item-toggle {
   margin-bottom: 0;
