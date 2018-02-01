@@ -3576,6 +3576,7 @@ button.btn.btn-block {
   min-height: 65px;
   padding: 0 0 0 104px;
   background-color: transparent;
+  min-height: 300px;
 }
 .schedule .tab-content-schedule .presentations-item {
   padding-left: 0px;

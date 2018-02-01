@@ -34,8 +34,8 @@ function getDatesAndSessions(event, data) {
   var duration = (new Date(Date.parse(event.duration))).getDate();
   
   for (let i = 1; i <= duration; i++) {
-    date.setDate(date.getDate() + 1)
     data.dates[date.getDate()] = 'day' + i;
+    date.setDate(date.getDate() + 1)
   }
   
   fetchFromDeck('sessions', `sort=date&event=${data.event}`, processSessions, data)
@@ -98,30 +98,30 @@ function processSessions(session, data) {
     htmlParent = `#${day}_keynotes > div`;
 
   } else if (session.kind === 'Presentation' || session.kind === 'Workshop') {
-    if (!session.place) return;
-    var place = 'room' + session.place.split(' ')[1];
+      if (!session.place) return;
+      var place = 'room' + session.place.split(' ')[1];
 
-    html = `
-      <div class="panel schedule-item ${place === 'room2' ? 'presentations-item' : ''}">
-        <div class="lecture-icon-wrapper">
-          <img src="${session.img}" alt="" class="img-responsive">
+      html = `
+        <div class="panel schedule-item ${place === 'room2' ? 'presentations-item' : ''}">
+          <div class="lecture-icon-wrapper">
+            <img src="${session.img}" alt="" class="img-responsive">
+          </div>
+          <a data-toggle="collapse" data-parent="#${day}_presentations_${data.counter}_timeline" href="#${day}_presentations_time${data.counter}" class="schedule-item-toggle">
+            <strong class="time highlight"><span class="icon icon-office-24"></span>${time} PM
+            <span class="icon icon-office-47 place"></span>${session.place}
+            </strong>
+            <h6 class="title">${session.name}<i class="icon icon-arrows-06"></i></h6>
+          </a>
+          <div id="${day}_presentations_time${data.counter}" class="panel-collapse collapse in schedule-item-body">
+            <article>
+              <p class="description">${session.description}</p>
+              <strong class="highlight speaker-name">${parseSpeakers(session.speakers)}</strong>
+            </article>
+          </div>
         </div>
-        <a data-toggle="collapse" data-parent="#${day}_presentations_${data.counter}_timeline" href="#${day}_presentations_time${data.counter}" class="schedule-item-toggle">
-          <strong class="time highlight"><span class="icon icon-office-24"></span>${time} PM
-          <span class="icon icon-office-47 place"></span>${session.place}
-          </strong>
-          <h6 class="title">${session.name}<i class="icon icon-arrows-06"></i></h6>
-        </a>
-        <div id="${day}_presentations_time${data.counter}" class="panel-collapse collapse in schedule-item-body">
-          <article>
-            <p class="description">${session.description}</p>
-            <strong class="highlight speaker-name">${parseSpeakers(session.speakers)}</strong>
-          </article>
-        </div>
-      </div>
-    `
+      `
 
-    htmlParent = `#${day}_${session.kind.toLowerCase()}s .${place}`;
+      htmlParent = `#${day}_${session.kind.toLowerCase()}s .${place}`;
   }
 
   data.counter += 1;
