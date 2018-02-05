@@ -3566,11 +3566,8 @@ button.btn.btn-block {
 }
 .schedule .presentations:before {
   left: 110px;
-  width: 495px;
+  width: 43%;
   border-left: 1px solid #eff1f5;
-}
-.room1 {
-  padding-left: 0px;
 }
 .schedule .tab-content-schedule .panel-group {
   margin-bottom: 0;
@@ -3780,12 +3777,27 @@ button.btn.btn-block {
   text-transform: uppercase;
   letter-spacing: 0.5em;
 }
+
 @media (max-width: 991px) {
   .schedule .tab-content .img-responsive {
     margin: 0;
   }
+  .col-sm-6 {
+    width: 100%;
+  }
+  .schedule .presentations:before {
+    width: 0px;
+    border-left: none;
+  }
 }
 @media (max-width: 767px) {
+  .col-sm-6 {
+    width: 100%;
+  }
+  .schedule .presentations:before {
+    width: 0px;
+    border-left: none;
+  }
   .schedule .tab-content {
     border: none;
   }
@@ -3837,6 +3849,13 @@ button.btn.btn-block {
   }
 }
 @media (max-width: 480px) {
+  .col-sm-6 {
+    width: 100%;
+  }
+  .schedule .presentations:before {
+    width: 0px;
+    border-left: none;
+  }
   .schedule .tab-content-schedule {
     padding: 35px 0;
   }
