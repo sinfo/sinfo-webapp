@@ -33,6 +33,7 @@ function getDatesAndSessions(event, data) {
   
   for (let i = 1; i <= duration; i++) {
     data.dates[date.getDate()] = 'day' + i;
+    $(`#day${i}-li p`).text(`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`);
     date.setDate(date.getDate() + 1)
   }
   
@@ -78,7 +79,7 @@ function processSessions(session, data) {
         <div class="lecture-icon-wrapper">
           <img src="${session.img}" alt="" class="img-responsive">
         </div>
-        <a data-toggle="collapse" data-parent="#${day}_keynotes_timeline" href="#${day}_keynotes_time${data.counter}" class="schedule-item-toggle">
+        <a data-toggle="collapse" data-parent="#${day}_keynotes_${data.counter}_timeline" href="#${day}_keynotes_time${data.counter}" class="schedule-item-toggle">
           <strong class="time highlight"><span class="icon icon-office-24"></span>${time}
           <span class="icon icon-office-47 place"></span>${session.place}
           </strong>
@@ -91,7 +92,6 @@ function processSessions(session, data) {
         <div id="${day}_keynotes_time${data.counter}" class="panel-collapse collapse in schedule-item-body">
           <article>
             <p class="description">${session.description}</p>
-            <strong class="highlight speaker-name"></strong>
           </article>
         </div>
       </div>
