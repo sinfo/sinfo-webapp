@@ -362,6 +362,9 @@ Ventcamp = {
     tabNavToSelect: function() {
         $nav = $('.nav');
         $nav_schedule = $('.nav-schedule');
+        $schedule = $('#schedule');
+
+        $schedule.hide();
 
         var _this = this;
 

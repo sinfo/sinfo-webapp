@@ -1,11 +1,16 @@
 $(document).on('ready', function () {
   var event = '25-sinfo';
-  var sessionCounter = 0;
-  var speakers = {};
 
   fetchFromDeck('speakers',`sort=name&event=${event}&&participations=true`, processSpeaker, speakers);
   fetchFromDeck('members',`sort=name&event=${event}&&participations=true`, processMember);
-  fetchFromDeck('events', '', getDatesAndSessions, {event: event, counter: sessionCounter, speakers: speakers});
+
+  var data = {
+    event: event,
+    counter: 0,
+    speakers: {}
+  }
+
+  fetchFromDeck('events', '', getDatesAndSessions, data);
   //fetchFromDeck('companies','event=24-sinfo&&participations=true', processSponsors);
 });
 
@@ -24,6 +29,10 @@ function fetchFromDeck(field, params, processDataFromDeck, extraData) {
   }
 }
 
+function twoDigit(number) {
+  return (number < 10 ? '0' : '') + number
+}
+
 function getDatesAndSessions(event, data) {
   if (event.id !== data.event) return;
   
@@ -33,7 +42,12 @@ function getDatesAndSessions(event, data) {
   
   for (let i = 1; i <= duration; i++) {
     data.dates[date.getDate()] = 'day' + i;
-    $(`#day${i}-li p`).text(`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`);
+    
+    let day = twoDigit(date.getDate());
+    let month = twoDigit(date.getMonth());
+    let year = date.getFullYear();
+
+    $(`#day${i}-li p`).text(`${day}/${month}/${year}`);
     date.setDate(date.getDate() + 1)
   }
   
@@ -41,9 +55,8 @@ function getDatesAndSessions(event, data) {
 }
 
 function processSessions(session, data) {
-  function twoDigitMinues(minutes) {
-    return (minutes < 10 ? '0' : '') + minutes
-  }
+  
+  $('#schedule').show();
 
   function parseSpeakers(speakersList) {
     parsed = '';
@@ -71,7 +84,7 @@ function processSessions(session, data) {
   var date = new Date(Date.parse(session.date));
   var duration = new Date(Date.parse(session.duration));
   var day = data.dates[date.getDate()];
-  var time = `${date.getHours()}:${twoDigitMinues(date.getMinutes())}`;
+  var time = `${date.getHours()}:${twoDigit(date.getMinutes())}`;
 
   if (session.kind === 'Keynote') {
     html = `

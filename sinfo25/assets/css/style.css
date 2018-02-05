@@ -5943,6 +5943,7 @@ div.clear input.btn:hover {
 ---------------------------------------------------------------------------- */
 .member { 
   margin-bottom: 40px;
+  height: 180px;
 }
 .member .name {
   height: auto;
