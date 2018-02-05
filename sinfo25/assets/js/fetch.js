@@ -1,5 +1,5 @@
 $(document).on('ready', function () {
-  var event = '24-sinfo';
+  var event = '25-sinfo';
   var speakers = {};
 
   fetchFromDeck('speakers',`sort=name&event=${event}&&participations=true`, processSpeaker, speakers);
