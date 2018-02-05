@@ -2328,7 +2328,6 @@ input[type=password].error,
 .counter-block.counter-block-solid .counter-box,
 .gallery.light-slider .description-slider-wrapper .bx-pager-link.active,
 .gallery-thumb-link:after,
-.speaker .speaker-socials > li .fa,
 .contacts-wrapper-color:before,
 .header.header-color .header-wrapper,
 .header.header-color .dropdown-menu,
@@ -2339,6 +2338,9 @@ input[type=password].error,
 .header .buy-btn {
   /*background-color: white;*/
   background-color: #018ae6;
+}
+.speaker .speaker-socials > li .fa {
+  background-color: white;
 }
 .base-clr-txt,
 .highlight,
