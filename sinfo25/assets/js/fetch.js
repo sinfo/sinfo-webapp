@@ -82,12 +82,16 @@ function processSessions(session, data) {
           <strong class="time highlight"><span class="icon icon-office-24"></span>${time}
           <span class="icon icon-office-47 place"></span>${session.place}
           </strong>
-          <h6 class="title">${session.name}<i class="icon icon-arrows-06"></i></h6>
+          <h6 class="title">
+            <strong class="highlight speaker-name">
+              ${parseSpeakers(session.speakers)}
+            </strong>
+            &#8212 ${session.name.split(' - ')[1]}<i class="icon icon-arrows-06"></i></h6>
         </a>
         <div id="${day}_keynotes_time${data.counter}" class="panel-collapse collapse in schedule-item-body">
           <article>
             <p class="description">${session.description}</p>
-            <strong class="highlight speaker-name">${parseSpeakers(session.speakers)}</strong>
+            <strong class="highlight speaker-name"></strong>
           </article>
         </div>
       </div>
