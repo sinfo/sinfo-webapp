@@ -1,5 +1,6 @@
 $(document).on('ready', function () {
   var event = '25-sinfo';
+  var speakers = {};
 
   fetchFromDeck('speakers',`sort=name&event=${event}&&participations=true`, processSpeaker, speakers);
   fetchFromDeck('members',`sort=name&event=${event}&&participations=true`, processMember);
@@ -7,7 +8,7 @@ $(document).on('ready', function () {
   var data = {
     event: event,
     counter: 0,
-    speakers: {}
+    speakers: speakers
   }
 
   fetchFromDeck('events', '', getDatesAndSessions, data);
@@ -31,6 +32,12 @@ function fetchFromDeck(field, params, processDataFromDeck, extraData) {
 
 function twoDigit(number) {
   return (number < 10 ? '0' : '') + number
+}
+
+function capitalize(id) {
+    return id.replace(/\w\S*/g, function(word) {
+      return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
+    });
 }
 
 function getDatesAndSessions(event, data) {
@@ -59,28 +66,18 @@ function processSessions(session, data) {
   $('#schedule').show();
 
   function parseSpeakers(speakersList) {
-    parsed = '';
+    var parsed = '';
 
-    speakersList.forEach( function (speaker) {
-      var name = '';
-
-      if (data.speakers[speaker.id]) {
-        name = data.speakers[speaker.id].name;
-      } else {
-        name = speaker.id.replace(/-/g, ' ')
-      }
-  
-      if (!speakersList.length) {
-        parsed += ', ';
-      }
-      parsed += name;
+    speakersList.forEach( function (speaker, index) {
+      var name = data.speakers[speaker.id] ? data.speakers[speaker.id].name : speaker.id.replace(/-/g, ' ');
+      parsed += index ? `, ${name}` : capitalize(name);
     });
 
     return parsed;
   }
 
-  var htmlParent = '';
-  var html = '';
+  var $parent;
+  var html;
   var date = new Date(Date.parse(session.date));
   var duration = new Date(Date.parse(session.duration));
   var day = data.dates[date.getDate()];
@@ -110,7 +107,7 @@ function processSessions(session, data) {
       </div>
     `;
 
-    htmlParent = `#${day}_keynotes > div`;
+    $parent = $(`#${day}_keynotes > div`);
 
   } else if (session.kind === 'Presentation' || session.kind === 'Workshop') {
       if (!session.place) return;
@@ -136,11 +133,11 @@ function processSessions(session, data) {
         </div>
       `
 
-      htmlParent = `#${day}_${session.kind.toLowerCase()}s .${place}`;
+      $parent = $(`#${day}_${session.kind.toLowerCase()}s .${place}`);
   }
 
   data.counter += 1;
-  $(htmlParent).append(html);
+  $parent.append(html);
 }
 
 function processMember(member) {
