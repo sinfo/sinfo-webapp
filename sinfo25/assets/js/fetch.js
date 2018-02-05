@@ -119,7 +119,7 @@ function processSessions(session, data) {
             <img src="${session.img}" alt="" class="img-responsive">
           </div>
           <a data-toggle="collapse" data-parent="#${day}_presentations_${data.counter}_timeline" href="#${day}_presentations_time${data.counter}" class="schedule-item-toggle">
-            <strong class="time highlight"><span class="icon icon-office-24"></span>${time} PM
+            <strong class="time highlight"><span class="icon icon-office-24"></span>${time}
             <span class="icon icon-office-47 place"></span>${session.place}
             </strong>
             <h6 class="title">${session.name}<i class="icon icon-arrows-06"></i></h6>
