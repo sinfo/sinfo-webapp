@@ -64,6 +64,7 @@ function getDatesAndSessions(event, data) {
 function processSessions(session, data) {
   
   $('#schedule').show();
+  $('#index-schedule').show();
 
   function parseSpeakers(speakersList) {
     var parsed = '';

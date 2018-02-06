@@ -363,8 +363,10 @@ Ventcamp = {
         $nav = $('.nav');
         $nav_schedule = $('.nav-schedule');
         $schedule = $('#schedule');
+        $index_schedule = $('#index-schedule');
 
         $schedule.hide();
+        $index_schedule.hide();
 
         var _this = this;
 
