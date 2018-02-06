@@ -114,7 +114,7 @@ function processSessions(session, data) {
       var place = 'room' + session.place.split(' ')[1];
 
       html = `
-        <div class="panel schedule-item ${place === 'room2' ? 'presentations-item' : ''}">
+        <div class="panel schedule-item">
           <div class="lecture-icon-wrapper">
             <img src="${session.img}" alt="" class="img-responsive">
           </div>
