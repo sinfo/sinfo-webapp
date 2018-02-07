@@ -34,9 +34,6 @@ Ventcamp = {
         smoothScroll: false,
         smoothScrollSpeed: 800,
         pseudoSelect: true,
-        ajaxedForm: true,
-        ajaxedFormSuccessMsg: 'Success',
-        ajaxedFormErrorMsg: 'An error occured. Please try again later.',
         toastrPositionClass: 'toast-top-full-width'
     },
 
@@ -390,183 +387,6 @@ Ventcamp = {
                 }
             });
         });
-    },
-
-    formInit: function () {
-        var _this = this;
-
-        this.log( 'Init ajaxed forms.' );
-
-        if ( typeof toastr != 'undefined' ) {
-            toastr.options = {
-                positionClass: this.options.toastrPositionClass
-            };
-
-        }else {
-            this.log( 'Can\'t find toastr. Form messages in alerts.' );
-        }
-
-        var validateOptions,
-            submitHandler,
-            doneHandler,
-            failHandler;
-
-        submitHandler = function (event) {
-            var form = this;
-
-            event.preventDefault();
-
-            $.ajax({
-                url: form.action,
-                type: 'POST',
-                data: $(form).serialize()
-            }).done(function(msg) {
-                doneHandler(msg, form);
-
-            }).fail(function() {
-                failHandler(form);
-
-            });
-        }
-
-        validateOptions = {
-            rules: {
-                password: {
-                    required: true,
-                    minlength: 5
-                },
-                confirmPassword: {
-                    required: true,
-                    minlength: 5,
-                    equalTo: '#password'
-                }
-            },
-
-            messages: {
-                password: {
-                    required: 'Please provide a password',
-                    minlength: 'Your password must be at least 5 characters long'
-                },
-                confirmPassword: {
-                    required: 'Please provide a password',
-                    minlength: 'Your password must be at least 5 characters long',
-                    equalTo: 'Please enter the same password as above'
-                }
-            },
-
-            submitHandler: function (form) {
-                var $input = $(form).find('input[type="submit"]'),
-                    $button = $(form).find('button[type="submit"]');
-
-                if ( $button.length ) {
-                    $button.append('<span class="loading fa fa-refresh"></span>');
-
-                }else if ( $input ) {
-                    $input.after('<span class="loading fa fa-refresh"></span>');
-
-                }
-
-                $.ajax({
-                    url: form.action,
-                    type: 'POST',
-                    data: $(form).serialize()
-                }).done(function(msg) {
-                    $(form).find('.loading').remove();
-
-                    doneHandler(msg, form);
-
-                }).fail(function() {
-                    $(form).find('.loading').remove();
-
-                    failHandler(form);
-
-                });
-            }
-        };
-
-        doneHandler = function (msg, form) {
-            if( msg === 'ok' ) {
-                form.reset();
-
-                if ( typeof toastr != 'undefined' ) toastr.success('Success');
-                else alert('Success');
-
-            } else {
-                if ( typeof toastr != 'undefined' ) toastr.error('An error occured. Please try again later.');
-                else alert('An error occured. Please try again later.');
-
-                _this.log( 'Form message', msg );
-            }
-        };
-
-        failHandler = function () {
-            if ( typeof toastr != 'undefined' ) toastr.error('An error occured. Please try again later.');
-            else alert('An error occured. Please try again later.');
-        }
-
-        if ( $('form').not('.mailchimp-form').not('.disable-ajax-form').length ) {
-            $('form').not('.mailchimp-form').not('.disable-ajax-form').each(function() {
-                if ( typeof $.fn.validate == 'function' ) {
-                    $(this).validate(validateOptions);
-                }else {
-                    $(this).on('submit', submitHandler);
-
-                    _this.log( 'Can\'t find jQuery.validate function.' );
-                }
-            });
-        }
-
-        if ( $('.mailchimp-form').length ) {
-            $('.mailchimp-form').each(function() {
-                $(this).on('submit', function(event) {
-                    event.preventDefault();
-
-                    var $form = $(this),
-                        $input = $form.find('input[type="submit"]'),
-                        $button = $form.find('button[type="submit"]'),
-                        $fullnameField = '',
-                        $emailField = $form.find('[name=NewsletterEmail]'),
-                        $responseBlock = $form.find('.response'),
-                        email = $emailField.val(),
-                        first_name = '',
-                        last_name = '';
-
-                    if ($(this).find('[name=NewsletterName]') .length > 0){
-                        $fullnameField = $form.find('[name=NewsletterName]');
-                        fullname = $fullnameField.val().split(' '), // Gwt Full name and split it by space
-                        first_name = fullname[0], // First part is the first name
-                        last_name = fullname[1]; // Second part is Last name
-                        if ( !last_name ) last_name = ''; //By chance they can input only their first name, then we should null the last name since there is none
-                    } else {
-                        first_name = '',
-                        last_name = '';
-                    }
-
-                    if ( $button.length ) {
-                        $button.append('<span class="loading fa fa-refresh"></span>');
-
-                    }else if ( $input ) {
-                        $input.after('<span class="loading fa fa-refresh"></span>');
-
-                    }
-
-                    $.ajax({
-                        url: 'process-form-mailchimp.php',
-                        data: 'ajax=true&email=' + escape(email) + '&fname=' + first_name +'&lname=' + last_name,
-
-                        success: function(msg) {
-                            $form.find('.loading').remove();
-
-                            if ( msg.indexOf('Success') !=-1 ) {
-                                $responseBlock.html('<span class="success-message">Success! You are now subscribed to our newsletter!</span>');
-                            } else {
-                                $responseBlock.html('<span class="error-message">' + msg + '</span>');
-                            }
-                        }
-                    });
-                });
-            });
-        }
     },
 
     // Google map
@@ -1218,8 +1038,6 @@ Ventcamp = {
         if ( this.options.styleSwitcher ) this.buildStyleSwitcher();
 
         if ( this.options.smoothScroll ) this.smoothScrollInit();
-
-        if ( this.options.ajaxedForm ) this.formInit();
 
         if ( this.options.pseudoSelect ) this.initPseudoSelect();
 
