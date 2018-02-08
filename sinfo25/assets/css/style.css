@@ -5747,7 +5747,8 @@ section#feedback {
 .speaker .photo-wrapper {
   margin: 0 auto 20px;
   display: inline-block;
-  max-width: 100%;
+  width: 180px;
+  height: 180px;
 }
 .speaker .photo-wrapper.rounded {
   border-radius: 50%;
