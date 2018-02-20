@@ -358,12 +358,19 @@ Ventcamp = {
     // Tabs view
     tabNavToSelect: function() {
         $nav = $('.nav');
+        $nav_schedule = $('.nav-schedule');
+        $schedule = $('#schedule');
+        $index_schedule = $('#index-schedule');
+
+        $schedule.hide();
+        $index_schedule.hide();
 
         var _this = this;
 
         $nav.each(function () {
             var $this = $(this),
                 $active = $this.find('li.active > a'),
+                $li = $this.find('li'),
                 $field = $('<span class="nav-current">' + $active.html() + '</span>');
 
             $this.wrapAll('<div class="nav-wrapper"></div>')
@@ -377,6 +384,24 @@ Ventcamp = {
 
             $this.on('click', 'a', function () {
                 $field.html($(this).html());
+            });
+
+            $li.on('click', function () {
+                var id = $(this).find('a:first').attr('href');
+                var $schedule = $('.tab-content-schedule');
+                var presentations = false;
+
+                if (id.indexOf('presentations') !== -1 || id.indexOf('workshops') !== -1) {
+                    presentations = true;
+                }
+
+                $schedule.each(function () {
+                    if (presentations) {
+                        $(this).addClass('presentations');
+                    } else {
+                        $(this).removeClass('presentations');
+                    }
+                });
             });
 
             $('body').on('click', function (event) {

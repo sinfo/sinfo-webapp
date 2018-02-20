@@ -2328,7 +2328,6 @@ input[type=password].error,
 .counter-block.counter-block-solid .counter-box,
 .gallery.light-slider .description-slider-wrapper .bx-pager-link.active,
 .gallery-thumb-link:after,
-.speaker .speaker-socials > li .fa,
 .contacts-wrapper-color:before,
 .header.header-color .header-wrapper,
 .header.header-color .dropdown-menu,
@@ -2337,6 +2336,10 @@ input[type=password].error,
 .call-to-action-section > .overlay:before,
 .thumb-wrapper .overlay:before,
 .header .buy-btn {
+  /*background-color: white;*/
+  background-color: #018ae6;
+}
+.speaker .speaker-socials > li .fa {
   background-color: white;
 }
 .base-clr-txt,
@@ -3507,6 +3510,7 @@ button.btn.btn-block {
 .nav.nav-schedule > li.active a:hover *,
 .nav.nav-schedule > li.active a:focus * {
   color: #ffffff;
+  background-color: ;
 }
 .schedule .tab-content {
   padding: 0;
@@ -3554,11 +3558,16 @@ button.btn.btn-block {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 104px;
+  left: 110px;
   width: 0;
   display: block;
   content: "";
   border-right: 1px solid #eff1f5;
+}
+.schedule .presentations:before {
+  left: 110px;
+  width: 43%;
+  border-left: 1px solid #eff1f5;
 }
 .schedule .tab-content-schedule .panel-group {
   margin-bottom: 0;
@@ -3566,9 +3575,13 @@ button.btn.btn-block {
 .schedule .tab-content-schedule .schedule-item {
   position: relative;
   margin-bottom: 22px;
-  min-height: 65px;
   padding: 0 0 0 104px;
   background-color: transparent;
+}
+.schedule .tab-content-schedule .presentations-item {
+  padding-left: 0px;
+  padding-right: 104px;
+
 }
 .schedule .tab-content-schedule .schedule-item:last-child {
   margin-bottom: 0;
@@ -3579,18 +3592,22 @@ button.btn.btn-block {
 .schedule .schedule-item .lecture-icon-wrapper {
   position: absolute;
   vertical-align: middle;
-  top: 25px;
+  top: 15px;
   left: 4px;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   text-align: center;
   font-size: 20px;
   line-height: 36px;
   background-color: #ffffff;
-  border-style: solid;
+  /* border-style: solid;
   border-width: 1px;
-  border-radius: 50%;
+  border-radius: 50%; */
   overflow: hidden;
+}
+
+.schedule .presentations-item .lecture-icon-wrapper {
+  left: 385px;
 }
 .schedule .schedule-item .schedule-item-toggle {
   margin-bottom: 0;
@@ -3641,6 +3658,9 @@ button.btn.btn-block {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.5em;
+}
+.place {
+  margin-left: 15px;
 }
 .download-schedule-btn {
   -webkit-transition: color 0.2s ease, background 0.2s ease, border 0.2s ease;
@@ -3755,12 +3775,27 @@ button.btn.btn-block {
   text-transform: uppercase;
   letter-spacing: 0.5em;
 }
+
 @media (max-width: 991px) {
   .schedule .tab-content .img-responsive {
     margin: 0;
   }
+  .col-sm-6 {
+    width: 100%;
+  }
+  .schedule .presentations:before {
+    width: 0px;
+    border-left: none;
+  }
 }
 @media (max-width: 767px) {
+  .col-sm-6 {
+    width: 100%;
+  }
+  .schedule .presentations:before {
+    width: 0px;
+    border-left: none;
+  }
   .schedule .tab-content {
     border: none;
   }
@@ -3812,6 +3847,13 @@ button.btn.btn-block {
   }
 }
 @media (max-width: 480px) {
+  .col-sm-6 {
+    width: 100%;
+  }
+  .schedule .presentations:before {
+    width: 0px;
+    border-left: none;
+  }
   .schedule .tab-content-schedule {
     padding: 35px 0;
   }
@@ -3820,7 +3862,7 @@ button.btn.btn-block {
     padding-left: 0;
   }
   .schedule .tab-content-schedule .schedule-item .lecture-icon-wrapper {
-    top: 27px;
+    top: 36px;
     left: 0;
     width: 30px;
     height: 30px;
