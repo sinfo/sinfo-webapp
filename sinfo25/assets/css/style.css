@@ -3575,10 +3575,8 @@ button.btn.btn-block {
 .schedule .tab-content-schedule .schedule-item {
   position: relative;
   margin-bottom: 22px;
-  min-height: 65px;
   padding: 0 0 0 104px;
   background-color: transparent;
-  min-height: 300px;
 }
 .schedule .tab-content-schedule .presentations-item {
   padding-left: 0px;
@@ -5964,7 +5962,6 @@ div.clear input.btn:hover {
 ---------------------------------------------------------------------------- */
 .member { 
   margin-bottom: 40px;
-  height: 180px;
 }
 .member .name {
   height: auto;
