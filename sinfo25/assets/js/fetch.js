@@ -112,7 +112,7 @@ function processSessions(session, data) {
 
   } else if (session.kind === 'Presentation' || session.kind === 'Workshop') {
       if (!session.place) return;
-      var place = 'room' + session.place.split(' ')[1];
+      var place = session.place === 'Room 2' ? 'room2' : 'room1'
 
       html = `
         <div class="panel schedule-item">
